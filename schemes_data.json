@@ -1,0 +1,813 @@
+{
+  "schemes": [
+    {
+      "scheme_id": "PM-KISAN-001",
+      "scheme_name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+      "category": "Agriculture",
+      "brief_description": "Direct income support of ₹6,000/year to small & marginal farmers in three equal installments.",
+      "detailed_description": "PM-KISAN provides financial support to landholding farmer families. The amount is transferred directly to the beneficiary's bank account in three equal installments of ₹2,000 each every four months. The scheme aims to supplement the financial needs of farmers for procuring inputs and meeting domestic expenses.",
+      "eligibility_criteria": {
+        "age_range": "any",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "farmer",
+        "state": "All India",
+        "land_ownership": "Up to 2 hectares (small & marginal farmers)",
+        "other_conditions": [
+          "Must be a landholding farmer family",
+          "Family should have cultivable land in their name",
+          "Excludes institutional landholders, higher income taxpayers"
+        ]
+      },
+      "benefits": "₹6,000 per year in 3 equal installments of ₹2,000 each, directly to bank account.",
+      "required_documents": [
+        "Aadhaar Card",
+        "Bank Account Details",
+        "Land Ownership Documents",
+        "Farmer Declaration"
+      ],
+      "application_process": [
+        "Visit PM-KISAN portal or nearest CSC",
+        "Register with Aadhaar number",
+        "Fill application form with land details",
+        "Submit land records",
+        "Verification by local authorities",
+        "Amount credited directly to bank"
+      ],
+      "application_deadline": "Rolling basis",
+      "official_website": "https://pmkisan.gov.in",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "PMFBY-002",
+      "scheme_name": "Pradhan Mantri Fasal Bima Yojana (PMFBY)",
+      "category": "Agriculture",
+      "brief_description": "Crop insurance scheme for farmers against natural calamities, pests and diseases.",
+      "detailed_description": "PMFBY provides comprehensive crop insurance from pre-sowing to post-harvest. Farmers pay a nominal premium; the rest is subsidized by the government. Claims are settled on the basis of crop cutting experiments or weather-based triggers. It covers yield loss and prevented sowing.",
+      "eligibility_criteria": {
+        "age_range": "any",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "farmer",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Must have insurable interest in the crop",
+          "Loanee farmers are covered compulsorily",
+          "Non-loanee farmers can opt in voluntarily"
+        ]
+      },
+      "benefits": "Insurance payout for crop loss due to natural calamities, pests, diseases. Premium as low as 1.5% for kharif, 1% for rabi, 5% for commercial/horticultural crops.",
+      "required_documents": [
+        "Aadhaar",
+        "Land records",
+        "Bank account details",
+        "Sowing declaration"
+      ],
+      "application_process": [
+        "Register through bank (if loanee) or Common Service Centre / insurance company",
+        "Pay premium before cut-off date",
+        "Submit sowing declaration",
+        "In case of loss, intimate and submit claim form",
+        "Settlement based on crop cutting experiments or weather data"
+      ],
+      "application_deadline": "Varies by crop season; check state/insurance company",
+      "official_website": "https://pmfby.gov.in",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "KCC-003",
+      "scheme_name": "Kisan Credit Card (KCC)",
+      "category": "Agriculture",
+      "brief_description": "Credit card for farmers for short-term crop loans, term loans for agriculture and allied activities.",
+      "detailed_description": "KCC provides adequate and timely credit to farmers for cultivation, purchase of inputs, and other short-term needs. Interest subvention is available for prompt repayment. Limit is based on landholding and cropping pattern. Now extended to animal husbandry and fisheries.",
+      "eligibility_criteria": {
+        "age_range": "any",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "farmer",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Individual farmers, joint borrowers, tenant farmers",
+          "Fisheries and animal husbandry farmers eligible under KCC"
+        ]
+      },
+      "benefits": "Credit limit for crop and allied activities; interest subvention (concessional rate) for prompt repayment; one-time documentation, revolving credit.",
+      "required_documents": [
+        "Aadhaar",
+        "Land documents / lease",
+        "Passport size photo",
+        "Bank account"
+      ],
+      "application_process": [
+        "Approach participating bank (public/private/cooperative) or PACs",
+        "Submit application with land and identity proof",
+        "Bank assesses limit and issues KCC",
+        "Draw cash/limit as per need within sanctioned limit"
+      ],
+      "application_deadline": "Rolling basis",
+      "official_website": "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=11133",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "SHC-004",
+      "scheme_name": "Soil Health Card Scheme",
+      "category": "Agriculture",
+      "brief_description": "Free soil health cards to farmers with nutrient status and recommended doses of fertilizers.",
+      "detailed_description": "Every farmer gets a Soil Health Card every 2 years. The card shows nutrient status of the soil (N, P, K, micronutrients, pH) and recommends type and quantity of fertilizers. Aims to promote balanced use of fertilizers and improve soil health.",
+      "eligibility_criteria": {
+        "age_range": "any",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "farmer",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Must be a farmer with cultivable land"
+        ]
+      },
+      "benefits": "Free Soil Health Card every 2 years with nutrient status and fertilizer recommendations; helps reduce input cost and improve yield.",
+      "required_documents": [
+        "Aadhaar",
+        "Land details / application form"
+      ],
+      "application_process": [
+        "Register at agriculture department or online portal",
+        "Soil samples collected by department",
+        "Testing in soil testing labs",
+        "Card issued with recommendations"
+      ],
+      "application_deadline": "Rolling basis",
+      "official_website": "https://soilhealth.dac.gov.in",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "eNAM-005",
+      "scheme_name": "National Agriculture Market (e-NAM)",
+      "category": "Agriculture",
+      "brief_description": "Online national market for agricultural produce to enable transparent price discovery and direct selling.",
+      "detailed_description": "e-NAM integrates existing APMC mandis into a single online platform. Farmers can sell produce to buyers across states. Electronic auction, payment and assaying facilities. Aims to remove intermediaries and ensure better prices for farmers.",
+      "eligibility_criteria": {
+        "age_range": "any",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "farmer",
+        "state": "All India (participating mandis)",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Farmers registered in linked APMC mandis can trade on e-NAM"
+        ]
+      },
+      "benefits": "Access to pan-India buyers, transparent auction, electronic payment, assaying at mandi, better price discovery.",
+      "required_documents": [
+        "Aadhaar",
+        "Bank account",
+        "Mandatory registration at mandi"
+      ],
+      "application_process": [
+        "Register at nearest e-NAM linked mandi",
+        "Get trader/farmer ID",
+        "Bring produce to mandi or use assaying",
+        "Participate in e-auction; payment to bank account"
+      ],
+      "application_deadline": "Rolling basis",
+      "official_website": "https://enam.gov.in",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "PMSS-SC-006",
+      "scheme_name": "Post Matric Scholarship for SC Students",
+      "category": "Education",
+      "brief_description": "Scholarship for Scheduled Caste students studying at post-matriculation level to reduce financial burden.",
+      "detailed_description": "Central sector scheme for SC students pursuing post-matric/post-secondary education. Covers tuition fee, maintenance allowance, and other allowances. Income ceiling applies. Implemented through states and National Scholarship Portal.",
+      "eligibility_criteria": {
+        "age_range": "any",
+        "gender": "any",
+        "caste_category": "SC",
+        "income_limit": "Family income up to ₹2.5 lakh per annum",
+        "occupation": "student",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Must belong to Scheduled Caste",
+          "Admitted to recognized post-matric/post-secondary course",
+          "Should not be receiving similar scholarship from other sources"
+        ]
+      },
+      "benefits": "Tuition fee reimbursement, maintenance allowance (₹230–₹1200/month as per course), and other allowances. Varies by course and level.",
+      "required_documents": [
+        "Caste certificate",
+        "Income certificate",
+        "Previous year marksheet",
+        "Admission proof",
+        "Bank account",
+        "Aadhaar"
+      ],
+      "application_process": [
+        "Register on National Scholarship Portal (NSP)",
+        "Fill application and upload documents",
+        "Submit to institution for verification",
+        "State/UT verifies and disburses"
+      ],
+      "application_deadline": "Usually October–November; check NSP for current year",
+      "official_website": "https://scholarships.gov.in",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "PMSS-OBC-007",
+      "scheme_name": "Post Matric Scholarship for OBC Students",
+      "category": "Education",
+      "brief_description": "Scholarship for Other Backward Class students at post-matriculation level.",
+      "detailed_description": "Central scheme for OBC students in post-matric/post-secondary education. Covers tuition fee and maintenance allowance. Income ceiling applies. Disbursed through states via National Scholarship Portal.",
+      "eligibility_criteria": {
+        "age_range": "any",
+        "gender": "any",
+        "caste_category": "OBC",
+        "income_limit": "Family income up to ₹1 lakh per annum (creamy layer excluded)",
+        "occupation": "student",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Must belong to OBC (non-creamy layer)",
+          "Admitted to recognized post-matric course",
+          "Not availing similar scholarship"
+        ]
+      },
+      "benefits": "Tuition fee and maintenance allowance as per norms; amount varies by course and level.",
+      "required_documents": [
+        "OBC certificate (non-creamy layer)",
+        "Income certificate",
+        "Marksheet",
+        "Admission proof",
+        "Bank account",
+        "Aadhaar"
+      ],
+      "application_process": [
+        "Register on National Scholarship Portal",
+        "Fill application and upload documents",
+        "Institution verifies",
+        "State disburses after verification"
+      ],
+      "application_deadline": "Usually October–November; check NSP",
+      "official_website": "https://scholarships.gov.in",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "NSP-008",
+      "scheme_name": "National Scholarship Portal (NSP) Schemes",
+      "category": "Education",
+      "brief_description": "Single window for multiple central and state scholarships for school and higher education.",
+      "detailed_description": "NSP hosts various scholarships: pre-matric and post-matric for SC/ST/OBC/minorities, merit-cum-means, and others. One registration, one application per scheme. Scholarships disbursed directly to bank accounts.",
+      "eligibility_criteria": {
+        "age_range": "varies by scheme",
+        "gender": "any",
+        "caste_category": "any (scheme-specific)",
+        "income_limit": "varies by scheme",
+        "occupation": "student",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Eligibility differs for each scholarship; check scheme on NSP"
+        ]
+      },
+      "benefits": "Varies by scholarship: fee reimbursement, maintenance, one-time grants. Direct Benefit Transfer to bank.",
+      "required_documents": [
+        "Aadhaar",
+        "Bank account",
+        "Income/caste/other certificates as per scheme",
+        "Marksheet",
+        "Admission proof"
+      ],
+      "application_process": [
+        "Register on scholarships.gov.in",
+        "Login and select applicable scholarship",
+        "Fill form and upload documents",
+        "Submit; institution/state verifies",
+        "Disbursement as per scheme"
+      ],
+      "application_deadline": "Varies by scheme; typically September–November",
+      "official_website": "https://scholarships.gov.in",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "PMSS-MERIT-009",
+      "scheme_name": "Prime Minister's Scholarship Scheme (PMSS)",
+      "category": "Education",
+      "brief_description": "Scholarship for wards of ex-servicemen/reaching personnel for professional degree courses.",
+      "detailed_description": "PMSS provides scholarships to dependents of ex-servicemen and personnel of armed forces and paramilitary for technical/professional degree courses. Run by Kendriya Sainik Board. Merit-based with income criteria.",
+      "eligibility_criteria": {
+        "age_range": "typically 18–25 for undergrad",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "Family income up to ₹8 lakh per annum",
+        "occupation": "student",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Ward of ex-servicemen/war widows/disabled in action/serving personnel (min 5 years)",
+          "Admitted to first year of recognized professional degree",
+          "Minimum 60% in qualifying exam"
+        ]
+      },
+      "benefits": "₹2,500/month for boys and ₹3,000/month for girls for degree courses; higher for PG. Renewal based on academic progress.",
+      "required_documents": [
+        "Parent's service/EC certificate",
+        "Income certificate",
+        "Admission letter",
+        "Marksheet",
+        "Bank details",
+        "Aadhaar"
+      ],
+      "application_process": [
+        "Register on KSB/Rajya Sainik Board portal",
+        "Fill application and upload documents",
+        "Submit before deadline",
+        "Merit list prepared; scholarship disbursed"
+      ],
+      "application_deadline": "Check KSB portal (usually July–August)",
+      "official_website": "https://ksb.gov.in",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "BHMNSS-010",
+      "scheme_name": "Begum Hazrat Mahal National Scholarship (Minority Girls)",
+      "category": "Education",
+      "brief_description": "Merit-cum-means scholarship for girl students from minority communities in classes 9 to 12.",
+      "detailed_description": "Scheme for girl students from minority communities (Muslim, Christian, Sikh, Buddhist, Parsi, Jain) studying in classes 9–12. Covers tuition and maintenance. Implemented through Maulana Azad Education Foundation and state agencies.",
+      "eligibility_criteria": {
+        "age_range": "school going (class 9–12)",
+        "gender": "female",
+        "caste_category": "any",
+        "income_limit": "Family income up to ₹2 lakh per annum",
+        "occupation": "student",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Must belong to notified minority community",
+          "Girl student in class 9, 10, 11 or 12",
+          "Minimum 50% in previous class"
+        ]
+      },
+      "benefits": "Tuition fee (up to ₹10,000/year) and maintenance (₹500/month for day scholars, ₹1,000 for hostellers).",
+      "required_documents": [
+        "Minority community certificate",
+        "Income certificate",
+        "Marksheet",
+        "School admission proof",
+        "Bank account",
+        "Aadhaar"
+      ],
+      "application_process": [
+        "Apply through NSP or state/MAEF portal",
+        "Upload documents",
+        "School/institution verifies",
+        "Disbursement to bank account"
+      ],
+      "application_deadline": "Check NSP/MAEF (often October–November)",
+      "official_website": "https://scholarships.gov.in",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "AB-PMJAY-011",
+      "scheme_name": "Ayushman Bharat Pradhan Mantri Jan Arogya Yojana (AB-PMJAY)",
+      "category": "Healthcare",
+      "brief_description": "Health insurance cover of ₹5 lakh per family per year for secondary and tertiary hospitalization.",
+      "detailed_description": "PMJAY provides cashless health cover to economically vulnerable families. Coverage is based on SECC 2011 and other criteria. Empanelled hospitals provide cashless treatment. No cap on family size or age. Covers pre-existing conditions.",
+      "eligibility_criteria": {
+        "age_range": "any",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "Deprivation criteria as per SECC (rural) and defined occupational criteria (urban)",
+        "occupation": "any",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Family in SECC database with defined deprivation",
+          "Or families meeting state-defined eligibility",
+          "No income certificate needed if in SECC list"
+        ]
+      },
+      "benefits": "₹5 lakh per family per year for hospitalization; cashless at empanelled hospitals; covers 1,900+ procedures.",
+      "required_documents": [
+        "Aadhaar (optional)",
+        "Ration card or other identity; eligibility as per SECC/state list"
+      ],
+      "application_process": [
+        "Check eligibility on pmjay.gov.in or via helpline",
+        "Get e-card (physical card optional)",
+        "Visit empanelled hospital with ID",
+        "Cashless treatment; no upfront payment"
+      ],
+      "application_deadline": "Rolling basis",
+      "official_website": "https://pmjay.gov.in",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "PMMVY-012",
+      "scheme_name": "Pradhan Mantri Matru Vandana Yojana (PMMVY)",
+      "category": "Healthcare",
+      "brief_description": "Maternity benefit of ₹5,000 in three installments to pregnant women and lactating mothers for first live birth.",
+      "detailed_description": "PMMVY provides partial wage compensation to women for wage loss during pregnancy and after delivery. Benefit is for first living child. Amount is paid in three installments upon meeting conditions (registration, antenatal check-up, child birth registration and immunization).",
+      "eligibility_criteria": {
+        "age_range": "19 years and above",
+        "gender": "female",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "any",
+        "state": "All India (excluding those receiving similar benefit from state)",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Pregnant woman or lactating mother",
+          "First living child only",
+          "Not availing similar maternity benefit from government"
+        ]
+      },
+      "benefits": "₹5,000 in three installments (₹1,000 + ₹2,000 + ₹2,000) on meeting conditionalities; DBT to bank/post office account.",
+      "required_documents": [
+        "Aadhaar",
+        "Bank/PO account",
+        "Mother and Child Protection (MCP) card",
+        "Husband's Aadhaar (optional)"
+      ],
+      "application_process": [
+        "Register at Anganwadi or health facility",
+        "Fill PMMVY form with bank details",
+        "Submit MCP card and documents",
+        "First installment after registration; second after ANC; third after birth registration and first immunization"
+      ],
+      "application_deadline": "Within 730 days of first child birth",
+      "official_website": "https://wcd.nic.in/schemes/pradhan-mantri-matru-vandana-yojana",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "JSY-013",
+      "scheme_name": "Janani Suraksha Yojana (JSY)",
+      "category": "Healthcare",
+      "brief_description": "Cash assistance to pregnant women for institutional delivery to reduce maternal and neonatal mortality.",
+      "detailed_description": "JSY promotes institutional delivery by providing cash assistance to pregnant women. Amount varies by state (higher in low-performing states). Payment is made to mother after delivery at government or accredited private facility.",
+      "eligibility_criteria": {
+        "age_range": "19 years and above",
+        "gender": "female",
+        "caste_category": "any",
+        "income_limit": "BPL or defined categories in states",
+        "occupation": "any",
+        "state": "All India (amount and criteria vary by state)",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Pregnant woman",
+          "Delivery in government or accredited private facility",
+          "BPL or as per state eligibility"
+        ]
+      },
+      "benefits": "Cash assistance (₹700–₹1,400 in rural, ₹600–₹1,000 in urban; higher in low-performing states) after institutional delivery.",
+      "required_documents": [
+        "Aadhaar",
+        "Bank/PO account",
+        "BPL/eligibility certificate as per state",
+        "MCP card"
+      ],
+      "application_process": [
+        "Register at health facility or Anganwadi",
+        "Undertake ANC and deliver at institution",
+        "Submit documents at facility",
+        "Amount credited to account"
+      ],
+      "application_deadline": "Rolling; claim within stipulated period post delivery",
+      "official_website": "https://nhm.gov.in/index1.php?lang=1&level=1&sublinkid=841&lid=309",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "IGNOAPS-014",
+      "scheme_name": "Indira Gandhi National Old Age Pension Scheme (IGNOAPS)",
+      "category": "Senior Citizens",
+      "brief_description": "Monthly pension to BPL elderly (60+) under National Social Assistance Programme.",
+      "detailed_description": "IGNOAPS provides monthly pension to destitute elderly belonging to BPL families. Central assistance is ₹200/month (80+ gets ₹500); states add their share. Part of NSAP implemented by states/UTs.",
+      "eligibility_criteria": {
+        "age_range": "60+ (80+ for higher amount)",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "BPL",
+        "occupation": "any",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Must be in BPL list",
+          "Destitute with little or no regular support"
+        ]
+      },
+      "benefits": "₹200/month (60–79 years); ₹500/month (80+). States may add; total varies by state.",
+      "required_documents": [
+        "Aadhaar",
+        "BPL certificate",
+        "Age proof",
+        "Bank/PO account"
+      ],
+      "application_process": [
+        "Apply at block/municipal office or through state portal",
+        "Submit BPL and age proof",
+        "Verification by revenue/social welfare",
+        "Pension credited to account"
+      ],
+      "application_deadline": "Rolling basis",
+      "official_website": "https://nsap.nic.in",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "APY-015",
+      "scheme_name": "Atal Pension Yojana (APY)",
+      "category": "Senior Citizens",
+      "brief_description": "Guaranteed pension of ₹1,000–₹5,000 per month after 60 years; government co-contribution for eligible subscribers.",
+      "detailed_description": "APY is a pension scheme for workers in unorganized sector. Subscriber contributes till 60 and receives guaranteed pension. Pension amount depends on contribution. Government co-contributes 50% of subscriber contribution (max ₹1,000/year) for 5 years for those who joined before 2015–16 and are not income tax payers.",
+      "eligibility_criteria": {
+        "age_range": "18–40 years (to join)",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "Any; co-contribution only for non-tax payers who joined in 2015–16",
+        "occupation": "any (especially unorganized sector)",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Must have savings bank account",
+          "Indian citizen",
+          "Join between 18–40 to get pension from 60"
+        ]
+      },
+      "benefits": "Guaranteed pension ₹1,000–₹5,000/month (based on contribution) from 60 years; spouse gets pension after subscriber's death; nominee gets corpus if both die.",
+      "required_documents": [
+        "Aadhaar",
+        "Bank account (same bank for APY)"
+      ],
+      "application_process": [
+        "Open/use savings account in participating bank or post office",
+        "Fill APY form and choose pension amount",
+        "Auto-debit for monthly contribution",
+        "Pension starts at 60"
+      ],
+      "application_deadline": "Rolling basis",
+      "official_website": "https://www.npscra.nsdl.co.in/atal-pension-yojana.php",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "PMVVY-016",
+      "scheme_name": "Pradhan Mantri Vaya Vandana Yojana (PMVVY)",
+      "category": "Senior Citizens",
+      "brief_description": "Pension scheme for senior citizens (60+) offering guaranteed return and pension for 10 years.",
+      "detailed_description": "PMVVY is a senior citizen pension scheme sold through LIC. One-time investment; pension paid monthly for 10 years. Guaranteed return (as notified). On maturity, purchase price returned. Available for subscription as per government notification.",
+      "eligibility_criteria": {
+        "age_range": "60 years and above",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "any",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Minimum age 60 years",
+          "Subscription as per LIC/notification (scheme may be closed for new subscription)"
+        ]
+      },
+      "benefits": "Guaranteed monthly pension for 10 years; return of purchase price on maturity. Rate and cap as per notification.",
+      "required_documents": [
+        "Aadhaar",
+        "PAN",
+        "Proof of age",
+        "Bank details"
+      ],
+      "application_process": [
+        "Visit LIC branch or agent",
+        "Choose pension amount and pay lump sum",
+        "Pension credited monthly; maturity after 10 years"
+      ],
+      "application_deadline": "Check LIC; scheme subscription period notified by government",
+      "official_website": "https://www.licindia.in",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "SSY-017",
+      "scheme_name": "Sukanya Samriddhi Yojana (SSY)",
+      "category": "Women & Children",
+      "brief_description": "Small savings scheme for girl child; deposit up to ₹1.5 lakh/year; maturity at 21 or marriage after 18.",
+      "detailed_description": "SSY account can be opened for girl child below 10 years. Deposit up to ₹1.5 lakh per financial year. Interest and maturity amount are tax-free. Account matures at 21 or on marriage after 18. Partial withdrawal for education after 18 allowed.",
+      "eligibility_criteria": {
+        "age_range": "Girl below 10 years (at account opening)",
+        "gender": "female",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "any",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Only one account per girl in post office or bank",
+          "Guardian opens on behalf of girl"
+        ]
+      },
+      "benefits": "Tax-free interest (rate as notified); maturity amount; partial withdrawal for education after 18; max deposit ₹1.5 lakh/year.",
+      "required_documents": [
+        "Birth certificate of girl",
+        "Guardian's identity and address proof",
+        "Passport size photo"
+      ],
+      "application_process": [
+        "Visit post office or participating bank",
+        "Fill SSY form and submit documents",
+        "Make initial deposit (min ₹250)",
+        "Deposit annually; account matures at 21 or marriage after 18"
+      ],
+      "application_deadline": "Rolling; open before girl turns 10",
+      "official_website": "https://www.indiapost.gov.in",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "BBBP-018",
+      "scheme_name": "Beti Bachao Beti Padhao (BBBP)",
+      "category": "Women & Children",
+      "brief_description": "National campaign to improve child sex ratio and promote education and welfare of the girl child.",
+      "detailed_description": "BBBP focuses on preventing gender-biased sex selection, ensuring survival and protection of girl child, and promoting her education and participation. Implemented through districts; includes awareness, enforcement of PC&PNDT Act, and conditional cash transfers in some states.",
+      "eligibility_criteria": {
+        "age_range": "any (beneficiaries are girls and their families)",
+        "gender": "female",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "any",
+        "state": "All India (priority districts)",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Scheme is awareness and enabling; specific benefits (e.g. state CCTs) have their own eligibility"
+        ]
+      },
+      "benefits": "Awareness and behaviour change; state-level incentives for girl child (e.g. Sukanya, Ladli); improved access to education and protection.",
+      "required_documents": [
+        "V",
+        "a",
+        "r",
+        "i",
+        "e",
+        "s",
+        " ",
+        "b",
+        "y",
+        " ",
+        "s",
+        "t",
+        "a",
+        "t",
+        "e",
+        " ",
+        "c",
+        "o",
+        "m",
+        "p",
+        "o",
+        "n",
+        "e",
+        "n",
+        "t",
+        ";",
+        " ",
+        "g",
+        "e",
+        "n",
+        "e",
+        "r",
+        "a",
+        "l",
+        "l",
+        "y",
+        " ",
+        "b",
+        "i",
+        "r",
+        "t",
+        "h",
+        " ",
+        "c",
+        "e",
+        "r",
+        "t",
+        "i",
+        "f",
+        "i",
+        "c",
+        "a",
+        "t",
+        "e",
+        ",",
+        " ",
+        "A",
+        "a",
+        "d",
+        "h",
+        "a",
+        "a",
+        "r",
+        ",",
+        " ",
+        "s",
+        "c",
+        "h",
+        "o",
+        "o",
+        "l",
+        " ",
+        "e",
+        "n",
+        "r",
+        "o",
+        "l",
+        "m",
+        "e",
+        "n",
+        "t"
+      ],
+      "application_process": [
+        "No single application; access through Anganwadi, schools, health facilities",
+        "For state-specific incentives, apply as per state guidelines"
+      ],
+      "application_deadline": "Rolling / as per state",
+      "official_website": "https://wcd.nic.in/bbbp-schemes",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "PMMY-019",
+      "scheme_name": "Pradhan Mantri Mudra Yojana (PMMY)",
+      "category": "Business & Employment",
+      "brief_description": "Loans up to ₹10 lakh to non-corporate small businesses (Shishu/Kishore/Tarun) without collateral.",
+      "detailed_description": "MUDRA provides loans through banks, NBFCs and MFIs to micro and small enterprises. Three categories: Shishu (up to ₹50,000), Kishore (₹50,001–₹5 lakh), Tarun (₹5–10 lakh). No collateral for small amounts. Supports income-generating activities.",
+      "eligibility_criteria": {
+        "age_range": "18 years and above",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "entrepreneur / non-corporate small business",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Non-corporate small business: manufacturing, trading, services",
+          "New or existing unit",
+          "Loan for business purpose"
+        ]
+      },
+      "benefits": "Loan up to ₹10 lakh (Shishu/Kishore/Tarun); no collateral for small loans; interest as per bank/MFI.",
+      "required_documents": [
+        "Aadhaar",
+        "Identity and address proof",
+        "Business proof (if existing)",
+        "Bank statement",
+        "Passport size photo"
+      ],
+      "application_process": [
+        "Approach bank, NBFC or MFI offering MUDRA loans",
+        "Submit application and business plan",
+        "Credit assessment",
+        "Disbursement after approval"
+      ],
+      "application_deadline": "Rolling basis",
+      "official_website": "https://www.mudra.org.in",
+      "last_updated": "2026-02-03"
+    },
+    {
+      "scheme_id": "PMEGP-020",
+      "scheme_name": "Prime Minister's Employment Generation Programme (PMEGP)",
+      "category": "Business & Employment",
+      "brief_description": "Margin money subsidy for setting up micro-enterprises; project cost up to ₹25 lakh (manufacturing) / ₹10 lakh (services).",
+      "detailed_description": "PMEGP provides financial assistance for setting up new micro-enterprises. Margin money subsidy (15–35% of project cost) through KVIC, state KVIBs and DICs. Rest is bank loan. Special category (SC/ST/OBC/minorities/women etc.) get higher subsidy.",
+      "eligibility_criteria": {
+        "age_range": "18 years and above",
+        "gender": "any",
+        "caste_category": "any (higher subsidy for SC/ST/OBC/minorities)",
+        "income_limit": "any",
+        "occupation": "any (new entrepreneur)",
+        "state": "All India",
+        "land_ownership": "any",
+        "other_conditions": [
+          "Only new projects",
+          "No existing unit from same proprietor in same state",
+          "Project cost: manufacturing up to ₹25 lakh, services up to ₹10 lakh"
+        ]
+      },
+      "benefits": "Margin money subsidy 15–35% of project cost; balance as bank loan. Subsidy higher for special categories and backward areas.",
+      "required_documents": [
+        "Aadhaar",
+        "Project report",
+        "Land/building proof",
+        "Caste/category certificate if applicable",
+        "Bank account"
+      ],
+      "application_process": [
+        "Apply online at kviconline.gov.in or through KVIC/KVIB/DIC",
+        "Submit project report and documents",
+        "Field verification",
+        "Recommendation to bank; subsidy released after unit setup and margin money contribution"
+      ],
+      "application_deadline": "Check KVIC portal for annual deadline",
+      "official_website": "https://kviconline.gov.in/pmegpeportal",
+      "last_updated": "2026-02-03"
+    }
+  ]
+}

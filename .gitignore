@@ -1,0 +1,35 @@
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Scraping outputs and logs
+agriculture_urls.json
+agriculture_urls_partial.json
+all_scheme_urls.json
+agriculture_scraping.log
+all_categories_scraping.log
+scraping_log.txt
+scrape_result.json
+
+# Optional: uncomment to ignore main scheme data
+# schemes_data.json
+# manual_schemes.json
