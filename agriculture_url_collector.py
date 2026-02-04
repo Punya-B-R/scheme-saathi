@@ -256,14 +256,19 @@ def _category_name_to_slug(name: str) -> str:
 CATEGORY_SLUGS: dict[str, str] = {
     "Agriculture, Rural & Environment": "Agriculture,Rural%20&%20Environment",
     "Education & Learning": "Education%20%26%20Learning",
-    "Health & Wellness": "Health%20%26%20Wellness",
+    "Health & Wellness": "Health%20&%20Wellness",
     "Social Welfare & Empowerment": "Social%20Welfare%20%26%20Empowerment",
     "Women & Child": "Women%20%26%20Child",
     "Business & Entrepreneurship": "Business%20%26%20Entrepreneurship",
     "Skills & Employment": "Skills%20%26%20Employment",
-    "Housing & Shelter": "Housing%20%26%20Shelter",
+    "Housing & Shelter": "Housing%20&%20Shelter",
     "Banking, Financial Services and Insurance": "Banking%2C%20Financial%20Services%20and%20Insurance",
-    "Science, IT & Communications": "Science%2C%20IT%20%26%20Communications",
+    "Science, IT & Communications": "Science,%20IT%20&%20Communications",
+    "Public Safety, Law & Justice": "Public%20Safety,Law%20&%20Justice",
+    "Utility & Sanitation": "Utility%20&%20Sanitation",
+    "Travel & Tourism": "Travel%20&%20Tourism",
+    "Transport & Infrastructure": "Transport%20&%20Infrastructure",
+    "Sports & Culture": "Sports%20&%20Culture",
 }
 
 

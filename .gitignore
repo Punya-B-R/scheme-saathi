@@ -27,8 +27,12 @@ agriculture_urls_partial.json
 all_scheme_urls.json
 agriculture_scraping.log
 all_categories_scraping.log
+agriculture_detail_scraping.log
 scraping_log.txt
 scrape_result.json
+agriculture_schemes_data.json
+failed_urls.json
+checkpoints/
 
 # Optional: uncomment to ignore main scheme data
 # schemes_data.json

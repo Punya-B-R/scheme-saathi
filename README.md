@@ -65,6 +65,56 @@ python run.py --scrape-status
 
 This reads `scrape_result.json` (written after each `--scrape` run) and prints the same summary. So you can tell at a glance whether scraping worked and what percent of the target was reached.
 
+## Scraping all 677 URLs and merging
+
+You have **677 URLs** in `all_scheme_urls.json`. To scrape details for all of them and merge into `schemes_data.json`:
+
+### 1. Run the detail scraper on all URLs
+
+From the project root (with venv active):
+
+```bash
+# All 677 URLs → all_schemes_data.json (takes ~1–2 hours with rate limiting)
+python agriculture_detail_scraper.py --input all_scheme_urls.json --output all_schemes_data.json --category "Government Schemes"
+```
+
+**Chunked / resumable runs** (e.g. 200 at a time):
+
+```bash
+# First 200
+python agriculture_detail_scraper.py -i all_scheme_urls.json -o all_schemes_data.json -c "Government Schemes" --start 0 --limit 200
+
+# Next 200 (then merge partial outputs or run again with --start 200 --limit 200 and append)
+python agriculture_detail_scraper.py -i all_scheme_urls.json -o all_schemes_data_part2.json -c "Government Schemes" --start 200 --limit 200
+```
+
+Checkpoints are saved under `checkpoints/` every 50 schemes. Failed URLs go to `failed_urls_all.json`.
+
+### 2. Merge into main schemes data
+
+After scraping (either full or chunked; if chunked, merge the part files into one `all_schemes_data.json` first, or run the merge script with each part and then dedupe):
+
+```bash
+python merge_scraped_to_schemes.py
+```
+
+This:
+
+- Loads `schemes_data.json` (current 108 schemes)
+- Loads `agriculture_schemes_data.json` and `all_schemes_data.json` (if present)
+- Deduplicates by `scheme_id`, validates, backs up to `schemes_data_backup.json`
+- Writes merged result to `schemes_data.json`
+
+### 3. Use in the backend
+
+Copy the updated file into the backend:
+
+```bash
+copy schemes_data.json backend\data\schemes_data.json
+```
+
+Then restart the Scheme Saathi backend so it uses the new scheme count.
+
 ## Project structure
 
 | File | Purpose |
