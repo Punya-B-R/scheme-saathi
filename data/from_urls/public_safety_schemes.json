@@ -1,0 +1,836 @@
+{
+  "metadata": {
+    "category": "Public Safety, Law & Justice",
+    "total_schemes": 5,
+    "total_urls": 5,
+    "successfully_scraped": 5,
+    "failed": 0,
+    "average_quality_score": 70.0,
+    "scraping_date": "2026-02-07"
+  },
+  "schemes": [
+    {
+      "scheme_id": "PS-EE6EC645",
+      "scheme_name": "Advocate Graduate Stipend Gujarat",
+      "scheme_name_local": "",
+      "category": "Public Safety, Law & Justice",
+      "brief_description": "Details The “Advocate Graduate Stipend” scheme was launched by the Tribal Development Department, Government of Gujarat. It aims to provide financial assistance and practical training support to tribal law graduates who begin their legal practice. Under this scheme, tribal youth who have obtained th",
+      "detailed_description": "Details The “Advocate Graduate Stipend” scheme was launched by the Tribal Development Department, Government of Gujarat. It aims to provide financial assistance and practical training support to tribal law graduates who begin their legal practice. Under this scheme, tribal youth who have obtained their charter within two years of completing their LLB are given a monthly stipend. ﻿",
+      "benefits": {
+        "summary": "Stipend to junior tribal advocates: ₹10,000 per month for the first year. ₹8,000 per month for the second year. ₹6,000 per month for the third year. Allowance to senior advocate (mentor): ₹5,000 per month for three years. ﻿",
+        "financial_benefit": "₹10,000",
+        "benefit_type": "Other",
+        "frequency": "Monthly",
+        "additional_benefits": [],
+        "raw_benefits_text": "Stipend to junior tribal advocates: ₹10,000 per month for the first year. ₹8,000 per month for the second year. ₹6,000 per month for the third year. Allowance to senior advocate (mentor): ₹5,000 per month for three years. ﻿"
+      },
+      "eligibility_criteria": {
+        "age_range": "any",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "any",
+        "state": "Gujarat",
+        "district": "",
+        "victim_type": "crime victims",
+        "case_type": "any",
+        "requires_police_report": false,
+        "requires_court_order": false,
+        "requires_medical_certificate": false,
+        "other_conditions": [],
+        "checklist": [],
+        "raw_eligibility_text": "Eligibility The applicant should be a Scheduled Tribe (ST) youth. The applicant should have completed LLB degree. The applicant should have obtained a charter within two years of graduation. The applicant should begin legal practice as a junior lawyer under a senior advocate. The applicant should be practicing in tribal areas of Gujarat. ﻿"
+      },
+      "required_documents": [
+        {
+          "document_name": "Aadhaar Card",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Birth Certificate",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Certificate of Professional Course",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Identity Card",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Passport-Size Photos",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Affidavit",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Caste Certificate",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Graduate Marksheet",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Marksheet",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "School Leaving",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        }
+      ],
+      "application_process": [
+        "Offline Step 1: The interested applicant should visit (during office hours) the office of the Project Administrator of Gujarat Tribal Development Corporation, Gandhinagar, and all tribal districts, and request a hard copy of the prescribed format of the application form from the staff exclusively entrusted to issue and collect filled-in applications",
+        "Step 2: In the application form, fill in all the mandatory fields, and attach copies of all the mandatory documents (self-attest, if required)",
+        "Step 3: Submit the duly filled and signed application form along with the documents to the Tribal District Sponsorship Administrator's Office",
+        "Step 4: Request a receipt or acknowledgment from the concerned authority to whom the application has been submitted",
+        "Ensure that the receipt contains essential details such as the date and time of submission and a unique identification number (if applicable)"
+      ],
+      "official_website": "https://www.digitalindia.gov.in/",
+      "application_link": "",
+      "helpline_number": "",
+      "helpline_email": "",
+      "scheme_type": "Central",
+      "scheme_code": "",
+      "ministry_department": "Ministry of Electronics & IT (MeitY) Government of India ® Connect on Social Media Quick Lin",
+      "implementing_agency": "Ministry of Electronics & IT (MeitY) Government of India ® Connect on Social Media Quick Lin",
+      "nodal_officer": "",
+      "target_beneficiaries": "",
+      "beneficiary_type": "Individual",
+      "funding_pattern": "",
+      "compensation_amount": "₹10,000",
+      "scheme_duration": "",
+      "launch_date": "",
+      "application_deadline": "",
+      "processing_time": "",
+      "geographical_coverage": "Gujarat",
+      "urban_rural": "Both",
+      "covered_states": [
+        "Gujarat"
+      ],
+      "crime_types_covered": [],
+      "compensation_matrix": {},
+      "key_features": [],
+      "scheme_objectives": [],
+      "payment_mode": "",
+      "payment_timeline": "",
+      "appeal_process": "",
+      "grievance_redressal": "",
+      "tracking_mechanism": "",
+      "legal_provisions": "",
+      "relevant_acts": [],
+      "faqs": [],
+      "contact_details": {},
+      "related_schemes": [],
+      "success_stories": "",
+      "source_url": "https://www.myscheme.gov.in/schemes/agsg",
+      "source_domain": "myscheme.gov.in",
+      "scraped_at": "2026-02-07T00:52:09.161754Z",
+      "scraper_version": "public_safety_1.0",
+      "scraping_success": true,
+      "page_load_successful": true,
+      "data_quality_score": 70,
+      "fields_missing": [
+        "crime_types_covered",
+        "legal_provisions/relevant_acts",
+        "contact_details"
+      ]
+    },
+    {
+      "scheme_id": "PS-C457E710",
+      "scheme_name": "Awareness Programme on Child/Human Trafficking, Family Planning, Legal Awareness, Health etc.",
+      "scheme_name_local": "",
+      "category": "Public Safety, Law & Justice",
+      "brief_description": "Details The scheme \"Awareness Programme on Child/Human Trafficking, Family Planning, Legal Awareness, Health etc.\" was launched by the Tea Tribes and Adivasi Welfare Department, Government of Assam. The scheme aims to generate awareness among the Tea Tribes and Adivasi community on critical social i",
+      "detailed_description": "Details The scheme \"Awareness Programme on Child/Human Trafficking, Family Planning, Legal Awareness, Health etc.\" was launched by the Tea Tribes and Adivasi Welfare Department, Government of Assam. The scheme aims to generate awareness among the Tea Tribes and Adivasi community on critical social issues. The scheme provides a platform to generate awareness regarding child/human trafficking, family planning, legal awareness, and health issues such as the reduction of Maternal Mortality Rate, Infant Mortality Rate, and Alcoholism, along with maintaining hygiene. The applications for this scheme are accepted by inviting proposals through Expression of Interest (EOI). ﻿",
+      "benefits": {
+        "summary": "The benefit is to generate awareness among the Tea Tribes and Adivasi community on issues like child/human trafficking, family planning, legal awareness, and health (reduction of Maternal Mortality Rate, Infant Mortality Rate, Alcoholism, and maintenance of hygiene). This awareness generation aims towards bringing effective social and behavioural change amongst the community. ﻿",
+        "financial_benefit": "",
+        "benefit_type": "Other",
+        "frequency": "One-time",
+        "additional_benefits": [],
+        "raw_benefits_text": "The benefit is to generate awareness among the Tea Tribes and Adivasi community on issues like child/human trafficking, family planning, legal awareness, and health (reduction of Maternal Mortality Rate, Infant Mortality Rate, Alcoholism, and maintenance of hygiene). This awareness generation aims towards bringing effective social and behavioural change amongst the community. ﻿"
+      },
+      "eligibility_criteria": {
+        "age_range": "any",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "any",
+        "state": "All India",
+        "district": "",
+        "victim_type": "crime victims",
+        "case_type": "any",
+        "requires_police_report": false,
+        "requires_court_order": false,
+        "requires_medical_certificate": false,
+        "other_conditions": [],
+        "checklist": [],
+        "raw_eligibility_text": "Eligibility The applicant must be a Non-Governmental Organization. The applicant must have valid registration under Societies Act, XXI of 1860. ﻿"
+      },
+      "required_documents": [
+        {
+          "document_name": "Track Record Of Having Experience In Providing Awareness Programmes Which Includes Child/Human Trafficking, Family Planning, Reducing Child Labour, Improvement Of Health, Prioritizing Girls Education, Reduction Of Maternal Mortality Rate, Infant Mortality Rate, Alcoholism, Maintenance Of Hygiene Etc. (With Documentary Evidence Such As Audit Report, Photographic Evidence, Etc.).",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Details Regarding The Availability Of Well Trained Staff, Infrastructure, And The Required Managerial Expertise To Organize And Carry Out The Activities Under The Scheme (With Proper Details).",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Extent Of Experience In The Number Of Districts (Please Indicate The Number/District).",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Years Of Experience By The Non-Governmental Organization (With Documentary Evidence).",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Documentation Regarding Any Financial Assistance Received From Government (If Yes, Provide Documentary Evidence).",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Total Population Covered Till Date (Indicate The Number Of Population).",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Any Action Plan By The Non-Governmental Organization Including The Proposed Number Of Camps And Geographical Area To Be Covered Under The Selected District.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        }
+      ],
+      "application_process": [
+        "Offline Step 1: The implementation of the scheme is initiated by issuing proposals inviting Non-Governmental Organizations (NGOs)",
+        "Step 2: Eligible NGOs must submit their proposals for the implementation of the scheme by responding to the Expression of Interest (EOI)",
+        "Where to Apply The details of the scheme guidelines will be available at the official website ( http://ttwd"
+      ],
+      "official_website": "https://www.digitalindia.gov.in/",
+      "application_link": "",
+      "helpline_number": "",
+      "helpline_email": "",
+      "scheme_type": "Central",
+      "scheme_code": "",
+      "ministry_department": "Ministry of Electronics & IT (MeitY) Government of India ® Connect on Social Media Quick Lin",
+      "implementing_agency": "Ministry of Electronics & IT (MeitY) Government of India ® Connect on Social Media Quick Lin",
+      "nodal_officer": "",
+      "target_beneficiaries": "",
+      "beneficiary_type": "Individual",
+      "funding_pattern": "",
+      "compensation_amount": "",
+      "scheme_duration": "",
+      "launch_date": "",
+      "application_deadline": "",
+      "processing_time": "",
+      "geographical_coverage": "All India",
+      "urban_rural": "Both",
+      "covered_states": [
+        "All India"
+      ],
+      "crime_types_covered": [
+        "Trafficking"
+      ],
+      "compensation_matrix": {},
+      "key_features": [],
+      "scheme_objectives": [],
+      "payment_mode": "",
+      "payment_timeline": "",
+      "appeal_process": "",
+      "grievance_redressal": "",
+      "tracking_mechanism": "",
+      "legal_provisions": "",
+      "relevant_acts": [],
+      "faqs": [],
+      "contact_details": {},
+      "related_schemes": [],
+      "success_stories": "",
+      "source_url": "https://www.myscheme.gov.in/schemes/apchtfplahe",
+      "source_domain": "myscheme.gov.in",
+      "scraped_at": "2026-02-07T00:52:20.592851Z",
+      "scraper_version": "public_safety_1.0",
+      "scraping_success": true,
+      "page_load_successful": true,
+      "data_quality_score": 70,
+      "fields_missing": [
+        "benefits.financial_benefit",
+        "legal_provisions/relevant_acts",
+        "contact_details"
+      ]
+    },
+    {
+      "scheme_id": "PS-1FFEDCD3",
+      "scheme_name": "Assistance under SC/ST Prevention of Atrocities Act",
+      "scheme_name_local": "",
+      "category": "Public Safety, Law & Justice",
+      "brief_description": "Details The scheme “Assistance under SC/ST Prevention of Atrocities Act” was introduced by the Adi Dravidar Welfare Department, Government of Puducherry. The objective of the scheme is to provide immediate relief to the victims of atrocities who are from Scheduled Castes/ Scheduled Tribes.",
+      "detailed_description": "Details The scheme “Assistance under SC/ST Prevention of Atrocities Act” was introduced by the Adi Dravidar Welfare Department, Government of Puducherry. The objective of the scheme is to provide immediate relief to the victims of atrocities who are from Scheduled Castes/ Scheduled Tribes.",
+      "benefits": {
+        "summary": "Payment of Relief, Compensation for Loss, and Rehabilitation.",
+        "financial_benefit": "",
+        "benefit_type": "Compensation",
+        "frequency": "One-time",
+        "additional_benefits": [
+          "Rehabilitation support"
+        ],
+        "raw_benefits_text": "Payment of Relief, Compensation for Loss, and Rehabilitation."
+      },
+      "eligibility_criteria": {
+        "age_range": "any",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "any",
+        "state": "All India",
+        "district": "",
+        "victim_type": "crime victims",
+        "case_type": "any",
+        "requires_police_report": false,
+        "requires_court_order": false,
+        "requires_medical_certificate": false,
+        "other_conditions": [],
+        "checklist": [],
+        "raw_eligibility_text": "Eligibility The applicant should be from a Scheduled Caste. The applicant should have been affected by an atrocity."
+      },
+      "required_documents": [
+        {
+          "document_name": "Residence-cum-nativity Certificate.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Aadhaar Card.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Caste Certificate.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Copy of FIR.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Recent Passport-Size Photograph of the Applicant.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "In the absence of an Aadhaar Card; the applicant is required to provide his/her Aadhaar Enrolment ID along with ANY ONE of the following documents -",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "1. Bank or Post Office Passbook with Photo.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "2. Permanent Account Number (PAN) Card.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "3. Passport.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "4. Ration Card.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "5. Voter Identity Card.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "6. MGNREGA Card.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "7. Kisan Photo Passbook.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "8. Driving license issued by the Licensing Authority under the Motor Vehicles Act, 1988 (59 of 1988).",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "9. Certificate of identity having a photo of such person issued by a Gazetted Officer or a Tehsildar on an official letterhead.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "10. Any other document as specified by the Department.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        }
+      ],
+      "application_process": [
+        "Offline Step 1: The interested applicant should visit (during office hours) the Office/ Sub-Office of the Adi Dravidar Welfare and Scheduled Tribes Welfare Department, and request the hard copy of the prescribed format of the application form from the staff exclusively entrusted to issue and collect filled-in applications",
+        "Step 2: In the application form, fill in all the mandatory fields, paste the passport-sized photograph (signed across, if required), and attach copies of all the mandatory documents (self-attest, if required)",
+        "Step 3: Submit the duly filled and signed application form along with the documents to the concerned authority",
+        "Step 4: Request a receipt or acknowledgment from the concerned authority to whom the application has been submitted",
+        "Ensure that the receipt contains essential details such as the date and time of submission, and a unique identification number (if applicable)"
+      ],
+      "official_website": "https://www.digitalindia.gov.in/",
+      "application_link": "",
+      "helpline_number": "",
+      "helpline_email": "",
+      "scheme_type": "Central",
+      "scheme_code": "",
+      "ministry_department": "Ministry of Electronics & IT (MeitY) Government of India ® Connect on Social Media Quick Lin",
+      "implementing_agency": "Ministry of Electronics & IT (MeitY) Government of India ® Connect on Social Media Quick Lin",
+      "nodal_officer": "",
+      "target_beneficiaries": "",
+      "beneficiary_type": "Individual",
+      "funding_pattern": "",
+      "compensation_amount": "",
+      "scheme_duration": "",
+      "launch_date": "",
+      "application_deadline": "",
+      "processing_time": "",
+      "geographical_coverage": "All India",
+      "urban_rural": "Both",
+      "covered_states": [
+        "All India"
+      ],
+      "crime_types_covered": [
+        "Accidents"
+      ],
+      "compensation_matrix": {},
+      "key_features": [],
+      "scheme_objectives": [],
+      "payment_mode": "",
+      "payment_timeline": "",
+      "appeal_process": "",
+      "grievance_redressal": "",
+      "tracking_mechanism": "",
+      "legal_provisions": "",
+      "relevant_acts": [],
+      "faqs": [],
+      "contact_details": {},
+      "related_schemes": [],
+      "success_stories": "",
+      "source_url": "https://www.myscheme.gov.in/schemes/auscstpaa",
+      "source_domain": "myscheme.gov.in",
+      "scraped_at": "2026-02-07T00:52:32.085803Z",
+      "scraper_version": "public_safety_1.0",
+      "scraping_success": true,
+      "page_load_successful": true,
+      "data_quality_score": 70,
+      "fields_missing": [
+        "benefits.financial_benefit",
+        "legal_provisions/relevant_acts",
+        "contact_details"
+      ]
+    },
+    {
+      "scheme_id": "PS-753DBFC7",
+      "scheme_name": "Chief Minister’s Award for Excellence in Public Administration",
+      "scheme_name_local": "",
+      "category": "Public Safety, Law & Justice",
+      "brief_description": "Details The scheme \"Chief Minister’s Award for Excellence in Public Administration\" was launched by the Department of Personnel and Administrative Reforms (DPAR), Union Territory of Puducherry. The scheme aims to recognize outstanding and exemplary performance by a team of officials under the Union ",
+      "detailed_description": "Details The scheme \"Chief Minister’s Award for Excellence in Public Administration\" was launched by the Department of Personnel and Administrative Reforms (DPAR), Union Territory of Puducherry. The scheme aims to recognize outstanding and exemplary performance by a team of officials under the Union Territory of Puducherry for achievements of initiatives and projects whose qualitative and quantitative outcomes/results are of very high order and which have benefitted a large number of citizens. The applications for this scheme are accepted by the Secretary to the Government (Administrative Reforms Wing), Chief Secretariat, Puducherry-605001. ﻿",
+      "benefits": {
+        "summary": "Chief Minister's Award for Excellence in Public Administration The award carries a Commendation Scroll and a Cash Award of ₹10,00,000/- each. Two such awards are given: one each for Departments’ and Organizations/Institutions’ categories. Chief Minister's Appreciation for Initiative in Public Administration The award carries a Commendation Scroll and a Cash Award of ₹5,00,000/- each. Two such awards are given: one each for Departments’ and Organizations/Institutions’ categories. Conditions The a",
+        "financial_benefit": "₹10,00,000",
+        "benefit_type": "Other",
+        "frequency": "One-time",
+        "additional_benefits": [],
+        "raw_benefits_text": "Chief Minister's Award for Excellence in Public Administration The award carries a Commendation Scroll and a Cash Award of ₹10,00,000/- each. Two such awards are given: one each for Departments’ and Organizations/Institutions’ categories. Chief Minister's Appreciation for Initiative in Public Administration The award carries a Commendation Scroll and a Cash Award of ₹5,00,000/- each. Two such awards are given: one each for Departments’ and Organizations/Institutions’ categories. Conditions The amount of the cash award can be varied by the Government from time to time subject to the availability of funds. The Government reserves the right not to present an Award in any year. ﻿"
+      },
+      "eligibility_criteria": {
+        "age_range": "any",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "any",
+        "state": "All India",
+        "district": "",
+        "victim_type": "crime victims",
+        "case_type": "any",
+        "requires_police_report": false,
+        "requires_court_order": false,
+        "requires_medical_certificate": false,
+        "other_conditions": [],
+        "checklist": [],
+        "raw_eligibility_text": "Eligibility The applicant must represent one of the following: a) A Local Body under the UT of Puducherry. b) An Autonomous Body under the UT of Puducherry. c) A Corporation under the UT of Puducherry. d) An Agency under the UT of Puducherry. e) A Public Sector Undertaking under the UT of Puducherry. f) A Government Department under the UT of Puducherry. The applicant must be nominated only through the Administrative Secretary. The applicant must submit an application that contains the recommendation of the Departmental Committee. The applicant must propose achievements of initiatives and projects whose qualitative and quantitative outcomes/results are of very high order and which have benefitted a large number of citizens. The application should be made for rewardable work done during the previous one calendar year as on the date of nomination. ﻿"
+      },
+      "required_documents": [
+        {
+          "document_name": "Recommendation Of The Departmental Committee.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "A Write-Up (Including An Executive Summary).",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Supporting Documents Like Field Photograph (Maximum 10).",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Flow Charts Detailing Uniqueness And Success Story Of The Initiatives.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Document Of Proof For Approval From The Administrative Secretary.",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Supporting Documents Attached, Not More Than 5 (Five) Pages (Supporting documents attached with the nomination form).",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "A Descriptive Note Of Not More Than 150 Words (Required for exceptional achievements in substantiation of each chosen/ticked outcome listed in the application form).",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Details Of Audit/Measurement/Verification By Any Independent Agency For A Reality Check Of Envisaged And Realized Benefits And Outcomes (If the project/initiative has been audited/measured/verified).",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Brief Details Of Awards Received Earlier By The Nominee Departments/Organisations/Institutions (If the initiative/nominee was a winner of any Award, details not more than 100 words).",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        }
+      ],
+      "application_process": [
+        "Offline Step 1: The application should be submitted in the prescribed format , ensuring it clearly mentions the approving authority with relevant details",
+        "Step 2: The applicant must prepare a narrative of the project/initiative (not more than 2,500 words) clearly bringing out the background, priorities, strategies adopted, innovative method used, period of implementation, outcome, exceptional achievements, sustainability, and replicability",
+        "The application must include supporting documents like field photographs (maximum 10) and flow charts detailing uniqueness and success story of the initiatives",
+        "Step 3: The Administrative Secretary of the Department must constitute a Departmental Committee to shortlist and verify facts before forwarding nominations",
+        "The application should be submitted along with the recommendation of the Departmental Committee and a document of proof for approval from the Administrative Secretary",
+        "Nominating authorities are requested to forward nominations if the initiatives/accomplishments are truly innovative, extraordinary, and outstanding in nature",
+        "Step 4: The nomination must be made ONLY in the format prescribed (in soft and hard copy) and mailed directly by Registered Post/Speed Post and email directly to the Secretary to the Government (Administrative Reforms Wing), Chief Secretariat, Puducherry-605001",
+        "The corresponding Email Address is usar@py",
+        "﻿ Post-Application Processes Step 1: Screening and Shortlisting of Nominations The Screening Committee shall screen the applications in the first stage, considering, among other things, the efforts, impact/outcomes, constraints, sustainability, and scope for replication",
+        "The Committee may conduct spot studies wherever required and will endeavor to shortlist sufficient nominations for consideration of the Empowered Committee with specific recommendations",
+        "Step 2: Consideration by the Empowered Committee The recommendations made by the Screening Committee shall be considered by an Empowered Committee",
+        "The Empowered Committee may ask the nominees to make a presentation on their respective projects/works if required, and it would take into account the study reports and make its recommendations for the approval of the Chief Minister",
+        "Note: The Chief Secretary may permit a one-stage selection process through the Empowered Committee if the number of applications is less",
+        "﻿ Application Deadlines Receipt of nomination: 15th June",
+        "Recommendation by Screening Committee: 7th July",
+        "Recommendation by Empowered Committee: 31st July",
+        "Announcement and Distribution of Awards: 25th August",
+        "Note: In case of insufficient nominations, the receipt of nominations may be extended"
+      ],
+      "official_website": "https://www.digitalindia.gov.in/",
+      "application_link": "",
+      "helpline_number": "",
+      "helpline_email": "",
+      "scheme_type": "Central",
+      "scheme_code": "",
+      "ministry_department": "Department of Personnel and Administrative Reforms (DPAR)",
+      "implementing_agency": "Department of Personnel and Administrative Reforms (DPAR)",
+      "nodal_officer": "",
+      "target_beneficiaries": "",
+      "beneficiary_type": "Individual",
+      "funding_pattern": "",
+      "compensation_amount": "₹10,00,000",
+      "scheme_duration": "",
+      "launch_date": "",
+      "application_deadline": "",
+      "processing_time": "",
+      "geographical_coverage": "All India",
+      "urban_rural": "Both",
+      "covered_states": [
+        "All India"
+      ],
+      "crime_types_covered": [],
+      "compensation_matrix": {},
+      "key_features": [],
+      "scheme_objectives": [],
+      "payment_mode": "",
+      "payment_timeline": "",
+      "appeal_process": "",
+      "grievance_redressal": "",
+      "tracking_mechanism": "",
+      "legal_provisions": "",
+      "relevant_acts": [],
+      "faqs": [],
+      "contact_details": {},
+      "related_schemes": [],
+      "success_stories": "",
+      "source_url": "https://www.myscheme.gov.in/schemes/cmaepap",
+      "source_domain": "myscheme.gov.in",
+      "scraped_at": "2026-02-07T00:52:43.481224Z",
+      "scraper_version": "public_safety_1.0",
+      "scraping_success": true,
+      "page_load_successful": true,
+      "data_quality_score": 70,
+      "fields_missing": [
+        "crime_types_covered",
+        "legal_provisions/relevant_acts",
+        "contact_details"
+      ]
+    },
+    {
+      "scheme_id": "PS-56470524",
+      "scheme_name": "Foster Care Scheme (Vatsalaya)",
+      "scheme_name_local": "",
+      "category": "Public Safety, Law & Justice",
+      "brief_description": "Details The Foster Care Scheme (Vatsalaya) is being implemented by the Department of Women & Child Development, Government of Goa to provide temporary/substitute care for children in difficult circumstances, whose parents are unable to care for them due to illness, death, and desertion of one parent",
+      "detailed_description": "Details The Foster Care Scheme (Vatsalaya) is being implemented by the Department of Women & Child Development, Government of Goa to provide temporary/substitute care for children in difficult circumstances, whose parents are unable to care for them due to illness, death, and desertion of one parent or any emotional crisis. ﻿ Awareness Self-Help Groups, MahilaMandals, Child Development Project Officers, Village Child Committees, Anganwadi Workers, NGOs, and Media can be enlisted to propagate the need for foster parents and families. ﻿ Placement Conditions When placing a child in foster care, the following points shall be looked Due consideration shall be given to the age and sex of the other children of the foster care applicants/parents. Not more than two children shall be placed in a foster family, except in the case of siblings who may require to be placed with the same family. Foster care applicants/s shall be counselled about behavioural issues. The child's emotional and psychological assessment shall be discussed with the foster care applicant/s to enable them to deal with the child's situation to minimize the chances of premature termination of the foster care placement. The child's opinion shall be sought, wherever possible, prior to initiating the foster care procedures. In case of a child in conflict with law, the Juvenile Justice Board may refer the child to the Child Welfare Committee to initiate the procedures for foster placement. ﻿",
+      "benefits": {
+        "summary": "(payable to the foster families on the basis of the assessment of the Child Care Coordinator) ﻿ Foster Care Allowance ₹ 2,500/- per month. (The children who are Beneficiaries of the Dayanand Social Security Scheme shall not be eligible for Foster Care Allowances) ﻿ Maintenance Allowance Age Group: 0 to 6 years; Amount: ₹ 1,500/- per month Age Group: 6 to 14 years; Amount: ₹ 2,000/- per month Age Group: 14 to 18 years; Amount: ₹ 2,500/- per month",
+        "financial_benefit": "₹ 2,500",
+        "benefit_type": "Other",
+        "frequency": "Monthly",
+        "additional_benefits": [],
+        "raw_benefits_text": "(payable to the foster families on the basis of the assessment of the Child Care Coordinator) ﻿ Foster Care Allowance ₹ 2,500/- per month. (The children who are Beneficiaries of the Dayanand Social Security Scheme shall not be eligible for Foster Care Allowances) ﻿ Maintenance Allowance Age Group: 0 to 6 years; Amount: ₹ 1,500/- per month Age Group: 6 to 14 years; Amount: ₹ 2,000/- per month Age Group: 14 to 18 years; Amount: ₹ 2,500/- per month"
+      },
+      "eligibility_criteria": {
+        "age_range": "any",
+        "gender": "any",
+        "caste_category": "any",
+        "income_limit": "any",
+        "occupation": "any",
+        "state": "All India",
+        "district": "",
+        "victim_type": "crime victims",
+        "case_type": "any",
+        "requires_police_report": false,
+        "requires_court_order": false,
+        "requires_medical_certificate": false,
+        "other_conditions": [],
+        "checklist": [],
+        "raw_eligibility_text": "Eligibility For Children The Child should qualify for at least one of the following conditions - The child is affected by family breakdown or marital discord. The child is faced with upheavals caused by family illness, substance abuse or any other “crisis”. The child's safety is “at risk”. The child is affected by natural or man-made disasters. The child is orphaned, surrendered/relinquished, or abandoned. The child cannot be placed for adoption for various reasons. The child in an institution who can be “reinstated” or “restored” back into families. The child is in conflict with the law. ﻿ For Foster Parents (in accordance with Section 35 of the Model Rules of the Juvenile Justice (Care and Protection of Children) Act) The foster parents should have stable emotional adjustment within the family. The foster parents should have an income in which they are able to meet the basic needs of the child. The Medical Reports of all the members of the family residing on the premises should be obtained to determine their medical fitness, including checks on: Human Immunodeficiency Virus (HIV), Tuberculosis (TB) and Hepatitis B. The foster parents should have adequate exposure, orientation and capacity in child caring and the capacity to provide good child care. the foster parents should be physically, mentally and emotionally stable. The home of the foster parents should have adequate space and basic facilities. The foster care family should be willing to follow rules laid down including making regular visits to a paediatrician, immunization of the child, and maintenance of the child's health records. The foster care family should be willing to sign an agreement and to return the child to the Child Welfare Committee if directed by the Committee to do so. The foster parents should be willing to attend training or orientation programmes on child care and health, etc. The foster parents should motivate the child to study and be willing to send the child to regular school or vocational training. ﻿ NOTE 1: There shall be no discrimination in the selection of foster parents on the basis of caste, religion, ethnic status, disability or health status and the best interests of the child shall be paramount in deciding foster-care placement. As far as possible, the foster family should belong to a similar social-economic and cultural milieu. NOTE 2: The foster care maintenance allowance/assistance should not be their motivation for caring for the child and they should not be totally dependent on the same. The CWC shall assess whether the monthly family income is adequate to take care of foster children."
+      },
+      "required_documents": [
+        {
+          "document_name": "Identity Proof",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Proof of Residence",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Employment Certificate",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Health Reports",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Income Certificate",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Birth Certificates",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Marriage Certificates",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        },
+        {
+          "document_name": "Death Certificates (where applicable)",
+          "mandatory": true,
+          "specifications": "",
+          "notes": "",
+          "validity": ""
+        }
+      ],
+      "application_process": [
+        "Offline Step 1: Visit the District Child Protection Society/ Child Welfare Committee, and request a hard copy of the proforma of the application form for the \"Foster Care Scheme (Vatsalaya)\" from the Child Care Coordinator/ Concerned Authority",
+        "Step 2: In the application form, fill in all the mandatory fields, paste the passport-sized photograph (signed across), and attach copies of all the mandatory documents (self-attest if required)",
+        "Step 3: Submit the duly filled and signed application form along with the documents to the Child Care Coordinator/ Concerned Authority",
+        "Step 4: Acquire the receipt/acknowledgement of the successful submission of the application from the District Child Protection Society/ Child Welfare Committee",
+        "﻿ Identification of Foster Families The biological parent/s can identify a relative or a potential caregiver from the vicinity",
+        "A list of couples found ineligible under the criteria for adoption but willing to care for children in foster care can be prepared by adoption agencies and submitted to Child Welfare Committee for assessment by the Child Care Coordinator"
+      ],
+      "official_website": "https://www.digitalindia.gov.in/",
+      "application_link": "",
+      "helpline_number": "",
+      "helpline_email": "",
+      "scheme_type": "Central",
+      "scheme_code": "",
+      "ministry_department": "Department of Women & Child Development",
+      "implementing_agency": "Department of Women & Child Development",
+      "nodal_officer": "",
+      "target_beneficiaries": "",
+      "beneficiary_type": "Individual",
+      "funding_pattern": "",
+      "compensation_amount": "₹ 2,500",
+      "scheme_duration": "",
+      "launch_date": "",
+      "application_deadline": "",
+      "processing_time": "",
+      "geographical_coverage": "All India",
+      "urban_rural": "Both",
+      "covered_states": [
+        "All India"
+      ],
+      "crime_types_covered": [],
+      "compensation_matrix": {},
+      "key_features": [],
+      "scheme_objectives": [],
+      "payment_mode": "",
+      "payment_timeline": "",
+      "appeal_process": "",
+      "grievance_redressal": "",
+      "tracking_mechanism": "",
+      "legal_provisions": "",
+      "relevant_acts": [],
+      "faqs": [],
+      "contact_details": {},
+      "related_schemes": [],
+      "success_stories": "",
+      "source_url": "https://www.myscheme.gov.in/schemes/fcsv",
+      "source_domain": "myscheme.gov.in",
+      "scraped_at": "2026-02-07T00:52:54.901361Z",
+      "scraper_version": "public_safety_1.0",
+      "scraping_success": true,
+      "page_load_successful": true,
+      "data_quality_score": 70,
+      "fields_missing": [
+        "crime_types_covered",
+        "legal_provisions/relevant_acts",
+        "contact_details"
+      ]
+    }
+  ]
+}
