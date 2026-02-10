@@ -4,9 +4,9 @@ Public Safety, Law & Justice detail scraper.
 Reads URLs from `data/public_safety_law_justice_urls.json` (or `data/urls/public_safety_urls.json`
 if present), scrapes each scheme page, and writes rich scheme data to:
 
-- data/from_urls/public_safety_schemes.json
-- data/from_urls/public_safety_failed_urls.json
-- data/from_urls/public_safety_stats.json
+- data/from_urls/public_safety_schemes/public_safety_schemes.json
+- data/from_urls/public_safety_schemes/public_safety_failed_urls.json
+- data/from_urls/public_safety_schemes/public_safety_stats.json
 
 Checkpoints every 25 schemes under `checkpoints/public_safety_checkpoint_*.json`.
 """
@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 
 INPUT_PRIMARY = Path("data/public_safety_law_justice_urls.json")
 INPUT_ALT = Path("data/urls/public_safety_urls.json")
-OUT_DIR = Path("data/from_urls")
+OUT_DIR = Path("data/from_urls/public_safety_schemes")
 CHECKPOINT_DIR = Path("checkpoints")
 LOG_DIR = Path("logs")
 

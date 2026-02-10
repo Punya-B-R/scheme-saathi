@@ -1,0 +1,89 @@
+{
+  "failed_count": 14,
+  "urls": [
+    {
+      "url": "https://www.myscheme.gov.in/schemes/dbrasvpcdbrali",
+      "error": "Message: timeout: Timed out receiving message from renderer: 44.633\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0x975093\n\t0x9750d4\n\t0x76b490\n\t0x75b863\n\t0x75b595\n\t0x7596a8\n\t0x759ef6\n\t0x766d3b\n\t0x778a6e\n\t0x77e4b6\n\t0x75a57c\n\t0x778803\n\t0x7f565a\n\t0x7d7f56\n\t0x7a96c9\n\t0x7aa484\n\t0xbc7e34\n\t0xbc30c9\n\t0xbe0add\n\t0x98db38\n\t0x9958ad\n\t0x97d848\n\t0x97da12\n\t0x9675fa\n\t0x76035d49\n\t0x7752d5db\n\t0x7752d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T03:20:12.946086Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/dccbsrto",
+      "error": "HTTPConnectionPool(host='localhost', port=52978): Read timed out. (read timeout=120)",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T03:25:25.660617Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/dicf",
+      "error": "Message: timeout: Timed out receiving message from renderer: 44.680\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0x975093\n\t0x9750d4\n\t0x76b490\n\t0x75b863\n\t0x75b595\n\t0x7596a8\n\t0x759ef6\n\t0x766d3b\n\t0x778a6e\n\t0x77e4b6\n\t0x75a57c\n\t0x778803\n\t0x7f565a\n\t0x7d7f56\n\t0x7a96c9\n\t0x7aa484\n\t0xbc7e34\n\t0xbc30c9\n\t0xbe0add\n\t0x98db38\n\t0x9958ad\n\t0x97d848\n\t0x97da12\n\t0x9675fa\n\t0x76035d49\n\t0x7752d5db\n\t0x7752d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T03:27:45.291531Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/dp-cmsguy",
+      "error": "Message: timeout: Timed out receiving message from renderer: 44.886\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0x975093\n\t0x9750d4\n\t0x76b490\n\t0x75b863\n\t0x75b595\n\t0x7596a8\n\t0x759ef6\n\t0x766d3b\n\t0x778a6e\n\t0x77e4b6\n\t0x75a57c\n\t0x778803\n\t0x7f565a\n\t0x7d7f56\n\t0x7a96c9\n\t0x7aa484\n\t0xbc7e34\n\t0xbc30c9\n\t0xbe0add\n\t0x98db38\n\t0x9958ad\n\t0x97d848\n\t0x97da12\n\t0x9675fa\n\t0x76035d49\n\t0x7752d5db\n\t0x7752d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T03:30:00.530622Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/e-yuvase-yuvac",
+      "error": "Message: timeout: Timed out receiving message from renderer: 44.871\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0x975093\n\t0x9750d4\n\t0x76b490\n\t0x75b863\n\t0x75b595\n\t0x7596a8\n\t0x759ef6\n\t0x766d3b\n\t0x778a6e\n\t0x77e4b6\n\t0x75a57c\n\t0x778803\n\t0x7f565a\n\t0x7d7f56\n\t0x7a96c9\n\t0x7aa484\n\t0xbc7e34\n\t0xbc30c9\n\t0xbe0add\n\t0x98db38\n\t0x9958ad\n\t0x97d848\n\t0x97da12\n\t0x9675fa\n\t0x76035d49\n\t0x7752d5db\n\t0x7752d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T03:32:15.921016Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/ecceuk",
+      "error": "Message: timeout: Timed out receiving message from renderer: 44.723\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0x975093\n\t0x9750d4\n\t0x76b490\n\t0x75b863\n\t0x75b595\n\t0x7596a8\n\t0x759ef6\n\t0x766d3b\n\t0x778a6e\n\t0x77e4b6\n\t0x75a57c\n\t0x778803\n\t0x7f565a\n\t0x7d7f56\n\t0x7a96c9\n\t0x7aa484\n\t0xbc7e34\n\t0xbc30c9\n\t0xbe0add\n\t0x98db38\n\t0x9958ad\n\t0x97d848\n\t0x97da12\n\t0x9675fa\n\t0x76035d49\n\t0x7752d5db\n\t0x7752d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T03:34:31.126613Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/mvdcws-ma",
+      "error": "HTTPConnectionPool(host='localhost', port=52978): Read timed out. (read timeout=120)",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T03:51:13.239656Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/mvdcws-mda",
+      "error": "HTTPConnectionPool(host='localhost', port=52978): Read timed out. (read timeout=120)",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T03:57:13.350523Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/mvdcws-s",
+      "error": "Message: timeout: Timed out receiving message from renderer: 44.932\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0x975093\n\t0x9750d4\n\t0x76b490\n\t0x75b863\n\t0x75b595\n\t0x7596a8\n\t0x759ef6\n\t0x766d3b\n\t0x778a6e\n\t0x77e4b6\n\t0x75a57c\n\t0x778803\n\t0x7f565a\n\t0x7d7f56\n\t0x7a96c9\n\t0x7aa484\n\t0xbc7e34\n\t0xbc30c9\n\t0xbe0add\n\t0x98db38\n\t0x9958ad\n\t0x97d848\n\t0x97da12\n\t0x9675fa\n\t0x76035d49\n\t0x7752d5db\n\t0x7752d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T04:01:30.372104Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/ngin",
+      "error": "Message: timeout: Timed out receiving message from renderer: 44.916\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0x975093\n\t0x9750d4\n\t0x76b490\n\t0x75b863\n\t0x75b595\n\t0x7596a8\n\t0x759ef6\n\t0x766d3b\n\t0x778a6e\n\t0x77e4b6\n\t0x75a57c\n\t0x778803\n\t0x7f565a\n\t0x7d7f56\n\t0x7a96c9\n\t0x7aa484\n\t0xbc7e34\n\t0xbc30c9\n\t0xbe0add\n\t0x98db38\n\t0x9958ad\n\t0x97d848\n\t0x97da12\n\t0x9675fa\n\t0x76035d49\n\t0x7752d5db\n\t0x7752d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T04:06:55.438602Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/otcild-sw",
+      "error": "HTTPConnectionPool(host='localhost', port=52978): Read timed out. (read timeout=120)",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T04:11:40.513595Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/swsvy",
+      "error": "Message: timeout: Timed out receiving message from renderer: 44.856\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0x975093\n\t0x9750d4\n\t0x76b490\n\t0x75b863\n\t0x75b595\n\t0x7596a8\n\t0x759ef6\n\t0x766d3b\n\t0x778a6e\n\t0x77e4b6\n\t0x75a57c\n\t0x778803\n\t0x7f565a\n\t0x7d7f56\n\t0x7a96c9\n\t0x7aa484\n\t0xbc7e34\n\t0xbc30c9\n\t0xbe0add\n\t0x98db38\n\t0x9958ad\n\t0x97d848\n\t0x97da12\n\t0x9675fa\n\t0x76035d49\n\t0x7752d5db\n\t0x7752d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T04:22:21.302679Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tls-delhi",
+      "error": "Message: timeout: Timed out receiving message from renderer: 44.941\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0x975093\n\t0x9750d4\n\t0x76b490\n\t0x75b863\n\t0x75b595\n\t0x7596a8\n\t0x759ef6\n\t0x766d3b\n\t0x778a6e\n\t0x77e4b6\n\t0x75a57c\n\t0x778803\n\t0x7f565a\n\t0x7d7f56\n\t0x7a96c9\n\t0x7aa484\n\t0xbc7e34\n\t0xbc30c9\n\t0xbe0add\n\t0x98db38\n\t0x9958ad\n\t0x97d848\n\t0x97da12\n\t0x9675fa\n\t0x76035d49\n\t0x7752d5db\n\t0x7752d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T04:31:28.267816Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/ycmvyfvjnts",
+      "error": "Message: timeout: Timed out receiving message from renderer: 44.906\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0x975093\n\t0x9750d4\n\t0x76b490\n\t0x75b863\n\t0x75b595\n\t0x7596a8\n\t0x759ef6\n\t0x766d3b\n\t0x778a6e\n\t0x77e4b6\n\t0x75a57c\n\t0x778803\n\t0x7f565a\n\t0x7d7f56\n\t0x7a96c9\n\t0x7aa484\n\t0xbc7e34\n\t0xbc30c9\n\t0xbe0add\n\t0x98db38\n\t0x9958ad\n\t0x97d848\n\t0x97da12\n\t0x9675fa\n\t0x76035d49\n\t0x7752d5db\n\t0x7752d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T04:36:31.338719Z"
+    }
+  ]
+}

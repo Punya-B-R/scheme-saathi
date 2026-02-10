@@ -1,0 +1,245 @@
+2026-02-07 16:15:28,731 - INFO - Loaded 100 Housing & Shelter URLs
+2026-02-07 16:15:28,859 - INFO - ====== WebDriver manager ======
+2026-02-07 16:15:30,913 - INFO - Get LATEST chromedriver version for google-chrome
+2026-02-07 16:15:31,377 - INFO - Get LATEST chromedriver version for google-chrome
+2026-02-07 16:15:31,881 - INFO - Driver [C:\Users\punya\.wdm\drivers\chromedriver\win64\144.0.7559.133\chromedriver-win32/chromedriver.exe] found in cache
+2026-02-07 16:15:33,242 - INFO - Driver initialised (headless).
+2026-02-07 16:15:33,242 - INFO - [1/100] https://www.myscheme.gov.in/schemes/1pmy
+2026-02-07 16:15:33,248 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/1pmy
+2026-02-07 16:16:21,788 - INFO - [2/100] https://www.myscheme.gov.in/schemes/aay-goa
+2026-02-07 16:16:21,788 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/aay-goa
+2026-02-07 16:16:36,550 - INFO - [3/100] https://www.myscheme.gov.in/schemes/adthsg
+2026-02-07 16:16:36,555 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/adthsg
+2026-02-07 16:16:50,186 - INFO - [4/100] https://www.myscheme.gov.in/schemes/ahs
+2026-02-07 16:16:50,186 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/ahs
+2026-02-07 16:17:04,358 - INFO - [5/100] https://www.myscheme.gov.in/schemes/apch-gbocwwb
+2026-02-07 16:17:04,374 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/apch-gbocwwb
+2026-02-07 16:17:16,631 - INFO - [6/100] https://www.myscheme.gov.in/schemes/aphhbocwwb
+2026-02-07 16:17:16,631 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/aphhbocwwb
+2026-02-07 16:17:30,324 - INFO - [7/100] https://www.myscheme.gov.in/schemes/asst
+2026-02-07 16:17:30,324 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/asst
+2026-02-07 16:17:42,499 - INFO - [8/100] https://www.myscheme.gov.in/schemes/asyf1hvidsstiti
+2026-02-07 16:17:42,501 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/asyf1hvidsstiti
+2026-02-07 16:17:54,545 - INFO - [9/100] https://www.myscheme.gov.in/schemes/avyay-napsc-hssc
+2026-02-07 16:17:54,545 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/avyay-napsc-hssc
+2026-02-07 16:18:08,450 - INFO - [10/100] https://www.myscheme.gov.in/schemes/ba
+2026-02-07 16:18:08,460 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/ba
+2026-02-07 16:18:22,186 - INFO - [11/100] https://www.myscheme.gov.in/schemes/bany
+2026-02-07 16:18:22,186 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/bany
+2026-02-07 16:18:34,338 - INFO - [12/100] https://www.myscheme.gov.in/schemes/bay
+2026-02-07 16:18:34,338 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/bay
+2026-02-07 16:18:46,485 - INFO - [13/100] https://www.myscheme.gov.in/schemes/bhavanuk
+2026-02-07 16:18:46,487 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/bhavanuk
+2026-02-07 16:18:59,133 - INFO - [14/100] https://www.myscheme.gov.in/schemes/bhsstg
+2026-02-07 16:18:59,133 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/bhsstg
+2026-02-07 16:19:12,669 - INFO - [15/100] https://www.myscheme.gov.in/schemes/chobcbg
+2026-02-07 16:19:12,669 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/chobcbg
+2026-02-07 16:19:26,013 - INFO - [16/100] https://www.myscheme.gov.in/schemes/cllpwaafa-dhmhwehwe
+2026-02-07 16:19:26,013 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/cllpwaafa-dhmhwehwe
+2026-02-07 16:19:37,961 - INFO - [17/100] https://www.myscheme.gov.in/schemes/cmbaocwump
+2026-02-07 16:19:37,961 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/cmbaocwump
+2026-02-07 16:19:51,046 - INFO - [18/100] https://www.myscheme.gov.in/schemes/cmbocwhrs
+2026-02-07 16:19:51,057 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/cmbocwhrs
+2026-02-07 16:20:04,278 - INFO - [19/100] https://www.myscheme.gov.in/schemes/cmhr
+2026-02-07 16:20:04,278 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/cmhr
+2026-02-07 16:20:17,982 - INFO - [20/100] https://www.myscheme.gov.in/schemes/cofhft
+2026-02-07 16:20:17,982 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/cofhft
+2026-02-07 16:20:31,070 - INFO - [21/100] https://www.myscheme.gov.in/schemes/copy-of-ddugavy
+2026-02-07 16:20:31,070 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/copy-of-ddugavy
+2026-02-07 16:20:43,187 - INFO - [22/100] https://www.myscheme.gov.in/schemes/daay
+2026-02-07 16:20:43,187 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/daay
+2026-02-07 16:20:55,382 - INFO - [23/100] https://www.myscheme.gov.in/schemes/daynulmsuh
+2026-02-07 16:20:55,382 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/daynulmsuh
+2026-02-07 16:21:07,489 - INFO - [24/100] https://www.myscheme.gov.in/schemes/ddugavyuk
+2026-02-07 16:21:07,489 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/ddugavyuk
+2026-02-07 16:21:20,377 - INFO - [25/100] https://www.myscheme.gov.in/schemes/dfhsscoebc
+2026-02-07 16:21:20,377 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/dfhsscoebc
+2026-02-07 16:21:32,971 - INFO - Checkpoint saved: checkpoints\housing_shelter_checkpoint_24.json
+2026-02-07 16:21:32,971 - INFO - [26/100] https://www.myscheme.gov.in/schemes/fahfptihbocwwb
+2026-02-07 16:21:32,976 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/fahfptihbocwwb
+2026-02-07 16:21:45,206 - INFO - [27/100] https://www.myscheme.gov.in/schemes/faishl
+2026-02-07 16:21:45,211 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/faishl
+2026-02-07 16:22:17,791 - INFO - [28/100] https://www.myscheme.gov.in/schemes/faphfts
+2026-02-07 16:22:17,795 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/faphfts
+2026-02-07 16:22:36,117 - INFO - [29/100] https://www.myscheme.gov.in/schemes/fchdnnasnc
+2026-02-07 16:22:36,130 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/fchdnnasnc
+2026-02-07 16:22:51,504 - INFO - [30/100] https://www.myscheme.gov.in/schemes/gaoah
+2026-02-07 16:22:51,504 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/gaoah
+2026-02-07 16:23:11,865 - INFO - [31/100] https://www.myscheme.gov.in/schemes/ghcsscp
+2026-02-07 16:23:11,865 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/ghcsscp
+2026-02-07 16:23:31,946 - INFO - [32/100] https://www.myscheme.gov.in/schemes/giah
+2026-02-07 16:23:31,963 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/giah
+2026-02-07 16:23:51,643 - INFO - [33/100] https://www.myscheme.gov.in/schemes/gshtn
+2026-02-07 16:23:51,665 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/gshtn
+2026-02-07 16:24:18,771 - INFO - [34/100] https://www.myscheme.gov.in/schemes/gssvhhi
+2026-02-07 16:24:18,771 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/gssvhhi
+2026-02-07 16:24:43,437 - INFO - [35/100] https://www.myscheme.gov.in/schemes/gwwh
+2026-02-07 16:24:43,453 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/gwwh
+2026-02-07 16:25:18,021 - INFO - [36/100] https://www.myscheme.gov.in/schemes/ha
+2026-02-07 16:25:18,021 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/ha
+2026-02-07 16:25:43,512 - INFO - [37/100] https://www.myscheme.gov.in/schemes/hascmcwgbocwwb
+2026-02-07 16:25:43,512 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/hascmcwgbocwwb
+2026-02-07 16:26:05,261 - INFO - [38/100] https://www.myscheme.gov.in/schemes/hasukbocwwb
+2026-02-07 16:26:05,262 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/hasukbocwwb
+2026-02-07 16:26:27,275 - INFO - [39/100] https://www.myscheme.gov.in/schemes/hblsegg
+2026-02-07 16:26:27,275 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/hblsegg
+2026-02-07 16:26:43,957 - INFO - [40/100] https://www.myscheme.gov.in/schemes/hfshpbocwwb
+2026-02-07 16:26:43,957 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/hfshpbocwwb
+2026-02-07 16:27:10,376 - INFO - [41/100] https://www.myscheme.gov.in/schemes/hfta-giapsca
+2026-02-07 16:27:10,380 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/hfta-giapsca
+2026-02-07 16:27:27,470 - INFO - [42/100] https://www.myscheme.gov.in/schemes/hhs
+2026-02-07 16:27:27,470 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/hhs
+2026-02-07 16:27:48,280 - INFO - [43/100] https://www.myscheme.gov.in/schemes/hiip
+2026-02-07 16:27:48,290 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/hiip
+2026-02-07 16:28:01,938 - INFO - [44/100] https://www.myscheme.gov.in/schemes/hliss-glwb
+2026-02-07 16:28:01,942 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/hliss-glwb
+2026-02-07 16:28:18,648 - INFO - [45/100] https://www.myscheme.gov.in/schemes/hmcc
+2026-02-07 16:28:18,664 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/hmcc
+2026-02-07 16:28:34,340 - INFO - [46/100] https://www.myscheme.gov.in/schemes/hrasfts
+2026-02-07 16:28:34,340 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/hrasfts
+2026-02-07 16:28:48,932 - INFO - [47/100] https://www.myscheme.gov.in/schemes/hs
+2026-02-07 16:28:48,944 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/hs
+2026-02-07 16:29:09,096 - INFO - [48/100] https://www.myscheme.gov.in/schemes/hssgbocwwb
+2026-02-07 16:29:09,105 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/hssgbocwwb
+2026-02-07 16:29:30,199 - INFO - [49/100] https://www.myscheme.gov.in/schemes/ibhrs
+2026-02-07 16:29:30,215 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/ibhrs
+2026-02-07 16:29:44,413 - INFO - [50/100] https://www.myscheme.gov.in/schemes/ihs
+2026-02-07 16:29:44,413 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/ihs
+2026-02-07 16:29:59,807 - INFO - Checkpoint saved: checkpoints\housing_shelter_checkpoint_49.json
+2026-02-07 16:29:59,821 - INFO - [51/100] https://www.myscheme.gov.in/schemes/kgbvrghuk
+2026-02-07 16:29:59,821 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/kgbvrghuk
+2026-02-07 16:30:20,028 - INFO - [52/100] https://www.myscheme.gov.in/schemes/kkn-ctnc
+2026-02-07 16:30:20,044 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/kkn-ctnc
+2026-02-07 16:30:42,856 - INFO - [53/100] https://www.myscheme.gov.in/schemes/lach
+2026-02-07 16:30:42,868 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/lach
+2026-02-07 16:31:38,136 - ERROR - Error scraping https://www.myscheme.gov.in/schemes/lach (attempt 1): Message: timeout: Timed out receiving message from renderer: 44.747
+  (Session info: chrome=144.0.7559.133)
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x895093
+	0x8950d4
+	0x68b490
+	0x67b863
+	0x67b595
+	0x6796a8
+	0x679ef6
+	0x686d3b
+	0x698a6e
+	0x69e4b6
+	0x67a57c
+	0x698803
+	0x71565a
+	0x6f7f56
+	0x6c96c9
+	0x6ca484
+	0xae7e34
+	0xae30c9
+	0xb00add
+	0x8adb38
+	0x8b58ad
+	0x89d848
+	0x89da12
+	0x8875fa
+	0x76035d49
+	0x7752d5db
+	0x7752d561
+
+2026-02-07 16:31:38,147 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/lach
+2026-02-07 16:31:58,229 - INFO - [54/100] https://www.myscheme.gov.in/schemes/mabay
+2026-02-07 16:31:58,229 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/mabay
+2026-02-07 16:32:13,624 - INFO - [55/100] https://www.myscheme.gov.in/schemes/maua
+2026-02-07 16:32:13,640 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/maua
+2026-02-07 16:32:31,437 - INFO - [56/100] https://www.myscheme.gov.in/schemes/mayhpbocwwb
+2026-02-07 16:32:31,469 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/mayhpbocwwb
+2026-02-07 16:33:10,379 - INFO - [57/100] https://www.myscheme.gov.in/schemes/mgawb
+2026-02-07 16:33:10,379 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/mgawb
+2026-02-07 16:33:26,441 - INFO - [58/100] https://www.myscheme.gov.in/schemes/mgbghsc
+2026-02-07 16:33:26,441 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/mgbghsc
+2026-02-07 16:33:41,587 - INFO - [59/100] https://www.myscheme.gov.in/schemes/mmvenay
+2026-02-07 16:33:41,603 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/mmvenay
+2026-02-07 16:33:56,909 - INFO - [60/100] https://www.myscheme.gov.in/schemes/mmvsksy
+2026-02-07 16:33:56,925 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/mmvsksy
+2026-02-07 16:34:12,834 - INFO - [61/100] https://www.myscheme.gov.in/schemes/mpmgarssc
+2026-02-07 16:34:12,834 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/mpmgarssc
+2026-02-07 16:34:27,857 - INFO - [62/100] https://www.myscheme.gov.in/schemes/msp
+2026-02-07 16:34:27,857 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/msp
+2026-02-07 16:34:42,441 - INFO - [63/100] https://www.myscheme.gov.in/schemes/msyr
+2026-02-07 16:34:42,441 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/msyr
+2026-02-07 16:34:57,057 - INFO - [64/100] https://www.myscheme.gov.in/schemes/nn
+2026-02-07 16:34:57,071 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/nn
+2026-02-07 16:35:12,600 - INFO - [65/100] https://www.myscheme.gov.in/schemes/nscbrhuk
+2026-02-07 16:35:12,600 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/nscbrhuk
+2026-02-07 16:35:27,550 - INFO - [66/100] https://www.myscheme.gov.in/schemes/nspgy
+2026-02-07 16:35:27,550 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/nspgy
+2026-02-07 16:36:01,885 - INFO - [67/100] https://www.myscheme.gov.in/schemes/oahr
+2026-02-07 16:36:01,901 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/oahr
+2026-02-07 16:36:19,958 - INFO - [68/100] https://www.myscheme.gov.in/schemes/ogoaih
+2026-02-07 16:36:19,966 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/ogoaih
+2026-02-07 16:36:34,957 - INFO - [69/100] https://www.myscheme.gov.in/schemes/ohss
+2026-02-07 16:36:34,965 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/ohss
+2026-02-07 16:36:52,909 - INFO - [70/100] https://www.myscheme.gov.in/schemes/ombgh
+2026-02-07 16:36:52,909 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/ombgh
+2026-02-07 16:37:13,175 - INFO - [71/100] https://www.myscheme.gov.in/schemes/oossh
+2026-02-07 16:37:13,186 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/oossh
+2026-02-07 16:37:26,644 - INFO - [72/100] https://www.myscheme.gov.in/schemes/osh
+2026-02-07 16:37:26,644 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/osh
+2026-02-07 16:37:40,805 - INFO - [73/100] https://www.myscheme.gov.in/schemes/pagccigchosh
+2026-02-07 16:37:40,805 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/pagccigchosh
+2026-02-07 16:37:52,241 - INFO - [74/100] https://www.myscheme.gov.in/schemes/pagwwrcwh
+2026-02-07 16:37:52,246 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/pagwwrcwh
+2026-02-07 16:38:05,003 - INFO - [75/100] https://www.myscheme.gov.in/schemes/pchcw
+2026-02-07 16:38:05,003 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/pchcw
+2026-02-07 16:38:16,259 - INFO - Checkpoint saved: checkpoints\housing_shelter_checkpoint_74.json
+2026-02-07 16:38:16,259 - INFO - [76/100] https://www.myscheme.gov.in/schemes/pduaydcw
+2026-02-07 16:38:16,259 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/pduaydcw
+2026-02-07 16:38:27,502 - INFO - [77/100] https://www.myscheme.gov.in/schemes/pduayebc
+2026-02-07 16:38:27,502 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/pduayebc
+2026-02-07 16:38:38,981 - INFO - [78/100] https://www.myscheme.gov.in/schemes/pgy
+2026-02-07 16:38:38,981 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/pgy
+2026-02-07 16:38:50,228 - INFO - [79/100] https://www.myscheme.gov.in/schemes/pm-janman
+2026-02-07 16:38:50,228 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/pm-janman
+2026-02-07 16:39:01,530 - INFO - [80/100] https://www.myscheme.gov.in/schemes/pmayguk
+2026-02-07 16:39:01,530 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/pmayguk
+2026-02-07 16:39:12,987 - INFO - [81/100] https://www.myscheme.gov.in/schemes/pmmrc
+2026-02-07 16:39:12,988 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/pmmrc
+2026-02-07 16:39:24,453 - INFO - [82/100] https://www.myscheme.gov.in/schemes/ps-west-bengal
+2026-02-07 16:39:24,453 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/ps-west-bengal
+2026-02-07 16:39:35,661 - INFO - [83/100] https://www.myscheme.gov.in/schemes/rassnb
+2026-02-07 16:39:35,661 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/rassnb
+2026-02-07 16:39:47,175 - INFO - [84/100] https://www.myscheme.gov.in/schemes/rosch
+2026-02-07 16:39:47,175 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/rosch
+2026-02-07 16:39:58,522 - INFO - [85/100] https://www.myscheme.gov.in/schemes/rsb
+2026-02-07 16:39:58,522 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/rsb
+2026-02-07 16:40:09,751 - INFO - [86/100] https://www.myscheme.gov.in/schemes/sbygbocwwb
+2026-02-07 16:40:09,751 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/sbygbocwwb
+2026-02-07 16:40:20,994 - INFO - [87/100] https://www.myscheme.gov.in/schemes/scbshas
+2026-02-07 16:40:20,994 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/scbshas
+2026-02-07 16:40:32,452 - INFO - [88/100] https://www.myscheme.gov.in/schemes/sjay-hp
+2026-02-07 16:40:32,452 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/sjay-hp
+2026-02-07 16:40:43,653 - INFO - [89/100] https://www.myscheme.gov.in/schemes/slabch
+2026-02-07 16:40:43,653 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/slabch
+2026-02-07 16:40:54,847 - INFO - [90/100] https://www.myscheme.gov.in/schemes/smile
+2026-02-07 16:40:54,847 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/smile
+2026-02-07 16:41:06,036 - INFO - [91/100] https://www.myscheme.gov.in/schemes/spay
+2026-02-07 16:41:06,036 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/spay
+2026-02-07 16:41:17,257 - INFO - [92/100] https://www.myscheme.gov.in/schemes/sre-randr
+2026-02-07 16:41:17,257 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/sre-randr
+2026-02-07 16:41:28,617 - INFO - [93/100] https://www.myscheme.gov.in/schemes/ss-k
+2026-02-07 16:41:28,617 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/ss-k
+2026-02-07 16:41:39,950 - INFO - [94/100] https://www.myscheme.gov.in/schemes/ssch
+2026-02-07 16:41:39,950 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/ssch
+2026-02-07 16:41:51,165 - INFO - [95/100] https://www.myscheme.gov.in/schemes/swsp
+2026-02-07 16:41:51,165 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/swsp
+2026-02-07 16:42:08,021 - INFO - [96/100] https://www.myscheme.gov.in/schemes/thrgrr-sw
+2026-02-07 16:42:08,021 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/thrgrr-sw
+2026-02-07 16:42:19,227 - INFO - [97/100] https://www.myscheme.gov.in/schemes/uky
+2026-02-07 16:42:19,227 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/uky
+2026-02-07 16:42:30,615 - INFO - [98/100] https://www.myscheme.gov.in/schemes/v-vhcs
+2026-02-07 16:42:30,615 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/v-vhcs
+2026-02-07 16:42:41,829 - INFO - [99/100] https://www.myscheme.gov.in/schemes/ycmvyfvjnts
+2026-02-07 16:42:41,830 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/ycmvyfvjnts
+2026-02-07 16:42:53,018 - INFO - [100/100] https://www.myscheme.gov.in/schemes/yhs
+2026-02-07 16:42:53,025 - INFO - Loading URL: https://www.myscheme.gov.in/schemes/yhs
+2026-02-07 16:43:04,244 - INFO - Checkpoint saved: checkpoints\housing_shelter_checkpoint_99.json
+2026-02-07 16:43:04,244 - INFO - Scraping complete. Total schemes scraped: 100; failed: 0
+2026-02-07 16:43:06,636 - INFO - Outputs written under data\from_urls\housing_shelter

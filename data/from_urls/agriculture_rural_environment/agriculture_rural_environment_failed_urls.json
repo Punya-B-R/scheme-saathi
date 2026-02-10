@@ -1,0 +1,305 @@
+{
+  "failed_count": 50,
+  "urls": [
+    {
+      "url": "https://www.myscheme.gov.in/schemes/ssvy",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:05.943226Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sswps",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:05.953003Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/ssy-goa",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:05.959023Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/ssyc",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:05.970817Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/stisrr",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:05.980594Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/stl",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:05.992388Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/stlsmeghalaya",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:05.996403Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/stpmtdh",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.001431Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/stscss",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.008461Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/swhsds",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.038307Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/syss",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.050104Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tcptc",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.055866Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tdphduk",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.073670Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tds",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.081703Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tfppt",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.093494Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tifsptfsrguj",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.101521Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tipc",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.117329Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tmvsy-ajjap",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.136891Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/toaifse",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.142912Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tpahkcc",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.148933Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tpedb",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.166488Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tpehw",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.178537Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tpfafnfd",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.182291Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tpfkcc",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.188315Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tpoml",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.194339Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/trainsugarfarmers",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.211658Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tshsdfl",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.247295Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/ttf",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.273127Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/twibierfv",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.299729Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/twp",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.312779Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tws",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.324563Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/uadtas",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.330588Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/ucuk",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.334603Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/uppy",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.344376Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/v-vhcs",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.364197Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/vcfrsk",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.368216Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/vdaps",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.373986Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/vds",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.380005Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/vea",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.386026Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/vi",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.391787Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/vppy",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.397811Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/wbcism",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.403580Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/wcdcls",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.407596Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/wfafcp",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.413620Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/wit",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.427414Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/wrflsncs-fbps",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.439200Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/wrflsncs-idra",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.447230Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/wrflsncs-lsa",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.452992Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/wscp",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.457004Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/zbnf",
+      "error": "Message: invalid session id; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b2ce\n\t0x8c8957\n\t0x8f8076\n\t0x8f3dc1\n\t0x8f32c2\n\t0x85e26b\n\t0x85e80e\n\t0x85eced\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0x85dde9\n\t0x85d430\n\t0xe39aaf\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T14:40:06.461013Z"
+    }
+  ]
+}

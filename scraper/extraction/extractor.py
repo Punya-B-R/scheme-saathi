@@ -36,10 +36,10 @@ INVALID_DESCRIPTION_PATTERNS = [
 ]
 
 
-def generate_scheme_id(url: str) -> str:
-    """Generate a stable scheme_id from URL."""
+def generate_scheme_id(url: str, prefix: str = "PS") -> str:
+    """Generate a stable scheme_id from URL with optional prefix (e.g. PS, US)."""
     h = hashlib.md5(url.encode("utf-8")).hexdigest()[:8].upper()
-    return f"PS-{h}"
+    return f"{prefix}-{h}"
 
 
 def _clean_text(text: str) -> str:
@@ -257,14 +257,21 @@ def _find_section_text(soup: BeautifulSoup, keywords: list[str]) -> str:
     return ""
 
 
-def extract_scheme(driver, url: str) -> Dict[str, Any]:
+def extract_scheme(
+    driver,
+    url: str,
+    category: str | None = None,
+    scheme_id_prefix: str = "PS",
+) -> Dict[str, Any]:
     """
-    Extract a full scheme record from a Public Safety scheme URL.
+    Extract a full scheme record from a scheme URL.
+    category: display name (e.g. "Utility & Sanitation"); if None, uses default CATEGORY_NAME.
+    scheme_id_prefix: prefix for scheme_id (e.g. "US" for Utility & Sanitation).
     """
     soup = get_soup(driver, url)
     page_text = _clean_text(soup.get_text(separator=" "))
 
-    scheme_id = generate_scheme_id(url)
+    scheme_id = generate_scheme_id(url, prefix=scheme_id_prefix)
     scheme_name, brief_description, detailed_description = _extract_heading_and_body(soup)
 
     if not is_valid_scheme_name(scheme_name):
@@ -327,7 +334,7 @@ def extract_scheme(driver, url: str) -> Dict[str, Any]:
         "scheme_id": scheme_id,
         "scheme_name": scheme_name or "Scheme name not clearly specified",
         "scheme_name_local": "",
-        "category": CATEGORY_NAME,
+        "category": category if category is not None else CATEGORY_NAME,
         "brief_description": (brief_description or detailed_description[:300] if detailed_description else ""),
         "detailed_description": detailed_description or "",
         "benefits": benefits,

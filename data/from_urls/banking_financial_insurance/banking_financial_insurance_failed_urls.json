@@ -1,0 +1,353 @@
+{
+  "failed_count": 58,
+  "urls": [
+    {
+      "url": "https://www.myscheme.gov.in/schemes/ses-goa",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:21.457365Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sesnvmly",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:21.939226Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sessct",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:22.173028Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sestltf",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:22.423510Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sfaoeao",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:22.656284Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sfurti",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:23.002778Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sgatt",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:23.424745Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/shnh-pipdic",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:24.282867Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/shrp",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:24.794384Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/siupd",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:25.480490Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/skssgis",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:25.950504Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sl",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:26.330568Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sm",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:27.063930Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sma",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:27.556976Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/smo",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:28.290975Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/soipfsci",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:28.891434Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sostupm-atisis",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:29.492049Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sp4wou",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:30.078172Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/spesp",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:30.571833Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/spmsv",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:30.984943Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/spphm",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:31.774929Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sprs",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:32.161130Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sps-assam",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:32.869949Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/spshs",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:33.597514Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/srdsy",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:34.239158Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/srshsfdc",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:34.773962Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/ssbc",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:35.395169Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/ssboscbpbs",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:36.024347Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/ssfgcojmmw",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:36.468556Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sslgiangiaimuif",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:37.124322Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/ssls-m",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:37.534508Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sssps",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:38.002947Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sstlsbc",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:38.667781Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/ssuie",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:39.310698Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sswhrwcd",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:39.796095Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/stls",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:40.281157Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/stra",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:40.954393Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sui",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:41.552134Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/suwps",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:42.242634Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/svby",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:42.801232Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/sws-pipdic",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:43.476989Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tbsshsfdc",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:44.034920Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tes",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:44.626797Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tlgntdnt",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:45.269284Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tlnskfdch",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:45.695124Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tls",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:46.359589Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tls-cl1mc",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:46.886417Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tls-nmdfc",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:47.403075Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tlsbc",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:47.796433Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tlsbgtkvn",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:48.543461Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tlscl2mc",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:49.161220Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tlsgmfdc",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:49.604259Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tsgtkvn",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:50.111942Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/tufs",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:50.612792Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/vetls",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:51.051517Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/vls-nmdfc",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:51.677125Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/vlsy",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:52.138424Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/vy",
+      "error": "Message: unknown error: net::ERR_INTERNET_DISCONNECTED\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0xa95093\n\t0xa950d4\n\t0x88b490\n\t0x88899e\n\t0x87bac4\n\t0x87d51c\n\t0x87bf67\n\t0x87b895\n\t0x87b595\n\t0x8796a8\n\t0x879dba\n\t0x88ef1e\n\t0x915e84\n\t0x8f81bc\n\t0x915341\n\t0x8f7f56\n\t0x8c96c9\n\t0x8ca484\n\t0xce7e34\n\t0xce30c9\n\t0xd00add\n\t0xaadb38\n\t0xab58ad\n\t0xa9d848\n\t0xa9da12\n\t0xa875fa\n\t0x759b5d49\n\t0x7702d5db\n\t0x7702d561\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-08T04:35:52.668971Z"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "failed_count": 2,
+  "urls": [
+    {
+      "url": "https://www.myscheme.gov.in/schemes/lowaltitudeuk",
+      "error": "Message: timeout: Timed out receiving message from renderer: 44.915\n  (Session info: chrome=144.0.7559.133)\nStacktrace:\nSymbols not available. Dumping unresolved backtrace:\n\t0x2f5093\n\t0x2f50d4\n\t0xeb490\n\t0xdb863\n\t0xdb595\n\t0xd96a8\n\t0xd9ef6\n\t0xe6d3b\n\t0xf8a6e\n\t0xfe4b6\n\t0xda57c\n\t0xf8803\n\t0x17565a\n\t0x157f56\n\t0x1296c9\n\t0x12a484\n\t0x547e34\n\t0x5430c9\n\t0x560add\n\t0x30db38\n\t0x3158ad\n\t0x2fd848\n\t0x2fda12\n\t0x2e75fa\n\t0x76035d49\n\t0x7752d5db\n\t0x7752d561\n\t(nil)\n",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T02:05:26.810243Z"
+    },
+    {
+      "url": "https://www.myscheme.gov.in/schemes/mountaineeringuk",
+      "error": "HTTPConnectionPool(host='localhost', port=61704): Read timed out. (read timeout=120)",
+      "attempts": 3,
+      "last_attempt": "2026-02-07T02:12:28.328527Z"
+    }
+  ]
+}

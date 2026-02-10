@@ -1,0 +1,11 @@
+{
+  "failed_count": 1,
+  "urls": [
+    {
+      "url": "https://www.myscheme.gov.in/schemes/mdiis",
+      "error": "Invalid scheme name extracted from https://www.myscheme.gov.in/schemes/mdiis: ''",
+      "attempts": 3,
+      "last_attempt": "2026-02-09T08:09:20.648092Z"
+    }
+  ]
+}
