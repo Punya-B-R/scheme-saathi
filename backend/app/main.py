@@ -43,6 +43,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from app.auth_router import router as auth_router
+from app.chats_router import router as chats_router
+
+app.include_router(auth_router)
+app.include_router(chats_router)
+
 
 # ============================================================
 # 1. CONTEXT EXTRACTION ENGINE

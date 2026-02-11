@@ -72,7 +72,19 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="mt-8 text-sm text-gray-400"
         >
-          Free forever. No login required. Data from official sources.
+          Free forever. Log in to find schemes that match you. Data from official sources.
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mt-2 text-sm text-gray-500"
+        >
+          New here?{' '}
+          <Link to="/signup" className="text-primary-600 font-medium hover:underline">Sign up</Link>
+          {' or '}
+          <Link to="/login" className="text-primary-600 font-medium hover:underline">Log in</Link>
+          {' to get started.'}
         </motion.p>
       </div>
     </section>

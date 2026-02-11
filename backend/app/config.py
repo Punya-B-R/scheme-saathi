@@ -34,6 +34,9 @@ class Settings(BaseSettings):
     # CORS Settings
     ALLOWED_ORIGINS: str = "http://localhost:3000,http://localhost:5173"
 
+    # Database (PostgreSQL; required for auth and chat history)
+    DATABASE_URL: str = ""
+
     # Data Paths
     SCHEMES_DATA_PATH: str = "data_f/all_schemes.json"
     CHROMA_DB_PATH: str = "chroma_db"
@@ -41,6 +44,9 @@ class Settings(BaseSettings):
     # RAG Settings
     TOP_K_SCHEMES: int = 10  # Number of schemes to retrieve
     SIMILARITY_THRESHOLD: float = 0.3  # Minimum similarity score (0-1)
+
+    # Supabase Auth (for JWT verification; get JWT Secret from Supabase Dashboard → Project Settings → API)
+    SUPABASE_JWT_SECRET: str = ""
 
     @property
     def allowed_origins_list(self) -> List[str]:

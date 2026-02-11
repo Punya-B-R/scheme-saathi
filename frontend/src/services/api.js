@@ -1,11 +1,25 @@
 import axios from 'axios'
 import { API_BASE_URL } from '../utils/constants'
+import { supabase } from '../lib/supabase'
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 120000,
   headers: { 'Content-Type': 'application/json' },
 })
+
+api.interceptors.request.use(
+  async (config) => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session?.access_token) {
+        config.headers.Authorization = `Bearer ${session.access_token}`
+      }
+    } catch (_) {}
+    return config
+  },
+  (err) => Promise.reject(err)
+)
 
 api.interceptors.response.use(
   (res) => res,

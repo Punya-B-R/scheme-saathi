@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Sparkles, Menu } from 'lucide-react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Sparkles, Menu, LogIn, UserPlus, LogOut } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { APP_NAME } from '../../utils/constants'
+import { useAuth } from '../../context/AuthContext'
 import { sendChatMessage, getHealthStatus } from '../../services/api'
 import {
   getAllChats,
@@ -19,6 +20,7 @@ import ChatInput from './ChatInput'
 export default function ChatContainer() {
   const navigate = useNavigate()
   const { chatId: urlChatId } = useParams()
+  const { isAuthenticated, user, logout, loading: authLoading } = useAuth()
 
   const [chats, setChats] = useState([])
   const [currentChatId, setCurrentChat] = useState(null)
@@ -188,6 +190,32 @@ export default function ChatContainer() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            {!authLoading && (
+              isAuthenticated ? (
+                <>
+                  <span className="hidden sm:inline text-xs text-gray-500 truncate max-w-[100px]" title={user?.email}>{user?.email}</span>
+                  <button
+                    type="button"
+                    onClick={() => logout()}
+                    className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 px-2 py-1.5 rounded-lg hover:bg-gray-100"
+                  >
+                    <LogOut className="w-3.5 h-3.5" />
+                    Log out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 px-2 py-1.5 rounded-lg hover:bg-gray-100">
+                    <LogIn className="w-3.5 h-3.5" />
+                    Log in
+                  </Link>
+                  <Link to="/signup" className="flex items-center gap-1 text-xs text-primary-600 hover:text-primary-700 font-medium px-2 py-1.5 rounded-lg hover:bg-primary-50">
+                    <UserPlus className="w-3.5 h-3.5" />
+                    Sign up
+                  </Link>
+                </>
+              )
+            )}
             {backendUp !== null && (
               <span className={`text-[11px] px-2.5 py-1 rounded-full font-medium ${
                 backendUp

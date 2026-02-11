@@ -2,7 +2,14 @@
 venv/
 .venv/
 env/
-.env/
+
+# Environment and secrets (never commit)
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env
+*.pem
 
 # Python
 __pycache__/
