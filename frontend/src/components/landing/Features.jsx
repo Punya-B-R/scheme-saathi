@@ -1,58 +1,61 @@
 import { motion } from 'framer-motion'
-import { Bot, Database, CheckCircle, Globe } from 'lucide-react'
+import { Brain, Database, CheckCircle, Globe } from 'lucide-react'
 import { FEATURES } from '../../utils/constants'
-import Card from '../common/Card'
 
-const iconMap = {
-  bot: Bot,
-  database: Database,
-  check: CheckCircle,
-  globe: Globe,
-}
-
-const colors = [
-  'from-primary-500 to-primary-600',
-  'from-accent-purple to-purple-600',
-  'from-emerald-500 to-emerald-600',
-  'from-accent-orange to-orange-600',
+const ICONS = { brain: Brain, database: Database, check: CheckCircle, globe: Globe }
+const GRADIENTS = [
+  'from-blue-500 to-blue-600',
+  'from-violet-500 to-purple-600',
+  'from-emerald-500 to-teal-600',
+  'from-orange-500 to-amber-500',
 ]
 
 export default function Features() {
   return (
-    <section id="features" className="py-20 lg:py-28 bg-gray-50/50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+    <section id="features" className="py-20 lg:py-32 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: '-60px' }}
+          className="text-xs font-semibold tracking-wider uppercase text-blue-600 mb-2"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Everything You Need
-          </h2>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Powered by AI and backed by official government data
-          </p>
-        </motion.div>
+          Features
+        </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          className="text-3xl sm:text-4xl font-bold text-gray-900"
+        >
+          Everything you need to claim your benefits
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          className="mt-3 text-lg text-gray-600 max-w-2xl"
+        >
+          Designed for every Indian, regardless of language, location, or literacy
+        </motion.p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {FEATURES.map((feature, i) => {
-            const Icon = iconMap[feature.icon] || Bot
+            const Icon = ICONS[feature.icon] || Brain
             return (
               <motion.div
                 key={feature.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: '-40px' }}
                 transition={{ delay: i * 0.1 }}
+                className="card-hover p-6 lg:p-8"
               >
-                <Card hover className="p-6 h-full">
-                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${colors[i]} flex items-center justify-center mb-4 shadow-lg`}>
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className="text-base font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{feature.description}</p>
-                </Card>
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${GRADIENTS[i]} flex items-center justify-center mb-4`}>
+                  <Icon className="w-6 h-6 text-white" strokeWidth={2} />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900">{feature.title}</h3>
+                <p className="mt-2 text-sm text-gray-500 leading-relaxed">{feature.description}</p>
               </motion.div>
             )
           })}

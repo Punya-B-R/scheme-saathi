@@ -8,20 +8,20 @@ export const FEATURES = [
   {
     title: 'AI-Powered Discovery',
     description: 'Natural conversations to find schemes that match your exact situation',
-    icon: 'bot',
+    icon: 'brain',
   },
   {
-    title: '3,700+ Government Schemes',
+    title: '850+ Schemes',
     description: 'Comprehensive database covering agriculture, education, healthcare, and more',
     icon: 'database',
   },
   {
-    title: 'Instant Eligibility Check',
+    title: 'Instant Eligibility',
     description: 'Know if you qualify before applying, saving time and effort',
     icon: 'check',
   },
   {
-    title: 'Multi-Language Support',
+    title: 'Multi-Language',
     description: 'Access in English and Hindi, with more languages coming soon',
     icon: 'globe',
   },
@@ -46,9 +46,9 @@ export const HOW_IT_WORKS = [
 ]
 
 export const STATISTICS = [
-  { value: '3,700+', label: 'Government Schemes' },
-  { value: '29', label: 'States Covered' },
-  { value: '15', label: 'Categories' },
+  { value: '850+', label: 'Government Schemes' },
+  { value: '₹20L Cr', label: 'Annual Budget Available' },
+  { value: '68%', label: 'Citizens Unaware' },
   { value: '100%', label: 'Free to Use' },
 ]
 

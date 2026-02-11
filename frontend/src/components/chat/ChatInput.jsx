@@ -1,46 +1,75 @@
-import { useRef } from 'react'
-import { Send, Loader2 } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react'
+import { ArrowUp, Square } from 'lucide-react'
 
-export default function ChatInput({ value, onChange, onSend, loading }) {
-  const inputRef = useRef(null)
+export default function ChatInput({ onSend, isLoading = false, disabled = false }) {
+  const [value, setValue] = useState('')
+  const textareaRef = useRef(null)
+
+  useEffect(() => {
+    textareaRef.current?.focus()
+  }, [])
+
+  const handleSubmit = () => {
+    const text = value.trim()
+    if (!text || isLoading || disabled) return
+    onSend(text)
+    setValue('')
+    if (textareaRef.current) {
+      textareaRef.current.style.height = '44px'
+    }
+  }
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
-      onSend()
+      handleSubmit()
     }
   }
 
-  const handleInput = (e) => {
-    e.target.style.height = '44px'
-    e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px'
+  const handleInput = () => {
+    const el = textareaRef.current
+    if (!el) return
+    el.style.height = '44px'
+    el.style.height = Math.min(el.scrollHeight, 5 * 24) + 'px'
   }
 
   return (
-    <div className="border-t border-gray-200 bg-white p-4">
-      <div className="max-w-3xl mx-auto flex items-end gap-2">
-        <textarea
-          ref={inputRef}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          onKeyDown={handleKeyDown}
-          onInput={handleInput}
-          placeholder="Tell me about yourself or ask about a scheme..."
-          rows={1}
-          className="flex-1 resize-none rounded-xl border border-gray-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent placeholder-gray-400 transition-shadow"
-          style={{ minHeight: '44px', maxHeight: '120px' }}
-        />
-        <button
-          onClick={onSend}
-          disabled={!value.trim() || loading}
-          className="w-11 h-11 rounded-xl bg-primary-600 text-white flex items-center justify-center hover:bg-primary-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors flex-shrink-0"
-        >
-          {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
-        </button>
+    <div className="border-t border-gray-200 bg-white px-4 py-4 shadow-[0_-4px_24px_-4px_rgba(0,0,0,0.06)]">
+      <div className="max-w-3xl mx-auto">
+        <div className="relative flex items-end gap-2 rounded-2xl border border-gray-200 bg-gray-50/50 focus-within:border-blue-400 focus-within:bg-white transition-colors">
+          <textarea
+            ref={textareaRef}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            onKeyDown={handleKeyDown}
+            onInput={handleInput}
+            placeholder="Ask about government schemes..."
+            rows={1}
+            disabled={disabled}
+            className="flex-1 resize-none bg-transparent px-4 py-3 pr-12 text-sm leading-relaxed placeholder:text-gray-400 focus:outline-none disabled:opacity-50"
+            style={{ minHeight: '44px', maxHeight: '120px' }}
+          />
+          <button
+            type="button"
+            onClick={handleSubmit}
+            disabled={!value.trim() || isLoading || disabled}
+            className="absolute right-2 bottom-2 w-8 h-8 rounded-lg flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed active:scale-95"
+            style={{
+              backgroundColor: value.trim() && !isLoading ? '#2563eb' : 'transparent',
+              color: value.trim() && !isLoading ? 'white' : '#9ca3af',
+            }}
+          >
+            {isLoading ? (
+              <Square className="w-4 h-4 fill-current" />
+            ) : (
+              <ArrowUp className="w-4 h-4" />
+            )}
+          </button>
+        </div>
+        <p className="text-center text-[11px] text-gray-400 mt-2">
+          Scheme Saathi can make mistakes. Verify information on official government portals.
+        </p>
       </div>
-      <p className="text-center text-[10px] text-gray-400 mt-2 max-w-3xl mx-auto">
-        Scheme Saathi may make mistakes. Verify information on official government portals.
-      </p>
     </div>
   )
 }

@@ -1,10 +1,10 @@
 import Navbar from './Navbar'
 
-export default function PageLayout({ children, showNav = true }) {
+export default function PageLayout({ children }) {
   return (
     <div className="min-h-screen">
-      {showNav && <Navbar />}
-      {children}
+      <Navbar />
+      <main>{children}</main>
     </div>
   )
 }

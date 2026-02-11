@@ -1,60 +1,70 @@
-import { Bot, User } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
+import { motion } from 'framer-motion'
 import SchemeCard from './SchemeCard'
 
-export default function Message({ message }) {
+const ASSISTANT_NAME = 'Scheme Saathi'
+
+export default function Message({ message, isLatest }) {
   const isUser = message.role === 'user'
 
   return (
-    <div className={`message-enter flex gap-3 ${isUser ? 'justify-end' : 'justify-start'}`}>
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25 }}
+      className={`flex gap-3 ${isUser ? 'justify-end' : 'justify-start'} message-enter`}
+      data-is-latest={isLatest}
+    >
+      {/* AI avatar */}
       {!isUser && (
-        <div className="w-8 h-8 rounded-lg bg-primary-50 border border-primary-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-          <Bot className="w-4 h-4 text-primary-600" />
+        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 flex items-center justify-center flex-shrink-0 shadow-sm">
+          <span className="text-white font-bold text-[10px]">SS</span>
         </div>
       )}
 
-      <div className={`max-w-[85%] sm:max-w-[75%]`}>
-        {/* Bubble */}
+      <div className={`flex flex-col ${isUser ? 'items-end' : 'items-start'} max-w-[85%] sm:max-w-[75%]`}>
+        {!isUser && (
+          <p className="text-[11px] font-medium text-gray-500 mb-0.5 ml-1">{ASSISTANT_NAME}</p>
+        )}
         <div
-          className={`rounded-2xl px-4 py-3 ${
+          className={
             isUser
-              ? 'bg-primary-600 text-white rounded-br-md'
-              : 'bg-white text-gray-800 border border-gray-200 rounded-bl-md shadow-sm'
-          }`}
+              ? 'message-bubble-user'
+              : 'message-bubble-ai'
+          }
         >
           {isUser ? (
             <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.content}</p>
           ) : (
-            <ReactMarkdown
-              className="prose prose-sm max-w-none prose-p:my-1.5 prose-li:my-0.5 prose-strong:text-gray-900 prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline"
-            >
-              {message.content}
-            </ReactMarkdown>
+            <div className="prose prose-sm max-w-none prose-p:my-1.5 prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5 prose-strong:font-semibold prose-strong:text-gray-900 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">
+              <ReactMarkdown>{message.content}</ReactMarkdown>
+            </div>
           )}
         </div>
 
-        {/* Scheme cards */}
-        {!isUser && message.schemes && message.schemes.length > 0 && (
-          <div className="mt-2 space-y-2">
-            {message.schemes.slice(0, 4).map((scheme, j) => (
-              <SchemeCard key={scheme.scheme_id || j} scheme={scheme} />
+        {/* Scheme cards (AI only) */}
+        {!isUser && message.schemes?.length > 0 && (
+          <div className="mt-3 w-full max-w-2xl space-y-2">
+            <p className="text-xs font-semibold text-gray-500 mb-2">Schemes found for you:</p>
+            {message.schemes.slice(0, 5).map((scheme, i) => (
+              <SchemeCard key={scheme.scheme_id || i} scheme={scheme} />
             ))}
           </div>
         )}
 
-        {/* Timestamp */}
-        <span className="text-[10px] text-gray-400 mt-1 block px-1">
-          {message.timestamp
-            ? new Date(message.timestamp).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })
-            : ''}
-        </span>
+        {message.timestamp && (
+          <p className={`text-[10px] text-gray-400 mt-1 ${isUser ? '' : 'ml-1'}`}>
+            {new Date(message.timestamp).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })}
+          </p>
+        )}
       </div>
 
+      {/* User avatar */}
       {isUser && (
-        <div className="w-8 h-8 rounded-lg bg-gray-100 border border-gray-200 flex items-center justify-center flex-shrink-0 mt-0.5">
-          <User className="w-4 h-4 text-gray-500" />
+        <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0 text-gray-600 text-xs font-semibold">
+          U
         </div>
       )}
-    </div>
+    </motion.div>
   )
 }

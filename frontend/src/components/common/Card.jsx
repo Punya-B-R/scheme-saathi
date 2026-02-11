@@ -1,9 +1,24 @@
-export default function Card({ children, className = '', hover = false, glass = false }) {
+export default function Card({
+  children,
+  className = '',
+  hover = false,
+  glass = false,
+  padding = 'p-6',
+  as: Component = 'div',
+  ...props
+}) {
   return (
-    <div
-      className={`rounded-2xl border ${glass ? 'glass' : 'bg-white border-gray-200'} ${hover ? 'card-hover' : ''} ${className}`}
+    <Component
+      className={`
+        rounded-2xl border
+        ${glass ? 'glass-card' : 'bg-white border-gray-200/80 shadow-sm'}
+        ${hover ? 'card-lift cursor-pointer' : ''}
+        ${padding}
+        ${className}
+      `}
+      {...props}
     >
       {children}
-    </div>
+    </Component>
   )
 }

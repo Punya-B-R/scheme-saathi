@@ -3,24 +3,24 @@ import Message from './Message'
 import TypingIndicator from './TypingIndicator'
 import WelcomeScreen from './WelcomeScreen'
 
-export default function ChatMessages({ messages, loading, onPromptClick }) {
+export default function ChatMessages({ messages = [], isLoading = false, onSuggestionClick }) {
   const bottomRef = useRef(null)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages, loading])
+  }, [messages, isLoading])
 
-  if (messages.length === 0 && !loading) {
-    return <WelcomeScreen onPromptClick={onPromptClick} />
+  if (messages.length === 0 && !isLoading) {
+    return <WelcomeScreen onSuggestionClick={onSuggestionClick} />
   }
 
   return (
-    <div className="flex-1 overflow-y-auto px-4 py-6 scrollbar-thin">
-      <div className="max-w-3xl mx-auto space-y-5">
+    <div className="flex-1 overflow-y-auto px-4 py-6 scrollbar-thin bg-gray-50/30">
+      <div className="max-w-3xl mx-auto space-y-6">
         {messages.map((msg, i) => (
-          <Message key={i} message={msg} />
+          <Message key={msg.id || i} message={msg} isLatest={i === messages.length - 1} />
         ))}
-        {loading && <TypingIndicator />}
+        {isLoading && <TypingIndicator />}
         <div ref={bottomRef} />
       </div>
     </div>

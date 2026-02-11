@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Sparkles, Menu } from 'lucide-react'
+import { Menu, Plus, Home } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { APP_NAME } from '../../utils/constants'
 import { sendChatMessage, getHealthStatus } from '../../services/api'
@@ -11,69 +12,74 @@ import {
   saveMessageToChat,
   deleteChat,
   setCurrentChatId,
+  getCurrentChatId,
 } from '../../services/storage'
 import ChatSidebar from './ChatSidebar'
 import ChatMessages from './ChatMessages'
 import ChatInput from './ChatInput'
+import { getChatTitle } from '../../utils/chatHelpers'
+
+const ERROR_MESSAGE = 'Sorry, I encountered an error. Please check if the backend server is running and try again.'
 
 export default function ChatContainer() {
   const navigate = useNavigate()
   const { chatId: urlChatId } = useParams()
 
   const [chats, setChats] = useState([])
-  const [currentChatId, setCurrentChat] = useState(null)
+  const [currentChatId, setCurrentChatIdState] = useState(null)
   const [messages, setMessages] = useState([])
-  const [input, setInput] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [backendUp, setBackendUp] = useState(null)
-  const [schemesCount, setSchemesCount] = useState(0)
+  const [backendOk, setBackendOk] = useState(null)
 
-  // Load chats on mount
+  const refreshChats = useCallback(() => setChats(getAllChats()), [])
+
   useEffect(() => {
-    const saved = getAllChats()
-    setChats(saved)
+    refreshChats()
+    getHealthStatus().then(() => setBackendOk(true)).catch(() => setBackendOk(false))
+  }, [refreshChats])
 
-    // Health check
-    getHealthStatus()
-      .then((d) => { setBackendUp(true); setSchemesCount(d.total_schemes || 0) })
-      .catch(() => setBackendUp(false))
-  }, [])
-
-  // Handle URL chat id
   useEffect(() => {
     if (urlChatId) {
       const chat = getChatById(urlChatId)
       if (chat) {
-        setCurrentChat(urlChatId)
-        setMessages(chat.messages || [])
+        setCurrentChatIdState(urlChatId)
         setCurrentChatId(urlChatId)
+        setMessages(chat.messages || [])
       } else {
         navigate('/chat', { replace: true })
+      }
+    } else {
+      const saved = getCurrentChatId()
+      const chat = saved ? getChatById(saved) : null
+      if (chat) {
+        setCurrentChatIdState(chat.id)
+        setMessages(chat.messages || [])
+      } else {
+        setCurrentChatIdState(null)
+        setMessages([])
       }
     }
   }, [urlChatId, navigate])
 
-  const refreshChats = useCallback(() => {
-    setChats(getAllChats())
-  }, [])
-
   const handleNewChat = useCallback(() => {
     const chat = createNewChat()
-    setCurrentChat(chat.id)
-    setMessages([])
+    setCurrentChatIdState(chat.id)
     setCurrentChatId(chat.id)
+    setMessages([])
     refreshChats()
     navigate(`/chat/${chat.id}`, { replace: true })
+    setSidebarOpen(false)
   }, [navigate, refreshChats])
 
   const handleSelectChat = useCallback((id) => {
     const chat = getChatById(id)
     if (chat) {
-      setCurrentChat(id)
-      setMessages(chat.messages || [])
+      setCurrentChatIdState(id)
       setCurrentChatId(id)
+      setMessages(chat.messages || [])
       navigate(`/chat/${id}`, { replace: true })
+      setSidebarOpen(false)
     }
   }, [navigate])
 
@@ -81,146 +87,144 @@ export default function ChatContainer() {
     deleteChat(id)
     refreshChats()
     if (id === currentChatId) {
-      setCurrentChat(null)
-      setMessages([])
-      navigate('/chat', { replace: true })
+      handleNewChat()
     }
-  }, [currentChatId, navigate, refreshChats])
+  }, [currentChatId, refreshChats, handleNewChat])
 
-  const handleSend = useCallback(async () => {
-    const text = input.trim()
-    if (!text || loading) return
+  const handleSendMessage = useCallback(async (content) => {
+    const text = (content || '').trim()
+    if (!text || isLoading) return
 
-    // Create chat if none exists
-    let activeChatId = currentChatId
-    if (!activeChatId) {
+    let chatId = currentChatId
+    if (!chatId) {
       const chat = createNewChat()
-      activeChatId = chat.id
-      setCurrentChat(chat.id)
-      setCurrentChatId(chat.id)
+      chatId = chat.id
+      setCurrentChatIdState(chatId)
+      setCurrentChatId(chatId)
       refreshChats()
-      navigate(`/chat/${chat.id}`, { replace: true })
+      navigate(`/chat/${chatId}`, { replace: true })
     }
 
-    const userMsg = { role: 'user', content: text, timestamp: new Date().toISOString() }
-    setMessages((prev) => [...prev, userMsg])
-    saveMessageToChat(activeChatId, userMsg)
-    setInput('')
-    setLoading(true)
+    const userMessage = {
+      id: `msg_${Date.now()}`,
+      role: 'user',
+      content: text,
+      timestamp: new Date().toISOString(),
+    }
+    setMessages((prev) => [...prev, userMessage])
+    saveMessageToChat(chatId, userMessage)
+    refreshChats()
+    setIsLoading(true)
 
     try {
-      const history = messages.map((m) => ({ role: m.role, content: m.content }))
-      const data = await sendChatMessage(text, history)
+      const history = messages
+        .slice(-10)
+        .map((m) => ({ role: m.role, content: m.content }))
+      const response = await sendChatMessage(text, history)
 
-      const assistantMsg = {
+      const aiMessage = {
+        id: `msg_${Date.now()}`,
         role: 'assistant',
-        content: data.message,
-        schemes: data.schemes || [],
+        content: response.message || '',
+        schemes: response.schemes || [],
         timestamp: new Date().toISOString(),
       }
-      setMessages((prev) => [...prev, assistantMsg])
-      saveMessageToChat(activeChatId, assistantMsg)
+      setMessages((prev) => [...prev, aiMessage])
+      saveMessageToChat(chatId, aiMessage)
       refreshChats()
     } catch {
       const errorMsg = {
+        id: `msg_${Date.now()}`,
         role: 'assistant',
-        content: 'Sorry, I could not reach the server. Please make sure the backend is running on port 8000.',
+        content: ERROR_MESSAGE,
+        schemes: [],
+        isError: true,
         timestamp: new Date().toISOString(),
       }
       setMessages((prev) => [...prev, errorMsg])
-      saveMessageToChat(activeChatId, errorMsg)
-      toast.error('Could not connect to server')
+      saveMessageToChat(chatId, errorMsg)
+      refreshChats()
+      toast.error('Could not reach the server')
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
-  }, [input, loading, currentChatId, messages, navigate, refreshChats])
+  }, [currentChatId, isLoading, messages, navigate, refreshChats])
 
-  const handlePromptClick = useCallback((prompt) => {
-    setInput(prompt)
-    // Auto send after a tick
-    setTimeout(() => {
-      const fakeEvent = { trim: () => prompt }
-      // Set and send
-      setInput(prompt)
-    }, 50)
-  }, [])
+  const handleSuggestionClick = useCallback((text) => {
+    handleSendMessage(text)
+  }, [handleSendMessage])
 
-  // Auto-send when input is set from prompt click
-  useEffect(() => {
-    if (input && !loading && QUICK_PROMPT_SET.has(input)) {
-      handleSend()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [input])
+  const currentChat = currentChatId ? getChatById(currentChatId) : null
+  const headerTitle = currentChat ? getChatTitle(currentChat) : 'New Conversation'
 
   return (
-    <div className="flex h-screen bg-white">
-      {/* Sidebar */}
+    <div className="flex h-screen overflow-hidden bg-white">
       <ChatSidebar
         chats={chats}
         currentChatId={currentChatId}
-        onSelectChat={handleSelectChat}
         onNewChat={handleNewChat}
+        onSelectChat={handleSelectChat}
         onDeleteChat={handleDeleteChat}
-        open={sidebarOpen}
+        isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
       />
 
-      {/* Main chat area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <header className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white">
+        <header className="h-14 flex items-center justify-between px-4 border-b border-gray-200 bg-white flex-shrink-0">
           <div className="flex items-center gap-3">
             <button
+              type="button"
               onClick={() => setSidebarOpen(true)}
-              className="w-9 h-9 rounded-lg hover:bg-gray-100 flex items-center justify-center lg:hidden"
+              className="lg:hidden w-9 h-9 rounded-lg flex items-center justify-center text-gray-500 hover:bg-gray-100"
+              aria-label="Open menu"
             >
-              <Menu className="w-5 h-5 text-gray-500" />
+              <Menu className="w-5 h-5" />
             </button>
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-600 to-accent-purple flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-white" />
-              </div>
-              <div>
-                <h1 className="text-sm font-semibold text-gray-900">{APP_NAME}</h1>
-                <p className="text-[11px] text-gray-400">AI Scheme Finder</p>
-              </div>
-            </div>
+            <h1 className="text-sm font-semibold text-gray-900 truncate max-w-[200px] sm:max-w-xs">
+              {headerTitle}
+            </h1>
           </div>
           <div className="flex items-center gap-2">
-            {backendUp !== null && (
-              <span className={`text-[11px] px-2.5 py-1 rounded-full font-medium ${
-                backendUp
-                  ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
-                  : 'bg-red-50 text-red-600 border border-red-200'
-              }`}>
-                {backendUp ? `${schemesCount.toLocaleString()} schemes` : 'Offline'}
+            {backendOk !== null && (
+              <span
+                className={`text-[11px] px-2 py-0.5 rounded-full font-medium ${
+                  backendOk ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'
+                }`}
+              >
+                {backendOk ? 'Online' : 'Offline'}
               </span>
             )}
+            <button
+              type="button"
+              onClick={handleNewChat}
+              className="w-9 h-9 rounded-lg flex items-center justify-center text-gray-500 hover:bg-gray-100"
+              aria-label="New chat"
+            >
+              <Plus className="w-4 h-4" />
+            </button>
+            <Link
+              to="/"
+              className="w-9 h-9 rounded-lg flex items-center justify-center text-gray-500 hover:bg-gray-100"
+              aria-label="Back to home"
+            >
+              <Home className="w-4 h-4" />
+            </Link>
           </div>
         </header>
 
-        {/* Messages */}
         <ChatMessages
           messages={messages}
-          loading={loading}
-          onPromptClick={(prompt) => {
-            setInput(prompt)
-          }}
+          isLoading={isLoading}
+          onSuggestionClick={handleSuggestionClick}
         />
 
-        {/* Input */}
         <ChatInput
-          value={input}
-          onChange={setInput}
-          onSend={handleSend}
-          loading={loading}
+          onSend={handleSendMessage}
+          isLoading={isLoading}
+          disabled={false}
         />
       </div>
     </div>
   )
 }
-
-// Quick prompt detection for auto-send
-import { QUICK_PROMPTS } from '../../utils/constants'
-const QUICK_PROMPT_SET = new Set(QUICK_PROMPTS)
