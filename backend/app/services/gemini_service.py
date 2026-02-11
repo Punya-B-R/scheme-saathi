@@ -1,5 +1,6 @@
 """
-Gemini AI service for Scheme Saathi: conversation, context extraction, and scheme-aware responses.
+Gemini AI service for Scheme Saathi.
+Builds smart system prompts based on user context + matched schemes.
 """
 
 import logging
@@ -22,8 +23,6 @@ MODEL_ACK = (
 
 
 class GeminiService:
-    """Google Gemini integration for conversational scheme discovery."""
-
     def __init__(self) -> None:
         self._model = None
         self._genai = None
@@ -33,9 +32,7 @@ class GeminiService:
                 genai.configure(api_key=settings.GEMINI_API_KEY)
                 self._model = genai.GenerativeModel(settings.GEMINI_MODEL)
                 self._genai = genai
-                logger.info("Gemini initialized with model: %s", settings.GEMINI_MODEL)
-            else:
-                logger.warning("GEMINI_API_KEY not set.")
+                logger.info("Gemini initialized: %s", settings.GEMINI_MODEL)
         except Exception as e:
             logger.error("Gemini init failed: %s", e, exc_info=True)
 
@@ -64,102 +61,133 @@ class GeminiService:
         user_context: Optional[Dict[str, str]] = None,
         missing_fields: Optional[List[str]] = None,
     ) -> str:
-        """Build system prompt with conversation flow control."""
         ctx = user_context or {}
         missing = missing_fields or []
         has_schemes = bool(matched_schemes)
 
         parts = [
-            "You are Scheme Saathi, a warm and knowledgeable AI assistant that helps Indian citizens discover government schemes.",
+            "You are Scheme Saathi, a warm and knowledgeable AI assistant helping Indian citizens discover government schemes.",
             "",
-            "PERSONALITY: Friendly, simple language, empathetic. Like a helpful neighbor.",
-            "Respond in the same language the user writes in.",
+            "PERSONALITY:",
+            "- Friendly, empathetic, like a helpful neighbor at a government office.",
+            "- Use simple language. Avoid jargon.",
+            "- Respond in the same language the user writes in (Hindi/English/Hinglish).",
+            "- Be concise. No filler words.",
         ]
 
-        # What we know
+        # Full user profile
         if ctx:
             parts.append("")
-            parts.append("USER PROFILE (gathered so far):")
-            for k, v in ctx.items():
-                parts.append(f"  - {k.replace('_', ' ').title()}: {v}")
+            parts.append("=== USER PROFILE (gathered so far) ===")
+            label_map = {
+                "state": "State",
+                "occupation": "Occupation",
+                "gender": "Gender",
+                "age": "Age",
+                "caste_category": "Category",
+                "education_level": "Education Level",
+                "income": "Income",
+                "bpl": "Below Poverty Line",
+                "disability": "Disability",
+                "residence": "Residence (urban/rural)",
+                "family_status": "Family Status",
+            }
+            for key, label in label_map.items():
+                val = ctx.get(key)
+                if val:
+                    parts.append(f"  {label}: {val}")
+            parts.append("=== END PROFILE ===")
 
         if not has_schemes:
             # ========== GATHERING PHASE ==========
             parts.extend([
                 "",
-                ">>> CURRENT MODE: GATHERING INFORMATION <<<",
+                ">>> MODE: GATHERING INFORMATION <<<",
                 "",
-                "You do NOT have enough information yet. DO NOT recommend any schemes.",
-                "DO NOT name any scheme. DO NOT say 'here are some schemes'. DO NOT list benefits.",
+                "You do NOT have enough information yet.",
+                "DO NOT recommend any schemes. DO NOT name any scheme.",
+                "DO NOT say 'here are some schemes' or list benefits.",
                 "",
-                "Your job right now: ask the user for ONE more piece of information.",
+                "Your ONLY job: ask ONE more piece of information.",
                 "",
             ])
             if missing:
-                # Map field names to natural questions
                 field_questions = {
-                    "state": "which state they are from",
-                    "occupation": "what they do (student, farmer, employee, business owner, etc.)",
-                    "gender": "their gender (this helps find women-specific schemes)",
-                    "age": "their age",
-                    "caste_category": "their category (General, SC, ST, OBC) - ask sensitively",
+                    "state": "which state/UT they are from",
+                    "occupation": "what they do (student, farmer, employee, business owner, retired, etc.)",
+                    "gender": "their gender (this helps find gender-specific schemes)",
+                    "age": "their age or approximate age range",
+                    "caste_category": "their category (General/SC/ST/OBC/Minority) — ask politely, explain it helps find reserved schemes",
                 }
-                next_field = missing[0]
-                question_hint = field_questions.get(next_field, next_field.replace("_", " "))
-                parts.append(f"Ask about: {question_hint}")
-                parts.append(f"(Still need: {', '.join(f.replace('_', ' ') for f in missing)})")
+                next_q = field_questions.get(missing[0], missing[0].replace("_", " "))
+                parts.append(f"Next question: Ask about {next_q}")
+                if len(missing) > 1:
+                    parts.append(f"(Still need after this: {', '.join(f.replace('_',' ') for f in missing[1:])})")
             parts.extend([
                 "",
                 "HOW TO ASK:",
-                "1. First acknowledge what the user just told you (briefly).",
-                "2. Then ask ONE natural question about the next missing detail.",
-                "3. Keep it short (2-3 sentences max).",
+                "1. Briefly acknowledge what the user just told you (1 short sentence).",
+                "2. Ask ONE clear question about the next missing detail.",
+                "3. Max 2-3 sentences total.",
                 "4. Do NOT mention schemes, benefits, or eligibility at all.",
             ])
         else:
             # ========== RECOMMENDATION PHASE ==========
             parts.extend([
                 "",
-                ">>> CURRENT MODE: RECOMMENDING SCHEMES <<<",
+                ">>> MODE: RECOMMENDING SCHEMES <<<",
                 "",
                 "You have enough info and matching schemes. Now recommend.",
                 "",
-                "RULES:",
-                "- Present TOP 2-3 most relevant schemes from the list below.",
-                "- For each scheme, include:",
+                "CRITICAL RULES:",
+                "- ONLY recommend schemes from the list below. NEVER invent schemes.",
+                "- Present the TOP 2-3 most relevant schemes.",
+                "- For EACH scheme:",
                 "  * **Scheme Name** (bold)",
-                "  * What the user gets (benefits, amounts)",
-                "  * Why it fits them specifically",
-                "  * How to apply (1-2 key steps)",
-                "  * Website link if available",
+                "  * What the user gets (amounts, benefits)",
+                "  * Why it fits them specifically (connect to their profile)",
+                "  * Key eligibility: age, income, category requirements",
+                "  * How to apply (1-2 steps + website if available)",
                 "- Use bullet points. Be concise.",
-                "- ONLY use schemes from the list below. NEVER invent anything.",
-                "- If user asks follow-up, give more detail on that scheme.",
-                "- If user corrects info (e.g., 'not OBC'), acknowledge and adjust.",
                 "- Keep response under 350 words.",
+                "",
+                "RELEVANCE CHECK — Before including a scheme, verify:",
+                f"- User is: {ctx.get('occupation', 'unknown')} | {ctx.get('gender', 'unknown')} | age {ctx.get('age', '?')} | {ctx.get('caste_category', 'unknown')} | {ctx.get('state', 'unknown')}",
+            ])
+            if ctx.get("education_level"):
+                parts.append(f"- Education: {ctx['education_level']} (do NOT suggest pre-matric schemes for college students or vice versa)")
+            if ctx.get("disability") != "yes":
+                parts.append("- User does NOT have a disability. Skip disability-specific schemes.")
+            if ctx.get("family_status"):
+                parts.append(f"- Family status: {ctx['family_status']}")
+            parts.extend([
+                "- If a scheme doesn't match the user's profile, SKIP IT even if it's in the list.",
+                "- If user asks follow-up about a specific scheme, give full details.",
+                "- If user corrects info, acknowledge and adjust.",
             ])
 
-            parts.extend(["", "=== VERIFIED MATCHING SCHEMES ==="])
+            # Scheme data
+            parts.extend(["", "=== MATCHED SCHEMES (pre-filtered for relevance) ==="])
             for i, s in enumerate(matched_schemes[:7], 1):
                 name = s.get("scheme_name", "Unknown")
                 category = s.get("category", "")
 
                 benefits = s.get("benefits") or {}
                 if isinstance(benefits, dict):
-                    benefit_text = (benefits.get("summary") or benefits.get("raw_benefits_text") or "")[:300]
+                    benefit_text = (benefits.get("summary") or benefits.get("raw_benefits_text") or "")[:350]
                 else:
-                    benefit_text = str(benefits)[:300]
+                    benefit_text = str(benefits)[:350]
 
                 elig = s.get("eligibility_criteria") or {}
                 if isinstance(elig, dict):
-                    elig_text = (elig.get("raw_eligibility_text") or "")[:300]
+                    elig_text = (elig.get("raw_eligibility_text") or "")[:350]
                     state = elig.get("state", "All India")
                     gender = elig.get("gender", "any")
                     caste = elig.get("caste_category", "any")
                     age = elig.get("age_range", "any")
+                    occ = elig.get("occupation", "any")
                 else:
-                    elig_text = ""
-                    state, gender, caste, age = "All India", "any", "any", "any"
+                    elig_text, state, gender, caste, age, occ = "", "All India", "any", "any", "any", "any"
 
                 url = s.get("source_url") or s.get("official_website") or ""
 
@@ -167,9 +195,10 @@ class GeminiService:
                 parts.append(f"   Benefits: {benefit_text}")
                 if elig_text:
                     parts.append(f"   Eligibility: {elig_text}")
-                parts.append(f"   State: {state} | Gender: {gender} | Category: {caste} | Age: {age}")
+                parts.append(f"   State: {state} | Gender: {gender} | Category: {caste} | Age: {age} | Occupation: {occ}")
                 if url:
                     parts.append(f"   Website: {url}")
+
             parts.append("\n=== END SCHEMES ===")
 
         return "\n".join(parts)
@@ -187,7 +216,6 @@ class GeminiService:
         missing_fields: Optional[List[str]] = None,
         language: str = "en",
     ) -> str:
-        """Main conversation method."""
         if not user_message or not user_message.strip():
             return "Please send a message so I can help you."
 
@@ -196,15 +224,12 @@ class GeminiService:
 
         system_prompt = self.create_system_prompt(matched_schemes, user_context, missing_fields)
         logger.info(
-            "Chat: msg_len=%d, history=%d, schemes=%s, ctx=%s, missing=%s",
-            len(user_message),
-            len(conversation_history or []),
-            len(matched_schemes or []),
-            user_context,
-            missing_fields,
+            "Chat: msg=%d chars, history=%d, schemes=%d, ctx=%s, missing=%s",
+            len(user_message), len(conversation_history or []),
+            len(matched_schemes or []), user_context, missing_fields,
         )
 
-        # Build Gemini history
+        # Build Gemini conversation
         messages = [
             {"role": "user", "parts": [system_prompt]},
             {"role": "model", "parts": [MODEL_ACK]},
@@ -223,8 +248,7 @@ class GeminiService:
             history_for_api = []
             for m in messages:
                 role = m.get("role", "user")
-                parts = m.get("parts", [])
-                text = parts[0] if parts else ""
+                text = m.get("parts", [""])[0]
                 if isinstance(text, dict):
                     text = text.get("text", "")
                 if not text:
@@ -234,7 +258,7 @@ class GeminiService:
             chat_session = self._model.start_chat(history=history_for_api)
             response = chat_session.send_message(user_message.strip())
             text = (response.text or "").strip()
-            logger.info("Chat response: %d chars", len(text))
+            logger.info("Response: %d chars", len(text))
             return text or "I couldn't generate a response. Please try again."
         except Exception as e:
             logger.error("Chat failed: %s", e, exc_info=True)
@@ -248,12 +272,8 @@ class GeminiService:
                 resp = self._model.generate_content(full_prompt)
                 return (resp.text or "").strip() or "I'm having trouble. Please try again."
             except Exception as e2:
-                logger.error("Chat fallback failed: %s", e2)
+                logger.error("Fallback failed: %s", e2)
                 return "I'm having trouble connecting right now. Please try again in a moment."
-
-    # ------------------------------------------------------------------
-    # Health check
-    # ------------------------------------------------------------------
 
     def check_health(self) -> bool:
         if not self._ensure_model():
@@ -262,22 +282,11 @@ class GeminiService:
             response = self._model.generate_content("Hello")
             return bool(response and response.text)
         except Exception as e:
-            logger.error("Gemini health check failed: %s", e)
+            logger.error("Health check failed: %s", e)
             return False
 
-    def generate_reply(
-        self,
-        user_message: str,
-        context_schemes: Optional[List[dict]] = None,
-        system_prompt: Optional[str] = None,
-    ) -> str:
-        """Backward-compatible wrapper."""
-        return self.chat(
-            user_message=user_message,
-            conversation_history=[],
-            matched_schemes=context_schemes,
-            language="en",
-        )
+    def generate_reply(self, user_message: str, context_schemes=None, system_prompt=None) -> str:
+        return self.chat(user_message=user_message, conversation_history=[], matched_schemes=context_schemes)
 
 
 gemini_service = GeminiService()
