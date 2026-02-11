@@ -1,0 +1,19 @@
+# Scheme Saathi - Scraper Dependencies
+# Python 3.8+
+
+# Web scraping
+beautifulsoup4>=4.12.0
+requests>=2.31.0
+lxml>=4.9.0
+
+# Selenium (for JS-rendered MyScheme pages)
+selenium>=4.15.0
+webdriver-manager>=4.0.0
+undetected-chromedriver>=3.5.5
+
+# Data processing
+python-dotenv>=1.0.0
+urllib3>=2.0.0
+
+# Rate limiting
+ratelimit>=2.2.1

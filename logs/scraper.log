@@ -1,0 +1,33 @@
+2026-02-11 15:13:14,013 [INFO] === Phase 2: Loading Existing Data ===
+2026-02-11 15:13:14,080 [INFO] Loaded 695 schemes from agriculture_rural_environment
+2026-02-11 15:13:14,103 [INFO] Loaded 250 schemes from banking_financial_insurance
+2026-02-11 15:13:14,165 [INFO] Loaded 389 schemes from business_entrepreneurship
+2026-02-11 15:13:14,268 [INFO] Loaded 1062 schemes from education_learning
+2026-02-11 15:13:14,297 [INFO] Loaded 280 schemes from health_wellness
+2026-02-11 15:13:14,311 [INFO] Loaded 100 schemes from housing_shelter
+2026-02-11 15:13:14,314 [INFO] Loaded 29 schemes from public_safety_schemes
+2026-02-11 15:13:14,326 [INFO] Loaded 100 schemes from science_it_communications
+2026-02-11 15:13:14,367 [INFO] Loaded 366 schemes from skills_employment
+2026-02-11 15:13:14,429 [INFO] Loaded 680 schemes from social_welfare_empowerment
+2026-02-11 15:13:14,454 [INFO] Loaded 250 schemes from sports_culture
+2026-02-11 15:13:14,466 [INFO] Loaded 82 schemes from transport_infrastructure
+2026-02-11 15:13:14,479 [INFO] Loaded 89 schemes from travel_tourism
+2026-02-11 15:13:14,485 [INFO] Loaded 58 schemes from utility_sanitation
+2026-02-11 15:13:14,576 [INFO] Loaded 459 schemes from women_child
+2026-02-11 15:13:14,576 [INFO] Total raw schemes loaded: 4889
+2026-02-11 15:13:14,576 [INFO] Loaded 4889 existing schemes
+2026-02-11 15:13:14,576 [INFO] === Phase 3: Manual Curated Data ===
+2026-02-11 15:13:14,576 [INFO] Added 20 manually curated schemes
+2026-02-11 15:13:14,576 [INFO] === Phase 4: Cleaning ===
+2026-02-11 15:13:14,843 [INFO] After cleaning: 4909 schemes
+2026-02-11 15:13:14,843 [INFO] === Phase 5: Deduplication ===
+2026-02-11 15:13:14,856 [INFO] Removed 1116 duplicates -> 3793 unique schemes
+2026-02-11 15:13:14,856 [INFO] === Phase 6: Validation ===
+2026-02-11 15:13:14,860 [INFO] Validation: 3793 valid, 0 invalid
+2026-02-11 15:13:15,733 [INFO] Saved 3793 schemes to E:\Buildathon pt 2\scraper\schemes_data.json
+2026-02-11 15:13:16,622 [INFO] Also saved to backend: E:\Buildathon pt 2\backend\data_f\all_schemes.json
+2026-02-11 15:13:16,622 [INFO] 
+=== Pipeline Complete ===
+2026-02-11 15:13:16,622 [INFO] Total schemes: 3793
+2026-02-11 15:13:16,622 [INFO] Output: E:\Buildathon pt 2\scraper\schemes_data.json
+2026-02-11 15:13:16,624 [INFO] Backend: E:\Buildathon pt 2\backend\data_f\all_schemes.json
