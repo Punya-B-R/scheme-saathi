@@ -16,6 +16,8 @@ export const UI_TEXT = {
     disclaimer:
       "Scheme Saathi can make mistakes. Always verify on official government portals.",
     thinking: "Scheme Saathi is thinking...",
+    listening: "Listening...",
+    sendingIn: "Sending in",
     welcomeTitle: "How can I help you today?",
     welcomeSubtitle:
       "Discover government schemes you're eligible for through simple conversation",
@@ -50,6 +52,8 @@ export const UI_TEXT = {
     disclaimer:
       "Scheme Saathi से गलती हो सकती है। हमेशा आधिकारिक सरकारी पोर्टल पर जांचें।",
     thinking: "Scheme Saathi सोच रहा है...",
+    listening: "सुन रहा है...",
+    sendingIn: "इतने समय में भेजा जाएगा",
     welcomeTitle: "आज मैं आपकी कैसे मदद करूं?",
     welcomeSubtitle:
       "सरल बातचीत के जरिए जानें कि आप किन सरकारी योजनाओं के लिए पात्र हैं",

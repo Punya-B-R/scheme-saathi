@@ -114,7 +114,7 @@ export default function ChatInput({
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={handleKeyDown}
             onInput={handleInput}
-            placeholder={isListening ? 'Listening...' : t.inputPlaceholder}
+            placeholder={isListening ? t.listening : t.inputPlaceholder}
             rows={1}
             disabled={disabled}
             className={`flex-1 resize-none bg-transparent px-4 py-3 pr-24 text-sm leading-relaxed placeholder:text-gray-400 focus:outline-none disabled:opacity-50 ${
@@ -125,7 +125,7 @@ export default function ChatInput({
           {isListening && (
             <div className="absolute left-3 top-2.5 flex items-center gap-1">
               <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-              <span className="text-xs text-red-500">Listening...</span>
+              <span className="text-xs text-red-500">{t.listening}</span>
             </div>
           )}
 
@@ -138,6 +138,7 @@ export default function ChatInput({
               onStopListening={stopListening}
               countdown={countdown}
               disabled={isLoading || disabled}
+              language={language}
             />
 
           <button

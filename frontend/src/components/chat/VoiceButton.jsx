@@ -1,4 +1,5 @@
 import { Mic, MicOff, Loader2 } from 'lucide-react'
+import { useTranslation } from '../../utils/i18n'
 
 export default function VoiceButton({
   isListening = false,
@@ -7,7 +8,9 @@ export default function VoiceButton({
   onStopListening,
   countdown = 5,
   disabled = false,
+  language = 'en',
 }) {
+  const t = useTranslation(language)
   if (!isSupported) return null
 
   const handleClick = () => {
@@ -17,14 +20,14 @@ export default function VoiceButton({
   }
 
   const title = isListening
-    ? 'Listening... click to stop'
-    : 'Click to speak'
+    ? (language === 'hi' ? 'सुन रहा है... रोकने के लिए क्लिक करें' : 'Listening... click to stop')
+    : (language === 'hi' ? 'बोलने के लिए क्लिक करें' : 'Click to speak')
 
   return (
     <div className="relative">
       {isListening && (
         <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-medium text-red-600 whitespace-nowrap">
-          Sending in {countdown}s...
+          {t.sendingIn} {countdown}s...
         </div>
       )}
 

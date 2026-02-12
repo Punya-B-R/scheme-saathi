@@ -117,16 +117,22 @@ export default function useVoice({
     } catch (err) {
       if (err?.name === 'NotAllowedError') {
         setError(
-          'Microphone access denied. Please allow microphone in browser settings.',
+          language === 'hi'
+            ? 'माइक्रोफोन अनुमति अस्वीकृत। कृपया ब्राउज़र सेटिंग्स में अनुमति दें।'
+            : 'Microphone access denied. Please allow microphone in browser settings.',
         )
       } else if (err?.name === 'NotFoundError') {
-        setError('No microphone found. Please connect a microphone.')
+        setError(
+          language === 'hi'
+            ? 'माइक्रोफोन नहीं मिला। कृपया माइक्रोफोन कनेक्ट करें।'
+            : 'No microphone found. Please connect a microphone.',
+        )
       } else {
-        setError('Cannot access microphone.')
+        setError(language === 'hi' ? 'माइक्रोफोन एक्सेस नहीं हो पा रहा है।' : 'Cannot access microphone.')
       }
       return false
     }
-  }, [])
+  }, [language])
 
   const startListening = useCallback(async () => {
     if (!isSupported) return
@@ -160,31 +166,80 @@ export default function useVoice({
         .replace(/#{1,6}\s/g, '')
         .replace(/•\s/g, '')
         .replace(/\d+\.\s/g, '')
-        .replace(/[₹]/g, 'rupees ')
+        .replace(/[₹]/g, language === 'hi' ? 'रुपये ' : 'rupees ')
+        .replace(/https?:\/\/\S+/g, '')
+        .replace(/[\u{1F300}-\u{1FAFF}]/gu, '')
         .replace(/\n/g, '. ')
         .trim()
 
-      const utterance = new SpeechSynthesisUtterance(cleanText)
-      utterance.lang = language === 'hi' ? 'hi-IN' : 'en-IN'
-      utterance.rate = 0.9
-      utterance.pitch = 1.0
-      utterance.volume = 1.0
+      if (!cleanText) return
+
+      const chunkText = (input, maxLen = 220) => {
+        const chunks = []
+        let remaining = input
+        while (remaining.length > maxLen) {
+          let splitAt = remaining.lastIndexOf('.', maxLen)
+          if (splitAt < 50) splitAt = remaining.lastIndexOf(' ', maxLen)
+          if (splitAt < 20) splitAt = maxLen
+          chunks.push(remaining.slice(0, splitAt + 1).trim())
+          remaining = remaining.slice(splitAt + 1).trim()
+        }
+        if (remaining) chunks.push(remaining)
+        return chunks.filter(Boolean)
+      }
 
       const voices = window.speechSynthesis.getVoices()
-      const preferredVoice = voices.find(
-        (v) =>
-          v.lang === 'en-IN' ||
-          v.name.includes('India') ||
-          v.name.includes('Ravi') ||
-          v.name.includes('Heera'),
-      )
-      if (preferredVoice) utterance.voice = preferredVoice
+      const preferredVoice =
+        language === 'hi'
+          ? voices.find(
+              (v) =>
+                v.lang === 'hi-IN' ||
+                v.lang.startsWith('hi') ||
+                v.name.toLowerCase().includes('hindi'),
+            )
+          : voices.find(
+              (v) =>
+                v.lang === 'en-IN' ||
+                v.name.includes('India') ||
+                v.name.includes('Ravi') ||
+                v.name.includes('Heera'),
+            )
+      const chunks = chunkText(cleanText)
+      if (!chunks.length) return
 
-      utterance.onstart = () => setIsSpeaking(true)
-      utterance.onend = () => setIsSpeaking(false)
-      utterance.onerror = () => setIsSpeaking(false)
+      let idx = 0
+      setIsSpeaking(true)
+      const speakNext = () => {
+        if (idx >= chunks.length) {
+          setIsSpeaking(false)
+          return
+        }
+        const utterance = new SpeechSynthesisUtterance(chunks[idx])
+        utterance.lang = language === 'hi' ? 'hi-IN' : 'en-IN'
+        utterance.rate = 0.9
+        utterance.pitch = 1.0
+        utterance.volume = 1.0
+        if (preferredVoice) utterance.voice = preferredVoice
 
-      window.speechSynthesis.speak(utterance)
+        utterance.onend = () => {
+          idx += 1
+          speakNext()
+        }
+        utterance.onerror = () => {
+          setIsSpeaking(false)
+        }
+        window.speechSynthesis.speak(utterance)
+      }
+
+      // If voices are not loaded yet, wait once then speak.
+      if (!voices.length && typeof window.speechSynthesis.onvoiceschanged !== 'undefined') {
+        window.speechSynthesis.onvoiceschanged = () => {
+          speakNext()
+          window.speechSynthesis.onvoiceschanged = null
+        }
+      } else {
+        speakNext()
+      }
     },
     [language],
   )
