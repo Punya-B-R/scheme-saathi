@@ -83,6 +83,18 @@ export default function Hero() {
           >
             ✓ Free forever &nbsp; ✓ No signup needed &nbsp; ✓ 850+ schemes
           </motion.p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-2 text-sm text-gray-500"
+          >
+            New here?{' '}
+            <Link to="/signup" className="text-primary-600 font-medium hover:underline">Sign up</Link>
+            {' or '}
+            <Link to="/login" className="text-primary-600 font-medium hover:underline">Log in</Link>
+            {' to get started.'}
+          </motion.p>
         </div>
 
         {/* Chat mockup */}

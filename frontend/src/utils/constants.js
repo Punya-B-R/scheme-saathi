@@ -56,6 +56,8 @@ export const STORAGE_KEYS = {
   CHATS: 'scheme_saathi_chats',
   CURRENT_CHAT_ID: 'scheme_saathi_current_chat',
   USER_PREFERENCES: 'scheme_saathi_preferences',
+  AUTH_TOKEN: 'scheme_saathi_auth_token',
+  AUTH_USER: 'scheme_saathi_auth_user',
 }
 
 export const MESSAGE_ROLES = {

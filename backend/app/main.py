@@ -8,7 +8,7 @@ import re
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
@@ -20,6 +20,13 @@ from app.models import (
     SchemeSearchRequest,
     SchemeSearchResponse,
 )
+from app.database import get_db, init_db
+from app.chat_history import (
+    append_message,
+    get_or_create_chat_for_message,
+)
+from app.auth_router import get_current_user_id
+from sqlalchemy.ext.asyncio import AsyncSession
 from app.services.gemini_service import gemini_service
 from app.services.rag_service import rag_service
 
@@ -42,6 +49,12 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
+
+from app.auth_router import router as auth_router
+from app.chats_router import router as chats_router
+
+app.include_router(auth_router)
+app.include_router(chats_router)
 
 
 # ============================================================
@@ -731,6 +744,14 @@ def filter_schemes_for_user(
 async def startup_event():
     logger.info("Starting Scheme Saathi Backend...")
     logger.info("Gemini model: %s", settings.GEMINI_MODEL)
+
+    # Initialize database schema (creates tables on first run).
+    try:
+        await init_db()
+        logger.info("Database schema initialized successfully.")
+    except Exception as e:
+        logger.exception("Database initialization failed: %s", e)
+
     logger.info("Total schemes: %s", rag_service.get_total_schemes())
     logger.info("Ready to serve requests")
 
@@ -767,7 +788,11 @@ async def health():
 
 
 @app.post("/chat", response_model=ChatResponse)
-async def chat(request: ChatRequest):
+async def chat(
+    request: ChatRequest,
+    db: AsyncSession = Depends(get_db),
+    user_id: int | None = Depends(get_current_user_id),
+):
     """
     Main chat: extract context → decide gather/recommend → filter → respond.
     """
@@ -843,9 +868,34 @@ async def chat(request: ChatRequest):
             missing_fields=missing,
             language=request.language,
         )
+        persistent_chat_id: int | None = None
+
+        # 4. Persist conversation to DB when user is authenticated
+        # (Supabase JWT present). WhatsApp / anonymous calls skip this.
+        if user_id is not None:
+            logger.info("Authenticated user_id=%s; persisting chat to DB.", user_id)
+            try:
+                chat_obj, _history = await get_or_create_chat_for_message(
+                    db,
+                    user_id=user_id,
+                    chat_id=request.chat_id,
+                )
+                if chat_obj:
+                    persistent_chat_id = chat_obj.id
+                    await append_message(db, chat_obj.id, user_id, "user", query)
+                    await append_message(db, chat_obj.id, user_id, "assistant", reply)
+                    logger.info("Saved chat_id=%s with 2 messages for user_id=%s", chat_obj.id, user_id)
+                else:
+                    logger.warning("get_or_create_chat_for_message returned None for user_id=%s", user_id)
+            except Exception as db_err:
+                logger.exception("Failed to persist chat to DB: %s", db_err)
+                # Don't fail the request; the AI reply was already generated.
+        else:
+            logger.debug("Anonymous request; skipping DB persistence.")
 
         return ChatResponse(
             message=reply,
+            chat_id=persistent_chat_id,
             schemes=candidates[:5] if ready else [],
             needs_more_info=not ready,
             extracted_context=user_ctx if user_ctx else None,

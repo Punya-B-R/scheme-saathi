@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ArrowRight } from 'lucide-react'
+import { Menu, X, ArrowRight, LogIn, UserPlus, LogOut } from 'lucide-react'
 import { APP_NAME } from '../../utils/constants'
+import { useAuth } from '../../context/AuthContext'
 
 const NAV_LINKS = [
   { href: '#features', label: 'Features' },
@@ -15,6 +16,7 @@ export default function Navbar() {
   const isChat = pathname.startsWith('/chat')
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { isAuthenticated, user, logout, loading } = useAuth()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16)
@@ -56,6 +58,38 @@ export default function Navbar() {
               </a>
             ))}
             <div className="w-px h-5 bg-gray-200 ml-2 mr-1" />
+            {!loading && (
+              isAuthenticated ? (
+                <>
+                  <span className="hidden sm:inline text-sm text-gray-600 truncate max-w-[120px]" title={user?.email}>{user?.email}</span>
+                  <button
+                    type="button"
+                    onClick={() => logout()}
+                    className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-900 transition-colors px-3 py-2 rounded-lg hover:bg-gray-100"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Log out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-900 transition-colors px-3 py-2 rounded-lg hover:bg-gray-100"
+                  >
+                    <LogIn className="w-4 h-4" />
+                    Log in
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="flex items-center gap-1.5 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors px-3 py-2 rounded-lg hover:bg-primary-50"
+                  >
+                    <UserPlus className="w-4 h-4" />
+                    Sign up
+                  </Link>
+                </>
+              )
+            )}
             <Link to="/chat" className="btn-primary text-sm px-5 py-2.5">
               Try for Free
               <ArrowRight className="w-3.5 h-3.5" />
@@ -95,6 +129,33 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              {!loading && !isAuthenticated && (
+                <>
+                  <Link
+                    to="/login"
+                    onClick={() => setMobileOpen(false)}
+                    className="block py-3 text-sm font-medium text-gray-700 hover:text-gray-900 border-b border-gray-100"
+                  >
+                    Log in
+                  </Link>
+                  <Link
+                    to="/signup"
+                    onClick={() => setMobileOpen(false)}
+                    className="block py-3 text-sm font-medium text-primary-600 hover:text-primary-700 border-b border-gray-100"
+                  >
+                    Sign up
+                  </Link>
+                </>
+              )}
+              {!loading && isAuthenticated && (
+                <button
+                  type="button"
+                  onClick={() => { logout(); setMobileOpen(false) }}
+                  className="block w-full text-left py-3 text-sm font-medium text-gray-700 hover:text-gray-900 border-b border-gray-100"
+                >
+                  Log out
+                </button>
+              )}
               <div className="pt-4">
                 <Link to="/chat" className="btn-primary w-full justify-center" onClick={() => setMobileOpen(false)}>
                   Start Chatting

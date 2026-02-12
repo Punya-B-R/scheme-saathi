@@ -1,10 +1,16 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Menu, Plus, Home, Volume2, VolumeX } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Menu, Plus, Home, Volume2, VolumeX, LogIn, UserPlus, LogOut } from 'lucide-react'
 import toast from 'react-hot-toast'
-import { APP_NAME } from '../../utils/constants'
-import { sendChatMessage, getHealthStatus } from '../../services/api'
+import { APP_NAME, QUICK_PROMPTS } from '../../utils/constants'
+import { useAuth } from '../../context/AuthContext'
+import {
+  sendChatMessage,
+  getHealthStatus,
+  listBackendChats,
+  getBackendChat,
+  deleteBackendChat,
+} from '../../services/api'
 import {
   getAllChats,
   getChatById,
@@ -22,9 +28,12 @@ import LanguageToggle from './LanguageToggle'
 import { useTranslation } from '../../utils/i18n'
 import SpeakingIndicator from './SpeakingIndicator'
 
+const QUICK_PROMPT_SET = new Set(QUICK_PROMPTS)
+
 export default function ChatContainer() {
   const navigate = useNavigate()
   const { chatId: urlChatId } = useParams()
+  const { isAuthenticated, user, logout, loading: authLoading } = useAuth()
 
   const [chats, setChats] = useState([])
   const [currentChatId, setCurrentChatIdState] = useState(null)
@@ -40,64 +49,153 @@ export default function ChatContainer() {
   const voiceRef = useRef(null)
   const t = useTranslation(language)
 
-  const refreshChats = useCallback(() => setChats(getAllChats()), [])
+  // Track the backend chat_id returned by /chat (for grouping messages in Supabase)
+  const backendChatIdRef = useRef(null)
 
+  const refreshChats = useCallback(() => {
+    if (isAuthenticated) {
+      listBackendChats()
+        .then((backendChats) => {
+          const mapped = (backendChats || []).map((c) => ({
+            id: String(c.id),
+            title: c.title || 'New Conversation',
+            messages: [],
+            createdAt: c.created_at,
+            updatedAt: c.updated_at,
+            isBackend: true,
+          }))
+          setChats(mapped)
+        })
+        .catch(() => setChats([]))
+    } else {
+      setChats(getAllChats())
+    }
+  }, [isAuthenticated])
+
+  // Health check on mount
   useEffect(() => {
-    refreshChats()
-    getHealthStatus().then(() => setBackendOk(true)).catch(() => setBackendOk(false))
-  }, [refreshChats])
+    getHealthStatus()
+      .then(() => setBackendOk(true))
+      .catch(() => setBackendOk(false))
+  }, [])
 
+  // Load chats when auth state changes
+  useEffect(() => {
+    if (authLoading) return
+    refreshChats()
+  }, [isAuthenticated, authLoading, refreshChats])
+
+  // Handle URL chat id
   useEffect(() => {
     if (urlChatId) {
-      const chat = getChatById(urlChatId)
-      if (chat) {
-        setCurrentChatIdState(urlChatId)
-        setCurrentChatId(urlChatId)
-        setMessages(chat.messages || [])
+      if (isAuthenticated) {
+        getBackendChat(urlChatId)
+          .then((chat) => {
+            setCurrentChatIdState(String(chat.id))
+            backendChatIdRef.current = chat.id
+            setMessages(
+              (chat.messages || []).map((m) => ({
+                role: m.role,
+                content: m.content,
+                timestamp: m.timestamp,
+              }))
+            )
+          })
+          .catch(() => navigate('/chat', { replace: true }))
       } else {
-        navigate('/chat', { replace: true })
+        const chat = getChatById(urlChatId)
+        if (chat) {
+          setCurrentChatIdState(urlChatId)
+          setCurrentChatId(urlChatId)
+          setMessages(chat.messages || [])
+        } else {
+          navigate('/chat', { replace: true })
+        }
       }
     } else {
-      const saved = getCurrentChatId()
-      const chat = saved ? getChatById(saved) : null
-      if (chat) {
-        setCurrentChatIdState(chat.id)
-        setMessages(chat.messages || [])
+      if (!isAuthenticated) {
+        const saved = getCurrentChatId()
+        const chat = saved ? getChatById(saved) : null
+        if (chat) {
+          setCurrentChatIdState(chat.id)
+          setMessages(chat.messages || [])
+        } else {
+          setCurrentChatIdState(null)
+          setMessages([])
+        }
       } else {
         setCurrentChatIdState(null)
         setMessages([])
       }
     }
-  }, [urlChatId, navigate])
+  }, [urlChatId, navigate, isAuthenticated])
 
   const handleNewChat = useCallback(() => {
-    const chat = createNewChat()
-    setCurrentChatIdState(chat.id)
-    setCurrentChatId(chat.id)
-    setMessages([])
-    refreshChats()
-    navigate(`/chat/${chat.id}`, { replace: true })
+    backendChatIdRef.current = null
+    if (isAuthenticated) {
+      setCurrentChatIdState(null)
+      setMessages([])
+      navigate('/chat', { replace: true })
+    } else {
+      const chat = createNewChat()
+      setCurrentChatIdState(chat.id)
+      setCurrentChatId(chat.id)
+      setMessages([])
+      refreshChats()
+      navigate(`/chat/${chat.id}`, { replace: true })
+    }
     setSidebarOpen(false)
-  }, [navigate, refreshChats])
+  }, [navigate, refreshChats, isAuthenticated])
 
   const handleSelectChat = useCallback((id) => {
-    const chat = getChatById(id)
-    if (chat) {
-      setCurrentChatIdState(id)
-      setCurrentChatId(id)
-      setMessages(chat.messages || [])
-      navigate(`/chat/${id}`, { replace: true })
-      setSidebarOpen(false)
+    if (isAuthenticated) {
+      getBackendChat(id)
+        .then((chat) => {
+          setCurrentChatIdState(String(chat.id))
+          backendChatIdRef.current = chat.id
+          setMessages(
+            (chat.messages || []).map((m) => ({
+              role: m.role,
+              content: m.content,
+              timestamp: m.timestamp,
+            }))
+          )
+          navigate(`/chat/${chat.id}`, { replace: true })
+        })
+        .catch(() => {})
+    } else {
+      const chat = getChatById(id)
+      if (chat) {
+        setCurrentChatIdState(id)
+        setCurrentChatId(id)
+        setMessages(chat.messages || [])
+        navigate(`/chat/${id}`, { replace: true })
+      }
     }
-  }, [navigate])
+    setSidebarOpen(false)
+  }, [navigate, isAuthenticated])
 
   const handleDeleteChat = useCallback((id) => {
-    deleteChat(id)
-    refreshChats()
-    if (id === currentChatId) {
-      handleNewChat()
+    if (isAuthenticated) {
+      deleteBackendChat(id)
+        .then(() => {
+          refreshChats()
+          if (String(id) === String(currentChatId)) {
+            backendChatIdRef.current = null
+            setCurrentChatIdState(null)
+            setMessages([])
+            navigate('/chat', { replace: true })
+          }
+        })
+        .catch(() => toast.error('Failed to delete chat'))
+    } else {
+      deleteChat(id)
+      refreshChats()
+      if (id === currentChatId) {
+        handleNewChat()
+      }
     }
-  }, [currentChatId, refreshChats, handleNewChat])
+  }, [currentChatId, navigate, refreshChats, isAuthenticated, handleNewChat])
 
   const handleLanguageChange = useCallback((lang) => {
     setLanguage(lang)
@@ -115,7 +213,8 @@ export default function ChatContainer() {
     if (!text || isLoading) return
 
     let chatId = currentChatId
-    if (!chatId) {
+    // For non-authenticated users, create a local chat if needed
+    if (!isAuthenticated && !chatId) {
       const chat = createNewChat()
       chatId = chat.id
       setCurrentChatIdState(chatId)
@@ -131,7 +230,9 @@ export default function ChatContainer() {
       timestamp: new Date().toISOString(),
     }
     setMessages((prev) => [...prev, userMessage])
-    saveMessageToChat(chatId, userMessage)
+    if (!isAuthenticated && chatId) {
+      saveMessageToChat(chatId, userMessage)
+    }
     refreshChats()
     setIsLoading(true)
 
@@ -139,7 +240,16 @@ export default function ChatContainer() {
       const history = messages
         .slice(-10)
         .map((m) => ({ role: m.role, content: m.content }))
-      const response = await sendChatMessage(text, history, null, language)
+      const response = await sendChatMessage(text, history, null, language, backendChatIdRef.current)
+
+      // Store the backend chat_id for future messages in this conversation
+      if (response.chat_id) {
+        backendChatIdRef.current = response.chat_id
+        if (!currentChatId) {
+          setCurrentChatIdState(String(response.chat_id))
+          navigate(`/chat/${response.chat_id}`, { replace: true })
+        }
+      }
 
       const aiMessage = {
         id: `msg_${Date.now()}`,
@@ -149,7 +259,9 @@ export default function ChatContainer() {
         timestamp: new Date().toISOString(),
       }
       setMessages((prev) => [...prev, aiMessage])
-      saveMessageToChat(chatId, aiMessage)
+      if (!isAuthenticated && chatId) {
+        saveMessageToChat(chatId, aiMessage)
+      }
       refreshChats()
 
       // Always speak back for voice-originated messages.
@@ -169,13 +281,15 @@ export default function ChatContainer() {
         timestamp: new Date().toISOString(),
       }
       setMessages((prev) => [...prev, errorMsg])
-      saveMessageToChat(chatId, errorMsg)
+      if (!isAuthenticated && chatId) {
+        saveMessageToChat(chatId, errorMsg)
+      }
       refreshChats()
       toast.error(t.connectionError)
     } finally {
       setIsLoading(false)
     }
-  }, [currentChatId, isLoading, messages, navigate, refreshChats, language, t.connectionError, t.errorMessage, voiceEnabled])
+  }, [currentChatId, isLoading, messages, navigate, refreshChats, language, t.connectionError, t.errorMessage, voiceEnabled, isAuthenticated])
 
   const handleSuggestionClick = useCallback((text) => {
     handleSendMessage(text)
@@ -227,6 +341,32 @@ export default function ChatContainer() {
               language={language}
               onLanguageChange={handleLanguageChange}
             />
+            {!authLoading && (
+              isAuthenticated ? (
+                <>
+                  <span className="hidden sm:inline text-xs text-gray-500 truncate max-w-[100px]" title={user?.email}>{user?.email}</span>
+                  <button
+                    type="button"
+                    onClick={() => logout()}
+                    className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 px-2 py-1.5 rounded-lg hover:bg-gray-100"
+                  >
+                    <LogOut className="w-3.5 h-3.5" />
+                    Log out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 px-2 py-1.5 rounded-lg hover:bg-gray-100">
+                    <LogIn className="w-3.5 h-3.5" />
+                    Log in
+                  </Link>
+                  <Link to="/signup" className="flex items-center gap-1 text-xs text-primary-600 hover:text-primary-700 font-medium px-2 py-1.5 rounded-lg hover:bg-primary-50">
+                    <UserPlus className="w-3.5 h-3.5" />
+                    Sign up
+                  </Link>
+                </>
+              )
+            )}
             {backendOk !== null && (
               <span
                 className={`text-[11px] px-2 py-0.5 rounded-full font-medium ${
