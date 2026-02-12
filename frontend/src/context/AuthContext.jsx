@@ -52,6 +52,8 @@ export function AuthProvider({ children }) {
         } = await supabase.auth.getSession()
         if (!mounted) return
         if (error) {
+          
+          await supabase.auth.signOut().catch(() => {})
           setUser(null)
           setToken(null)
           setLoading(false)
@@ -59,6 +61,8 @@ export function AuthProvider({ children }) {
         }
         if (session) updateUserFromSession(session)
       } catch (_) {
+        
+        await supabase.auth.signOut().catch(() => {})
         if (mounted) setToken(null)
       } finally {
         if (mounted) setLoading(false)
@@ -171,9 +175,26 @@ export function AuthProvider({ children }) {
     }
   }, [])
 
+  const signInWithGoogle = useCallback(async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    })
+    if (error) {
+      const err = new Error(error.message || 'Google sign-in failed')
+      err.response = { data: { detail: err.message } }
+      throw err
+    }
+    // Browser will redirect to Google — no return value needed
+  }, [])
+
   const logout = useCallback(async () => {
     await supabase.auth.signOut()
     setToken(null)
+    // Redirect to home page after sign out
+    window.location.href = '/'
   }, [setToken])
 
   const value = {
@@ -182,6 +203,7 @@ export function AuthProvider({ children }) {
     loading,
     login,
     signup,
+    signInWithGoogle,
     logout,
     isAuthenticated: !!token,
   }

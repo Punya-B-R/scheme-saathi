@@ -81,7 +81,7 @@ export default function Hero() {
             transition={{ delay: 0.4 }}
             className="mt-8 text-sm text-gray-400"
           >
-            ✓ Free forever &nbsp; ✓ No signup needed &nbsp; ✓ 850+ schemes
+            ✓ Free forever &nbsp; ✓ Try it out now! &nbsp; ✓ 850+ schemes
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}

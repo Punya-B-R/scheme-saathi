@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage'
 import ChatPage from './pages/ChatPage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
+import AuthCallbackPage from './pages/AuthCallbackPage'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -16,8 +17,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/chat" element={<RequireAuth><ChatPage /></RequireAuth>} />
-          <Route path="/chat/:chatId" element={<RequireAuth><ChatPage /></RequireAuth>} />
+          <Route path="/auth/callback" element={<AuthCallbackPage />} />
+          <Route path="/chat" element={<ChatPage />} />
+          <Route path="/chat/:chatId" element={<ChatPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
 

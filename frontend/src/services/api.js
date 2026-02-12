@@ -11,11 +11,13 @@ const api = axios.create({
 api.interceptors.request.use(
   async (config) => {
     try {
-      const { data: { session } } = await supabase.auth.getSession()
-      if (session?.access_token) {
+      const { data: { session }, error } = await supabase.auth.getSession()
+      if (!error && session?.access_token) {
         config.headers.Authorization = `Bearer ${session.access_token}`
       }
-    } catch (_) {}
+    } catch (_) {
+     
+    }
     return config
   },
   (err) => Promise.reject(err)

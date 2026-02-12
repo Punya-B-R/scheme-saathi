@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Menu, Plus, Home, Volume2, VolumeX, LogIn, UserPlus, LogOut } from 'lucide-react'
 import toast from 'react-hot-toast'
-import { APP_NAME, QUICK_PROMPTS } from '../../utils/constants'
+import { APP_NAME } from '../../utils/constants'
 import { useAuth } from '../../context/AuthContext'
 import {
   sendChatMessage,
@@ -27,8 +27,6 @@ import { getChatTitle } from '../../utils/chatHelpers'
 import LanguageToggle from './LanguageToggle'
 import { useTranslation } from '../../utils/i18n'
 import SpeakingIndicator from './SpeakingIndicator'
-
-const QUICK_PROMPT_SET = new Set(QUICK_PROMPTS)
 
 export default function ChatContainer() {
   const navigate = useNavigate()
