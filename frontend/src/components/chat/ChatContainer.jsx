@@ -137,15 +137,15 @@ export default function ChatContainer() {
 
     try {
       const history = messages
-        .slice(-10)
         .map((m) => ({ role: m.role, content: m.content }))
       const response = await sendChatMessage(text, history, null, language)
 
+      const schemesList = Array.isArray(response.schemes) ? response.schemes : []
       const aiMessage = {
         id: `msg_${Date.now()}`,
         role: 'assistant',
         content: response.message || '',
-        schemes: response.schemes || [],
+        schemes: schemesList,
         timestamp: new Date().toISOString(),
       }
       setMessages((prev) => [...prev, aiMessage])

@@ -213,4 +213,43 @@
     z-index: -1;
     border-radius: 4px;
   }
+
+  /* Sound wave bars animation */
+  @keyframes soundBar {
+    0%,
+    100% {
+      transform: scaleY(0.4);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+
+  /* Listening ring pulse */
+  @keyframes listeningRing {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+
+  .listening-ring {
+    animation: listeningRing 1.2s ease-out infinite;
+  }
+
+  .listening-ring-delay-1 {
+    animation: listeningRing 1.2s ease-out infinite;
+    animation-delay: 0.4s;
+  }
+
+  .listening-ring-delay-2 {
+    animation: listeningRing 1.2s ease-out infinite;
+    animation-delay: 0.8s;
+  }
 }

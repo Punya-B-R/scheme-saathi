@@ -35,13 +35,6 @@ function getCategoryColor(category) {
   return CATEGORY_COLORS[key] || CATEGORY_COLORS.default
 }
 
-function getMatchColor(score) {
-  if (score == null) return 'bg-gray-100 text-gray-600'
-  if (score >= 70) return 'bg-emerald-100 text-emerald-700'
-  if (score >= 50) return 'bg-amber-100 text-amber-700'
-  return 'bg-gray-100 text-gray-600'
-}
-
 function localizeBenefitType(benefitType, language) {
   if (language !== 'hi' || !benefitType) return benefitType
   const map = {
@@ -65,7 +58,7 @@ function localizeBenefitType(benefitType, language) {
   return map[benefitType] || benefitType
 }
 
-export default function SchemeCard({ scheme, matchScore: matchScoreProp, language = 'en' }) {
+export default function SchemeCard({ scheme, language = 'en' }) {
   const [expanded, setExpanded] = useState(false)
   const t = useTranslation(language)
 
@@ -89,12 +82,7 @@ export default function SchemeCard({ scheme, matchScore: matchScoreProp, languag
   const processSteps = Array.isArray(process) ? process : []
   const url = scheme.source_url || scheme.official_website || ''
 
-  // match_score comes from backend as 0.0-1.0, convert to percentage
-  const rawScore = matchScoreProp ?? scheme.match_score
-  const matchScore = rawScore != null ? Math.round(rawScore * 100) : null
-
   const dotColor = getCategoryColor(category)
-  const matchClass = getMatchColor(matchScore)
 
   return (
     <div
@@ -119,12 +107,6 @@ export default function SchemeCard({ scheme, matchScore: matchScoreProp, languag
               {benefitType && benefitType !== 'Other' && (
                 <span className="px-2 py-0.5 rounded-md text-[11px] font-medium bg-blue-50 text-blue-600">
                   {benefitTypeLabel}
-                </span>
-              )}
-              {matchScore != null && (
-                <span className={`px-2 py-0.5 rounded-md text-[11px] font-medium ${matchClass}`}>
-                  {matchScore}% match
-                  {` ${t.matchScore}`}
                 </span>
               )}
             </div>

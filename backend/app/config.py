@@ -22,8 +22,15 @@ class Settings(BaseSettings):
 
     # API Keys
     GEMINI_API_KEY: str = "placeholder"
+    OPENAI_API_KEY: str = ""
 
-    # Model Configuration
+    # Embedding (for ChromaDB vector search)
+    OPENAI_EMBEDDING_MODEL: str = "text-embedding-3-large"
+
+    # Chat LLM: when set, use OpenAI for chat (e.g. gpt-5.2-chat-latest); else Gemini
+    OPENAI_CHAT_MODEL: str = "gpt-5.2-chat-latest"
+
+    # Model Configuration (Gemini, used only when OPENAI_CHAT_MODEL is not used)
     GEMINI_MODEL: str = "gemini-3-pro-preview"
 
     # Application Settings

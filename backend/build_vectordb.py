@@ -1,11 +1,14 @@
 """
 build_vectordb.py - Convert all_schemes.json to vectors and store in ChromaDB.
 
+Uses OpenAI text-embedding-3-large for embeddings (see app.utils.embedding_function).
+
 Reads:  backend/data_f/all_schemes.json
 Writes: backend/chroma_db/  (ChromaDB persistent storage)
 
 Usage:
     cd backend
+    set OPENAI_API_KEY=sk-...
     python build_vectordb.py
 """
 
@@ -18,6 +21,10 @@ import time
 from pathlib import Path
 from typing import Any, Dict, List
 
+# Ensure backend is on path when run as script
+if str(Path(__file__).resolve().parent) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+
 # ============================================================
 # Config
 # ============================================================
@@ -26,7 +33,9 @@ BACKEND_DIR = Path(__file__).resolve().parent
 SCHEMES_PATH = BACKEND_DIR / "data_f" / "all_schemes.json"
 CHROMA_DIR = BACKEND_DIR / "chroma_db"
 COLLECTION_NAME = "government_schemes"
-BATCH_SIZE = 100
+# Keep batches small to stay under OpenAI TPM (e.g. 40k tokens/min for text-embedding-3-large)
+BATCH_SIZE = 20
+BATCH_DELAY_SEC = 16  # Delay between batches to respect rate limit (TPM)
 MIN_QUALITY_SCORE = 30
 
 logging.basicConfig(
@@ -129,13 +138,17 @@ def prepare_text(scheme: Dict[str, Any]) -> str:
 # ============================================================
 
 def build_vectordb(schemes: List[Dict[str, Any]], fresh: bool = True) -> None:
-    """Index all schemes into ChromaDB."""
+    """Index all schemes into ChromaDB using OpenAI text-embedding-3-large."""
     try:
         import chromadb
         from chromadb.config import Settings as ChromaSettings
     except ImportError:
         logger.error("chromadb not installed. Run: pip install chromadb")
         sys.exit(1)
+
+    from app.utils.embedding_function import get_embedding_function
+
+    embedding_function = get_embedding_function()
 
     # Optionally wipe old DB for a clean build
     if fresh and CHROMA_DIR.exists():
@@ -144,7 +157,8 @@ def build_vectordb(schemes: List[Dict[str, Any]], fresh: bool = True) -> None:
 
     CHROMA_DIR.mkdir(parents=True, exist_ok=True)
 
-    logger.info("Initializing ChromaDB at %s ...", CHROMA_DIR)
+    from app.config import settings
+    logger.info("Initializing ChromaDB at %s (OpenAI %s) ...", CHROMA_DIR, settings.OPENAI_EMBEDDING_MODEL)
     client = chromadb.PersistentClient(
         path=str(CHROMA_DIR),
         settings=ChromaSettings(anonymized_telemetry=False),
@@ -160,6 +174,7 @@ def build_vectordb(schemes: List[Dict[str, Any]], fresh: bool = True) -> None:
     collection = client.create_collection(
         name=COLLECTION_NAME,
         metadata={"description": "Indian government schemes for Scheme Saathi"},
+        embedding_function=embedding_function,
     )
 
     # Prepare data
@@ -226,6 +241,10 @@ def build_vectordb(schemes: List[Dict[str, Any]], fresh: bool = True) -> None:
             batch_num, total_batches, min(i + BATCH_SIZE, len(ids)), elapsed,
         )
 
+        # Throttle to stay under OpenAI TPM (tokens per minute) limit
+        if i + BATCH_SIZE < len(ids) and BATCH_DELAY_SEC > 0:
+            time.sleep(BATCH_DELAY_SEC)
+
     elapsed = time.time() - start_time
     final_count = collection.count()
 
@@ -248,12 +267,15 @@ def test_search(query: str = "farmer pension scheme") -> None:
     import chromadb
     from chromadb.config import Settings as ChromaSettings
 
+    from app.utils.embedding_function import get_embedding_function
+
     logger.info("\nTest search: '%s'", query)
     client = chromadb.PersistentClient(
         path=str(CHROMA_DIR),
         settings=ChromaSettings(anonymized_telemetry=False),
     )
-    collection = client.get_collection(COLLECTION_NAME)
+    embedding_function = get_embedding_function()
+    collection = client.get_collection(COLLECTION_NAME, embedding_function=embedding_function)
 
     results = collection.query(
         query_texts=[query],

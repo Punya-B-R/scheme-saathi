@@ -16,6 +16,10 @@ NO_API_KEY_MESSAGE = (
     "Get a key from: https://makersuite.google.com/app/apikey"
 )
 
+OPENAI_NO_API_KEY_MESSAGE = (
+    "Scheme Saathi chat requires OPENAI_API_KEY in .env when using OpenAI (GPT) for chat."
+)
+
 MODEL_ACK = (
     "Understood. I'm Scheme Saathi. I'll gather the user's details first before "
     "recommending any schemes. I'll ask one question at a time."
@@ -140,6 +144,8 @@ class GeminiService:
             "- If the user already told you some info in earlier messages, DO NOT ask again. Use what you know.",
             "- If the user gave multiple details at once (e.g. 'I am a female student from Karnataka looking for scholarships'), acknowledge ALL of them and ask the next missing piece.",
             "",
+            "DO NOT RE-ASK — Once the user has told you something (occupation, state, type of help, gender, age, caste), NEVER ask for it again in later messages. Always use the USER PROFILE below as the source of truth. Only ask for fields that are still missing.",
+            "",
             "CRITICAL RULES:",
             "- Do NOT show or name ANY scheme until you have at least: occupation + state + type of help + 1 more.",
             "- If you do NOT have a list of schemes below, you are in GATHERING mode. DO NOT name or recommend any scheme.",
@@ -151,7 +157,7 @@ class GeminiService:
         # Full user profile
         if ctx:
             parts.append("")
-            parts.append("=== USER PROFILE (gathered so far) ===")
+            parts.append("=== USER PROFILE (gathered so far — DO NOT ask again for these) ===")
             label_map = {
                 "occupation": "Occupation",
                 "state": "State",
@@ -215,6 +221,10 @@ class GeminiService:
                 "",
             ])
             if missing:
+                known = [f for f in ["occupation", "state", "help_type", "gender", "age", "caste_category"] if ctx.get(f)]
+                if known:
+                    parts.append(f"ALREADY KNOWN (do NOT ask again): {', '.join(known)}")
+                parts.append(f"ONLY ask for (one at a time): {', '.join(m.replace('_', ' ') for m in missing)}")
                 field_questions = {
                     "occupation": "what they do (student, farmer, employee, business owner, retired, homemaker, etc.)",
                     "state": "which state/UT they are from",
@@ -248,7 +258,7 @@ class GeminiService:
                 "",
                 "CRITICAL RULES:",
                 "- ONLY recommend schemes from the list below. NEVER invent schemes.",
-                "- Present the TOP 2-3 most relevant schemes.",
+                "- Present ALL relevant schemes from the list that match the user (do not limit to 2-3; show every scheme that fits their profile and type of help).",
                 "- For EACH scheme:",
                 "  * **Scheme Name** (bold)",
                 "  * What the user gets (amounts, benefits)",
@@ -316,6 +326,40 @@ class GeminiService:
     # Chat
     # ------------------------------------------------------------------
 
+    def _chat_openai(
+        self,
+        user_message: str,
+        conversation_history: Optional[List[Any]],
+        system_prompt: str,
+    ) -> str:
+        """Call OpenAI Chat Completions (e.g. GPT 5.2) with same system prompt and history."""
+        from openai import OpenAI
+
+        client = OpenAI(api_key=settings.OPENAI_API_KEY)
+        messages = [{"role": "system", "content": system_prompt}]
+        for msg in (conversation_history or []):
+            role = getattr(msg, "role", None) or (msg.get("role") if isinstance(msg, dict) else None)
+            content = getattr(msg, "content", None) or (msg.get("content", "") if isinstance(msg, dict) else "")
+            if not content:
+                continue
+            if role == "user":
+                messages.append({"role": "user", "content": content})
+            elif role in ("assistant", "model"):
+                messages.append({"role": "assistant", "content": content})
+        messages.append({"role": "user", "content": user_message.strip()})
+
+        try:
+            resp = client.chat.completions.create(
+                model=settings.OPENAI_CHAT_MODEL,
+                messages=messages,
+            )
+            text = (resp.choices[0].message.content or "").strip()
+            logger.info("OpenAI response: %d chars", len(text))
+            return text or "I couldn't generate a response. Please try again."
+        except Exception as e:
+            logger.error("OpenAI chat failed: %s", e, exc_info=True)
+            return "I'm having trouble connecting right now. Please try again in a moment."
+
     def chat(
         self,
         user_message: str,
@@ -327,9 +371,6 @@ class GeminiService:
     ) -> str:
         if not user_message or not user_message.strip():
             return "Please send a message so I can help you."
-
-        if not self._ensure_model():
-            return NO_API_KEY_MESSAGE
 
         system_prompt = self.create_system_prompt(
             matched_schemes=matched_schemes,
@@ -343,7 +384,16 @@ class GeminiService:
             len(matched_schemes or []), user_context, missing_fields,
         )
 
-        # Build Gemini conversation
+        # Use OpenAI (e.g. GPT 5.2) when configured
+        if settings.OPENAI_CHAT_MODEL:
+            if not (settings.OPENAI_API_KEY or "").strip():
+                return OPENAI_NO_API_KEY_MESSAGE
+            return self._chat_openai(user_message, conversation_history, system_prompt)
+
+        # Gemini
+        if not self._ensure_model():
+            return NO_API_KEY_MESSAGE
+
         messages = [
             {"role": "user", "parts": [system_prompt]},
             {"role": "model", "parts": [MODEL_ACK]},
@@ -390,6 +440,19 @@ class GeminiService:
                 return "I'm having trouble connecting right now. Please try again in a moment."
 
     def check_health(self) -> bool:
+        if settings.OPENAI_CHAT_MODEL and (settings.OPENAI_API_KEY or "").strip():
+            try:
+                from openai import OpenAI
+                client = OpenAI(api_key=settings.OPENAI_API_KEY)
+                resp = client.chat.completions.create(
+                    model=settings.OPENAI_CHAT_MODEL,
+                    messages=[{"role": "user", "content": "Hi"}],
+                    max_tokens=5,
+                )
+                return bool(resp and resp.choices and resp.choices[0].message)
+            except Exception as e:
+                logger.error("OpenAI health check failed: %s", e)
+                return False
         if not self._ensure_model():
             return False
         try:

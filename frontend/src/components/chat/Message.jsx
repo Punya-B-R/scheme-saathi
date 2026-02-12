@@ -83,17 +83,21 @@ export default function Message({
         </div>
 
         {/* Scheme cards (AI only) */}
-        {!isUser && message.schemes?.length > 0 && (
-          <div className="mt-3 w-full max-w-2xl space-y-2">
-            <p className="text-xs font-semibold text-gray-500 mb-2 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-              {t.schemesFound}
-            </p>
-            {message.schemes.slice(0, 5).map((scheme, i) => (
-              <SchemeCard key={scheme.scheme_id || i} scheme={scheme} language={language} />
-            ))}
-          </div>
-        )}
+        {!isUser && (() => {
+          const schemeList = Array.isArray(message.schemes) ? message.schemes : []
+          if (schemeList.length === 0) return null
+          return (
+            <div className="mt-3 w-full max-w-2xl space-y-2">
+              <p className="text-xs font-semibold text-gray-500 mb-2 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                {t.schemesFound}
+              </p>
+              {schemeList.slice(0, 20).map((scheme, i) => (
+                <SchemeCard key={scheme.scheme_id || `s-${i}`} scheme={scheme} language={language} />
+              ))}
+            </div>
+          )
+        })()}
 
         {message.timestamp && (
           <p className={`text-[10px] text-gray-400 mt-1 ${isUser ? '' : 'ml-1'}`}>

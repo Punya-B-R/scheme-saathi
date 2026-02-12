@@ -9,7 +9,7 @@ When you run it manually, it executes:
 1. Category scraping via existing scraper modules (`scraper/*.py`)
 2. Merge new scraped schemes into `backend/data_f/all_schemes.json`
 3. Enrichment (`enrich_data.py`) to re-extract structured eligibility/benefit fields
-4. Vector DB rebuild (`build_vectordb.py`)
+4. Vector DB rebuild (`build_vectordb.py`) — uses **OpenAI text-embedding-3-large**; requires `OPENAI_API_KEY` in `.env`
 5. Report generation in `backend/pipeline/reports/`
 
 ## Run manually

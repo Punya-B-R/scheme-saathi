@@ -12,6 +12,7 @@ from app.utils.data_loader import (
     load_schemes_from_json,
     prepare_scheme_text_for_embedding,
 )
+from app.utils.embedding_function import get_embedding_function
 
 logger = logging.getLogger(__name__)
 
@@ -55,9 +56,11 @@ class RAGService:
                 path=str(chroma_path),
                 settings=ChromaSettings(anonymized_telemetry=False),
             )
+            embedding_function = get_embedding_function()
             self._collection = self._client.get_or_create_collection(
                 name=self.COLLECTION_NAME,
                 metadata={"description": "Indian government schemes"},
+                embedding_function=embedding_function,
             )
 
             if self._collection.count() == 0:

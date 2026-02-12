@@ -141,10 +141,10 @@ MARITAL_PATTERNS = {
     r"\borphan\b|\banath\b": "orphan",
 }
 
-# Specific need / type of help detection
+# Specific need / type of help detection (English + Hindi)
 NEED_PATTERNS = {
-    # Education
-    r"\bscholarship\b|\bscholarships\b|\bfellowship\b|\bstipend\b|\bfreeship\b|\bfee\s+waiver\b|\btuition\b": "scholarship",
+    # Education (incl. Hindi: छात्रवृत्ति, शिक्षा, etc.)
+    r"\bscholarship\b|\bscholarships\b|\bfellowship\b|\bstipend\b|\bfreeship\b|\bfee\s+waiver\b|\btuition\b|\bछात्रवृत्ति\b": "scholarship",
     # Loans
     r"\bloan\b|\bloans\b|\bmudra\b|\bcredit\b|\bfinance\b|\bfunding\b|\bborrowing\b": "loan",
     # Pension / old age
@@ -820,14 +820,20 @@ async def chat(request: ChatRequest):
             raw = rag_service.search_schemes(
                 query=search_query,
                 user_context=user_ctx,
-                top_k=settings.TOP_K_SCHEMES * 3,
+                top_k=50,
             )
             logger.info("RAG returned %d candidates", len(raw))
 
             candidates = filter_schemes_for_user(raw, user_ctx)
             logger.info("After main filter: %d candidates", len(candidates))
 
-            candidates = candidates[: settings.TOP_K_SCHEMES]
+            # Return all relevant matches (up to 20); if filter removed all, fallback to top RAG results so cards still show
+            max_schemes_chat = 20
+            if not candidates and raw:
+                candidates = raw[:max_schemes_chat]
+                logger.info("Filter removed all; using top %d from RAG as fallback", len(candidates))
+            else:
+                candidates = candidates[:max_schemes_chat]
         else:
             logger.info(
                 "Not ready (need occ+state+help_type+1more). Have: %s",
@@ -846,7 +852,7 @@ async def chat(request: ChatRequest):
 
         return ChatResponse(
             message=reply,
-            schemes=candidates[:5] if ready else [],
+            schemes=candidates if ready else [],
             needs_more_info=not ready,
             extracted_context=user_ctx if user_ctx else None,
         )

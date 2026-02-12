@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowUp, Square } from 'lucide-react'
 import { useTranslation } from '../../utils/i18n'
 import useVoice from '../../hooks/useVoice'
@@ -13,8 +14,11 @@ export default function ChatInput({
 }) {
   const [value, setValue] = useState('')
   const [countdown, setCountdown] = useState(5)
+  const [ringFlashGreen, setRingFlashGreen] = useState(false)
+  const [transcriptPulse, setTranscriptPulse] = useState(false)
   const textareaRef = useRef(null)
   const valueRef = useRef('')
+  const previousTranscriptRef = useRef('')
   const t = useTranslation(language)
 
   useEffect(() => {
@@ -94,42 +98,95 @@ export default function ChatInput({
   }, [isListening, transcript])
 
   useEffect(() => {
+    if (!isListening) {
+      setRingFlashGreen(false)
+      setTranscriptPulse(false)
+      previousTranscriptRef.current = ''
+      return
+    }
+    const previous = previousTranscriptRef.current
+    if (transcript && transcript !== previous) {
+      setRingFlashGreen(true)
+      setTranscriptPulse(true)
+      const ringTimer = setTimeout(() => setRingFlashGreen(false), 300)
+      const textTimer = setTimeout(() => setTranscriptPulse(false), 150)
+      previousTranscriptRef.current = transcript
+      return () => {
+        clearTimeout(ringTimer)
+        clearTimeout(textTimer)
+      }
+    }
+    previousTranscriptRef.current = transcript
+    return undefined
+  }, [isListening, transcript])
+
+  useEffect(() => {
     if (!onVoiceReady) return
     onVoiceReady({ speak, stopSpeaking, isSpeaking })
   }, [onVoiceReady, speak, stopSpeaking, isSpeaking])
 
   return (
-    <div className="border-t border-gray-200 bg-white px-4 py-4 shadow-[0_-4px_24px_-4px_rgba(0,0,0,0.06)]">
+    <div className="relative border-t border-gray-200 bg-white px-4 py-4 shadow-[0_-4px_24px_-4px_rgba(0,0,0,0.06)]">
+      <AnimatePresence>
+        {isListening && (
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 20, opacity: 0 }}
+            className="absolute left-0 right-0 -top-10 z-10 flex justify-center pointer-events-none"
+          >
+            <div className="flex items-center gap-3 bg-white border border-emerald-200 rounded-full px-4 py-2 shadow-lg shadow-emerald-100 mx-auto w-fit">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              {transcript ? (
+                <span className="text-sm text-gray-700 max-w-xs truncate">"{transcript}"</span>
+              ) : (
+                <span className="text-sm text-gray-500">Listening for your voice...</span>
+              )}
+              {transcript && (
+                <span className="text-xs text-gray-400 shrink-0">{countdown}s</span>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="max-w-3xl mx-auto">
         <div
-          className={`relative flex items-end gap-2 rounded-2xl border transition-colors ${
+          className={`relative flex items-end gap-2 rounded-2xl border transition-all duration-200 ${
             isListening
-              ? 'border-red-400 bg-red-50/70 ring-2 ring-red-200'
+              ? `border-emerald-300 bg-emerald-50 ring-2 ring-offset-1 ${
+                ringFlashGreen ? 'ring-emerald-400' : 'ring-emerald-300'
+              }`
               : 'border-gray-200 bg-gray-50/50 focus-within:border-blue-400 focus-within:bg-white'
           }`}
         >
+          {isListening && (
+            <div className="absolute top-2 left-3 flex items-center gap-1.5 pointer-events-none">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-xs text-emerald-600 font-medium">
+                {language === 'hi' ? 'सुन रहा है' : 'Listening'}
+              </span>
+            </div>
+          )}
+
           <textarea
             ref={textareaRef}
             value={value}
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={handleKeyDown}
             onInput={handleInput}
-            placeholder={isListening ? t.listening : t.inputPlaceholder}
+            placeholder={isListening ? 'Speak now...' : t.inputPlaceholder}
             rows={1}
             disabled={disabled}
-            className={`flex-1 resize-none bg-transparent px-4 py-3 pr-24 text-sm leading-relaxed placeholder:text-gray-400 focus:outline-none disabled:opacity-50 ${
-              isListening ? 'text-red-700' : ''
+            className={`flex-1 resize-none bg-transparent px-4 py-3 pr-24 text-sm leading-relaxed placeholder:text-gray-400 focus:outline-none disabled:opacity-50 transition-opacity duration-150 ${
+              isListening ? 'pt-7 text-gray-800' : ''
+            } ${
+              transcriptPulse ? 'opacity-80' : 'opacity-100'
             }`}
             style={{ minHeight: '44px', maxHeight: '120px' }}
           />
-          {isListening && (
-            <div className="absolute left-3 top-2.5 flex items-center gap-1">
-              <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-              <span className="text-xs text-red-500">{t.listening}</span>
-            </div>
-          )}
 
-          <div className="absolute right-2 bottom-2 flex items-center gap-2">
+          <div className="absolute right-3 bottom-2 flex items-center gap-2">
             <VoiceButton
               isListening={isListening}
               isSpeaking={isSpeaking}
@@ -139,29 +196,56 @@ export default function ChatInput({
               countdown={countdown}
               disabled={isLoading || disabled}
               language={language}
+              transcript={transcript}
             />
 
-          <button
-            type="button"
-            onClick={handleSubmit}
-            disabled={!value.trim() || isLoading || disabled}
+            <button
+              type="button"
+              onClick={handleSubmit}
+              disabled={!value.trim() || isLoading || disabled}
               className="w-8 h-8 rounded-lg flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed active:scale-95"
-            style={{
-              backgroundColor: value.trim() && !isLoading ? '#2563eb' : 'transparent',
-              color: value.trim() && !isLoading ? 'white' : '#9ca3af',
-            }}
-          >
-            {isLoading ? (
-              <Square className="w-4 h-4 fill-current" />
-            ) : (
-              <ArrowUp className="w-4 h-4" />
-            )}
-          </button>
+              style={{
+                backgroundColor: value.trim() && !isLoading ? '#2563eb' : 'transparent',
+                color: value.trim() && !isLoading ? 'white' : '#9ca3af',
+              }}
+            >
+              {isLoading ? (
+                <Square className="w-4 h-4 fill-current" />
+              ) : (
+                <ArrowUp className="w-4 h-4" />
+              )}
+            </button>
           </div>
         </div>
-        <p className="text-center text-[11px] text-gray-400 mt-2">
-          {t.disclaimer}
-        </p>
+        <div className="mt-2 min-h-4">
+          {isListening ? (
+            <div className="flex items-center justify-between px-1">
+              <div className="flex items-center gap-1.5">
+                <div className="flex items-end gap-0.5 h-4">
+                  {[2, 4, 3, 5, 2, 4, 3, 2, 4, 5].map((height, i) => (
+                    <div
+                      key={i}
+                      className="w-0.5 bg-emerald-400 rounded-full"
+                      style={{
+                        height: `${height * 2}px`,
+                        animation: 'soundBar 0.8s ease-in-out infinite',
+                        animationDelay: `${i * 0.08}s`,
+                      }}
+                    />
+                  ))}
+                </div>
+                <span className="text-xs text-gray-600">
+                  Speak clearly • Auto-sends after silence
+                </span>
+              </div>
+              <span className="text-xs text-gray-400">
+                {transcript.length > 0 ? `${transcript.trim().split(/\s+/).length} words` : ''}
+              </span>
+            </div>
+          ) : (
+            <p className="text-center text-[11px] text-gray-400">{t.disclaimer}</p>
+          )}
+        </div>
       </div>
     </div>
   )
