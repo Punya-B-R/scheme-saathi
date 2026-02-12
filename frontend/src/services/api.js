@@ -15,10 +15,16 @@ api.interceptors.response.use(
   }
 )
 
-export async function sendChatMessage(message, conversationHistory = [], language = 'en') {
+export async function sendChatMessage(
+  message,
+  conversationHistory = [],
+  userContext = null,
+  language = 'en',
+) {
   const { data } = await api.post('/chat', {
     message,
     conversation_history: conversationHistory,
+    user_context: userContext,
     language,
   })
   return data

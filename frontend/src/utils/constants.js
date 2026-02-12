@@ -63,9 +63,21 @@ export const MESSAGE_ROLES = {
   ASSISTANT: 'assistant',
 }
 
-export const QUICK_PROMPTS = [
-  "I'm a farmer in Bihar with 2 acres of land",
-  "Show me scholarships for SC/ST students",
-  "What pension schemes exist for senior citizens?",
-  "I'm a woman entrepreneur looking for loans",
-]
+export const SUGGESTIONS = {
+  en: [
+    { icon: "🌾", text: "I'm a farmer in Bihar with 2 acres of land" },
+    { icon: "👩‍🎓", text: "I'm a student looking for scholarships" },
+    { icon: "👴", text: "Senior citizen looking for welfare schemes" },
+    { icon: "💼", text: "I want to start a small business" },
+    { icon: "🏥", text: "Looking for health and medical schemes" },
+    { icon: "👩", text: "Women empowerment schemes" },
+  ],
+  hi: [
+    { icon: "🌾", text: "मैं बिहार का किसान हूं, 2 एकड़ जमीन है" },
+    { icon: "👩‍🎓", text: "मुझे छात्रवृत्ति के लिए योजना चाहिए" },
+    { icon: "👴", text: "बुजुर्ग हूं, सरकारी मदद चाहिए" },
+    { icon: "💼", text: "छोटा व्यापार शुरू करना है, ऋण चाहिए" },
+    { icon: "🏥", text: "स्वास्थ्य योजनाएं खोजनी हैं" },
+    { icon: "👩", text: "महिलाओं के लिए सरकारी योजनाएं" },
+  ],
+}

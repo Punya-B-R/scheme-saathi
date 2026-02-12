@@ -1,15 +1,11 @@
 import { motion } from 'framer-motion'
+import { SUGGESTIONS } from '../../utils/constants'
+import { useTranslation } from '../../utils/i18n'
 
-const SUGGESTIONS = [
-  { icon: '🌾', text: "I'm a farmer in Bihar" },
-  { icon: '👩‍🎓', text: 'Student looking for scholarships' },
-  { icon: '👴', text: 'Senior citizen, need welfare schemes' },
-  { icon: '💼', text: 'Want to start a business' },
-  { icon: '🏥', text: 'Looking for health schemes' },
-  { icon: '👩', text: 'Women empowerment schemes' },
-]
+export default function WelcomeScreen({ onSuggestionClick, language = 'en' }) {
+  const t = useTranslation(language)
+  const suggestions = SUGGESTIONS[language] || SUGGESTIONS.en
 
-export default function WelcomeScreen({ onSuggestionClick }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -21,13 +17,13 @@ export default function WelcomeScreen({ onSuggestionClick }) {
         <div className="w-20 h-20 rounded-2xl bg-gradient-to-r from-blue-500 to-violet-500 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-blue-500/20">
           <span className="text-white font-bold text-2xl">SS</span>
         </div>
-        <h2 className="text-2xl font-bold text-gray-900">How can I help you today?</h2>
+        <h2 className="text-2xl font-bold text-gray-900">{t.welcomeTitle}</h2>
         <p className="mt-2 text-gray-500">
-          I can help you discover government schemes you're eligible for.
+          {t.welcomeSubtitle}
         </p>
 
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {SUGGESTIONS.map((item, i) => (
+          {suggestions.map((item, i) => (
             <motion.button
               key={item.text}
               type="button"

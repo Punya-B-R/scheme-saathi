@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MapPin, Banknote, FileText, ExternalLink, ChevronDown } from 'lucide-react'
+import { useTranslation } from '../../utils/i18n'
 
 const CATEGORY_COLORS = {
   agriculture: 'bg-emerald-500',
@@ -41,8 +42,32 @@ function getMatchColor(score) {
   return 'bg-gray-100 text-gray-600'
 }
 
-export default function SchemeCard({ scheme, matchScore: matchScoreProp }) {
+function localizeBenefitType(benefitType, language) {
+  if (language !== 'hi' || !benefitType) return benefitType
+  const map = {
+    Scholarship: 'छात्रवृत्ति',
+    Loan: 'ऋण',
+    Pension: 'पेंशन',
+    Insurance: 'बीमा',
+    Subsidy: 'सब्सिडी',
+    'Skill Training': 'कौशल प्रशिक्षण',
+    'Financial Assistance': 'वित्तीय सहायता',
+    'Maternity Benefit': 'मातृत्व लाभ',
+    'Marriage Assistance': 'विवाह सहायता',
+    Housing: 'आवास',
+    Healthcare: 'स्वास्थ्य सहायता',
+    'Food/Essentials': 'खाद्य/आवश्यक सहायता',
+    'Travel Concession': 'यात्रा रियायत',
+    'Startup Fund': 'स्टार्टअप फंड',
+    Rehabilitation: 'पुनर्वास',
+    'Legal Aid': 'कानूनी सहायता',
+  }
+  return map[benefitType] || benefitType
+}
+
+export default function SchemeCard({ scheme, matchScore: matchScoreProp, language = 'en' }) {
   const [expanded, setExpanded] = useState(false)
+  const t = useTranslation(language)
 
   if (!scheme) return null
 
@@ -51,7 +76,9 @@ export default function SchemeCard({ scheme, matchScore: matchScoreProp }) {
   const elig = scheme.eligibility_criteria || {}
   const rawElig = typeof elig === 'object' ? (elig.raw_eligibility_text || '') : ''
   const state = typeof elig === 'object' ? (elig.state || '') : ''
+  const displayState = state.toLowerCase().includes('all india') ? t.allIndia : state
   const benefitType = typeof (scheme.benefits) === 'object' ? (scheme.benefits?.benefit_type || '') : ''
+  const benefitTypeLabel = localizeBenefitType(benefitType, language)
   const benefits = scheme.benefits || {}
   const benefitSummary = typeof benefits === 'object' ? (benefits.summary || benefits.raw_benefits_text || '') : String(benefits)
   const financialBenefit = typeof benefits === 'object' ? (benefits.financial_benefit || '') : ''
@@ -91,12 +118,13 @@ export default function SchemeCard({ scheme, matchScore: matchScoreProp }) {
               )}
               {benefitType && benefitType !== 'Other' && (
                 <span className="px-2 py-0.5 rounded-md text-[11px] font-medium bg-blue-50 text-blue-600">
-                  {benefitType}
+                  {benefitTypeLabel}
                 </span>
               )}
               {matchScore != null && (
                 <span className={`px-2 py-0.5 rounded-md text-[11px] font-medium ${matchClass}`}>
                   {matchScore}% match
+                  {` ${t.matchScore}`}
                 </span>
               )}
             </div>
@@ -119,7 +147,7 @@ export default function SchemeCard({ scheme, matchScore: matchScoreProp }) {
         {/* Eligibility preview */}
         {rawElig && !expanded && (
           <div className="mt-2">
-            <p className="text-[11px] font-medium text-gray-500 mb-0.5">Who can apply:</p>
+            <p className="text-[11px] font-medium text-gray-500 mb-0.5">{t.eligibility}:</p>
             <p className="text-xs text-gray-600 line-clamp-2">{rawElig.substring(0, 120)}{rawElig.length > 120 ? '...' : ''}</p>
           </div>
         )}
@@ -130,12 +158,12 @@ export default function SchemeCard({ scheme, matchScore: matchScoreProp }) {
             {state && (
               <span className="flex items-center gap-1 text-xs text-gray-500">
                 <MapPin className="w-3.5 h-3.5" />
-                {state}
+                {displayState}
               </span>
             )}
             <span className="text-[11px] text-gray-400 flex items-center gap-1">
               <FileText className="w-3 h-3" />
-              {docCount} docs needed
+              {docCount} {language === 'hi' ? t.documents : 'docs needed'}
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -147,10 +175,13 @@ export default function SchemeCard({ scheme, matchScore: matchScoreProp }) {
                 onClick={(e) => e.stopPropagation()}
                 className="text-xs font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1"
               >
-                Apply
+                {t.applyNow}
                 <ExternalLink className="w-3 h-3" />
               </a>
             )}
+            <span className="text-[11px] text-gray-500">
+              {expanded ? t.showLess : t.showMore}
+            </span>
             <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`} />
           </div>
         </div>
@@ -169,7 +200,7 @@ export default function SchemeCard({ scheme, matchScore: matchScoreProp }) {
             <div className="px-4 pb-4 pt-3 border-t border-gray-100 space-y-3 bg-gray-50/50">
               {rawElig && (
                 <div>
-                  <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-1">Eligibility</p>
+                  <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-1">{t.eligibility}</p>
                   <p className="text-xs text-gray-700 leading-relaxed">{rawElig}</p>
                 </div>
               )}
@@ -183,7 +214,7 @@ export default function SchemeCard({ scheme, matchScore: matchScoreProp }) {
 
               {Array.isArray(docs) && docs.length > 0 && (
                 <div>
-                  <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-1">Required documents</p>
+                  <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-1">{t.documents}</p>
                   <ul className="list-disc list-inside text-xs text-gray-700 space-y-0.5">
                     {docs.map((d, i) => (
                       <li key={i}>{typeof d === 'object' ? d.document_name : d}</li>
@@ -194,7 +225,7 @@ export default function SchemeCard({ scheme, matchScore: matchScoreProp }) {
 
               {processSteps.length > 0 && (
                 <div>
-                  <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-1">How to apply</p>
+                  <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-1">{t.applyNow}</p>
                   <ol className="list-decimal list-inside text-xs text-gray-700 space-y-1">
                     {processSteps.map((step, i) => (
                       <li key={i}>{typeof step === 'object' ? (step.step ?? step) : step}</li>
@@ -211,7 +242,7 @@ export default function SchemeCard({ scheme, matchScore: matchScoreProp }) {
                   onClick={(e) => e.stopPropagation()}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm"
                 >
-                  Open official website
+                  {t.viewDetails}
                   <ExternalLink className="w-4 h-4" />
                 </a>
               )}

@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Menu, Plus, Home } from 'lucide-react'
+import { Menu, Plus, Home, Volume2, VolumeX } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { APP_NAME } from '../../utils/constants'
@@ -18,8 +18,9 @@ import ChatSidebar from './ChatSidebar'
 import ChatMessages from './ChatMessages'
 import ChatInput from './ChatInput'
 import { getChatTitle } from '../../utils/chatHelpers'
-
-const ERROR_MESSAGE = 'Sorry, I encountered an error. Please check if the backend server is running and try again.'
+import LanguageToggle from './LanguageToggle'
+import { useTranslation } from '../../utils/i18n'
+import SpeakingIndicator from './SpeakingIndicator'
 
 export default function ChatContainer() {
   const navigate = useNavigate()
@@ -31,6 +32,13 @@ export default function ChatContainer() {
   const [isLoading, setIsLoading] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [backendOk, setBackendOk] = useState(null)
+  const [voiceEnabled, setVoiceEnabled] = useState(false)
+  const [isSpeaking, setIsSpeaking] = useState(false)
+  const [language, setLanguage] = useState(
+    () => localStorage.getItem('scheme_saathi_language') || 'en'
+  )
+  const voiceRef = useRef(null)
+  const t = useTranslation(language)
 
   const refreshChats = useCallback(() => setChats(getAllChats()), [])
 
@@ -91,7 +99,18 @@ export default function ChatContainer() {
     }
   }, [currentChatId, refreshChats, handleNewChat])
 
-  const handleSendMessage = useCallback(async (content) => {
+  const handleLanguageChange = useCallback((lang) => {
+    setLanguage(lang)
+    localStorage.setItem('scheme_saathi_language', lang)
+  }, [])
+
+  const handleVoiceReady = useCallback((controls) => {
+    voiceRef.current = controls
+    setIsSpeaking(!!controls?.isSpeaking)
+  }, [])
+
+  const handleSendMessage = useCallback(async (content, options = {}) => {
+    const { fromVoice = false } = options || {}
     const text = (content || '').trim()
     if (!text || isLoading) return
 
@@ -120,7 +139,7 @@ export default function ChatContainer() {
       const history = messages
         .slice(-10)
         .map((m) => ({ role: m.role, content: m.content }))
-      const response = await sendChatMessage(text, history)
+      const response = await sendChatMessage(text, history, null, language)
 
       const aiMessage = {
         id: `msg_${Date.now()}`,
@@ -132,11 +151,19 @@ export default function ChatContainer() {
       setMessages((prev) => [...prev, aiMessage])
       saveMessageToChat(chatId, aiMessage)
       refreshChats()
+
+      // Always speak back for voice-originated messages.
+      // For typed messages, follow the voice toggle.
+      if ((fromVoice || voiceEnabled) && voiceRef.current?.speak) {
+        setTimeout(() => {
+          voiceRef.current?.speak(response.message || '')
+        }, 500)
+      }
     } catch {
       const errorMsg = {
         id: `msg_${Date.now()}`,
         role: 'assistant',
-        content: ERROR_MESSAGE,
+        content: t.errorMessage,
         schemes: [],
         isError: true,
         timestamp: new Date().toISOString(),
@@ -144,15 +171,20 @@ export default function ChatContainer() {
       setMessages((prev) => [...prev, errorMsg])
       saveMessageToChat(chatId, errorMsg)
       refreshChats()
-      toast.error('Could not reach the server')
+      toast.error(t.connectionError)
     } finally {
       setIsLoading(false)
     }
-  }, [currentChatId, isLoading, messages, navigate, refreshChats])
+  }, [currentChatId, isLoading, messages, navigate, refreshChats, language, t.connectionError, t.errorMessage, voiceEnabled])
 
   const handleSuggestionClick = useCallback((text) => {
     handleSendMessage(text)
   }, [handleSendMessage])
+
+  const handleSpeakMessage = useCallback((text) => {
+    if (!text || !voiceRef.current?.speak) return
+    voiceRef.current.speak(text)
+  }, [])
 
   const currentChat = currentChatId ? getChatById(currentChatId) : null
   const headerTitle = currentChat ? getChatTitle(currentChat) : 'New Conversation'
@@ -167,9 +199,14 @@ export default function ChatContainer() {
         onDeleteChat={handleDeleteChat}
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
+        language={language}
       />
 
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 relative">
+        <SpeakingIndicator
+          isSpeaking={isSpeaking}
+          onStop={() => voiceRef.current?.stopSpeaking?.()}
+        />
         {/* Header */}
         <header className="h-14 flex items-center justify-between px-4 border-b border-gray-200 bg-white flex-shrink-0">
           <div className="flex items-center gap-3">
@@ -186,6 +223,10 @@ export default function ChatContainer() {
             </h1>
           </div>
           <div className="flex items-center gap-2">
+            <LanguageToggle
+              language={language}
+              onLanguageChange={handleLanguageChange}
+            />
             {backendOk !== null && (
               <span
                 className={`text-[11px] px-2 py-0.5 rounded-full font-medium ${
@@ -195,6 +236,17 @@ export default function ChatContainer() {
                 {backendOk ? 'Online' : 'Offline'}
               </span>
             )}
+            <button
+              type="button"
+              onClick={() => setVoiceEnabled((v) => !v)}
+              className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${
+                voiceEnabled ? 'bg-blue-100 text-blue-600' : 'text-gray-400 hover:bg-gray-100'
+              }`}
+              title={voiceEnabled ? 'Disable voice' : 'Enable voice response'}
+              aria-label={voiceEnabled ? 'Disable voice' : 'Enable voice response'}
+            >
+              {voiceEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+            </button>
             <button
               type="button"
               onClick={handleNewChat}
@@ -217,12 +269,17 @@ export default function ChatContainer() {
           messages={messages}
           isLoading={isLoading}
           onSuggestionClick={handleSuggestionClick}
+          language={language}
+          onSpeakMessage={handleSpeakMessage}
+          isSpeaking={isSpeaking}
         />
 
         <ChatInput
           onSend={handleSendMessage}
           isLoading={isLoading}
           disabled={false}
+          language={language}
+          onVoiceReady={handleVoiceReady}
         />
       </div>
     </div>

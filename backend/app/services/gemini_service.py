@@ -21,6 +21,29 @@ MODEL_ACK = (
     "recommending any schemes. I'll ask one question at a time."
 )
 
+LANGUAGE_INSTRUCTIONS = {
+    "en": "You MUST respond in English only.",
+    "hi": """आप हमेशा हिंदी में जवाब दें। (You MUST respond in Hindi only)
+
+HINDI RESPONSE RULES:
+- Use simple, conversational Hindi (बोलचाल की भाषा)
+- Avoid complex Sanskrit words
+- Scheme names stay in English: "PM-KISAN", "Ayushman Bharat"
+- Numbers and amounts in digits: ₹6,000
+- Technical mix allowed: "DBT (Direct Benefit Transfer)"
+- Government portal names stay in English: "pmkisan.gov.in"
+- Outside scheme names, do NOT use English words like "scholarship", "loan", "scheme", "eligibility"
+- Prefer Hindi terms: छात्रवृत्ति, ऋण/लोन, योजना, पात्रता, आवेदन, दस्तावेज, आय
+
+EXAMPLE GOOD:
+"नमस्ते! मैं आपकी मदद करूंगा। आप क्या काम करते हैं? जैसे किसान, छात्र, बुजुर्ग नागरिक, या व्यापारी?"
+
+EXAMPLE BAD:
+- "I can help you find schemes."
+- "आप किस व्यवसाय में संलग्न हैं?"
+""",
+}
+
 
 class GeminiService:
     def __init__(self) -> None:
@@ -60,10 +83,12 @@ class GeminiService:
         matched_schemes: Optional[List[Dict[str, Any]]] = None,
         user_context: Optional[Dict[str, str]] = None,
         missing_fields: Optional[List[str]] = None,
+        language: str = "en",
     ) -> str:
         ctx = user_context or {}
         missing = missing_fields or []
         has_schemes = bool(matched_schemes)
+        language_instruction = LANGUAGE_INSTRUCTIONS.get(language, LANGUAGE_INSTRUCTIONS["en"])
 
         parts = [
             "You are Scheme Saathi, a warm and knowledgeable AI assistant helping Indian citizens discover government schemes.",
@@ -71,7 +96,7 @@ class GeminiService:
             "PERSONALITY:",
             "- Friendly, empathetic, like a helpful neighbor at a government office.",
             "- Use simple language. Avoid jargon.",
-            "- Respond in the same language the user writes in (Hindi/English/Hinglish).",
+            "- Follow the selected app language strictly.",
             "- Be concise. No filler words.",
             "",
             "CONVERSATION FLOW (you MUST follow this strictly):",
@@ -147,6 +172,34 @@ class GeminiService:
                 if val:
                     parts.append(f"  {label}: {val}")
             parts.append("=== END PROFILE ===")
+
+        if language == "hi":
+            parts.extend([
+                "",
+                "HINDI CLARIFYING QUESTIONS TO USE:",
+                "- Occupation: 'आप क्या काम करते हैं? जैसे - किसान, छात्र, बुजुर्ग, व्यापारी?'",
+                "- State: 'आप किस राज्य में रहते हैं?'",
+                "- Land: 'आपके पास कितनी जमीन है? (एकड़ या हेक्टेयर में)'",
+                "- Income: 'आपकी सालाना आमदनी कितनी है?'",
+                "- Caste: 'आप किस वर्ग से हैं? SC/ST/OBC या सामान्य वर्ग?'",
+                "- Age: 'आपकी उम्र कितनी है?'",
+                "",
+                "HINDI SCHEME EXPLANATION FORMAT:",
+                "1. **PM-KISAN योजना**",
+                "   💰 फायदा: हर साल ₹6,000 सीधे बैंक खाते में",
+                "   ✓ आप eligible हैं क्योंकि: आप 2 हेक्टेयर से कम जमीन वाले किसान हैं",
+                "   📋 जरूरी कागज: Aadhaar card, bank passbook, जमीन के कागज",
+                "   🔗 Apply करें: pmkisan.gov.in पर जाएं",
+                "",
+                "HINDI WORD CHOICE GLOSSARY (use these words in explanatory text):",
+                "- scholarship -> छात्रवृत्ति",
+                "- loan -> ऋण / लोन",
+                "- scheme -> योजना",
+                "- eligibility -> पात्रता",
+                "- documents -> दस्तावेज / कागज",
+                "- apply -> आवेदन करें",
+                "- income -> आय",
+            ])
 
         if not has_schemes:
             # ========== GATHERING PHASE ==========
@@ -257,7 +310,7 @@ class GeminiService:
 
             parts.append("\n=== END SCHEMES ===")
 
-        return "\n".join(parts)
+        return f"{language_instruction}\n\n" + "\n".join(parts)
 
     # ------------------------------------------------------------------
     # Chat
@@ -278,7 +331,12 @@ class GeminiService:
         if not self._ensure_model():
             return NO_API_KEY_MESSAGE
 
-        system_prompt = self.create_system_prompt(matched_schemes, user_context, missing_fields)
+        system_prompt = self.create_system_prompt(
+            matched_schemes=matched_schemes,
+            user_context=user_context,
+            missing_fields=missing_fields,
+            language=language,
+        )
         logger.info(
             "Chat: msg=%d chars, history=%d, schemes=%d, ctx=%s, missing=%s",
             len(user_message), len(conversation_history or []),
@@ -379,6 +437,15 @@ Conversation:
 {conv_text}
 
 Extract these fields. Use "unknown" if not mentioned. Be VERY STRICT - only extract what is explicitly stated.
+
+NOTE: User may write in Hindi. Extract information regardless of language.
+Examples:
+- "मैं किसान हूं" -> occupation: farmer
+- "बिहार से हूं" -> state: Bihar
+- "मेरे पास 2 एकड़ जमीन है" -> land_ownership: 2 acres
+- "SC वर्ग से हूं" -> caste_category: SC
+- "मेरी उम्र 35 साल है" -> age: 35
+Always return values in English regardless of input language.
 
 Return EXACTLY in this format (one per line):
 occupation: [farmer/student/senior citizen/employee/entrepreneur/unknown]

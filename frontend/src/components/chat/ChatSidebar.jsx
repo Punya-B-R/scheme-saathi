@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, MessageSquare, ArrowLeft, X } from 'lucide-react'
 import { APP_NAME } from '../../utils/constants'
 import { groupChatsByDate, getChatTitle } from '../../utils/chatHelpers'
+import { useTranslation } from '../../utils/i18n'
 
 export default function ChatSidebar({
   chats = [],
@@ -12,12 +13,14 @@ export default function ChatSidebar({
   onDeleteChat,
   isOpen,
   onClose,
+  language = 'en',
 }) {
+  const t = useTranslation(language)
   const groups = groupChatsByDate(chats)
 
   const handleDelete = (e, chatId) => {
     e.stopPropagation()
-    if (window.confirm('Delete this conversation?')) {
+    if (window.confirm(language === 'hi' ? 'क्या इस बातचीत को हटाना है?' : 'Delete this conversation?')) {
       onDeleteChat(chatId)
     }
   }
@@ -45,7 +48,7 @@ export default function ChatSidebar({
                 type="button"
                 onClick={(e) => handleDelete(e, chat.id)}
                 className="w-6 h-6 rounded flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-600 opacity-0 group-hover:opacity-100 transition-all flex-shrink-0"
-                aria-label="Delete chat"
+                aria-label={t.deleteChat}
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -84,7 +87,7 @@ export default function ChatSidebar({
           className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg border border-gray-700 text-gray-300 hover:bg-gray-700/80 hover:text-white transition-colors text-sm font-medium"
         >
           <Plus className="w-4 h-4" />
-          New Chat
+          {t.newChat}
         </button>
       </div>
 
@@ -93,21 +96,21 @@ export default function ChatSidebar({
         {chats.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
             <MessageSquare className="w-12 h-12 text-gray-600 mb-3" />
-            <p className="text-sm text-gray-500 mb-1">No conversations yet</p>
+            <p className="text-sm text-gray-500 mb-1">{t.noConversations}</p>
             <button
               type="button"
               onClick={onNewChat}
               className="text-sm text-blue-400 hover:text-blue-300"
             >
-              Start a new chat →
+              {t.startNewChat} →
             </button>
           </div>
         ) : (
           <>
-            {renderGroup('Today', groups.today)}
-            {renderGroup('Yesterday', groups.yesterday)}
-            {renderGroup('Previous 7 Days', groups.week)}
-            {renderGroup('Older', groups.older)}
+            {renderGroup(t.today, groups.today)}
+            {renderGroup(t.yesterday, groups.yesterday)}
+            {renderGroup(t.previous7Days, groups.week)}
+            {renderGroup(t.older, groups.older)}
           </>
         )}
       </div>
@@ -119,7 +122,7 @@ export default function ChatSidebar({
           className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Home
+          {t.backToHome}
         </Link>
         <p className="text-[11px] text-gray-500">{APP_NAME} v1.0</p>
       </div>

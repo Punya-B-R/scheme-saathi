@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
+import { useTranslation } from '../../utils/i18n'
 
-export default function TypingIndicator() {
+export default function TypingIndicator({ language = 'en' }) {
+  const t = useTranslation(language)
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
@@ -15,7 +17,7 @@ export default function TypingIndicator() {
         <span className="typing-dot w-2 h-2 rounded-full bg-gray-400" />
         <span className="typing-dot w-2 h-2 rounded-full bg-gray-400" />
       </div>
-      <p className="text-xs text-gray-400 mt-1 ml-11">Scheme Saathi is thinking...</p>
+      <p className="text-xs text-gray-400 mt-1 ml-11">{t.thinking}</p>
     </motion.div>
   )
 }
