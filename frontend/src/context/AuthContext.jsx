@@ -190,6 +190,27 @@ export function AuthProvider({ children }) {
     // Browser will redirect to Google — no return value needed
   }, [])
 
+  const resetPassword = useCallback(async (email) => {
+    const normalizedEmail = (email || '').trim().toLowerCase()
+    const { error } = await supabase.auth.resetPasswordForEmail(normalizedEmail, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    })
+    if (error) {
+      const err = new Error(error.message || 'Failed to send reset email')
+      err.response = { data: { detail: err.message } }
+      throw err
+    }
+  }, [])
+
+  const updatePassword = useCallback(async (newPassword) => {
+    const { error } = await supabase.auth.updateUser({ password: newPassword })
+    if (error) {
+      const err = new Error(error.message || 'Failed to update password')
+      err.response = { data: { detail: err.message } }
+      throw err
+    }
+  }, [])
+
   const logout = useCallback(async () => {
     await supabase.auth.signOut()
     setToken(null)
@@ -204,6 +225,8 @@ export function AuthProvider({ children }) {
     login,
     signup,
     signInWithGoogle,
+    resetPassword,
+    updatePassword,
     logout,
     isAuthenticated: !!token,
   }
