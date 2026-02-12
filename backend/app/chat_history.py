@@ -8,7 +8,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.db_models import Chat, Message, User
+from app.db_models import Chat, Message, User  # pyright: ignore[reportMissingImports]
 
 
 async def get_chat_history(db: AsyncSession, chat_id: int, user_id: int) -> List[Dict[str, Any]]:

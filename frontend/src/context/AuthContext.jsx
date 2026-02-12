@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { STORAGE_KEYS } from '../utils/constants'
+import { clearAllChats } from '../services/storage'
 
 const AuthContext = createContext(null)
 
@@ -34,6 +35,8 @@ export function AuthProvider({ children }) {
       setTokenState(session.access_token)
       localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, session.access_token)
       localStorage.setItem(STORAGE_KEYS.AUTH_USER, JSON.stringify(userObj))
+      // Clear shared localStorage chats when authenticated (chats are now in Supabase DB)
+      clearAllChats()
     },
     [setToken]
   )
@@ -78,16 +81,33 @@ export function AuthProvider({ children }) {
   }, [updateUserFromSession])
 
   const login = useCallback(async (email, password) => {
+    const normalizedEmail = (email || '').trim().toLowerCase()
+    const normalizedPassword = password || ''
+
     const { data, error } = await supabase.auth.signInWithPassword({
-      email: (email || '').trim().toLowerCase(),
-      password: password || '',
+      email: normalizedEmail,
+      password: normalizedPassword,
     })
     if (error) {
+   
+      if (error.message === 'Email not confirmed') {
+        const { data: retryData, error: retryError } = await supabase.auth.signUp({
+          email: normalizedEmail,
+          password: normalizedPassword,
+        })
+        if (!retryError && retryData?.session) {
+          return {
+            access_token: retryData.session.access_token,
+            user: { id: retryData.user.id, email: retryData.user.email ?? '' },
+          }
+        }
+      }
+
       const message =
         error.message === 'Invalid login credentials'
           ? 'Invalid email or password. Please check and try again.'
           : error.message === 'Email not confirmed'
-            ? 'Please confirm your email using the link we sent you, then try again.'
+            ? 'Your email is not confirmed. Please sign up again or check your inbox.'
             : error.message || 'Sign in failed. Please try again.'
       const err = new Error(message)
       err.response = { data: { detail: message } }
@@ -101,22 +121,53 @@ export function AuthProvider({ children }) {
   }, [])
 
   const signup = useCallback(async (email, password) => {
-    const { data, error } = await supabase.auth.signUp({ email, password })
+    const normalizedEmail = (email || '').trim().toLowerCase()
+    const normalizedPassword = password || ''
+
+    const { data, error } = await supabase.auth.signUp({
+      email: normalizedEmail,
+      password: normalizedPassword,
+    })
     if (error) {
       const err = new Error(error.message || 'Signup failed')
       err.response = { data: { detail: error.message } }
       throw err
     }
-    if (!data.session) {
+
+    // Supabase returns identities=[] when the email already exists (privacy).
+    // Detect this and try signing in instead.
+    if (data.user && data.user.identities && data.user.identities.length === 0) {
+      // User already exists — attempt sign in directly
+      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+        email: normalizedEmail,
+        password: normalizedPassword,
+      })
+      if (signInError) {
+        const err = new Error(
+          'An account with this email already exists. Please go to Sign In.'
+        )
+        err.response = { data: { detail: err.message } }
+        throw err
+      }
       return {
-        access_token: null,
-        user: { id: data.user?.id, email: data.user?.email ?? '' },
-        message: 'Check your email for the confirmation link.',
+        access_token: signInData.session.access_token,
+        user: { id: signInData.user.id, email: signInData.user.email ?? '' },
       }
     }
+
+    // If Supabase returned a session, user is auto-confirmed (confirmation disabled)
+    if (data.session) {
+      return {
+        access_token: data.session.access_token,
+        user: { id: data.user.id, email: data.user.email ?? '' },
+      }
+    }
+
+    // No session = email confirmation is required
     return {
-      access_token: data.session.access_token,
-      user: { id: data.user.id, email: data.user.email ?? '' },
+      access_token: null,
+      user: { id: data.user?.id, email: data.user?.email ?? '' },
+      message: 'Check your email for the confirmation link, then sign in.',
     }
   }, [])
 

@@ -25,6 +25,12 @@ class ChatRequest(BaseModel):
     """Request to the chat endpoint"""
 
     message: str = Field(..., description="User's message", min_length=1)
+    # Optional chat identifier for persistent history (when authenticated).
+    # Frontend can omit this; backend will create a new chat and return chat_id.
+    chat_id: Optional[int] = Field(
+        default=None,
+        description="Optional chat id for persistent history; if omitted, backend may create a new chat.",
+    )
     conversation_history: List[ChatMessage] = Field(
         default_factory=list,
         description="Previous messages in this conversation",
@@ -43,6 +49,10 @@ class ChatResponse(BaseModel):
     """Response from the chat endpoint"""
 
     message: str = Field(..., description="AI assistant's response")
+    chat_id: Optional[int] = Field(
+        default=None,
+        description="Persistent chat id (when user is authenticated).",
+    )
     schemes: List[Dict[str, Any]] = Field(
         default_factory=list,
         description="Matched schemes (if any)",

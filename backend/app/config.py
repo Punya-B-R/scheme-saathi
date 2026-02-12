@@ -45,7 +45,8 @@ class Settings(BaseSettings):
     TOP_K_SCHEMES: int = 10  # Number of schemes to retrieve
     SIMILARITY_THRESHOLD: float = 0.3  # Minimum similarity score (0-1)
 
-    # Supabase Auth (for JWT verification; get JWT Secret from Supabase Dashboard → Project Settings → API)
+    SUPABASE_URL: str = ""
+    # Legacy JWT secret (HS256); only needed if SUPABASE_URL is not set
     SUPABASE_JWT_SECRET: str = ""
 
     @property

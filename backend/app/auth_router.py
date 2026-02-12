@@ -1,3 +1,4 @@
+import logging
 
 from fastapi import APIRouter, Depends, Header, HTTPException
 from pydantic import BaseModel
@@ -7,6 +8,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
 from app.db_models import User  # pyright: ignore[reportMissingImports]
 from app.supabase_auth import verify_supabase_token
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -29,25 +32,33 @@ async def get_current_user_id(
     return internal user id. Returns None if no/invalid token.
     """
     if not authorization or not authorization.startswith("Bearer "):
+        logger.debug("No Authorization header; treating as anonymous.")
         return None
     token = authorization[7:].strip()
     parsed = verify_supabase_token(token)
     if not parsed:
+        logger.warning("JWT verification failed; treating as anonymous.")
         return None
     sub, email = parsed
-    result = await db.execute(select(User).where(User.supabase_user_id == sub))
-    user = result.scalar_one_or_none()
-    if user:
+    try:
+        result = await db.execute(select(User).where(User.supabase_user_id == sub))
+        user = result.scalar_one_or_none()
+        if user:
+            logger.info("Found existing user id=%s for sub=%s", user.id, sub)
+            return user.id
+        user = User(
+            email=email or f"supabase-{sub}@local",
+            password_hash=None,
+            supabase_user_id=sub,
+        )
+        db.add(user)
+        await db.flush()
+        await db.refresh(user)
+        logger.info("Created new user id=%s for sub=%s email=%s", user.id, sub, email)
         return user.id
-    user = User(
-        email=email or f"supabase-{sub}@local",
-        password_hash=None,
-        supabase_user_id=sub,
-    )
-    db.add(user)
-    await db.flush()
-    await db.refresh(user)
-    return user.id
+    except Exception as exc:
+        logger.exception("DB error in get_current_user_id: %s", exc)
+        return None
 
 
 async def require_current_user_id(

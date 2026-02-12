@@ -29,12 +29,38 @@ api.interceptors.response.use(
   }
 )
 
-export async function sendChatMessage(message, conversationHistory = [], language = 'en') {
-  const { data } = await api.post('/chat', {
+export async function sendChatMessage(message, conversationHistory = [], language = 'en', chatId = null) {
+  const payload = {
     message,
     conversation_history: conversationHistory,
     language,
-  })
+  }
+  if (chatId) {
+    payload.chat_id = chatId
+  }
+  const { data } = await api.post('/chat', payload)
+  return data
+}
+
+// ---- Backend-persisted chats API (Supabase DB) ----
+
+export async function listBackendChats() {
+  const { data } = await api.get('/chats')
+  return data
+}
+
+export async function getBackendChat(chatId) {
+  const { data } = await api.get(`/chats/${chatId}`)
+  return data
+}
+
+export async function createBackendChat() {
+  const { data } = await api.post('/chats')
+  return data
+}
+
+export async function deleteBackendChat(chatId) {
+  const { data } = await api.delete(`/chats/${chatId}`)
   return data
 }
 

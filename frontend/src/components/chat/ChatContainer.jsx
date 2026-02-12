@@ -1,10 +1,16 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Sparkles, Menu, LogIn, UserPlus, LogOut } from 'lucide-react'
 import toast from 'react-hot-toast'
-import { APP_NAME } from '../../utils/constants'
+import { APP_NAME, QUICK_PROMPTS } from '../../utils/constants'
 import { useAuth } from '../../context/AuthContext'
-import { sendChatMessage, getHealthStatus } from '../../services/api'
+import {
+  sendChatMessage,
+  getHealthStatus,
+  listBackendChats,
+  getBackendChat,
+  deleteBackendChat,
+} from '../../services/api'
 import {
   getAllChats,
   getChatById,
@@ -16,6 +22,8 @@ import {
 import ChatSidebar from './ChatSidebar'
 import ChatMessages from './ChatMessages'
 import ChatInput from './ChatInput'
+
+const QUICK_PROMPT_SET = new Set(QUICK_PROMPTS)
 
 export default function ChatContainer() {
   const navigate = useNavigate()
@@ -31,20 +39,60 @@ export default function ChatContainer() {
   const [backendUp, setBackendUp] = useState(null)
   const [schemesCount, setSchemesCount] = useState(0)
 
-  // Load chats on mount
-  useEffect(() => {
-    const saved = getAllChats()
-    setChats(saved)
+  // Track the backend chat_id returned by /chat (for grouping messages in Supabase)
+  const backendChatIdRef = useRef(null)
 
-    // Health check
+  // Health check on mount
+  useEffect(() => {
     getHealthStatus()
       .then((d) => { setBackendUp(true); setSchemesCount(d.total_schemes || 0) })
       .catch(() => setBackendUp(false))
   }, [])
 
+  // Load chats when auth state changes
+  useEffect(() => {
+    if (authLoading) return
+    if (isAuthenticated) {
+    
+      listBackendChats()
+        .then((backendChats) => {
+          const mapped = (backendChats || []).map((c) => ({
+            id: String(c.id),
+            title: c.title || 'New Conversation',
+            messages: [],
+            createdAt: c.created_at,
+            updatedAt: c.updated_at,
+            isBackend: true,
+          }))
+          setChats(mapped)
+        })
+        .catch((err) => {
+          console.warn('Failed to load chats from backend:', err?.message)
+          setChats([]) // Empty list, NOT localStorage (which is shared across users)
+        })
+    } else {
+      setChats(getAllChats())
+    }
+  }, [isAuthenticated, authLoading])
+
   // Handle URL chat id
   useEffect(() => {
-    if (urlChatId) {
+    if (!urlChatId) return
+    if (isAuthenticated) {
+      getBackendChat(urlChatId)
+        .then((chat) => {
+          setCurrentChat(String(chat.id))
+          backendChatIdRef.current = chat.id
+          setMessages(
+            (chat.messages || []).map((m) => ({
+              role: m.role,
+              content: m.content,
+              timestamp: m.timestamp,
+            }))
+          )
+        })
+        .catch(() => navigate('/chat', { replace: true }))
+    } else {
       const chat = getChatById(urlChatId)
       if (chat) {
         setCurrentChat(urlChatId)
@@ -54,48 +102,93 @@ export default function ChatContainer() {
         navigate('/chat', { replace: true })
       }
     }
-  }, [urlChatId, navigate])
+  }, [urlChatId, navigate, isAuthenticated])
 
   const refreshChats = useCallback(() => {
-    setChats(getAllChats())
-  }, [])
+    if (isAuthenticated) {
+      listBackendChats()
+        .then((backendChats) => {
+          const mapped = (backendChats || []).map((c) => ({
+            id: String(c.id),
+            title: c.title || 'New Conversation',
+            messages: [],
+            createdAt: c.created_at,
+            updatedAt: c.updated_at,
+            isBackend: true,
+          }))
+          setChats(mapped)
+        })
+        .catch(() => setChats([]))
+    } else {
+      setChats(getAllChats())
+    }
+  }, [isAuthenticated])
 
   const handleNewChat = useCallback(() => {
-    const chat = createNewChat()
-    setCurrentChat(chat.id)
+    backendChatIdRef.current = null
+    setCurrentChat(null)
     setMessages([])
-    setCurrentChatId(chat.id)
-    refreshChats()
-    navigate(`/chat/${chat.id}`, { replace: true })
-  }, [navigate, refreshChats])
-
-  const handleSelectChat = useCallback((id) => {
-    const chat = getChatById(id)
-    if (chat) {
-      setCurrentChat(id)
-      setMessages(chat.messages || [])
-      setCurrentChatId(id)
-      navigate(`/chat/${id}`, { replace: true })
-    }
+    navigate('/chat', { replace: true })
   }, [navigate])
 
-  const handleDeleteChat = useCallback((id) => {
-    deleteChat(id)
-    refreshChats()
-    if (id === currentChatId) {
-      setCurrentChat(null)
-      setMessages([])
-      navigate('/chat', { replace: true })
+  const handleSelectChat = useCallback((id) => {
+    if (isAuthenticated) {
+      getBackendChat(id)
+        .then((chat) => {
+          setCurrentChat(String(chat.id))
+          backendChatIdRef.current = chat.id
+          setMessages(
+            (chat.messages || []).map((m) => ({
+              role: m.role,
+              content: m.content,
+              timestamp: m.timestamp,
+            }))
+          )
+          navigate(`/chat/${chat.id}`, { replace: true })
+        })
+        .catch(() => {})
+    } else {
+      const chat = getChatById(id)
+      if (chat) {
+        setCurrentChat(id)
+        setMessages(chat.messages || [])
+        setCurrentChatId(id)
+        navigate(`/chat/${id}`, { replace: true })
+      }
     }
-  }, [currentChatId, navigate, refreshChats])
+  }, [navigate, isAuthenticated])
+
+  const handleDeleteChat = useCallback((id) => {
+    if (isAuthenticated) {
+      deleteBackendChat(id)
+        .then(() => {
+          refreshChats()
+          if (String(id) === String(currentChatId)) {
+            backendChatIdRef.current = null
+            setCurrentChat(null)
+            setMessages([])
+            navigate('/chat', { replace: true })
+          }
+        })
+        .catch(() => toast.error('Failed to delete chat'))
+    } else {
+      deleteChat(id)
+      refreshChats()
+      if (id === currentChatId) {
+        setCurrentChat(null)
+        setMessages([])
+        navigate('/chat', { replace: true })
+      }
+    }
+  }, [currentChatId, navigate, refreshChats, isAuthenticated])
 
   const handleSend = useCallback(async () => {
     const text = input.trim()
     if (!text || loading) return
 
-    // Create chat if none exists
+    // For non-authenticated users, use localStorage
     let activeChatId = currentChatId
-    if (!activeChatId) {
+    if (!isAuthenticated && !activeChatId) {
       const chat = createNewChat()
       activeChatId = chat.id
       setCurrentChat(chat.id)
@@ -106,13 +199,25 @@ export default function ChatContainer() {
 
     const userMsg = { role: 'user', content: text, timestamp: new Date().toISOString() }
     setMessages((prev) => [...prev, userMsg])
-    saveMessageToChat(activeChatId, userMsg)
+    if (!isAuthenticated) {
+      saveMessageToChat(activeChatId, userMsg)
+    }
     setInput('')
     setLoading(true)
 
     try {
       const history = messages.map((m) => ({ role: m.role, content: m.content }))
-      const data = await sendChatMessage(text, history)
+      // Pass backend chat_id so messages group in the same chat in Supabase
+      const data = await sendChatMessage(text, history, 'en', backendChatIdRef.current)
+
+      // Store the backend chat_id for future messages in this conversation
+      if (data.chat_id) {
+        backendChatIdRef.current = data.chat_id
+        if (!currentChatId) {
+          setCurrentChat(String(data.chat_id))
+          navigate(`/chat/${data.chat_id}`, { replace: true })
+        }
+      }
 
       const assistantMsg = {
         role: 'assistant',
@@ -121,7 +226,10 @@ export default function ChatContainer() {
         timestamp: new Date().toISOString(),
       }
       setMessages((prev) => [...prev, assistantMsg])
-      saveMessageToChat(activeChatId, assistantMsg)
+
+      if (!isAuthenticated) {
+        saveMessageToChat(activeChatId, assistantMsg)
+      }
       refreshChats()
     } catch {
       const errorMsg = {
@@ -130,19 +238,18 @@ export default function ChatContainer() {
         timestamp: new Date().toISOString(),
       }
       setMessages((prev) => [...prev, errorMsg])
-      saveMessageToChat(activeChatId, errorMsg)
+      if (!isAuthenticated) {
+        saveMessageToChat(activeChatId, errorMsg)
+      }
       toast.error('Could not connect to server')
     } finally {
       setLoading(false)
     }
-  }, [input, loading, currentChatId, messages, navigate, refreshChats])
+  }, [input, loading, currentChatId, messages, navigate, refreshChats, isAuthenticated])
 
   const handlePromptClick = useCallback((prompt) => {
     setInput(prompt)
-    // Auto send after a tick
     setTimeout(() => {
-      const fakeEvent = { trim: () => prompt }
-      // Set and send
       setInput(prompt)
     }, 50)
   }, [])
@@ -248,7 +355,3 @@ export default function ChatContainer() {
     </div>
   )
 }
-
-// Quick prompt detection for auto-send
-import { QUICK_PROMPTS } from '../../utils/constants'
-const QUICK_PROMPT_SET = new Set(QUICK_PROMPTS)
