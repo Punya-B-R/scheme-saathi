@@ -1,0 +1,90 @@
+{
+  "started_at": "2026-02-12T21:15:35.410544",
+  "dry_run": true,
+  "config_path": "E:\\Buildathon pt 2\\backend\\pipeline\\pipeline_config.json",
+  "stages": {
+    "scraping": {
+      "skipped": false,
+      "results": [
+        {
+          "module": "scraper.agriculture_rural_environment_scraper",
+          "status": "dry_run"
+        },
+        {
+          "module": "scraper.education_learning_scraper",
+          "status": "dry_run"
+        },
+        {
+          "module": "scraper.health_wellness_scraper",
+          "status": "dry_run"
+        },
+        {
+          "module": "scraper.social_welfare_empowerment_scraper",
+          "status": "dry_run"
+        },
+        {
+          "module": "scraper.women_child_scraper",
+          "status": "dry_run"
+        },
+        {
+          "module": "scraper.banking_financial_scraper",
+          "status": "dry_run"
+        },
+        {
+          "module": "scraper.business_entrepreneurship_scraper",
+          "status": "dry_run"
+        },
+        {
+          "module": "scraper.skills_employment_scraper",
+          "status": "dry_run"
+        },
+        {
+          "module": "scraper.housing_shelter_scraper",
+          "status": "dry_run"
+        },
+        {
+          "module": "scraper.science_it_communications_scraper",
+          "status": "dry_run"
+        },
+        {
+          "module": "scraper.transport_infrastructure_scraper",
+          "status": "dry_run"
+        },
+        {
+          "module": "scraper.travel_tourism_scraper",
+          "status": "dry_run"
+        },
+        {
+          "module": "scraper.utility_sanitation_scraper",
+          "status": "dry_run"
+        },
+        {
+          "module": "scraper.sports_culture_scraper",
+          "status": "dry_run"
+        },
+        {
+          "module": "scraper.public_safety_scraper",
+          "status": "dry_run"
+        }
+      ]
+    },
+    "merge": {
+      "existing_count": 3793,
+      "scraped_raw_count": 4889,
+      "scraped_clean_count": 3774,
+      "updated_by_id": 3773,
+      "replaced_by_name": 0,
+      "inserted_new": 0,
+      "untouched_existing": 0,
+      "final_count": 3793
+    },
+    "enrichment": {
+      "status": "dry_run"
+    },
+    "vectordb": {
+      "status": "dry_run"
+    }
+  },
+  "status": "ok",
+  "finished_at": "2026-02-12T21:15:37.306040"
+}

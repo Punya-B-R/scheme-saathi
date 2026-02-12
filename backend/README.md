@@ -85,3 +85,35 @@ backend/
 ## Data
 
 Scheme data is loaded from `data_f/all_schemes.json` at startup. ChromaDB indexes are stored in `chroma_db/` (created automatically on first run).
+
+## Data Auto-Update Pipeline (built, not enabled)
+
+An end-to-end refresh pipeline is available under `backend/pipeline/` and can:
+
+- run category scrapers,
+- merge new additions into `data_f/all_schemes.json`,
+- run enrichment,
+- rebuild ChromaDB,
+- generate run reports.
+
+It is **manual-only** by default (no scheduler/cron is installed).
+
+Run manually:
+
+```bash
+python run_data_update_pipeline.py
+```
+
+Dry run:
+
+```bash
+python run_data_update_pipeline.py --dry-run
+```
+
+Optional daemon loop (every 24h), still manual and disabled by default:
+
+```bash
+python run_data_update_daemon.py
+```
+
+It will only run if `scheduler.enabled=true` in `pipeline/pipeline_config.json`.

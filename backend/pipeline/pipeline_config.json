@@ -1,0 +1,46 @@
+{
+  "pipeline_name": "scheme_saathi_data_auto_update",
+  "enabled_by_default": false,
+  "notes": "This file only defines the pipeline. It does NOT schedule or auto-run anything.",
+  "scheduler": {
+    "enabled": false,
+    "interval_hours": 24,
+    "run_on_startup": false,
+    "stop_file": "backend/pipeline/.stop_daemon",
+    "heartbeat_file": "backend/pipeline/reports/daemon_status.json"
+  },
+  "scraping": {
+    "run": true,
+    "resume": true,
+    "test_mode": false,
+    "category_modules": [
+      "scraper.agriculture_rural_environment_scraper",
+      "scraper.education_learning_scraper",
+      "scraper.health_wellness_scraper",
+      "scraper.social_welfare_empowerment_scraper",
+      "scraper.women_child_scraper",
+      "scraper.banking_financial_scraper",
+      "scraper.business_entrepreneurship_scraper",
+      "scraper.skills_employment_scraper",
+      "scraper.housing_shelter_scraper",
+      "scraper.science_it_communications_scraper",
+      "scraper.transport_infrastructure_scraper",
+      "scraper.travel_tourism_scraper",
+      "scraper.utility_sanitation_scraper",
+      "scraper.sports_culture_scraper",
+      "scraper.public_safety_scraper"
+    ]
+  },
+  "merge": {
+    "run": true,
+    "min_quality_score": 25,
+    "prefer_newer_last_updated": true
+  },
+  "enrichment": {
+    "run": true
+  },
+  "vectordb": {
+    "rebuild": true
+  }
+}
+
