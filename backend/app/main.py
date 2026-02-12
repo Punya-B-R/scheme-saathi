@@ -141,9 +141,48 @@ MARITAL_PATTERNS = {
     r"\borphan\b|\banath\b": "orphan",
 }
 
+# Specific need / type of help detection
+NEED_PATTERNS = {
+    # Education
+    r"\bscholarship\b|\bscholarships\b|\bfellowship\b|\bstipend\b|\bfreeship\b|\bfee\s+waiver\b|\btuition\b": "scholarship",
+    # Loans
+    r"\bloan\b|\bloans\b|\bmudra\b|\bcredit\b|\bfinance\b|\bfunding\b|\bborrowing\b": "loan",
+    # Pension / old age
+    r"\bpension\b|\bretirement\b|\bold\s*age\b|\bvridh\b": "pension",
+    # Agriculture / farming (BEFORE health so "crop insurance" matches agriculture, not health)
+    r"\bcrop\b|\bfarming\b|\bseed\b|\birrigation\b|\bfertilizer\b|\bkhet\b|\bfasal\b|\bharvest\b|\bcrop\s+insurance\b": "agriculture_support",
+    # Health / medical
+    r"\bhealth\s*insurance\b|\bhealth\s*cover\b|\bhospital\b|\bayushman\b|\btreatment\b|\bmedical\b|\bsurgery\b|\bdisease\b|\bhealth\b": "health_insurance",
+    # Housing
+    r"\bhousing\b|\bawas\b|\bhouse\b|\bshelter\b|\bpmay\b|\bflat\b|\brent\b": "housing",
+    # Maternity / pregnancy
+    r"\bmaternity\b|\bpregnant\b|\bchild\s*birth\b|\bdelivery\b|\bgarbhvati\b": "maternity",
+    # Skill / training
+    r"\bskill\b|\btraining\b|\bvocational\b|\bapprentice\b|\binternship\b|\bcertification\b|\bcourse\b": "skill_training",
+    # Employment / job
+    r"\bjob\b|\bemployment\b|\bnaukri\b|\brozgar\b|\bwork\b|\bplacement\b": "employment",
+    # Business / entrepreneurship
+    r"\bbusiness\b|\bentrepreneur\b|\bstartup\b|\bstart-?up\b|\budyam\b|\bmsme\b|\bself[- ]?employ\b": "business_support",
+    # Marriage / wedding
+    r"\bmarriage\b|\bwedding\b|\bshadi\b|\bvivah\b|\bdowry\b|\bkanyadan\b|\bkanya\b": "marriage",
+    # Financial help / money / cash
+    r"\bmoney\b|\bcash\b|\bfinancial\s+help\b|\bfinancial\s+assist\b|\bpaisa\b|\barthik\b|\bdirect\s+benefit\b|\bDBT\b": "financial_assistance",
+    # Subsidy / grant
+    r"\bsubsidy\b|\bgrant\b|\brebate\b|\bconcession\b": "subsidy",
+    # Legal / protection
+    r"\blegal\b|\bprotection\b|\bviolence\b|\babuse\b|\bsafety\b": "legal_protection",
+    # Food / nutrition
+    r"\bfood\b|\bration\b|\bnutrition\b|\bmeal\b|\bmid[- ]?day\b|\bannapurna\b": "food_nutrition",
+    # Disability
+    r"\bdisability\b|\bdivyang\b|\bhandicap\b|\bblind\b|\bdeaf\b|\bPWD\b": "disability_support",
+    # Generic insurance (catch-all for "insurance" not matched above)
+    r"\binsurance\b": "health_insurance",
+}
+
 # Required context fields before recommending
-CONTEXT_FIELDS = ["state", "occupation", "gender", "age", "caste_category"]
-MIN_CONTEXT_FOR_RECOMMENDATION = 3
+# Order = question order. "help_type" = what kind of help they want
+CONTEXT_FIELDS = ["occupation", "state", "help_type", "gender", "age", "caste_category"]
+MIN_CONTEXT_FOR_RECOMMENDATION = 4
 
 
 def extract_context_from_text(text: str) -> Dict[str, str]:
@@ -231,6 +270,13 @@ def extract_context_from_text(text: str) -> Dict[str, str]:
             ctx["family_status"] = val
             break
 
+    # --- Specific need / type of help ---
+    for pat, need in NEED_PATTERNS.items():
+        if re.search(pat, t, re.I):
+            ctx["specific_need"] = need
+            ctx["help_type"] = need  # Also track as help_type for question flow
+            break
+
     # --- Negations ---
     for pattern, cat in CATEGORIES.items():
         neg = re.search(r"(?:not|no|neither|don'?t|isn'?t|i'?m not)\s+(?:a\s+)?" + pattern, t, re.I)
@@ -269,6 +315,45 @@ def context_completeness(ctx: Dict[str, str]) -> int:
 
 def missing_context_fields(ctx: Dict[str, str]) -> List[str]:
     return [f for f in CONTEXT_FIELDS if not ctx.get(f)]
+
+
+def _is_valid(val: Optional[str]) -> bool:
+    """Return True if a context value is present and meaningful."""
+    if not val:
+        return False
+    return val.strip().lower() not in ("unknown", "any", "all india", "")
+
+
+def has_enough_context(user_context: Optional[Dict[str, str]]) -> bool:
+    """
+    Check if we have minimum context needed for scheme search.
+    Need at least occupation AND state to start searching.
+    """
+    if not user_context:
+        return False
+    return _is_valid(user_context.get("occupation")) and _is_valid(user_context.get("state"))
+
+
+def is_ready_to_recommend(user_context: Optional[Dict[str, str]]) -> bool:
+    """
+    We only show schemes when we have ALL of:
+      1. occupation
+      2. state
+      3. help_type (what kind of help: scholarship/loan/pension/money/training/marriage/etc.)
+      4. at least 1 of: gender, age, caste_category
+    This forces the bot to ask at least 4 questions before showing results.
+    """
+    if not user_context:
+        return False
+    if not _is_valid(user_context.get("occupation")):
+        return False
+    if not _is_valid(user_context.get("state")):
+        return False
+    if not _is_valid(user_context.get("help_type")):
+        return False
+    # Need at least 1 more: gender, age, or caste
+    extras = sum(1 for f in ("gender", "age", "caste_category") if _is_valid(user_context.get(f)))
+    return extras >= 1
 
 
 # ============================================================
@@ -497,6 +582,81 @@ def _filter_child_schemes(scheme: dict, user_age: Optional[int]) -> bool:
     return True
 
 
+# --- Filter: Specific need (scholarship vs loan vs pension etc.) ---
+NEED_TO_BENEFIT_TYPES = {
+    "scholarship": {"scholarship", "fellowship", "stipend", "freeship"},
+    "loan": {"loan", "credit", "subsidized loan", "subsidized credit"},
+    "pension": {"pension", "pension / investment"},
+    "health_insurance": {"health insurance", "insurance"},
+    "housing": {"housing", "housing subsidy"},
+    "maternity": {"maternity", "maternity benefit"},
+    "subsidy": {"subsidy", "capital subsidy"},
+}
+
+NEED_TO_KEYWORDS = {
+    "scholarship": [r"\bscholarship\b", r"\bfellowship\b", r"\bstipend\b", r"\bfreeship\b", r"\bfee\s+waiver\b", r"\btuition\b"],
+    "loan": [r"\bloan\b", r"\bcredit\b", r"\bmudra\b"],
+    "pension": [r"\bpension\b", r"\bretirement\b"],
+    "health_insurance": [r"\bhealth\b.*\binsurance\b", r"\bayushman\b", r"\bhospital\b"],
+    "housing": [r"\bhousing\b", r"\bawas\b", r"\bshelter\b"],
+    "maternity": [r"\bmaternity\b", r"\bpregnant\b", r"\bjanani\b"],
+    "skill_training": [r"\bskill\b", r"\btraining\b", r"\bvocational\b", r"\bapprentice\b"],
+}
+
+
+def _filter_by_need(scheme: dict, user_need: str) -> bool:
+    """
+    If user has a specific need (e.g. scholarship), filter out schemes
+    that are clearly a different type (e.g. loans, pensions).
+    """
+    if not user_need:
+        return True  # No filter if no specific need
+
+    # Check benefit_type field
+    benefits = scheme.get("benefits") or {}
+    if isinstance(benefits, dict):
+        benefit_type = (benefits.get("benefit_type") or "").strip().lower()
+    else:
+        benefit_type = ""
+
+    # 1. If the scheme's benefit_type matches the user's need → keep
+    matching_types = NEED_TO_BENEFIT_TYPES.get(user_need, set())
+    if matching_types and benefit_type:
+        if benefit_type in matching_types:
+            return True
+        # If benefit type is CLEARLY a different need, reject
+        # e.g. user wants scholarship but scheme is "Subsidized Loan"
+        other_needs = set()
+        for need, types in NEED_TO_BENEFIT_TYPES.items():
+            if need != user_need:
+                other_needs.update(types)
+        if benefit_type in other_needs:
+            return False
+
+    # 2. Check scheme text for keywords matching the need
+    text = _scheme_text(scheme)
+    name = (scheme.get("scheme_name") or "").lower()
+
+    # If scheme name or text has keywords matching user's need → keep
+    need_keywords = NEED_TO_KEYWORDS.get(user_need, [])
+    if need_keywords:
+        for kw in need_keywords:
+            if re.search(kw, name, re.I) or re.search(kw, text, re.I):
+                return True
+
+    # 3. If benefit_type is empty/generic ("Direct Cash Transfer", etc.), keep (might be relevant)
+    generic_types = {"direct cash transfer", "financial assistance", "technical assistance",
+                     "market access", "protection / rehabilitation", ""}
+    if benefit_type in generic_types:
+        return True
+
+    # 4. For specific needs, reject if no positive signal
+    if matching_types:
+        return False
+
+    return True
+
+
 def filter_schemes_for_user(
     candidates: List[Dict[str, Any]],
     user_ctx: Dict[str, str],
@@ -514,6 +674,7 @@ def filter_schemes_for_user(
     user_edu = user_ctx.get("education_level")
     user_disability = user_ctx.get("disability") == "yes"
     user_family = user_ctx.get("family_status")
+    user_need = user_ctx.get("specific_need")
 
     filtered = []
     reasons: Dict[str, int] = {}
@@ -543,6 +704,8 @@ def filter_schemes_for_user(
             rejected = "senior_specific"
         elif user_age is not None and not _filter_child_schemes(s, user_age):
             rejected = "child_specific"
+        elif user_need and not _filter_by_need(s, user_need):
+            rejected = "need_mismatch"
 
         if rejected:
             reasons[rejected] = reasons.get(rejected, 0) + 1
@@ -625,16 +788,20 @@ async def chat(request: ChatRequest):
             user_ctx, completeness, len(CONTEXT_FIELDS), missing,
         )
 
-        # 2. Decide
-        ready = completeness >= MIN_CONTEXT_FOR_RECOMMENDATION
+        # 2. Decide readiness: need occupation + state + help_type + 1 more
+        ready = is_ready_to_recommend(user_ctx)
         candidates: List[Dict[str, Any]] = []
 
+        # Only search RAG when we are ready to recommend
         if ready:
-            # Build rich search query
+            # Build rich search query using user context + specific need
             search_parts = [query]
             for key in ("occupation", "state", "gender", "caste_category", "education_level"):
-                if user_ctx.get(key):
-                    search_parts.append(user_ctx[key])
+                val = user_ctx.get(key)
+                if val and val.lower() not in ("unknown", "any", ""):
+                    search_parts.append(val)
+            if user_ctx.get("specific_need"):
+                search_parts.append(user_ctx["specific_need"])
             if user_ctx.get("disability") == "yes":
                 search_parts.append("disability divyang PWD")
             if user_ctx.get("bpl") == "yes":
@@ -650,7 +817,6 @@ async def chat(request: ChatRequest):
 
             search_query = " ".join(search_parts)
 
-            # RAG search (fetch extra, filter will trim)
             raw = rag_service.search_schemes(
                 query=search_query,
                 user_context=user_ctx,
@@ -658,13 +824,17 @@ async def chat(request: ChatRequest):
             )
             logger.info("RAG returned %d candidates", len(raw))
 
-            # HARD FILTER: multi-dimensional
             candidates = filter_schemes_for_user(raw, user_ctx)
-            logger.info("After filter: %d candidates", len(candidates))
+            logger.info("After main filter: %d candidates", len(candidates))
 
-            candidates = candidates[:settings.TOP_K_SCHEMES]
+            candidates = candidates[: settings.TOP_K_SCHEMES]
+        else:
+            logger.info(
+                "Not ready (need occ+state+help_type+1more). Have: %s",
+                {k: v for k, v in user_ctx.items() if _is_valid(v)},
+            )
 
-        # 3. Gemini response
+        # 3. Pass schemes to Gemini ONLY when ready
         reply = gemini_service.chat(
             user_message=query,
             conversation_history=request.conversation_history,

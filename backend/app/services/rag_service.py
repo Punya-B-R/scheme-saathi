@@ -124,13 +124,85 @@ class RAGService:
         if not user_context:
             return query.strip()
         parts = [query.strip()]
-        if user_context.get("occupation"):
+        if user_context.get("occupation") and str(user_context.get("occupation")).lower() != "unknown":
             parts.append(f"occupation: {user_context['occupation']}")
-        if user_context.get("state"):
+        if user_context.get("state") and str(user_context.get("state")).lower() not in ("unknown", "any", "all india", ""):
             parts.append(f"state: {user_context['state']}")
         if user_context.get("age"):
             parts.append(f"age: {user_context['age']}")
         return " | ".join(parts)
+
+    def filter_schemes_by_eligibility(
+        self, schemes: List[Dict[str, Any]], user_context: Optional[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
+        """
+        Hard filter schemes based on extracted user context.
+        Remove schemes that clearly don't match user's eligibility.
+        """
+        if not user_context or not schemes:
+            return schemes
+
+        filtered = []
+        user_state = (user_context.get("state") or "").strip().lower()
+        user_occupation = (user_context.get("occupation") or "").strip().lower()
+        user_caste = (user_context.get("caste_category") or "").strip().lower()
+        user_gender = (user_context.get("gender") or "").strip().lower()
+
+        for scheme in schemes:
+            eligibility = scheme.get("eligibility_criteria") or {}
+            if not isinstance(eligibility, dict):
+                filtered.append(scheme)
+                continue
+
+            scheme_state = (eligibility.get("state") or "All India").strip().lower()
+            scheme_occupation = (eligibility.get("occupation") or "any").strip().lower()
+            scheme_gender = (eligibility.get("gender") or "any").strip().lower()
+            scheme_caste = (eligibility.get("caste_category") or "any").strip().lower()
+
+            # ── STATE FILTER ──
+            if user_state and user_state not in ("unknown", "any", ""):
+                all_india_keywords = ["all india", "all states", "national", "central"]
+                is_all_india = any(kw in scheme_state for kw in all_india_keywords)
+                matches_state = user_state in scheme_state or scheme_state in user_state
+                if not is_all_india and not matches_state:
+                    continue
+
+            # ── OCCUPATION FILTER ──
+            occupation_mismatches = {
+                "farmer": ["student", "entrepreneur", "employee"],
+                "student": ["farmer", "senior citizen"],
+                "senior citizen": ["student", "farmer", "entrepreneur"],
+                "entrepreneur": ["student", "farmer"],
+            }
+            if user_occupation and user_occupation not in ("unknown", "any", ""):
+                if scheme_occupation not in ("any", "all", ""):
+                    mismatches = occupation_mismatches.get(user_occupation, [])
+                    if any(m in scheme_occupation for m in mismatches):
+                        continue
+
+            # ── GENDER FILTER ──
+            if user_gender and user_gender not in ("unknown", "any"):
+                if scheme_gender not in ("any", "all", ""):
+                    if user_gender == "male" and "female" in scheme_gender:
+                        continue
+                    if user_gender == "female" and scheme_gender == "male":
+                        continue
+
+            # ── CASTE FILTER ──
+            general_castes = ["any", "all", "general", ""]
+            if user_caste and user_caste not in ("unknown", "any"):
+                if scheme_caste not in general_castes:
+                    if user_caste in general_castes:
+                        continue
+                    if user_caste not in scheme_caste and scheme_caste not in user_caste:
+                        continue
+
+            filtered.append(scheme)
+
+        removed = len(schemes) - len(filtered)
+        if removed > 0:
+            logger.info("Hard filtered %d schemes that don't match user eligibility", removed)
+        return filtered
 
     def search_schemes(
         self,
@@ -140,6 +212,7 @@ class RAGService:
     ) -> List[Dict[str, Any]]:
         """
         Semantic search for schemes. Returns list of scheme dicts with match_score.
+        Applies hard eligibility filter when user_context is provided.
         """
         if not self.schemes or not self._collection:
             return []
@@ -148,7 +221,7 @@ class RAGService:
         enhanced_query = self._enhance_query(query, user_context)
 
         try:
-            n_results = min(top_k * 2, self._collection.count() or 1)  # fetch extra for filtering
+            n_results = min(top_k * 3, 30, self._collection.count() or 1)
             if n_results < 1:
                 return []
 
@@ -182,6 +255,10 @@ class RAGService:
             out.append(scheme)
 
         out.sort(key=lambda s: s.get("match_score", 0), reverse=True)
+
+        if user_context:
+            out = self.filter_schemes_by_eligibility(out, user_context)
+
         return out[:top_k]
 
     def get_scheme_by_id(self, scheme_id: str) -> Optional[Dict[str, Any]]:
