@@ -82,16 +82,16 @@ export default function SignupPage() {
 
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-primary-50 to-white px-4 overflow-hidden">
-      <div className="w-full max-w-md">
-        <div className="flex items-center justify-center gap-2 mb-4">
+      <div className="w-full max-w-lg">
+        <div className="flex items-center justify-center gap-2 mb-5">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-600 to-accent-purple flex items-center justify-center">
             <Sparkles className="w-4 h-4 text-white" />
           </div>
           <span className="text-lg font-semibold text-gray-900">{APP_NAME}</span>
         </div>
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 px-6 py-5">
-          <h1 className="text-lg font-semibold text-gray-900">Create account</h1>
-          <p className="text-gray-500 text-xs mb-4">Create an account to find schemes that match you</p>
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 px-8 py-6">
+          <h1 className="text-xl font-semibold text-gray-900">Create account</h1>
+          <p className="text-gray-500 text-sm mb-5">Create an account to find schemes that match you</p>
 
           {/* Google Sign-Up */}
           <button
@@ -105,7 +105,7 @@ export default function SignupPage() {
           </button>
 
           {/* Divider */}
-          <div className="relative my-3.5">
+          <div className="relative my-4">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-200" />
             </div>
@@ -114,7 +114,7 @@ export default function SignupPage() {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-2.5">
+          <form onSubmit={handleSubmit} className="space-y-3">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-0.5">Email</label>
               <input
@@ -123,7 +123,7 @@ export default function SignupPage() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-sm"
+                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-sm"
                 placeholder="you@example.com"
               />
             </div>
@@ -135,7 +135,7 @@ export default function SignupPage() {
                 autoComplete="new-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-sm"
+                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-sm"
                 placeholder="Min 6 characters"
               />
             </div>
@@ -147,19 +147,19 @@ export default function SignupPage() {
                 autoComplete="new-password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-sm"
+                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition text-sm"
                 placeholder="Re-enter password"
               />
             </div>
             <button
               type="submit"
               disabled={loading || googleLoading}
-              className="w-full py-2.5 rounded-lg bg-gradient-to-r from-primary-600 to-accent-purple text-white font-medium text-sm hover:opacity-95 disabled:opacity-60 transition"
+              className="w-full py-3 rounded-lg bg-gradient-to-r from-primary-600 to-accent-purple text-white font-medium text-sm hover:opacity-95 disabled:opacity-60 transition"
             >
               {loading ? 'Creating account...' : 'Sign up'}
             </button>
           </form>
-          <p className="mt-3.5 text-center text-sm text-gray-500">
+          <p className="mt-4 text-center text-sm text-gray-500">
             Already have an account?{' '}
             <Link to="/login" className="text-primary-600 font-medium hover:underline">Log in</Link>
             {' · '}

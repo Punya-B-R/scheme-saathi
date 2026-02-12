@@ -32,7 +32,7 @@ export default function Hero() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-200/80 bg-blue-50/80 text-blue-700 text-sm font-medium mb-8"
           >
             <span>✨</span>
-            Now with 850+ Government Schemes
+            Now with 4700+ Government Schemes
           </motion.div>
 
           {/* Headline */}
@@ -81,7 +81,7 @@ export default function Hero() {
             transition={{ delay: 0.4 }}
             className="mt-8 text-sm text-gray-400"
           >
-            ✓ Free forever &nbsp; ✓ Try it out now! &nbsp; ✓ 850+ schemes
+            ✓ Free forever &nbsp; ✓ Try it out now! &nbsp; ✓ 4700+ schemes
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
