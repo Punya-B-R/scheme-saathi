@@ -37,14 +37,9 @@ export default function CTA() {
             </a>
           </div>
           <p className="mt-8 text-sm text-gray-500">
-            Trusted by thousands of Indians
+            We value your trust
           </p>
-          <div className="mt-2 flex items-center justify-center gap-1 text-amber-500">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <Star key={i} className="w-4 h-4 fill-current" />
-            ))}
-            <span className="ml-2 text-sm text-gray-500">4.9/5</span>
-          </div>
+          
         </motion.div>
       </div>
     </section>
