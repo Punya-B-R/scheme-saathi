@@ -384,14 +384,18 @@ class GeminiService:
             len(matched_schemes or []), user_context, missing_fields,
         )
 
-        # Use OpenAI (e.g. GPT 5.2) when configured
-        if settings.OPENAI_CHAT_MODEL:
-            if not (settings.OPENAI_API_KEY or "").strip():
-                return OPENAI_NO_API_KEY_MESSAGE
+        # Use OpenAI when both model and API key are configured
+        if settings.OPENAI_CHAT_MODEL and (settings.OPENAI_API_KEY or "").strip():
             return self._chat_openai(user_message, conversation_history, system_prompt)
+        if settings.OPENAI_CHAT_MODEL and not (settings.OPENAI_API_KEY or "").strip():
+            logger.warning(
+                "OPENAI_CHAT_MODEL is set but OPENAI_API_KEY is missing; falling back to Gemini if configured."
+            )
 
-        # Gemini
+        # Gemini (default or fallback when OpenAI key is missing)
         if not self._ensure_model():
+            if settings.OPENAI_CHAT_MODEL:
+                return OPENAI_NO_API_KEY_MESSAGE
             return NO_API_KEY_MESSAGE
 
         messages = [

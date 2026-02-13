@@ -66,7 +66,7 @@ export default function Footer() {
             Built with ❤️ for Bharat
           </p>
           <p className="text-center text-xs text-gray-600 mt-1">
-            Powered by Google Gemini AI
+            Powered by OpenAI
           </p>
         </div>
       </div>

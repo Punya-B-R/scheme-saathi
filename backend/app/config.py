@@ -7,6 +7,10 @@ from typing import List
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+# Resolve .env relative to backend root so it loads correctly regardless of CWD
+_BACKEND_ROOT = Path(__file__).resolve().parent.parent
+_ENV_FILE = _BACKEND_ROOT / ".env"
+
 
 class Settings(BaseSettings):
     """
@@ -14,7 +18,7 @@ class Settings(BaseSettings):
     """
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=str(_ENV_FILE) if _ENV_FILE.exists() else ".env",
         env_file_encoding="utf-8",
         extra="ignore",
         case_sensitive=True,
@@ -41,6 +45,9 @@ class Settings(BaseSettings):
     # CORS Settings
     ALLOWED_ORIGINS: str = "http://localhost:3000,http://localhost:5173"
 
+    # Database (PostgreSQL; required for auth and chat history)
+    DATABASE_URL: str = ""
+
     # Data Paths
     SCHEMES_DATA_PATH: str = "data_f/all_schemes.json"
     CHROMA_DB_PATH: str = "chroma_db"
@@ -48,6 +55,10 @@ class Settings(BaseSettings):
     # RAG Settings
     TOP_K_SCHEMES: int = 10  # Number of schemes to retrieve
     SIMILARITY_THRESHOLD: float = 0.3  # Minimum similarity score (0-1)
+
+    SUPABASE_URL: str = ""
+    # Legacy JWT secret (HS256); only needed if SUPABASE_URL is not set
+    SUPABASE_JWT_SECRET: str = ""
 
     @property
     def allowed_origins_list(self) -> List[str]:
