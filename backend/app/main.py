@@ -24,6 +24,8 @@ from app.database import get_db, init_db
 from app.chat_history import (
     append_message,
     get_or_create_chat_for_message,
+    title_from_first_message,
+    update_chat_title,
 )
 from app.auth_router import get_current_user_id
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -885,10 +887,14 @@ async def chat(
                     db,
                     user_id=user_id,
                     chat_id=request.chat_id,
+                    first_message=query,
                 )
                 if chat_obj:
                     persistent_chat_id = chat_obj.id
+                    is_first_message = len(_history) == 0
                     await append_message(db, chat_obj.id, user_id, "user", query)
+                    if is_first_message and (not chat_obj.title or chat_obj.title == "New Conversation"):
+                        await update_chat_title(db, chat_obj.id, user_id, title_from_first_message(query))
                     await append_message(db, chat_obj.id, user_id, "assistant", reply)
                     logger.info("Saved chat_id=%s with 2 messages for user_id=%s", chat_obj.id, user_id)
                 else:

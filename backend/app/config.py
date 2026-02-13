@@ -7,6 +7,10 @@ from typing import List
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+# Resolve .env relative to backend root so it loads correctly regardless of CWD
+_BACKEND_ROOT = Path(__file__).resolve().parent.parent
+_ENV_FILE = _BACKEND_ROOT / ".env"
+
 
 class Settings(BaseSettings):
     """
@@ -14,7 +18,7 @@ class Settings(BaseSettings):
     """
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=str(_ENV_FILE) if _ENV_FILE.exists() else ".env",
         env_file_encoding="utf-8",
         extra="ignore",
         case_sensitive=True,

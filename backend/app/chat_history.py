@@ -34,18 +34,33 @@ async def append_message(db: AsyncSession, chat_id: int, user_id: int, role: str
     return True
 
 
+def title_from_first_message(first_message: str | None) -> str:
+    """Derive a short title from the first user message (max 50 chars)."""
+    if not first_message or not (first_message := first_message.strip()):
+        return "New Conversation"
+    if len(first_message) <= 50:
+        return first_message
+    return first_message[:47].rstrip() + "..."
+
+
 async def create_chat(db: AsyncSession, user_id: int, title: str = "New Conversation") -> Chat | None:
     """Create a new chat for the user."""
-    chat = Chat(user_id=user_id, title=title)
+    chat = Chat(user_id=user_id, title=title[:512] if title else "New Conversation")
     db.add(chat)
     await db.flush()
     await db.refresh(chat)
     return chat
 
 
-async def get_or_create_chat_for_message(db: AsyncSession, user_id: int, chat_id: int | None) -> tuple[Chat | None, List[Dict[str, Any]]]:
+async def get_or_create_chat_for_message(
+    db: AsyncSession,
+    user_id: int,
+    chat_id: int | None,
+    first_message: str | None = None,
+) -> tuple[Chat | None, List[Dict[str, Any]]]:
     """
     If chat_id given and valid, return (chat, history). Else create new chat and return (chat, []).
+    When creating a new chat, use first_message to set a relevant title (truncated to 50 chars).
     """
     if chat_id:
         result = await db.execute(
@@ -55,7 +70,8 @@ async def get_or_create_chat_for_message(db: AsyncSession, user_id: int, chat_id
         if chat:
             history = [{"role": m.role, "content": m.content} for m in chat.messages]
             return chat, history
-    chat = await create_chat(db, user_id)
+    title = title_from_first_message(first_message)
+    chat = await create_chat(db, user_id, title=title)
     return chat, []
 
 
