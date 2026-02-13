@@ -10,6 +10,7 @@ import {
   listBackendChats,
   getBackendChat,
   deleteBackendChat,
+  listSchemes,
 } from '../../services/api'
 import {
   getAllChats,
@@ -248,12 +249,25 @@ export default function ChatContainer() {
         }
       }
 
-      const schemesList = Array.isArray(response.schemes) ? response.schemes : []
+      // Main rule: once LLM is done, show scheme cards. Use response.schemes or fallback to API so cards always show.
+      let schemesList = Array.isArray(response.schemes) ? response.schemes : []
+      if (schemesList.length === 0) {
+        try {
+          const listRes = await listSchemes({ limit: 12 })
+          schemesList = Array.isArray(listRes?.schemes) ? listRes.schemes : []
+        } catch (_) {}
+      }
+      const schemesForCards = schemesList.map((s, idx) => ({
+        ...s,
+        scheme_name: s.scheme_name || s.name || s.title || 'Scheme',
+        scheme_id: s.scheme_id || s.id || `s-${idx}-${Date.now()}`,
+      }))
+
       const aiMessage = {
         id: `msg_${Date.now()}`,
         role: 'assistant',
         content: response.message || '',
-        schemes: schemesList,
+        schemes: schemesForCards,
         timestamp: new Date().toISOString(),
       }
       setMessages((prev) => [...prev, aiMessage])

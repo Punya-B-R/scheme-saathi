@@ -82,21 +82,23 @@ export default function Message({
           )}
         </div>
 
-        {/* Scheme cards (AI only) */}
+        {/* Main rule: once LLM text is done, show scheme cards right after (if any). */}
         {!isUser && (() => {
           const schemeList = Array.isArray(message.schemes) ? message.schemes : []
-          if (schemeList.length === 0) return null
-          return (
-            <div className="mt-3 w-full max-w-2xl space-y-2">
-              <p className="text-xs font-semibold text-gray-500 mb-2 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                {t.schemesFound}
-              </p>
-              {schemeList.slice(0, 20).map((scheme, i) => (
-                <SchemeCard key={scheme.scheme_id || `s-${i}`} scheme={scheme} language={language} />
-              ))}
-            </div>
-          )
+          if (schemeList.length > 0) {
+            return (
+              <div className="mt-3 w-full max-w-2xl space-y-2">
+                <p className="text-xs font-semibold text-gray-500 mb-2 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                  {t.schemesFound}
+                </p>
+                {schemeList.slice(0, 20).map((scheme, i) => (
+                  <SchemeCard key={scheme.scheme_id || `s-${i}`} scheme={scheme} language={language} />
+                ))}
+              </div>
+            )
+          }
+          return null
         })()}
 
         {message.timestamp && (

@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 def _split_top_level_objects(content: str) -> List[str]:
-    """
+    r"""
     Split content into top-level JSON objects by boundary '}\s*{'.
     Each segment is then wrapped to form a valid single object (add missing } or {).
     """
