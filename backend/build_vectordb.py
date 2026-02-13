@@ -212,6 +212,8 @@ def build_vectordb(schemes: List[Dict[str, Any]], fresh: bool = True) -> None:
             "state": (elig.get("state") or "All India")[:200],
             "occupation": (elig.get("occupation") or "any")[:200],
             "quality_score": int(s.get("data_quality_score", 0)),
+            "source_url": (s.get("source_url") or "")[:500],
+            "official_website": (s.get("official_website") or "")[:500],
         })
 
     if skipped:

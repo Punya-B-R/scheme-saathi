@@ -29,6 +29,14 @@ const CATEGORY_COLORS = {
   default: 'bg-gray-500',
 }
 
+const isValidUrl = (url) => {
+  try {
+    return Boolean(url && new URL(url))
+  } catch {
+    return false
+  }
+}
+
 function getCategoryColor(category) {
   if (!category) return CATEGORY_COLORS.default
   const key = (category || '').toLowerCase()
@@ -80,7 +88,21 @@ export default function SchemeCard({ scheme, language = 'en' }) {
   const docCount = Array.isArray(docs) ? docs.length : 0
   const process = scheme.application_process
   const processSteps = Array.isArray(process) ? process : []
-  const url = scheme.source_url || scheme.official_website || ''
+  // Support both snake_case (API) and camelCase (if serialized)
+  const sourceUrl = (scheme.source_url ?? scheme.sourceUrl ?? '').trim()
+  const officialWebsite = (scheme.official_website ?? scheme.officialWebsite ?? '').trim()
+  const applicationLink = (scheme.application_link ?? scheme.applicationLink ?? '').trim()
+  const applyUrl = isValidUrl(sourceUrl)
+    ? sourceUrl
+    : isValidUrl(officialWebsite)
+      ? officialWebsite
+      : isValidUrl(applicationLink)
+        ? applicationLink
+        : null
+  const officialWebsiteUrl =
+    isValidUrl(officialWebsite) && officialWebsite !== applyUrl
+      ? officialWebsite
+      : null
 
   const dotColor = getCategoryColor(category)
 
@@ -148,17 +170,31 @@ export default function SchemeCard({ scheme, language = 'en' }) {
               {docCount} {language === 'hi' ? t.documents : 'docs needed'}
             </span>
           </div>
-          <div className="flex items-center gap-2">
-            {url && (
+          <div className="flex items-center gap-2 flex-wrap">
+            {applyUrl && (
               <a
-                href={url}
+                href={applyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="text-xs font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1"
+                onPointerDown={(e) => e.stopPropagation()}
+                className="text-xs font-medium text-blue-600 hover:text-blue-700 underline underline-offset-2 flex items-center gap-1 shrink-0 cursor-pointer"
               >
                 {t.applyNow}
                 <ExternalLink className="w-3 h-3" />
+              </a>
+            )}
+            {officialWebsiteUrl && (
+              <a
+                href={officialWebsiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                onPointerDown={(e) => e.stopPropagation()}
+                className="text-[11px] text-blue-600 hover:text-blue-700 underline truncate max-w-[220px] cursor-pointer"
+                title={officialWebsiteUrl}
+              >
+                {officialWebsiteUrl.replace(/^https?:\/\//, '').split('/')[0]}
               </a>
             )}
             <span className="text-[11px] text-gray-500">
@@ -216,17 +252,35 @@ export default function SchemeCard({ scheme, language = 'en' }) {
                 </div>
               )}
 
-              {url && (
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm"
-                >
-                  {t.viewDetails}
-                  <ExternalLink className="w-4 h-4" />
-                </a>
+              {(applyUrl || officialWebsiteUrl) && (
+                <div className="flex flex-wrap gap-2">
+                  {applyUrl && (
+                    <a
+                      href={applyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      onPointerDown={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm cursor-pointer"
+                    >
+                      {t.applyNow}
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
+                  {officialWebsiteUrl && (
+                    <a
+                      href={officialWebsiteUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      onPointerDown={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors cursor-pointer"
+                    >
+                      Official Website
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
               )}
             </div>
           </motion.div>
