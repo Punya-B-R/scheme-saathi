@@ -6,13 +6,6 @@ import { useTranslation } from '../../utils/i18n'
 
 const ASSISTANT_NAME = 'Scheme Saathi'
 
-// Make plain URLs in text clickable (wrap in markdown link syntax)
-function linkifyUrls(text) {
-  if (!text || typeof text !== 'string') return text
-  const urlRegex = /(https?:\/\/[^\s<>\]\)]+)/gi
-  return text.replace(urlRegex, (url) => `[${url}](${url})`)
-}
-
 export default function Message({
   message,
   isLatest,
@@ -61,14 +54,14 @@ export default function Message({
                         href={href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-600 underline underline-offset-2 hover:text-blue-800 break-all cursor-pointer"
+                        className="text-blue-600 underline underline-offset-2 hover:text-blue-800 break-all"
                       >
                         {children}
                       </a>
                     ),
                   }}
                 >
-                  {linkifyUrls(message.content)}
+                  {message.content}
                 </ReactMarkdown>
               </div>
             )}
@@ -92,12 +85,9 @@ export default function Message({
         {/* Scheme cards (AI only) */}
         {!isUser && (() => {
           const schemeList = Array.isArray(message.schemes) ? message.schemes : []
-          if (process.env.NODE_ENV === 'development') {
-            console.log('[Message] Assistant message schemes:', schemeList.length, 'has schemes key:', 'schemes' in message)
-          }
           if (schemeList.length === 0) return null
           return (
-            <div className="mt-3 w-full max-w-2xl space-y-2" data-scheme-cards-count={schemeList.length}>
+            <div className="mt-3 w-full max-w-2xl space-y-2">
               <p className="text-xs font-semibold text-gray-500 mb-2 flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
                 {t.schemesFound}

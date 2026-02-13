@@ -105,8 +105,6 @@ class RAGService:
                 "state": state,
                 "occupation": occupation,
                 "quality_score": int(s.get("data_quality_score", 0)),
-                "source_url": (s.get("source_url") or "")[:500],
-                "official_website": (s.get("official_website") or "")[:500],
             })
 
         total_batches = (len(ids) + self.BATCH_SIZE - 1) // self.BATCH_SIZE
@@ -249,17 +247,14 @@ class RAGService:
         out: List[Dict[str, Any]] = []
 
         for sid, dist in zip(ids[0], (distances[0] if distances else [])):
-            original = scheme_by_id.get(sid)
-            if not original:
+            scheme = scheme_by_id.get(sid)
+            if not scheme:
                 continue
             match_score = max(0.0, 1.0 - (float(dist) / 2.0))
             if match_score < threshold:
                 continue
-            scheme = dict(original)
+            scheme = dict(scheme)
             scheme["match_score"] = round(match_score, 4)
-            # Always preserve URL fields from original scheme (ChromaDB metadata may truncate)
-            scheme["source_url"] = original.get("source_url") or scheme.get("source_url") or ""
-            scheme["official_website"] = original.get("official_website") or scheme.get("official_website") or ""
             out.append(scheme)
 
         out.sort(key=lambda s: s.get("match_score", 0), reverse=True)

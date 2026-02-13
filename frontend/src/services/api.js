@@ -27,9 +27,6 @@ export async function sendChatMessage(
     user_context: userContext,
     language,
   })
-  if (process.env.NODE_ENV === 'development') {
-    console.log('[API] Chat response schemes count:', data?.schemes?.length ?? 0)
-  }
   return data
 }
 

@@ -140,14 +140,11 @@ export default function ChatContainer() {
         .map((m) => ({ role: m.role, content: m.content }))
       const response = await sendChatMessage(text, history, null, language)
 
-      const schemesList = Array.isArray(response?.schemes) ? response.schemes : []
-      if (process.env.NODE_ENV === 'development') {
-        console.log('[Chat] Response schemes count:', schemesList.length, 'first keys:', schemesList[0] ? Object.keys(schemesList[0]).slice(0, 8) : [])
-      }
+      const schemesList = Array.isArray(response.schemes) ? response.schemes : []
       const aiMessage = {
         id: `msg_${Date.now()}`,
         role: 'assistant',
-        content: response?.message ?? '',
+        content: response.message || '',
         schemes: schemesList,
         timestamp: new Date().toISOString(),
       }

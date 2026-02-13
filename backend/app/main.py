@@ -336,12 +336,8 @@ def has_enough_context(user_context: Optional[Dict[str, str]]) -> bool:
 
 def is_ready_to_recommend(user_context: Optional[Dict[str, str]]) -> bool:
     """
-    We only show schemes when we have ALL of:
-      1. occupation
-      2. state
-      3. help_type (what kind of help: scholarship/loan/pension/money/training/marriage/etc.)
-      4. at least 1 of: gender, age, caste_category
-    This forces the bot to ask at least 4 questions before showing results.
+    Show schemes when we have enough to match: occupation + state + what they want.
+    Optionally use gender/age/caste if present for better filtering.
     """
     if not user_context:
         return False
@@ -349,11 +345,11 @@ def is_ready_to_recommend(user_context: Optional[Dict[str, str]]) -> bool:
         return False
     if not _is_valid(user_context.get("state")):
         return False
-    if not _is_valid(user_context.get("help_type")):
+    # What they want: help_type or specific_need (extraction sets both, but accept either)
+    want = user_context.get("help_type") or user_context.get("specific_need")
+    if not _is_valid(want):
         return False
-    # Need at least 1 more: gender, age, or caste
-    extras = sum(1 for f in ("gender", "age", "caste_category") if _is_valid(user_context.get(f)))
-    return extras >= 1
+    return True
 
 
 # ============================================================
@@ -788,58 +784,54 @@ async def chat(request: ChatRequest):
             user_ctx, completeness, len(CONTEXT_FIELDS), missing,
         )
 
-        # 2. Decide readiness: need occupation + state + help_type + 1 more.
-        # Only fetch schemes (RAG) when we have enough context to match well.
+        # 2. ALWAYS run RAG so scheme cards show on every reply
         ready = is_ready_to_recommend(user_ctx)
         candidates: List[Dict[str, Any]] = []
 
-        if ready:
-            search_parts = [query]
-            for key in ("occupation", "state", "gender", "caste_category", "education_level"):
-                val = user_ctx.get(key)
-                if val and val.lower() not in ("unknown", "any", ""):
-                    search_parts.append(val)
-            if user_ctx.get("specific_need"):
-                search_parts.append(user_ctx["specific_need"])
-            if user_ctx.get("disability") == "yes":
-                search_parts.append("disability divyang PWD")
-            if user_ctx.get("bpl") == "yes":
-                search_parts.append("BPL below poverty economically weaker")
-            if request.conversation_history:
-                for m in request.conversation_history[-4:]:
-                    role = getattr(m, "role", None) or (m.get("role") if isinstance(m, dict) else None)
-                    content = getattr(m, "content", None) or (m.get("content", "") if isinstance(m, dict) else "")
-                    if role == "user" and content:
-                        search_parts.append(content)
-            search_query = " ".join(search_parts)
+        search_parts = [query]
+        for key in ("occupation", "state", "gender", "caste_category", "education_level"):
+            val = user_ctx.get(key)
+            if val and val.lower() not in ("unknown", "any", ""):
+                search_parts.append(val)
+        if user_ctx.get("specific_need"):
+            search_parts.append(user_ctx["specific_need"])
+        if user_ctx.get("disability") == "yes":
+            search_parts.append("disability divyang PWD")
+        if user_ctx.get("bpl") == "yes":
+            search_parts.append("BPL below poverty economically weaker")
+        if request.conversation_history:
+            for m in request.conversation_history[-4:]:
+                role = getattr(m, "role", None) or (m.get("role") if isinstance(m, dict) else None)
+                content = getattr(m, "content", None) or (m.get("content", "") if isinstance(m, dict) else "")
+                if role == "user" and content:
+                    search_parts.append(content)
+        search_query = " ".join(search_parts)
 
-            raw = rag_service.search_schemes(
-                query=search_query,
-                user_context=user_ctx,
-                top_k=50,
-            )
-            logger.info("RAG returned %d candidates (ready=True)", len(raw))
+        raw = rag_service.search_schemes(
+            query=search_query,
+            user_context=user_ctx if ready else None,
+            top_k=50,
+        )
+        logger.info("RAG returned %d candidates (ready=%s)", len(raw), ready)
+
+        if ready:
             candidates = filter_schemes_for_user(raw, user_ctx)
             logger.info("After main filter: %d candidates", len(candidates))
-            max_schemes_chat = 20
-            if not candidates and raw:
-                candidates = raw[:max_schemes_chat]
-                logger.info("Filter removed all; using top %d from RAG as fallback", len(candidates))
-            else:
-                candidates = candidates[:max_schemes_chat]
-
-            for s in candidates:
-                s["source_url"] = s.get("source_url") or ""
-                s["official_website"] = s.get("official_website") or ""
-
-            logger.info("Returning %d schemes", len(candidates))
         else:
-            logger.info(
-                "Not ready (need occ+state+help_type+1more). Skipping RAG; no schemes returned. Have: %s",
-                {k: v for k, v in user_ctx.items() if _is_valid(v)},
-            )
+            candidates = list(raw)
 
-        # 3. Pass schemes to Gemini ONLY when ready
+        max_schemes_chat = 20
+        if not candidates and raw:
+            candidates = raw[:max_schemes_chat]
+            logger.info("Using top %d from RAG as fallback", len(candidates))
+        else:
+            candidates = candidates[:max_schemes_chat]
+
+        for s in candidates:
+            s["source_url"] = s.get("source_url") or ""
+            s["official_website"] = s.get("official_website") or ""
+        logger.info("Returning %d schemes", len(candidates))
+
         reply = gemini_service.chat(
             user_message=query,
             conversation_history=request.conversation_history,
