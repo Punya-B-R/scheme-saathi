@@ -788,31 +788,31 @@ async def chat(request: ChatRequest):
             user_ctx, completeness, len(CONTEXT_FIELDS), missing,
         )
 
-        # 2. Decide readiness: need occupation + state + help_type + 1 more
+        # 2. Decide readiness: need occupation + state + help_type + 1 more.
+        # Only fetch schemes (RAG) when we have enough context to match well.
         ready = is_ready_to_recommend(user_ctx)
         candidates: List[Dict[str, Any]] = []
 
-        # Build search query (used both when ready and when not ready, so scheme cards can show either way)
-        search_parts = [query]
-        for key in ("occupation", "state", "gender", "caste_category", "education_level"):
-            val = user_ctx.get(key)
-            if val and val.lower() not in ("unknown", "any", ""):
-                search_parts.append(val)
-        if user_ctx.get("specific_need"):
-            search_parts.append(user_ctx["specific_need"])
-        if user_ctx.get("disability") == "yes":
-            search_parts.append("disability divyang PWD")
-        if user_ctx.get("bpl") == "yes":
-            search_parts.append("BPL below poverty economically weaker")
-        if request.conversation_history:
-            for m in request.conversation_history[-4:]:
-                role = getattr(m, "role", None) or (m.get("role") if isinstance(m, dict) else None)
-                content = getattr(m, "content", None) or (m.get("content", "") if isinstance(m, dict) else "")
-                if role == "user" and content:
-                    search_parts.append(content)
-        search_query = " ".join(search_parts)
-
         if ready:
+            search_parts = [query]
+            for key in ("occupation", "state", "gender", "caste_category", "education_level"):
+                val = user_ctx.get(key)
+                if val and val.lower() not in ("unknown", "any", ""):
+                    search_parts.append(val)
+            if user_ctx.get("specific_need"):
+                search_parts.append(user_ctx["specific_need"])
+            if user_ctx.get("disability") == "yes":
+                search_parts.append("disability divyang PWD")
+            if user_ctx.get("bpl") == "yes":
+                search_parts.append("BPL below poverty economically weaker")
+            if request.conversation_history:
+                for m in request.conversation_history[-4:]:
+                    role = getattr(m, "role", None) or (m.get("role") if isinstance(m, dict) else None)
+                    content = getattr(m, "content", None) or (m.get("content", "") if isinstance(m, dict) else "")
+                    if role == "user" and content:
+                        search_parts.append(content)
+            search_query = " ".join(search_parts)
+
             raw = rag_service.search_schemes(
                 query=search_query,
                 user_context=user_ctx,
@@ -827,27 +827,17 @@ async def chat(request: ChatRequest):
                 logger.info("Filter removed all; using top %d from RAG as fallback", len(candidates))
             else:
                 candidates = candidates[:max_schemes_chat]
+
+            for s in candidates:
+                s["source_url"] = s.get("source_url") or ""
+                s["official_website"] = s.get("official_website") or ""
+
+            logger.info("Returning %d schemes", len(candidates))
         else:
-            # Not ready: still run RAG so we can return some schemes for display (cards show earlier).
-            # Pass user_context=None so eligibility filter doesn't remove all results.
-            raw = rag_service.search_schemes(
-                query=search_query,
-                user_context=None,
-                top_k=15,
-            )
-            logger.info("RAG returned %d candidates (ready=False, showing schemes anyway)", len(raw))
-            candidates = raw[:10]
             logger.info(
-                "Not ready (need occ+state+help_type+1more). Have: %s",
+                "Not ready (need occ+state+help_type+1more). Skipping RAG; no schemes returned. Have: %s",
                 {k: v for k, v in user_ctx.items() if _is_valid(v)},
             )
-
-        # Ensure every scheme has source_url and official_website so frontend can render clickable links
-        for s in candidates:
-            s["source_url"] = s.get("source_url") or ""
-            s["official_website"] = s.get("official_website") or ""
-
-        logger.info("Returning %d schemes (ready=%s)", len(candidates), ready)
 
         # 3. Pass schemes to Gemini ONLY when ready
         reply = gemini_service.chat(
