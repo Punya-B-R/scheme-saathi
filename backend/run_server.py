@@ -9,7 +9,7 @@ import uvicorn
 from app.config import settings
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
+    port = int(os.environ.get("PORT") or "8000")
     print("=" * 60)
     print(f"Starting {settings.APP_NAME} v{settings.APP_VERSION}")
     print("=" * 60)
