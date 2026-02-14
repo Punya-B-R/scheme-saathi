@@ -267,8 +267,20 @@ class RAGService:
             enhanced_query = query.strip()
             if user_context:
                 parts: List[str] = []
-                if user_context.get("occupation") and str(user_context.get("occupation", "")).lower() not in ("unknown", "any", ""):
+                occ = str(user_context.get("occupation", "") or "").lower()
+                if occ and occ not in ("unknown", "any", ""):
                     parts.append(str(user_context["occupation"]))
+                # Add education level for students (better semantic matching)
+                if occ == "student":
+                    edu = str(user_context.get("education_level", "") or "").lower()
+                    if edu and edu not in ("unknown", "any", ""):
+                        parts.append(edu)
+                        if edu == "undergraduate":
+                            parts.append("undergraduate scholarship degree student")
+                        elif edu == "postgraduate":
+                            parts.append("postgraduate masters fellowship")
+                        elif edu == "phd":
+                            parts.append("phd doctoral research fellowship")
                 if user_context.get("state") and str(user_context.get("state", "")).lower() not in ("unknown", "any", "all india", ""):
                     parts.append(str(user_context["state"]))
                 if user_context.get("caste_category") and str(user_context.get("caste_category", "")).lower() not in ("unknown", "any", ""):

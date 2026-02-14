@@ -6,31 +6,6 @@ import { useTranslation } from '../../utils/i18n'
 
 const ASSISTANT_NAME = 'Scheme Saathi'
 
-const doesResponseMentionSchemes = (content) => {
-  if (!content || typeof content !== 'string') return false
-  const schemeIndicators = [
-    'scheme', 'schemes', 'yojana', 'yojnaa',
-    'benefit', 'benefits', 'eligible', 'eligibility',
-    'qualify', 'qualified', 'entitled', 'entitlement',
-    'apply', 'application', 'register', 'enroll',
-    'found for you', 'here are', 'following',
-    'these are', 'i found', "i've found",
-    'matches', 'matching', 'matched',
-    'options for you', 'programs', 'initiatives',
-    'for your profile', 'based on your',
-    'results', 'recommendations',
-    '₹', 'rupees', 'lakh', 'per month',
-    'per year', 'annually', 'monthly',
-    'financial assistance', 'subsidy', 'pension',
-    'scholarship', 'loan', 'grant',
-    'योजना', 'योजनाएं', 'पात्र', 'लाभ',
-    'आवेदन', 'मिलेगा', 'मिलेंगे',
-    'सहायता', 'छात्रवृत्ति',
-  ]
-  const lowerContent = content.toLowerCase()
-  return schemeIndicators.some((ind) => lowerContent.includes(ind.toLowerCase()))
-}
-
 export default function Message({
   message,
   isLatest,
@@ -38,11 +13,6 @@ export default function Message({
   onSpeak,
   isSpeaking = false,
 }) {
-  // DEBUG: Message component
-  console.log('DEBUG MSG 1 - message.role:', message.role)
-  console.log('DEBUG MSG 2 - message.schemes:', message.schemes)
-  console.log('DEBUG MSG 3 - schemes length:', message.schemes?.length)
-
   const isUser = message.role === 'user'
   const t = useTranslation(language)
 
@@ -112,27 +82,24 @@ export default function Message({
           )}
         </div>
 
-        {/* Show scheme cards when schemes exist. Trust backend (only returns schemes when confident). */}
-        {!isUser && (() => {
-          const schemeList = Array.isArray(message.schemes) ? message.schemes : []
-          if (
-            schemeList.length > 0 &&
-            (doesResponseMentionSchemes(message.content) || schemeList.length > 0)
-          ) {
-            return (
-              <div className="mt-3 w-full max-w-2xl space-y-2">
-                <p className="text-xs font-semibold text-gray-500 mb-2 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                  {t.schemesFound}
-                </p>
-                {schemeList.slice(0, 20).map((scheme, i) => (
-                  <SchemeCard key={scheme.scheme_id || `s-${i}`} scheme={scheme} language={language} />
-                ))}
-              </div>
-            )
-          }
-          return null
-        })()}
+        {/* SCHEME CARDS - show if any schemes exist */}
+        {message.role === 'assistant' &&
+          Array.isArray(message.schemes) &&
+          message.schemes.length > 0 && (
+            <div className="mt-4 space-y-3">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">
+                {message.schemes.length} scheme
+                {message.schemes.length !== 1 ? 's' : ''} found
+              </p>
+              {message.schemes.map((scheme, i) => (
+                <SchemeCard
+                  key={scheme.scheme_id || scheme.id || i}
+                  scheme={scheme}
+                  language={language}
+                />
+              ))}
+            </div>
+          )}
 
         {message.timestamp && (
           <p className={`text-[10px] text-gray-400 mt-1 ${isUser ? '' : 'ml-1'}`}>

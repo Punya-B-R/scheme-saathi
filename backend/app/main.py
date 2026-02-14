@@ -125,6 +125,110 @@ GENDERS = {
     r"\bmale\b(?!\s*(?:and|or|\/)\s*female)|\bboy\b|\bson\b": "male",
 }
 
+# Gujarati state names/variants -> English (for context extraction from Gujarati input)
+GUJARATI_STATE_MAP = {
+    "ગુજરાત": "Gujarat", "ગુજરાતથી": "Gujarat", "ગુજરાતના": "Gujarat",
+    "મહારાષ્ટ્ર": "Maharashtra", "બિહાર": "Bihar", "કર્ણાટક": "Karnataka",
+    "કેરળ": "Kerala", "તમિલનાડુ": "Tamil Nadu", "રાજસ્થાન": "Rajasthan",
+    "આંધ્ર પ્રદેશ": "Andhra Pradesh", "તેલંગાણા": "Telangana",
+    "પંજાબ": "Punjab", "મધ્ય પ્રદેશ": "Madhya Pradesh", "ઉત્તર પ્રદેશ": "Uttar Pradesh",
+    "પશ્ચિમ બંગાળ": "West Bengal", "ઓડિશા": "Odisha", "દિલ્હી": "Delhi",
+    "હરિયાણા": "Haryana",
+}
+
+# Gujarati occupation patterns (regex on original text)
+GUJARATI_OCCUPATION_PATTERNS = [
+    (r"ખેડૂત|ખેતી|કૃષિ", "farmer"),
+    (r"વિદ્યાર્થી|વિદ્યાર્થિની|શિક્ષણ", "student"),
+    (r"વૃદ્ધ|વડીલ|વૃદ્ધ નાગરિક|પેન્શન", "senior citizen"),
+    (r"વ્યવસાયી|ઉદ્યોગપતિ|વ્યવસાય", "entrepreneur"),
+    (r"કામદાર|કર્મચારી|કામ", "worker"),
+    (r"ગૃહિણી|સ્ત્રી|મહિલા", "homemaker"),
+]
+
+# Marathi state names/variants -> English (for context extraction from Marathi input)
+MARATHI_STATE_MAP = {
+    "महाराष्ट्र": "Maharashtra", "महाराष्ट्रातून": "Maharashtra", "महाराष्ट्रातील": "Maharashtra",
+    "बिहार": "Bihar", "कर्नाटक": "Karnataka", "केरळ": "Kerala",
+    "तामीळनाडू": "Tamil Nadu", "राजस्थान": "Rajasthan", "आंध्र प्रदेश": "Andhra Pradesh",
+    "तेलंगणा": "Telangana", "गुजरात": "Gujarat", "पंजाब": "Punjab",
+    "मध्य प्रदेश": "Madhya Pradesh", "उत्तर प्रदेश": "Uttar Pradesh",
+    "पश्चिम बंगाल": "West Bengal", "ओडिशा": "Odisha", "दिल्ली": "Delhi",
+    "हरियाणा": "Haryana",
+}
+
+# Marathi occupation patterns (regex on original text; Devanagari)
+MARATHI_OCCUPATION_PATTERNS = [
+    (r"शेतकरी|शेतकी|कृषि", "farmer"),
+    (r"विद्यार्थी|विद्यार्थिनी|शिक्षण", "student"),
+    (r"ज्येष्ठ|वृद्ध|ज्येष्ठ नागरिक|निवृत्तीवेतन", "senior citizen"),
+    (r"व्यवसायी|उद्योजक|व्यवसाय", "entrepreneur"),
+    (r"कामगार|कर्मचारी|काम", "worker"),
+    (r"गृहिणी|स्त्री|महिला", "homemaker"),
+]
+
+# Kannada state names -> English (for context extraction from Kannada input)
+KANNADA_STATE_MAP = {
+    "ಕರ್ನಾಟಕ": "Karnataka", "ಕೇರಳ": "Kerala", "ಮಹಾರಾಷ್ಟ್ರ": "Maharashtra",
+    "ತಮಿಳುನಾಡು": "Tamil Nadu", "ಬಿಹಾರ": "Bihar", "ರಾಜಸ್ಥಾನ": "Rajasthan",
+    "ಆಂಧ್ರ ಪ್ರದೇಶ": "Andhra Pradesh", "ತೆಲಂಗಾಣ": "Telangana",
+    "ಗುಜರಾತ್": "Gujarat", "ಪಂಜಾಬ್": "Punjab", "ಮಧ್ಯ ಪ್ರದೇಶ": "Madhya Pradesh",
+    "ಉತ್ತರ ಪ್ರದೇಶ": "Uttar Pradesh", "ಪಶ್ಚಿಮ ಬಂಗಾಳ": "West Bengal",
+    "ಒಡಿಶಾ": "Odisha", "ದೆಹಲಿ": "Delhi", "ಹರ್ಯಾಣ": "Haryana",
+}
+
+# Bengali state names/variants -> English (for context extraction from Bengali input)
+BENGALI_STATE_MAP = {
+    "পশ্চিমবঙ্গ": "West Bengal", "পশ্চিম বঙ্গ": "West Bengal",
+    "বিহার": "Bihar", "কর্ণাটক": "Karnataka", "কেরল": "Kerala",
+    "মহারাষ্ট্র": "Maharashtra", "তামিলনাড়ু": "Tamil Nadu", "রাজস্থান": "Rajasthan",
+    "আন্ধ্রপ্রদেশ": "Andhra Pradesh", "তেলেঙ্গানা": "Telangana",
+    "গুজরাত": "Gujarat", "পাঞ্জাব": "Punjab", "মধ্যপ্রদেশ": "Madhya Pradesh",
+    "উত্তরপ্রদেশ": "Uttar Pradesh", "ওড়িশা": "Odisha", "দিল্লি": "Delhi",
+    "হরিয়ানা": "Haryana", "ত্রিপুরা": "Tripura", "অসম": "Assam",
+}
+
+# Bengali occupation patterns (regex on original text)
+BENGALI_OCCUPATION_PATTERNS = [
+    (r"কৃষক|কৃষিকাজ|চাষ", "farmer"),
+    (r"ছাত্র|ছাত্রী|পড়াশোনা", "student"),
+    (r"বয়স্ক|বৃদ্ধ|পেনশনভোগী", "senior citizen"),
+    (r"ব্যবসায়ী|উদ্যোক্তা|ব্যবসা", "entrepreneur"),
+    (r"শ্রমিক|কর্মচারী|কাজ", "worker"),
+    (r"মহিলা|স্ত্রী|গৃহবধূ", "homemaker"),
+]
+
+# Tamil state names/variants -> English (for context extraction from Tamil input)
+TAMIL_STATE_MAP = {
+    "தமிழ்நாடு": "Tamil Nadu", "தமிழ்நாட்டில்": "Tamil Nadu", "தமிழ்நாட்டு": "Tamil Nadu",
+    "கருநாடகம்": "Karnataka", "கேரளம்": "Kerala",
+    "மகாராஷ்டிரம்": "Maharashtra", "பீகார்": "Bihar", "ராஜஸ்தான்": "Rajasthan",
+    "ஆந்திரா": "Andhra Pradesh", "தெலுங்கானா": "Telangana",
+    "குஜராத்": "Gujarat", "பஞ்சாப்": "Punjab", "மத்தியப் பிரதேசம்": "Madhya Pradesh",
+    "உத்தரப் பிரதேசம்": "Uttar Pradesh", "மேற்கு வங்கம்": "West Bengal",
+    "ஒடிசா": "Odisha", "டெல்லி": "Delhi", "ஹரியானா": "Haryana",
+}
+
+# Tamil occupation patterns (regex on original text)
+TAMIL_OCCUPATION_PATTERNS = [
+    (r"விவசாயி|விவசாயிகள்|விவசாயம்", "farmer"),
+    (r"மாணவர்|மாணவி|படிப்பு", "student"),
+    (r"முதியோர்|வயதானவர்|மூப்பான", "senior citizen"),
+    (r"வணிகர்|தொழிலதிபர்|வியாபாரம்", "entrepreneur"),
+    (r"தொழிலாளர்|ஊழியர்|வேலை", "worker"),
+    (r"மகளிர்|பெண்|பெண்கள்", "homemaker"),
+]
+
+# Kannada occupation patterns (regex on original text; Kannada has no case)
+KANNADA_OCCUPATION_PATTERNS = [
+    (r"ರೈತ|ರೈತರು|ಕೃಷಿ", "farmer"),
+    (r"ವಿದ್ಯಾರ್ಥಿ|ವಿದ್ಯಾರ್ಥಿನಿ|ಅಧ್ಯಯನ", "student"),
+    (r"ಹಿರಿಯ|ವೃದ್ಧ|ಹಿರಿಯ ನಾಗರಿಕ|ಪಿಂಚಣಿದಾರ", "senior citizen"),
+    (r"ವ್ಯಾಪಾರಿ|ಉದ್ಯಮಿ|ವ್ಯಾಪಾರ", "entrepreneur"),
+    (r"ಕಾರ್ಮಿಕ|ಉದ್ಯೋಗಿ|ಕೆಲಸ", "worker"),
+    (r"ಮಹಿಳೆ|ಸ್ತ್ರೀ|ಹೆಂಗಸು", "homemaker"),  # often used for women schemes
+]
+
 CATEGORIES = {
     r"\bsc\s*/\s*st\b|\bsc\s+st\b|\bsc\s*&\s*st\b|\bsc\s+and\s+st\b": "SC/ST",
     r"\bsc\b|\bschedul\w+\s*caste\b|\bdalit\b": "SC",
@@ -134,18 +238,28 @@ CATEGORIES = {
     r"\bminority\b|\bmuslim\b|\bchristian\b|\bsikh\b|\bbuddhist\b|\bjain\b|\bparsi\b": "Minority",
 }
 
-# Education level: "higher" = post-matric / college+, "school" = pre-matric (class 1-10)
+# Education level: granular extraction for filtering (undergrad vs postgrad vs PhD)
+# Order matters: check most specific first (phd → postgraduate → undergraduate → diploma → 12th → 10th)
+EDUCATION_LEVEL_PATTERNS = [
+    # PhD / doctorate
+    (r"\bph\.?d\b|\bdoctorate\b|\bdoctoral\b|\bresearch\s+scholar\b|\bresearch\s+student\b", "phd"),
+    # Postgraduate / masters
+    (r"\bm\.?sc\b|\bm\.?tech\b|\bmtech\b|\bmba\b|\bm\.?b\.?a\b|\bm\.?e\.?\b|\bme\s+student\b|\bmasters\b|\bmaster'?s\b|\bpost.?graduate\b|\bpost.?graduation\b|\bpg\s+student\b|\bp\.?g\.?\b|\bmphil\b|\bm\.?phil\b", "postgraduate"),
+    # Undergraduate / degree
+    (r"\bengineering\s+student\b|\bbe\s+student\b|\bbtech\b|\bb\.?tech\b|\bb\.?e\b|\bgraduation\b|\bdegree\s+student\b|\bundergraduate\b|\bunder.?graduate\b|\bug\s+student\b|\bb\.?a\.?\b|\bb\.?sc\b|\bb\.?com\b|\bbba\b|\bb\.?b\.?a\b|\bmbbs\b|\bbds\b|\bcollege\s+student\b|\buniversity\s+student\b", "undergraduate"),
+    # Diploma
+    (r"\bdiploma\s+student\b|\bdiploma\b", "diploma"),
+    # 12th / higher secondary
+    (r"\b12th\b|\b12\s+th\b|\bclass\s*12\b|\bhigher\s+secondary\b|\bhsc\b|\bhsce\b|\bpuc\b|\bintermediate\b|\bplus\s*two\b", "12th"),
+    # 10th / matriculation
+    (r"\b10th\b|\b10\s+th\b|\bclass\s*10\b|\bssc\b|\bmatriculation\b|\bmatric\b|\bschool\s+student\b", "10th"),
+]
+# Fallback: "higher" = post-matric, "school" = pre-matric (for backward compat)
 EDUCATION_HIGHER_PATTERNS = [
-    r"\bengineering\b", r"\bbtech\b", r"\bb\.?tech\b", r"\bb\.?e\b",
-    r"\bmtech\b", r"\bm\.?tech\b", r"\bmba\b", r"\bbba\b", r"\bm\.?sc\b",
-    r"\bb\.?sc\b", r"\bm\.?a\b", r"\bb\.?a\b", r"\bm\.?com\b", r"\bb\.?com\b",
-    r"\bph\.?d\b", r"\bpost.?graduate\b", r"\bgraduate\b", r"\bdiploma\b",
     r"\bcollege\b", r"\buniversity\b", r"\bdegree\b", r"\bprofessional\s+course\b",
-    r"\bmedical\s+student\b", r"\bmbbs\b", r"\blaw\b", r"\bllb\b",
-    r"\bnursing\b", r"\bpolytechnic\b", r"\biti\b", r"\bpost.?matric\b",
-    r"\bclass\s*1[1-2]\b", r"\b1[1-2]th\b", r"\bhigher\s+secondary\b",
-    r"\bhigher\s+education\b", r"\bunder.?graduate\b", r"\bug\b", r"\bpg\b",
-    r"\bca\b", r"\bcs\b", r"\bicwa\b", r"\bchartered\b",
+    r"\bmedical\s+student\b", r"\blaw\b", r"\bllb\b", r"\bnursing\b", r"\bpolytechnic\b",
+    r"\bpost.?matric\b", r"\bclass\s*1[1-2]\b", r"\b1[1-2]th\b", r"\bhigher\s+secondary\b",
+    r"\bhigher\s+education\b", r"\bug\b", r"\bpg\b", r"\bca\b", r"\bcs\b", r"\bicwa\b",
 ]
 EDUCATION_SCHOOL_PATTERNS = [
     r"\bpre.?matric\b", r"\bclass\s*[1-9]\b(?!\d)", r"\bclass\s*10\b",
@@ -231,22 +345,72 @@ def extract_context_from_text(text: str) -> Dict[str, str]:
     ctx: Dict[str, str] = {}
     t = text.lower()
 
-    # --- State ---
-    for state in sorted(INDIAN_STATES, key=len, reverse=True):
-        if state in t:
-            ctx["state"] = STATE_DISPLAY.get(state, state.title())
+    # --- State (English + Gujarati + Marathi + Bengali + Tamil + Kannada) ---
+    for gujarati_name, eng_state in GUJARATI_STATE_MAP.items():
+        if gujarati_name in text:
+            ctx["state"] = eng_state
             break
+    if "state" not in ctx:
+        for marathi_name, eng_state in MARATHI_STATE_MAP.items():
+            if marathi_name in text:
+                ctx["state"] = eng_state
+                break
+    if "state" not in ctx:
+        for bengali_name, eng_state in BENGALI_STATE_MAP.items():
+            if bengali_name in text or (bengali_name + "থেকে") in text or (bengali_name + "এর") in text:
+                ctx["state"] = eng_state
+                break
+    if "state" not in ctx:
+        for tamil_name, eng_state in TAMIL_STATE_MAP.items():
+            if tamil_name in text or (tamil_name + "இலிருந்து") in text or (tamil_name + "வில்") in text:
+                ctx["state"] = eng_state
+                break
+    if "state" not in ctx:
+        for kannada_name, eng_state in KANNADA_STATE_MAP.items():
+            if kannada_name in text or (kannada_name + "ದಿಂದ") in text or (kannada_name + "ದ") in text:
+                ctx["state"] = eng_state
+                break
+    if "state" not in ctx:
+        for state in sorted(INDIAN_STATES, key=len, reverse=True):
+            if state in t:
+                ctx["state"] = STATE_DISPLAY.get(state, state.title())
+                break
     if "state" not in ctx:
         for city, state_name in CITY_TO_STATE.items():
             if city in t:
                 ctx["state"] = state_name
                 break
 
-    # --- Occupation ---
-    for pattern, occ in OCCUPATIONS.items():
-        if re.search(pattern, t, re.I):
+    # --- Occupation (English + Gujarati + Marathi + Bengali + Tamil + Kannada) ---
+    for pattern, occ in GUJARATI_OCCUPATION_PATTERNS:
+        if re.search(pattern, text):
             ctx["occupation"] = occ
             break
+    if "occupation" not in ctx:
+        for pattern, occ in MARATHI_OCCUPATION_PATTERNS:
+            if re.search(pattern, text):
+                ctx["occupation"] = occ
+                break
+    if "occupation" not in ctx:
+        for pattern, occ in BENGALI_OCCUPATION_PATTERNS:
+            if re.search(pattern, text):
+                ctx["occupation"] = occ
+                break
+    if "occupation" not in ctx:
+        for pattern, occ in TAMIL_OCCUPATION_PATTERNS:
+            if re.search(pattern, text):
+                ctx["occupation"] = occ
+                break
+    if "occupation" not in ctx:
+        for pattern, occ in KANNADA_OCCUPATION_PATTERNS:
+            if re.search(pattern, text):
+                ctx["occupation"] = occ
+                break
+    if "occupation" not in ctx:
+        for pattern, occ in OCCUPATIONS.items():
+            if re.search(pattern, t, re.I):
+                ctx["occupation"] = occ
+                break
 
     # --- Gender ---
     for pattern, g in GENDERS.items():
@@ -267,6 +431,16 @@ def extract_context_from_text(text: str) -> Dict[str, str]:
         r"\bi(?:'?m| am)\s*(\d{1,2})\b",
         r"\b(\d{1,2})\s*sal\s*(?:ka|ki|ke|kaa)?\b",  # Hindi: 35 sal ka
         r"\b(?:umr|umar)\s*(?:hai\s*)?(\d{1,2})\b",  # Hindi: umr 35
+        r"(?:ವಯಸ್ಸು|ವಯಸು)\s*(\d{1,2})\b",  # Kannada: ವಯಸ್ಸು 35
+        r"ನನ್ನ\s*(?:ವಯಸ್ಸು|ವಯಸು)\s*(\d{1,2})\b",  # Kannada: ನನ್ನ ವಯಸ್ಸು 35
+        r"(?:வயது)\s*(\d{1,2})\b",  # Tamil: வயது 35
+        r"என்\s*வயது\s*(\d{1,2})\b",  # Tamil: என் வயது 35
+        r"বয়স\s*(\d{1,2})\b",  # Bengali: বয়স 35
+        r"আমার\s*বয়স\s*(\d{1,2})\b",  # Bengali: আমার বয়স 35
+        r"वय\s*(\d{1,2})\b",  # Marathi: वय 35
+        r"माझे\s*वय\s*(\d{1,2})\b",  # Marathi: माझे वय 35
+        r"ઉંમર\s*(\d{1,2})\b",  # Gujarati: ઉંમર 35
+        r"મારી\s*ઉંમર\s*(\d{1,2})\b",  # Gujarati: મારી ઉંમર 35
     ]:
         m = re.search(pat, t, re.I)
         if m:
@@ -275,29 +449,51 @@ def extract_context_from_text(text: str) -> Dict[str, str]:
                 ctx["age"] = str(age)
             break
 
-    # --- Income ---
+    # --- Income / income_level ---
     m = re.search(
         r"(?:income|earn|salary|annual\s+income).{0,25}?([\d,.]+)\s*(?:lakh|lac|lpa|per\s*(?:annum|year|month)|/\s*(?:year|month|annum))",
         t, re.I,
     )
-    if m:
+    if not m:
+        # Match "1.5 lakh annual income" (number before "lakh")
+        m = re.search(
+            r"([\d,.]+)\s*(?:lakh|lac|lpa)\s*(?:annual\s+)?(?:income|per\s*(?:annum|year))?",
+            t, re.I,
+        )
+        if m:
+            val = m.group(0).strip()
+            # Normalize to "X lakh" format for consistency
+            num = m.group(1).replace(",", "")
+            if "lakh" in t[m.start() : m.end() + 20].lower() or "lac" in t[m.start() : m.end() + 20].lower() or "lpa" in t[m.start() : m.end() + 20].lower():
+                ctx["income"] = f"{num} lakh"
+            else:
+                ctx["income"] = val
+            ctx["income_level"] = ctx["income"]
+    if m and "income_level" not in ctx:
         ctx["income"] = m.group(0).strip()
+        ctx["income_level"] = ctx["income"]
 
-    # --- Education level ---
-    for pat in EDUCATION_HIGHER_PATTERNS:
+    # --- Education level (granular: phd, postgraduate, undergraduate, diploma, 12th, 10th) ---
+    for pat, level in EDUCATION_LEVEL_PATTERNS:
         if re.search(pat, t, re.I):
-            ctx["education_level"] = "higher"
+            ctx["education_level"] = level
             break
+    if "education_level" not in ctx:
+        for pat in EDUCATION_HIGHER_PATTERNS:
+            if re.search(pat, t, re.I):
+                ctx["education_level"] = "higher"  # fallback: post-matric
+                break
     if "education_level" not in ctx:
         for pat in EDUCATION_SCHOOL_PATTERNS:
             if re.search(pat, t, re.I):
-                ctx["education_level"] = "school"
+                ctx["education_level"] = "school"  # fallback: pre-matric
                 break
 
     # --- BPL / EWS ---
     for pat in BPL_PATTERNS:
         if re.search(pat, t, re.I):
             ctx["bpl"] = "yes"
+            ctx["income_level"] = ctx.get("income_level") or "bpl"
             break
 
     # --- Disability ---
@@ -377,26 +573,83 @@ def _is_known(val: Optional[str]) -> bool:
     if not val:
         return False
     s = str(val).strip().lower()
-    return s not in ("unknown", "any", "", "none", "not specified", "all india")
+    return s not in ("unknown", "any", "", "none", "not specified", "all india", "n/a")
 
 
 def has_enough_context(user_context: Optional[Dict[str, str]]) -> bool:
     """
-    Minimum to trigger RAG: occupation + state.
-    Age, caste, income are optional — improve results but not required.
+    ALL 6 fields must be known before RAG runs.
     """
     if not user_context:
         return False
 
     def is_known(val: Optional[str]) -> bool:
-        if not val:
-            return False
-        s = str(val).strip().lower()
-        return s not in ("unknown", "any", "", "none", "not specified")
+        return (
+            val
+            and str(val).strip().lower()
+            not in ["unknown", "any", "", "none", "not specified", "n/a"]
+        )
 
-    has_occupation = is_known(user_context.get("occupation"))
-    has_state = is_known(user_context.get("state"))
-    return has_occupation and has_state
+    required_fields = [
+        "occupation",
+        "state",
+        "age",
+        "caste_category",
+        "income_level",
+        "gender",
+    ]
+
+    def get_val(f: str) -> Optional[str]:
+        v = user_context.get(f)
+        if f == "income_level":
+            v = v or user_context.get("income")
+        return v
+
+    missing_list = [f for f in required_fields if not is_known(get_val(f))]
+    if missing_list:
+        logger.info("Missing fields before RAG: %s", missing_list)
+        return False
+
+    logger.info("All 6 fields collected. Running RAG.")
+    return True
+
+
+def get_missing_fields(user_context: Optional[Dict[str, str]]) -> List[str]:
+    """Returns list of field names (human-readable labels) that are still unknown."""
+    if not user_context:
+        return [
+            "occupation",
+            "state",
+            "age",
+            "caste category (SC/ST/OBC/General)",
+            "annual income",
+            "gender",
+        ]
+
+    def is_known(val: Optional[str]) -> bool:
+        return (
+            val
+            and str(val).strip().lower()
+            not in ["unknown", "any", "", "none", "not specified", "n/a"]
+        )
+
+    required = {
+        "occupation": "occupation",
+        "state": "state",
+        "age": "age",
+        "caste_category": "caste category (SC/ST/OBC/General)",
+        "income_level": "annual income",
+        "gender": "gender",
+    }
+
+    result = []
+    for field, label in required.items():
+        val = user_context.get(field)
+        if field == "income_level":
+            val = val or user_context.get("income")
+        if not is_known(val):
+            result.append(label)
+    return result
 
 
 def is_ready_to_recommend(user_context: Optional[Dict[str, str]]) -> bool:
@@ -557,11 +810,90 @@ def _scheme_is_post_matric(text: str) -> bool:
 
 
 def _filter_education(scheme: dict, user_edu: str) -> bool:
+    """Pre-matric vs post-matric: higher/undergrad/postgrad/phd/diploma reject pre-matric; school/10th/12th reject post-matric."""
     text = _scheme_text(scheme)
-    if user_edu == "higher":
+    higher_levels = ("higher", "undergraduate", "postgraduate", "phd", "diploma")
+    school_levels = ("school", "10th", "12th")
+    if user_edu in higher_levels:
         return not _scheme_is_pre_matric(text)
-    elif user_edu == "school":
+    if user_edu in school_levels:
         return not _scheme_is_post_matric(text)
+    return True
+
+
+# Education level: undergrad vs postgrad/PhD filtering
+POSTGRAD_ONLY_KEYWORDS = [
+    "phd", "ph.d", "doctorate", "doctoral",
+    "postgraduate", "post graduate", "post-graduate",
+    "pg student", "p.g",
+    "msc", "m.sc", "mtech", "m.tech", "mba", "m.b.a",
+    "me ", "m.e.", "masters", "master's",
+    "mphil", "m.phil",
+    "research scholar", "research student",
+    "fellowship for phd", "doctoral fellowship",
+    "junior research fellow", "jrf",
+    "senior research fellow", "srf",
+]
+UNDERGRAD_LEVEL_KEYWORDS = [
+    "undergraduate", "under graduate", "under-graduate",
+    "ug student", "u.g",
+    "btech", "b.tech", "be ", "b.e.",
+    "bsc", "b.sc", "ba ", "b.a.", "bcom", "b.com",
+    "bba", "b.b.a", "mbbs", "bds",
+    "graduation", "degree student",
+    "college student", "university student",
+]
+
+
+def _filter_by_education_level(scheme: dict, user_education_level: Optional[str]) -> bool:
+    """
+    Reject scheme if user is undergraduate and scheme is clearly postgrad/PhD only.
+    Keep general schemes and undergrad-friendly schemes for undergrads.
+    """
+    if not user_education_level:
+        return True
+    ue = str(user_education_level).strip().lower()
+    if ue in ("unknown", "any", "", "higher", "school"):
+        return True
+
+    eligibility = scheme.get("eligibility_criteria") or {}
+    if not isinstance(eligibility, dict):
+        eligibility = {}
+    scheme_name = (scheme.get("scheme_name") or "").lower()
+    brief = (scheme.get("brief_description") or "").lower()
+    scheme_edu = str(
+        eligibility.get("education_level", "")
+        or eligibility.get("educational_qualification", "")
+        or eligibility.get("qualification", "")
+        or "",
+    ).lower()
+    raw_elig = (eligibility.get("raw_eligibility_text") or "").lower()
+    all_text = f"{scheme_name} {scheme_edu} {brief[:300]} {raw_elig[:500]}"
+
+    is_postgrad_only = any(kw in all_text for kw in POSTGRAD_ONLY_KEYWORDS)
+    is_undergrad_friendly = any(kw in all_text for kw in UNDERGRAD_LEVEL_KEYWORDS)
+    has_no_level_restriction = not is_postgrad_only and not is_undergrad_friendly
+
+    if ue == "undergraduate":
+        if is_postgrad_only and not is_undergrad_friendly:
+            return False
+        return True
+    if ue in ("postgraduate", "masters"):
+        return True
+    if ue == "phd":
+        return True
+    if ue in ("12th", "diploma"):
+        degree_keywords = ["graduation", "degree", "btech", "bsc", "ba ", "b.e."]
+        if is_undergrad_friendly and not has_no_level_restriction:
+            if any(kw in all_text for kw in degree_keywords):
+                return False
+        return True
+    if ue == "10th":
+        if is_undergrad_friendly and not has_no_level_restriction:
+            degree_keywords = ["graduation", "degree", "btech", "bsc", "ba ", "b.e."]
+            if any(kw in all_text for kw in degree_keywords):
+                return False
+        return True
     return True
 
 
@@ -745,6 +1077,8 @@ def filter_schemes_for_user(
             rejected = "occupation"
         elif user_edu and not _filter_education(s, user_edu):
             rejected = "education_level"
+        elif not _filter_by_education_level(s, user_ctx.get("education_level")):
+            rejected = "education_level_filter"
         elif not _filter_disability(s, user_disability):
             rejected = "disability"
         elif user_family is not None and not _filter_family_status(s, user_family):
@@ -981,23 +1315,49 @@ async def chat(
     logger.info("Chat request: %s", query[:100])
 
     try:
-        # 1. Cumulative context from all user messages
-        user_ctx = build_cumulative_context(request.conversation_history, query)
-        completeness = context_completeness(user_ctx)
-        missing = missing_context_fields(user_ctx)
+        # 1. Extract context from FULL conversation (history + current message)
+        full_conversation = list(request.conversation_history or []) + [
+            ChatMessage(role="user", content=request.message)
+        ]
+        extracted_ctx = gemini_service.extract_user_context(full_conversation)
+        if not extracted_ctx:
+            extracted_ctx = build_cumulative_context(request.conversation_history, query)
 
-        # DEBUG: Context extraction
-        logger.info("DEBUG 1 - Raw message: %s", request.message)
+        existing = request.user_context or {}
+        all_keys = [
+            "occupation", "state", "age", "gender",
+            "caste_category", "income_level",
+            "land_ownership", "education_level",
+        ]
+
+        def _is_valid(v):
+            return v and str(v).strip().lower() not in [
+                "unknown", "any", "", "none", "not specified", "n/a"
+            ]
+
+        merged_ctx: Dict[str, str] = {}
+        for key in all_keys:
+            extracted_val = extracted_ctx.get(key, "")
+            existing_val = existing.get(key, "")
+            if key == "income_level" and not extracted_val:
+                extracted_val = extracted_ctx.get("income", "")
+            if key == "income_level" and not existing_val:
+                existing_val = existing.get("income", "")
+            if _is_valid(extracted_val):
+                merged_ctx[key] = str(extracted_val)
+            elif _is_valid(existing_val):
+                merged_ctx[key] = str(existing_val)
+        if merged_ctx.get("income_level") and "income" not in merged_ctx:
+            merged_ctx["income"] = merged_ctx["income_level"]
+        user_ctx = merged_ctx
+
+        missing = get_missing_fields(user_ctx)
+
         logger.info("DEBUG 2 - user_ctx: %s", user_ctx)
         logger.info("DEBUG 3 - is_ready: %s", is_ready_to_recommend(user_ctx))
-        logger.info("DEBUG CTX 1 - conversation_history length: %s", len(request.conversation_history))
-        logger.info("DEBUG CTX 2 - occupation extracted: %s", user_ctx.get("occupation"))
-        logger.info("DEBUG CTX 3 - state extracted: %s", user_ctx.get("state"))
-        logger.info("DEBUG CTX 4 - full context: %s", user_ctx)
-
         logger.info(
-            "Context: %s | completeness=%d/%d | missing=%s",
-            user_ctx, completeness, len(CONTEXT_FIELDS), missing,
+            "Context: %s | missing=%s",
+            user_ctx, missing,
         )
 
         # 2. Run RAG only when we have minimum context (occupation + state)
@@ -1093,21 +1453,26 @@ async def chat(
             logger.debug("Anonymous request; skipping DB persistence.")
 
         # Ensure schemes is always a list with at least scheme_id/scheme_name for frontend
-        schemes_out: List[Dict[str, Any]] = []
+        final_schemes: List[Dict[str, Any]] = []
         for s in (candidates or []):
             if not isinstance(s, dict):
                 continue
-            schemes_out.append({
+            final_schemes.append({
                 **s,
                 "scheme_id": s.get("scheme_id") or s.get("id") or "",
                 "scheme_name": s.get("scheme_name") or s.get("name") or s.get("title") or "Scheme",
                 "source_url": s.get("source_url") or "",
                 "official_website": s.get("official_website") or "",
             })
+        logger.info("RETURNING schemes count: %s", len(final_schemes))
+        logger.info(
+            "RETURNING first scheme: %s",
+            final_schemes[0].get("scheme_name") if final_schemes else "NONE",
+        )
         return ChatResponse(
             message=reply,
             chat_id=persistent_chat_id,
-            schemes=schemes_out,
+            schemes=final_schemes,
             needs_more_info=not ready,
             extracted_context=user_ctx if user_ctx else None,
         )

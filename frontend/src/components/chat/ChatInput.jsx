@@ -164,7 +164,7 @@ export default function ChatInput({
             <div className="absolute top-2 left-3 flex items-center gap-1.5 pointer-events-none">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-xs text-emerald-600 font-medium">
-                {language === 'hi' ? 'सुन रहा है' : 'Listening'}
+                {t.listening}
               </span>
             </div>
           )}

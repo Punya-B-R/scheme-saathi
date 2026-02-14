@@ -29,9 +29,7 @@ export default function VoiceButton({
     return () => clearTimeout(timer)
   }, [isListening, transcript])
 
-  const title = isListening
-    ? (language === 'hi' ? 'सुन रहा है... रोकने के लिए क्लिक करें' : 'Listening... click to stop')
-    : (language === 'hi' ? 'बोलने के लिए क्लिक करें' : 'Click to speak')
+  const title = isListening ? t.listeningStop : t.clickToSpeak
 
   const countdownBg = flashListening
     ? 'bg-green-500'

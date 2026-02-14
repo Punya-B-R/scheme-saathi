@@ -27,6 +27,132 @@ MODEL_ACK = (
 
 LANGUAGE_INSTRUCTIONS = {
     "en": "You MUST respond in English only.",
+    "kn": """ನೀವು ಯಾವಾಗಲೂ ಕನ್ನಡದಲ್ಲಿ ಉತ್ತರಿಸಬೇಕು. (You MUST respond in Kannada only)
+
+KANNADA RESPONSE RULES:
+- Use simple, conversational Kannada (ಆಡುಭಾಷೆ)
+- Avoid complex Sanskrit-heavy words - use words common people understand
+- Scheme names keep in English: "PM-KISAN", "Ayushman Bharat"
+- Numbers and amounts in digits: ₹6,000 (not ಆರು ಸಾವಿರ)
+- Mix is okay for technical terms: "DBT (Direct Benefit Transfer)"
+- Government portal names keep in English: "pmkisan.gov.in"
+
+EXAMPLE GOOD KANNADA RESPONSE:
+"ನಮಸ್ಕಾರ! ನಾನು ನಿಮಗೆ ಸಹಾಯ ಮಾಡುತ್ತೇನೆ.
+ನೀವು ಏನು ಕೆಲಸ ಮಾಡುತ್ತೀರಿ? ಉದಾಹರಣೆಗೆ
+ರೈತ, ವಿದ್ಯಾರ್ಥಿ, ವ್ಯಾಪಾರಿ?"
+
+KANNADA CLARIFYING QUESTIONS TO USE:
+- Occupation: "ನೀವು ಏನು ಕೆಲಸ ಮಾಡುತ್ತೀರಿ?"
+- State: "ನೀವು ಯಾವ ರಾಜ್ಯದಲ್ಲಿ ವಾಸಿಸುತ್ತೀರಿ?"
+- Land: "ನಿಮ್ಮ ಬಳಿ ಎಷ್ಟು ಜಮೀನು ಇದೆ?"
+- Income: "ನಿಮ್ಮ ವಾರ್ಷಿಕ ಆದಾಯ ಎಷ್ಟು?"
+- Caste: "ನೀವು SC/ST/OBC ಅಥವಾ ಸಾಮಾನ್ಯ ವರ್ಗಕ್ಕೆ ಸೇರಿದ್ದೀರಾ?"
+- Age: "ನಿಮ್ಮ ವಯಸ್ಸು ಎಷ್ಟು?"
+
+KANNADA SCHEME FORMAT:
+"1. **PM-KISAN ಯೋಜನೆ**
+   ಪ್ರಯೋಜನ: ವರ್ಷಕ್ಕೆ ₹6,000 ನೇರವಾಗಿ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ
+   ಅರ್ಹತೆ: 2 ಹೆಕ್ಟೇರ್‌ಗಿಂತ ಕಡಿಮೆ ಜಮೀನು ಹೊಂದಿರುವ ರೈತರು
+   ಅಗತ್ಯ ದಾಖಲೆಗಳು: Aadhaar card, bank passbook
+   [Apply Here](https://pmkisan.gov.in)"
+""",
+    "ta": """நீங்கள் எப்போதும் தமிழில் பதில் சொல்ல வேண்டும். (Always respond in Tamil only)
+
+TAMIL RESPONSE RULES:
+- Use simple, conversational Tamil (பேச்சு வழக்கு)
+- Avoid complex Sanskrit words - use words common people understand
+- Scheme names keep in English: "PM-KISAN", "Ayushman Bharat"
+- Numbers and amounts in digits: ₹6,000 (not ஆறு ஆயிரம்)
+- Government portal names keep in English: "pmkisan.gov.in"
+
+TAMIL CLARIFYING QUESTIONS TO USE:
+- Occupation: "நீங்கள் என்ன வேலை செய்கிறீர்கள்?"
+- State: "நீங்கள் எந்த மாநிலத்தில் வசிக்கிறீர்கள்?"
+- Land: "உங்களிடம் எவ்வளவு நிலம் உள்ளது?"
+- Income: "உங்கள் வருடாந்திர வருமானம் எவ்வளவு?"
+- Caste: "நீங்கள் SC/ST/OBC அல்லது பொது வகுப்பைச் சேர்ந்தவரா?"
+- Age: "உங்கள் வயது என்ன?"
+
+TAMIL SCHEME FORMAT:
+"1. **PM-KISAN திட்டம்**
+   பலன்: ஆண்டுக்கு ₹6,000 நேரடியாக வங்கி கணக்கில்
+   தகுதி: 2 ஹெக்டேருக்கும் குறைவான நிலம் உள்ள விவசாயிகள்
+   தேவையான ஆவணங்கள்: Aadhaar card, bank passbook
+   [Apply Here](https://pmkisan.gov.in)"
+""",
+    "bn": """আপনাকে সবসময় বাংলায় উত্তর দিতে হবে। (Always respond in Bengali only)
+
+BENGALI RESPONSE RULES:
+- Use simple, conversational Bengali (কথ্য ভাষা)
+- Avoid complex Sanskrit words - use words common people understand
+- Scheme names keep in English: "PM-KISAN", "Ayushman Bharat"
+- Numbers and amounts in digits: ₹6,000 (not ছয় হাজার)
+- Government portal names keep in English: "pmkisan.gov.in"
+
+BENGALI CLARIFYING QUESTIONS TO USE:
+- Occupation: "আপনি কী কাজ করেন?"
+- State: "আপনি কোন রাজ্যে থাকেন?"
+- Land: "আপনার কতটুকু জমি আছে?"
+- Income: "আপনার বার্ষিক আয় কত?"
+- Caste: "আপনি কি SC/ST/OBC নাকি সাধারণ বিভাগের?"
+- Age: "আপনার বয়স কত?"
+
+BENGALI SCHEME FORMAT:
+"1. **PM-KISAN প্রকল্প**
+   সুবিধা: বছরে ₹6,000 সরাসরি ব্যাংক অ্যাকাউন্টে
+   যোগ্যতা: ২ হেক্টরের কম জমির কৃষকরা
+   প্রয়োজনীয় কাগজপত্র: Aadhaar card, bank passbook
+   [Apply Here](https://pmkisan.gov.in)"
+""",
+    "mr": """तुम्ही नेहमी मराठीत उत्तर द्यावे. (Always respond in Marathi only)
+
+MARATHI RESPONSE RULES:
+- Use simple, conversational Marathi (बोलीभाषा)
+- Avoid complex Sanskrit words - use words common people understand
+- Scheme names keep in English: "PM-KISAN", "Ayushman Bharat"
+- Numbers and amounts in digits: ₹6,000 (not सहा हजार)
+- Government portal names keep in English: "pmkisan.gov.in"
+
+MARATHI CLARIFYING QUESTIONS TO USE:
+- Occupation: "तुम्ही काय काम करता?"
+- State: "तुम्ही कोणत्या राज्यात राहता?"
+- Land: "तुमच्याकडे किती जमीन आहे?"
+- Income: "तुमचे वार्षिक उत्पन्न किती आहे?"
+- Caste: "तुम्ही SC/ST/OBC किंवा सामान्य प्रवर्गातील आहात का?"
+- Age: "तुमचे वय किती आहे?"
+
+MARATHI SCHEME FORMAT:
+"1. **PM-KISAN योजना**
+   फायदा: दरवर्षी ₹6,000 थेट बँक खात्यात
+   पात्रता: २ हेक्टरपेक्षा कमी जमीन असलेले शेतकरी
+   आवश्यक कागदपत्रे: Aadhaar card, bank passbook
+   [Apply Here](https://pmkisan.gov.in)"
+""",
+    "gu": """તમારે હંમેશા ગુજરાતીમાં જવાબ આપવો જોઈએ. (Always respond in Gujarati only)
+
+GUJARATI RESPONSE RULES:
+- Use simple, conversational Gujarati (બોલચાલની ભાષા)
+- Avoid complex Sanskrit words - use words common people understand
+- Scheme names keep in English: "PM-KISAN", "Ayushman Bharat"
+- Numbers and amounts in digits: ₹6,000 (not છ હજાર)
+- Government portal names keep in English: "pmkisan.gov.in"
+
+GUJARATI CLARIFYING QUESTIONS TO USE:
+- Occupation: "તમે શું કામ કરો છો?"
+- State: "તમે કયા રાજ્યમાં રહો છો?"
+- Land: "તમારી પાસે કેટલી જમીન છે?"
+- Income: "તમારી વાર્ષિક આવક કેટલી છે?"
+- Caste: "તમે SC/ST/OBC છો કે સામાન્ય વર્ગના?"
+- Age: "તમારી ઉંમર કેટલી છે?"
+
+GUJARATI SCHEME FORMAT:
+"1. **PM-KISAN યોજના**
+   ફાયદો: દર વર્ષે ₹6,000 સીધા બેંક ખાતામાં
+   પાત્રતા: ૨ હેક્ટરથી ઓછી જમીન ધરાવતા ખેડૂતો
+   જરૂરી દસ્તાવેજો: Aadhaar card, bank passbook
+   [Apply Here](https://pmkisan.gov.in)"
+""",
     "hi": """आप हमेशा हिंदी में जवाब दें। (You MUST respond in Hindi only)
 
 HINDI RESPONSE RULES:
@@ -94,6 +220,22 @@ class GeminiService:
         has_schemes = bool(matched_schemes)
         language_instruction = LANGUAGE_INSTRUCTIONS.get(language, LANGUAGE_INSTRUCTIONS["en"])
 
+        # Dynamic missing fields injection
+        if missing and len(missing) > 0:
+            missing_section = f"""
+CURRENT STATUS:
+Still missing these fields: {', '.join(missing)}
+You MUST ask for ALL of these in your next response.
+Do NOT show any schemes until these are provided.
+"""
+        else:
+            missing_section = """
+CURRENT STATUS:
+All required fields collected.
+RAG schemes provided below are verified candidates.
+Cross-check each against user profile before presenting.
+"""
+
         parts = [
             "You are Scheme Saathi, a warm and knowledgeable AI assistant helping Indian citizens discover government schemes.",
             "",
@@ -103,43 +245,69 @@ class GeminiService:
             "- Follow the selected app language strictly.",
             "- Be concise. No filler words.",
             "",
-            "CONVERSATION FLOW (you MUST follow this strictly):",
+            "INFORMATION GATHERING RULES:",
             "",
-            "INFORMATION GATHERING — MINIMUM REQUIRED (occupation + state + age before showing schemes):",
-            "  1. Occupation → 'What do you do for work?'",
-            "  2. State → 'Which state are you from?'",
-            "  3. Age → 'How old are you?'",
-            "PREFERRED (after minimum): caste category, income, type of help, gender.",
+            "You need ALL 6 of these before showing schemes:",
+            "1. occupation",
+            "2. state",
+            "3. age",
+            "4. caste category (SC/ST/OBC/General)",
+            "5. annual income",
+            "6. gender",
             "",
-            "OCCUPATION-SPECIFIC: If farmer → land; if student → education level; if senior → disability.",
+            "RULE 1 - ASK ALL MISSING AT ONCE:",
+            "If ANY of the 6 fields are missing, ask ALL missing ones in a SINGLE message. Do not split across multiple messages.",
             "",
-            "STAGE 2 - RECOMMEND (ONLY when you have occupation + state + age):",
-            "Show matched schemes from the provided list. Explain why each matches. Highlight key benefits.",
+            "Example - if missing age, caste, income, gender:",
+            '"To find the best schemes for you, I need a few more details:',
+            "- How old are you?",
+            "- Do you belong to SC/ST/OBC or General category?",
+            "- What is your approximate annual income?",
+            '- What is your gender?"',
             "",
-            "STAGE 3 - DETAIL (when user asks about a specific scheme):",
-            "Give complete details, required documents, and step-by-step application process.",
+            "RULE 2 - NEVER SHOW SCHEMES UNTIL ALL 6 ARE KNOWN:",
+            "Even if RAG returns schemes, do NOT mention or list any schemes until you have all 6 fields.",
+            "If schemes are provided but fields are missing, ignore the schemes and ask for missing fields instead.",
             "",
-            "QUESTIONING RULES (VERY IMPORTANT):",
-            "- Ask ONE question at a time. Never ask 2+ questions in one message.",
-            "- Question order (minimum first):",
-            "  (1) Occupation → (2) State → (3) Age",
-            "  Then preferred: type of help, caste, income, gender",
-            "     - For student wanting scholarship → ask caste category (many scholarships are caste-specific)",
-            "     - For farmer → ask about land ownership / income",
-            "     - For senior citizen → ask age",
-            "     - For women-specific help → confirm gender",
-            "- For caste, ask politely: 'To find category-specific schemes, may I know your category — General, SC, ST, OBC, or Minority?'",
-            "- If the user already told you some info in earlier messages, DO NOT ask again. Use what you know.",
-            "- If the user gave multiple details at once (e.g. 'I am a female student from Karnataka looking for scholarships'), acknowledge ALL of them and ask the next missing piece.",
+            "RULE 3 - SMART FIRST MESSAGE:",
+            "If user's first message already contains some fields, only ask for the ones that are STILL missing.",
+            "Never ask for something already provided.",
             "",
-            "DO NOT RE-ASK — Once the user has told you something (occupation, state, type of help, gender, age, caste), NEVER ask for it again in later messages. Always use the USER PROFILE below as the source of truth. Only ask for fields that are still missing.",
+            "Example:",
+            'User: "I am a 35 year old male farmer in Karnataka"',
+            "Known: occupation=farmer, state=Karnataka, age=35, gender=male",
+            "Still missing: caste_category, income_level",
+            'Ask: "Great! Just two more things:',
+            "     - Do you belong to SC/ST/OBC or General category?",
+            '     - What is your approximate annual income?"',
             "",
-            "CRITICAL RULES:",
-            "- Do NOT show or name ANY scheme until you have occupation + state + age.",
-            "- If you do NOT have a list of schemes below, you are in GATHERING mode. DO NOT name or recommend any scheme.",
-            "- Never assume the user's state, gender, caste, or help type. Always ask explicitly.",
-            "- Read previous messages carefully. Never re-ask something already answered.",
-            "- When user mentions something like 'scholarship' or 'loan' or 'marriage' — that IS their type of help. Don't ask again.",
+            "RULE 4 - CROSS VERIFY BEFORE PRESENTING:",
+            "When all 6 fields are collected and schemes are provided:",
+            "- Read each scheme's eligibility carefully",
+            "- ONLY include schemes where the user genuinely qualifies",
+            "- Remove any scheme where user clearly doesn't meet criteria",
+            "- Present ONLY verified matching schemes",
+            "",
+            "RULE 5 - SCHEME PRESENTATION FORMAT:",
+            'When presenting schemes, list them EXACTLY like this (one by one, clearly numbered):',
+            "",
+            '"Based on your profile, here are the schemes you qualify for:',
+            "",
+            "1. [Scheme Name]",
+            "   Benefit: [exact benefit amount/description]",
+            "   Why you qualify: [specific reason based on user's profile]",
+            "   Documents needed: [list]",
+            "   [Apply Here](url)",
+            "",
+            '2. [Scheme Name]',
+            '   ..."',
+            "",
+            "Use ONLY scheme names from the provided schemes list.",
+            "Do NOT invent or hallucinate any scheme not in the list.",
+            "",
+            missing_section,
+            "",
+            "DO NOT RE-ASK — Once the user has told you something, NEVER ask for it again. Use the USER PROFILE below as source of truth.",
         ]
 
         # Full user profile
@@ -205,36 +373,20 @@ class GeminiService:
                 "DO NOT recommend any schemes. DO NOT name any scheme. DO NOT mention specific benefits.",
                 "DO NOT say 'here are some schemes' or 'based on your profile' or list any scheme names.",
                 "",
-                "Your ONLY job right now: ask ONE more piece of information.",
+                "Your ONLY job right now: ask for ALL missing fields in ONE message.",
                 "",
             ])
             if missing:
-                known = [f for f in ["occupation", "state", "help_type", "gender", "age", "caste_category"] if ctx.get(f)]
-                if known:
-                    parts.append(f"ALREADY KNOWN (do NOT ask again): {', '.join(known)}")
-                parts.append(f"ONLY ask for (one at a time): {', '.join(m.replace('_', ' ') for m in missing)}")
-                field_questions = {
-                    "occupation": "what they do (student, farmer, employee, business owner, retired, homemaker, etc.)",
-                    "state": "which state/UT they are from",
-                    "help_type": "what kind of help they need — ask: 'What kind of help are you looking for? For example: scholarship, loan, pension, financial help, medical/health, housing, training, marriage assistance, employment, etc.'",
-                    "gender": "their gender (this helps find gender-specific schemes)",
-                    "age": "their age or approximate age range",
-                    "caste_category": "their category (General/SC/ST/OBC/Minority) — ask politely, explain it helps find reserved schemes",
-                }
-                next_q = field_questions.get(missing[0], missing[0].replace("_", " "))
-                parts.append(f"→ NEXT QUESTION TO ASK: {next_q}")
-                if len(missing) > 1:
-                    parts.append(f"(After this, still need: {', '.join(f.replace('_',' ') for f in missing[1:])})")
+                parts.append(f"MUST ask for ALL of these in your next response: {', '.join(missing)}")
+                parts.append("Format your response as a single message with bullet points or numbered list for each question.")
             parts.extend([
                 "",
                 "HOW TO RESPOND:",
                 "1. Acknowledge what the user just said in 1 short sentence.",
-                "   Example: 'Got it, you're a student from Karnataka.'",
-                "2. Ask ONE clear, specific question about the NEXT missing detail.",
-                "3. Keep your response to 2-3 sentences maximum.",
-                "4. Do NOT mention any schemes, scheme names, benefits, amounts, or eligibility details.",
-                "5. Do NOT say things like 'I can help you find schemes' or 'there are many schemes for you'.",
-                "   Instead say 'To find the best options for you, I need a few more details.'",
+                "2. Ask ALL missing questions in ONE message (use bullet points or numbered list).",
+                "3. Do NOT mention any schemes, scheme names, benefits, or eligibility details.",
+                "4. Do NOT say things like 'I can help you find schemes' or 'there are many schemes for you'.",
+                "   Instead say 'To find the best schemes for you, I need a few more details:'",
             ])
         else:
             # ========== RECOMMENDATION PHASE ==========
@@ -244,11 +396,28 @@ class GeminiService:
                 "",
                 "You have enough info and matching schemes. Now recommend.",
                 "",
+                "CROSS VERIFICATION INSTRUCTIONS:",
+                "The following schemes were returned by RAG search.",
+                "Before presenting to user, verify EACH scheme:",
+                "",
+                "For each scheme check:",
+                "1. State matches: scheme state = user state OR 'All India'",
+                "2. Occupation matches: scheme is relevant to user's occupation",
+                "3. Age matches: user age is within scheme's age range (if specified)",
+                "4. Caste matches: user's caste category is eligible",
+                "5. Income matches: user's income is within scheme's limit (if specified)",
+                "6. Gender matches: scheme is open to user's gender",
+                "",
+                "ONLY present schemes that pass ALL applicable checks.",
+                "If a scheme has no restriction on a field, it passes that check.",
+                "If fewer than 3 schemes pass, present those and say 'These are the most relevant schemes for your profile.'",
+                "If 0 schemes pass, say 'I could not find schemes matching all your criteria exactly. Here are the closest matches:' and show top 3 from RAG anyway.",
+                "",
                 "CRITICAL RULES:",
                 "- ONLY recommend schemes from the list below. NEVER invent schemes.",
-                "- Present ALL relevant schemes from the list that match the user (do not limit to 2-3; show every scheme that fits their profile and type of help).",
+                "- Present ONLY schemes that pass cross verification (do not blindly list all RAG results).",
                 "- For EACH scheme:",
-                "  * **Scheme Name** (bold)",
+                "  * **Scheme Name** (bold) — use EXACT name from the list",
                 "  * What the user gets (amounts, benefits)",
                 "  * Why it fits them specifically (connect to their profile)",
                 "  * Key eligibility: age, income, category requirements",
@@ -256,8 +425,8 @@ class GeminiService:
                 "- Use bullet points. Be concise.",
                 "- Keep response under 350 words.",
                 "",
-                "RELEVANCE CHECK — Before including a scheme, verify it matches the user:",
-                f"- User is: {ctx.get('occupation', 'unknown')} | {ctx.get('gender', 'unknown')} | age {ctx.get('age', '?')} | {ctx.get('caste_category', 'unknown')} | {ctx.get('state', 'unknown')}",
+                "USER PROFILE for verification:",
+                f"- Occupation: {ctx.get('occupation', 'unknown')} | State: {ctx.get('state', 'unknown')} | Age: {ctx.get('age', '?')} | Caste: {ctx.get('caste_category', 'unknown')} | Income: {ctx.get('income_level') or ctx.get('income', 'unknown')} | Gender: {ctx.get('gender', 'unknown')}",
             ])
             if ctx.get("specific_need"):
                 parts.append(f"- User specifically wants: {ctx['specific_need']}. Do NOT recommend schemes of a different type (e.g., if they want scholarship, don't show loans).")
@@ -466,39 +635,88 @@ class GeminiService:
                     context[key] = value
         return context
 
-    def extract_user_context(self, conversation: List[Any]) -> Dict[str, str]:
+    def extract_user_context(self, messages: List[Any]) -> Dict[str, str]:
         """
-        Use Gemini to extract structured user context from conversation.
-        Call only when conversation_history is non-empty (adds latency).
+        Extract user context from full conversation history.
+        Reads ALL messages to build complete profile.
         """
-        if not conversation or not self._ensure_model():
+        if not messages or not self._ensure_model():
             return {}
 
-        conv_text = ""
-        for msg in conversation:
+        conversation_text = ""
+        for msg in messages:
             role = getattr(msg, "role", None) or (msg.get("role") if isinstance(msg, dict) else None)
             content = getattr(msg, "content", None) or (msg.get("content", "") if isinstance(msg, dict) else "")
             if content:
-                conv_text += f"{'User' if role == 'user' else 'Assistant'}: {content}\n"
+                conversation_text += f"{'User' if role == 'user' else 'Assistant'}: {content}\n"
 
         extraction_prompt = f"""
-Analyze this conversation and extract ONLY explicitly mentioned information.
+Read this entire conversation and extract user information.
+Look across ALL messages, not just the last one.
 
-Conversation:
-{conv_text}
+CONVERSATION:
+{conversation_text}
 
-Extract these fields. Use "unknown" if not mentioned. Be VERY STRICT - only extract what is explicitly stated.
+Extract ONLY explicitly mentioned information. Scan ALL user messages for this info.
 
-NOTE: User may write in Hindi. Extract information regardless of language.
-Examples:
+NOTE: User may write in Hindi, Kannada, Tamil, Bengali, Marathi, or Gujarati. Extract information regardless of language.
+Examples (Hindi):
 - "मैं किसान हूं" -> occupation: farmer
 - "बिहार से हूं" -> state: Bihar
 - "मेरे पास 2 एकड़ जमीन है" -> land_ownership: 2 acres
 - "SC वर्ग से हूं" -> caste_category: SC
 - "मेरी उम्र 35 साल है" -> age: 35
-Always return values in English regardless of input language.
+Examples (Kannada):
+- "ನಾನು ರೈತ" -> occupation: farmer
+- "ಕರ್ನಾಟಕದಿಂದ" -> state: Karnataka
+- "ನನ್ನ ಬಳಿ 2 ಎಕರೆ ಜಮೀನು ಇದೆ" -> land_ownership: 2 acres
+- "SC ವರ್ಗದವರು" -> caste_category: SC
+- "ನನ್ನ ವಯಸ್ಸು 35" -> age: 35
+Examples (Tamil):
+- "நான் விவசாயி" -> occupation: farmer
+- "தமிழ்நாட்டில் இருந்து" -> state: Tamil Nadu
+- "என்னிடம் 2 ஏக்கர் நிலம் உள்ளது" -> land_ownership: 2 acres
+- "SC வகுப்பினர்" -> caste_category: SC
+- "என் வயது 35" -> age: 35
+Examples (Bengali):
+- "আমি কৃষক" -> occupation: farmer
+- "পশ্চিমবঙ্গ থেকে" -> state: West Bengal
+- "আমার ২ একর জমি আছে" -> land_ownership: 2 acres
+- "SC বিভাগের" -> caste_category: SC
+- "আমার বয়স ৩৫" -> age: 35
+Examples (Marathi):
+- "मी शेतकरी आहे" -> occupation: farmer
+- "महाराष्ट्रातून" -> state: Maharashtra
+- "माझ्याकडे २ एकर जमीन आहे" -> land_ownership: 2 acres
+- "SC प्रवर्गातील" -> caste_category: SC
+- "माझे वय ३५ आहे" -> age: 35
+Examples (Gujarati):
+- "હું ખેડૂત છું" -> occupation: farmer
+- "ગુજરાતથી છું" -> state: Gujarat
+- "મારી પાસે ૨ એકર જમીન છે" -> land_ownership: 2 acres
+- "SC વર્ગના" -> caste_category: SC
+- "મારી ઉંમર ૩૫ છે" -> age: 35
 
-Return EXACTLY in this format (one per line):
+INCOME EXTRACTION RULES (income_level - extract ANY mention of money/income/earnings):
+- "1.5 lakh", "1.5 lakh annual income" -> income_level: 1.5 lakh
+- "1,50,000", "150000" -> income_level: 1.5 lakh
+- "50,000 per year" -> income_level: 50000
+- "5 lakh salary" -> income_level: 5 lakh
+- "below poverty line", "BPL" -> income_level: BPL
+- "10 lakh per annum" -> income_level: 10 lakh
+- "monthly income 10000" -> income_level: 1.2 lakh
+- "कमाई 1.5 लाख" -> income_level: 1.5 lakh
+- "आय 50 हजार" -> income_level: 50000
+- "ವರಮಾನ 1 ಲಕ್ಷ" -> income_level: 1 lakh
+- "வருமானம் 2 லட்சம்" -> income_level: 2 lakh
+- "আয় ১.৫ লাখ" -> income_level: 1.5 lakh
+- "ઉત્પન્ન 1.5 લાખ" -> income_level: 1.5 lakh
+- "उत्पन्न 1.5 लाख" -> income_level: 1.5 lakh
+IMPORTANT: income_level field name must be exactly "income_level". Return simple string like "1.5 lakh". Never return "unknown" if any income number is mentioned.
+
+Always return extracted values in English regardless of input language.
+
+Return EXACTLY in this format (one per line, income_level MUST always be present):
 occupation: [farmer/student/senior citizen/employee/entrepreneur/unknown]
 state: [exact Indian state name/unknown]
 age: [number only, e.g. 35/unknown]
@@ -508,11 +726,21 @@ income_level: [amount or description/unknown]
 land_ownership: [acres or hectares/unknown]
 specific_need: [education/healthcare/agriculture/business/social welfare/unknown]
 
-RULES:
-- age: extract number only. "I am 35 years old" → age: 35
-- state: if user says city, infer state: Bangalore/Bengaluru→Karnataka, Mumbai→Maharashtra, Chennai→Tamil Nadu, Hyderabad→Telangana, Delhi→Delhi, Kolkata→West Bengal, Lucknow/Kanpur/Varanasi→Uttar Pradesh, Patna→Bihar, Jaipur→Rajasthan
-- occupation: kisan/kisaan→farmer, vidyarthi→student
-- NEVER guess - only extract explicitly stated facts
+EXTRACTION RULES:
+- age: numbers only. "50 years" -> 50. "50, general" -> age: 50. "I am 50" -> 50
+- caste: "general" -> General. "obc" -> OBC. "sc" -> SC. "st" -> ST
+- income: "50000 rupees" -> 50000. "1.5 lakh" -> 1.5 lakh. "50,000" -> 50000. "₹50000" -> 50000
+- state: city -> state: Bangalore->Karnataka, Mumbai->Maharashtra, Chennai->Tamil Nadu, Delhi->Delhi, Kolkata->West Bengal, Patna->Bihar, Hyderabad->Telangana
+- occupation: kisan/kisaan->farmer
+- Scan ALL user messages, not just the last one
+- NEVER guess — only extract explicitly stated facts
+- Return "unknown" if not mentioned anywhere
+
+IMPORTANT - User may give info across multiple messages:
+  Message 1: "I am a farmer in Bihar"
+  Message 2: "50, general, 50000 rupees, male"
+This means: occupation=farmer, state=Bihar, age=50, caste_category=General, income_level=50000, gender=male
+Extract ALL of it from the full conversation.
 """
         try:
             resp = self._model.generate_content(extraction_prompt)

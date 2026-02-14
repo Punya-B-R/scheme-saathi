@@ -27,8 +27,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'Noto Sans Devanagari', 'system-ui', 'sans-serif'],
-        display: ['Inter', 'Noto Sans Devanagari', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'Noto Sans Gujarati', 'Noto Sans Bengali', 'Noto Sans Tamil', 'Noto Sans Kannada', 'Noto Sans Devanagari', 'system-ui', 'sans-serif'],
+        display: ['Inter', 'Noto Sans Gujarati', 'Noto Sans Bengali', 'Noto Sans Tamil', 'Noto Sans Kannada', 'Noto Sans Devanagari', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

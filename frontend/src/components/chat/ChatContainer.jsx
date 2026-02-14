@@ -55,6 +55,8 @@ export default function ChatContainer() {
 
   // Track the backend chat_id returned by /chat (for grouping messages in Supabase)
   const backendChatIdRef = useRef(null)
+  // Skip overwriting messages when we just navigated after sending (backend messages don't include schemes)
+  const skipNextChatLoadRef = useRef(false)
 
   const refreshChats = useCallback(() => {
     if (isAuthenticated) {
@@ -97,6 +99,10 @@ export default function ChatContainer() {
           .then((chat) => {
             setCurrentChatIdState(String(chat.id))
             backendChatIdRef.current = chat.id
+            if (skipNextChatLoadRef.current) {
+              skipNextChatLoadRef.current = false
+              return
+            }
             setMessages(
               (chat.messages || []).map((m) => ({
                 role: m.role,
@@ -105,7 +111,10 @@ export default function ChatContainer() {
               }))
             )
           })
-          .catch(() => navigate('/chat', { replace: true }))
+          .catch(() => {
+            skipNextChatLoadRef.current = false
+            navigate('/chat', { replace: true })
+          })
       } else {
         const chat = getChatById(urlChatId)
         if (chat) {
@@ -256,16 +265,16 @@ export default function ChatContainer() {
         .map((m) => ({ role: m.role, content: m.content }))
       const response = await sendChatMessage(text, history, null, language, backendChatIdRef.current)
 
-      // DEBUG: API response
-      console.log('DEBUG 1 - Full API response:', response)
-      console.log('DEBUG 2 - response.schemes:', response.schemes)
-      console.log('DEBUG 3 - response.schemes length:', response.schemes?.length)
-      console.log('DEBUG 4 - needs_more_info:', response.needs_more_info)
+      console.log('SCHEMES CHECK 1 - raw response:', response)
+      console.log('SCHEMES CHECK 2 - response.schemes:', response.schemes)
+      console.log('SCHEMES CHECK 3 - type:', typeof response.schemes)
+      console.log('SCHEMES CHECK 4 - length:', response.schemes?.length)
 
       // Store the backend chat_id for future messages in this conversation
       if (response.chat_id) {
         backendChatIdRef.current = response.chat_id
         if (!currentChatId) {
+          skipNextChatLoadRef.current = true // Don't overwrite messages; backend doesn't return schemes
           setCurrentChatIdState(String(response.chat_id))
           navigate(`/chat/${response.chat_id}`, { replace: true })
         }
@@ -288,13 +297,14 @@ export default function ChatContainer() {
       const aiMessage = {
         id: `msg_${Date.now()}`,
         role: 'assistant',
-        content: response.message || '',
-        schemes: schemesForCards || [],
+        content: response.message || response.content || '',
+        schemes: Array.isArray(response.schemes) ? schemesForCards : [],
         timestamp: new Date().toISOString(),
       }
-      console.log('DEBUG 5 - aiMessage:', aiMessage)
-      console.log('DEBUG 6 - aiMessage.schemes:', aiMessage.schemes)
+      console.log('SCHEMES CHECK 5 - aiMessage.schemes:', aiMessage.schemes)
+      console.log('SCHEMES CHECK 7 - final aiMessage:', aiMessage)
       setMessages((prev) => [...prev, aiMessage])
+      console.log('SCHEMES CHECK 6 - setMessages called (state updates async); aiMessage.schemes length:', aiMessage.schemes?.length)
 
       if (response.extracted_context) {
         setExtractedContext(response.extracted_context)
