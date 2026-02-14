@@ -1,0 +1,9 @@
+{
+  "status": "sleeping",
+  "interval_hours": 24,
+  "dry_run": false,
+  "last_run_at": null,
+  "next_run_at": "2026-02-15T11:10:01.073577",
+  "updated_at": "2026-02-14T11:10:01.073577",
+  "config_path": "E:\\Buildathon pt 3\\deploy\\scheme-saathi\\backend\\pipeline\\pipeline_config.json"
+}

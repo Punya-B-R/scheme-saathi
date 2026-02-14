@@ -105,25 +105,15 @@ class GeminiService:
             "",
             "CONVERSATION FLOW (you MUST follow this strictly):",
             "",
-            "STAGE 1 - GATHER INFORMATION (you MUST ask ALL of these before showing any scheme):",
-            "You need to collect AT LEAST these 4 pieces of information:",
-            "  1. Occupation (farmer/student/senior citizen/employee/entrepreneur/homemaker/etc.)",
-            "  2. State (which Indian state they are from)",
-            "  3. Type of help needed (what they are looking for):",
-            "     Examples: scholarship/fee waiver, loan/credit, pension, health insurance/medical,",
-            "     housing, financial assistance/money, marriage help, skill training/course,",
-            "     business support/startup, employment/job, subsidy, food/nutrition, legal help, etc.",
-            "  4. At least ONE of: Gender, Age, OR Caste category (SC/ST/OBC/General)",
+            "INFORMATION GATHERING — MINIMUM REQUIRED (occupation + state + age before showing schemes):",
+            "  1. Occupation → 'What do you do for work?'",
+            "  2. State → 'Which state are you from?'",
+            "  3. Age → 'How old are you?'",
+            "PREFERRED (after minimum): caste category, income, type of help, gender.",
             "",
-            "After those 4 mandatory pieces, ask more if relevant:",
-            "  - Gender (if not known yet)",
-            "  - Age or age range",
-            "  - Caste category (SC/ST/OBC/General/Minority) — ask sensitively",
-            "  - Education level (if student: school/college/post-grad)",
-            "  - Income level / BPL status",
-            "  - Land ownership (if farmer)",
+            "OCCUPATION-SPECIFIC: If farmer → land; if student → education level; if senior → disability.",
             "",
-            "STAGE 2 - RECOMMEND (ONLY when you have occupation + state + type of help + 1 more detail):",
+            "STAGE 2 - RECOMMEND (ONLY when you have occupation + state + age):",
             "Show matched schemes from the provided list. Explain why each matches. Highlight key benefits.",
             "",
             "STAGE 3 - DETAIL (when user asks about a specific scheme):",
@@ -131,11 +121,9 @@ class GeminiService:
             "",
             "QUESTIONING RULES (VERY IMPORTANT):",
             "- Ask ONE question at a time. Never ask 2+ questions in one message.",
-            "- Question order:",
-            "  (1) Occupation → 'What do you do? (student/farmer/employee/business/retired/homemaker/etc.)'",
-            "  (2) State → 'Which state are you from?'",
-            "  (3) Type of help → 'What kind of help are you looking for? For example: scholarship, loan, pension, financial help, health cover, housing, training, marriage assistance, etc.'",
-            "  (4) Gender/Age/Caste (pick whichever is most relevant to their occupation + help type)",
+            "- Question order (minimum first):",
+            "  (1) Occupation → (2) State → (3) Age",
+            "  Then preferred: type of help, caste, income, gender",
             "     - For student wanting scholarship → ask caste category (many scholarships are caste-specific)",
             "     - For farmer → ask about land ownership / income",
             "     - For senior citizen → ask age",
@@ -147,7 +135,7 @@ class GeminiService:
             "DO NOT RE-ASK — Once the user has told you something (occupation, state, type of help, gender, age, caste), NEVER ask for it again in later messages. Always use the USER PROFILE below as the source of truth. Only ask for fields that are still missing.",
             "",
             "CRITICAL RULES:",
-            "- Do NOT show or name ANY scheme until you have at least: occupation + state + type of help + 1 more.",
+            "- Do NOT show or name ANY scheme until you have occupation + state + age.",
             "- If you do NOT have a list of schemes below, you are in GATHERING mode. DO NOT name or recommend any scheme.",
             "- Never assume the user's state, gender, caste, or help type. Always ask explicitly.",
             "- Read previous messages carefully. Never re-ask something already answered.",
@@ -513,7 +501,7 @@ Always return values in English regardless of input language.
 Return EXACTLY in this format (one per line):
 occupation: [farmer/student/senior citizen/employee/entrepreneur/unknown]
 state: [exact Indian state name/unknown]
-age: [number/unknown]
+age: [number only, e.g. 35/unknown]
 gender: [male/female/unknown]
 caste_category: [SC/ST/OBC/General/unknown]
 income_level: [amount or description/unknown]
@@ -521,11 +509,10 @@ land_ownership: [acres or hectares/unknown]
 specific_need: [education/healthcare/agriculture/business/social welfare/unknown]
 
 RULES:
-- For state: use full state name (e.g., "Karnataka" not "KA")
-- For occupation: standardize to common terms
-- NEVER guess or infer - only extract explicitly stated facts
-- If user says "I'm from Bangalore" → state: Karnataka
-- If user says "I'm a kisan" → occupation: farmer
+- age: extract number only. "I am 35 years old" → age: 35
+- state: if user says city, infer state: Bangalore/Bengaluru→Karnataka, Mumbai→Maharashtra, Chennai→Tamil Nadu, Hyderabad→Telangana, Delhi→Delhi, Kolkata→West Bengal, Lucknow/Kanpur/Varanasi→Uttar Pradesh, Patna→Bihar, Jaipur→Rajasthan
+- occupation: kisan/kisaan→farmer, vidyarthi→student
+- NEVER guess - only extract explicitly stated facts
 """
         try:
             resp = self._model.generate_content(extraction_prompt)

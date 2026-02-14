@@ -1,139 +1,168 @@
 """
 RAG service for semantic scheme search using ChromaDB.
-Loads schemes from JSON, builds vector DB, and provides search with optional user context.
+Uses sentence-transformers (all-MiniLM-L6-v2) for embeddings - no API key, no rate limits.
+Loads schemes from JSON, builds vector DB on first run, loads from disk on restarts.
 """
 
 import logging
+import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+import chromadb
+from chromadb.config import Settings as ChromaSettings
+from sentence_transformers import SentenceTransformer
 
 from app.config import settings
 from app.utils.data_loader import (
     load_schemes_from_json,
     prepare_scheme_text_for_embedding,
 )
-from app.utils.embedding_function import get_embedding_function
 
 logger = logging.getLogger(__name__)
 
 # Backend root (app/services -> app -> backend)
 BACKEND_ROOT = Path(__file__).resolve().parent.parent.parent
+CHROMA_PATH = str(settings.get_chroma_path(BACKEND_ROOT))
+MODEL_NAME = "all-MiniLM-L6-v2"
 
 
 class RAGService:
     """Vector database service for government scheme semantic search."""
 
     COLLECTION_NAME = "government_schemes"
-    BATCH_SIZE = 100
+    BATCH_SIZE = 256  # sentence-transformers handles large batches fine
 
     def __init__(self) -> None:
-        self._client = None
-        self._collection = None
         self.schemes: List[Dict[str, Any]] = []
-        self._chroma_path: Optional[Path] = None
-        self._initialized = False
+        self._client: Any = None
+        self._collection: Any = None
+        self._model: Any = None
         self._init()
 
     def _init(self) -> None:
         try:
-            chroma_path = settings.get_chroma_path(BACKEND_ROOT)
-            chroma_path.mkdir(parents=True, exist_ok=True)
-            self._chroma_path = chroma_path
+            # Load sentence transformer model
+            logger.info("Loading sentence transformer model: %s...", MODEL_NAME)
+            self._model = SentenceTransformer(MODEL_NAME)
+            logger.info("Model loaded successfully")
 
+            # Load schemes from JSON
             schemes_path = settings.get_schemes_path(BACKEND_ROOT)
-            logger.info("Loading schemes from %s", schemes_path)
             self.schemes = load_schemes_from_json(str(schemes_path))
+            logger.info("Loaded %s schemes", len(self.schemes))
 
             if not self.schemes:
                 logger.warning("No schemes loaded; RAG search will return empty results.")
-                self._initialized = True
                 return
 
-            import chromadb
-            from chromadb.config import Settings as ChromaSettings
-
-            self._client = chromadb.PersistentClient(
-                path=str(chroma_path),
-                settings=ChromaSettings(anonymized_telemetry=False),
-            )
-            embedding_function = get_embedding_function()
-            self._collection = self._client.get_or_create_collection(
-                name=self.COLLECTION_NAME,
-                metadata={"description": "Indian government schemes"},
-                embedding_function=embedding_function,
-            )
-
-            if self._collection.count() == 0:
-                logger.info("Vector DB is empty. Initializing...")
-                self._initialize_vector_db()
-            else:
-                count = self._collection.count()
-                logger.info("Vector DB loaded with %s schemes", count)
-
-            self._initialized = True
+            # Initialize ChromaDB with persistent storage
+            self._initialize_vector_db()
         except Exception as e:
             logger.error("RAGService init failed: %s", e, exc_info=True)
-            self.schemes = []
-            self._initialized = True
+            raise
 
     def _initialize_vector_db(self) -> None:
-        """Load scheme texts and add to ChromaDB in batches."""
-        if not self.schemes or not self._collection:
-            return
+        """Create ChromaDB client, collection, and embed schemes on first run."""
+        try:
+            os.makedirs(CHROMA_PATH, exist_ok=True)
 
-        ids: List[str] = []
-        documents: List[str] = []
-        metadatas: List[Dict[str, Any]] = []
-
-        for s in self.schemes:
-            sid = s.get("scheme_id") or ""
-            if not sid:
-                continue
-            ids.append(sid)
-            doc = prepare_scheme_text_for_embedding(s)
-            documents.append(doc[:8000] if doc else "")  # Chroma doc length limit
-
-            elig = s.get("eligibility_criteria") or {}
-            if not isinstance(elig, dict):
-                elig = {}
-            state = (elig.get("state") or "All India")[:200]
-            occupation = (elig.get("occupation") or "any")[:200]
-
-            metadatas.append({
-                "scheme_name": (s.get("scheme_name") or "")[:200],
-                "category": (s.get("category") or "")[:200],
-                "state": state,
-                "occupation": occupation,
-                "quality_score": int(s.get("data_quality_score", 0)),
-            })
-
-        total_batches = (len(ids) + self.BATCH_SIZE - 1) // self.BATCH_SIZE
-        for i in range(0, len(ids), self.BATCH_SIZE):
-            batch_ids = ids[i : i + self.BATCH_SIZE]
-            batch_docs = documents[i : i + self.BATCH_SIZE]
-            batch_meta = metadatas[i : i + self.BATCH_SIZE]
-            batch_num = (i // self.BATCH_SIZE) + 1
-            self._collection.add(
-                ids=batch_ids,
-                documents=batch_docs,
-                metadatas=batch_meta,
+            self._client = chromadb.PersistentClient(
+                path=CHROMA_PATH,
+                settings=ChromaSettings(anonymized_telemetry=False),
             )
-            logger.info("Added batch %s/%s", batch_num, total_batches)
 
-        logger.info("Successfully loaded %s schemes into vector DB", len(ids))
+            self._collection = self._client.get_or_create_collection(
+                name=self.COLLECTION_NAME,
+                metadata={"hnsw:space": "cosine"},
+            )
 
-    def _enhance_query(self, query: str, user_context: Optional[Dict[str, Any]]) -> str:
-        """Append user context to query for better targeting."""
-        if not user_context:
-            return query.strip()
-        parts = [query.strip()]
-        if user_context.get("occupation") and str(user_context.get("occupation")).lower() != "unknown":
-            parts.append(f"occupation: {user_context['occupation']}")
-        if user_context.get("state") and str(user_context.get("state")).lower() not in ("unknown", "any", "all india", ""):
-            parts.append(f"state: {user_context['state']}")
-        if user_context.get("age"):
-            parts.append(f"age: {user_context['age']}")
-        return " | ".join(parts)
+            existing_count = self._collection.count()
+
+            # If already populated, skip re-embedding
+            if existing_count > 0:
+                logger.info(
+                    "ChromaDB already has %s schemes. Skipping embedding. Loading from disk.",
+                    existing_count,
+                )
+                return
+
+            # First run - need to embed all schemes
+            logger.info(
+                "First run: embedding %s schemes. This will take a few minutes...",
+                len(self.schemes),
+            )
+
+            total = len(self.schemes)
+            added = 0
+
+            for i in range(0, total, self.BATCH_SIZE):
+                batch = self.schemes[i : i + self.BATCH_SIZE]
+                ids: List[str] = []
+                texts: List[str] = []
+                metadatas: List[Dict[str, Any]] = []
+
+                for scheme in batch:
+                    scheme_id = scheme.get("scheme_id") or ""
+                    if not scheme_id:
+                        continue
+
+                    text = prepare_scheme_text_for_embedding(scheme)
+                    text = (text[:8000] if text else "")  # Chroma doc length limit
+
+                    eligibility = scheme.get("eligibility_criteria") or {}
+                    if not isinstance(eligibility, dict):
+                        eligibility = {}
+                    state = eligibility.get("state") or "All India"
+                    if isinstance(state, list):
+                        state = ", ".join(str(s) for s in state)
+
+                    ids.append(str(scheme_id))
+                    texts.append(text)
+                    metadatas.append({
+                        "scheme_name": str(scheme.get("scheme_name", ""))[:200],
+                        "category": str(scheme.get("category", ""))[:200],
+                        "state": str(state or "All India")[:200],
+                        "occupation": str(
+                            eligibility.get("occupation", "any") or "any"
+                        )[:200],
+                    })
+
+                if not ids:
+                    continue
+
+                # Generate embeddings locally - fast, no API calls
+                embeddings = self._model.encode(
+                    texts,
+                    batch_size=64,
+                    show_progress_bar=False,
+                    convert_to_numpy=True,
+                )
+                embeddings_list = embeddings.tolist()
+
+                self._collection.add(
+                    ids=ids,
+                    documents=texts,
+                    embeddings=embeddings_list,
+                    metadatas=metadatas,
+                )
+
+                added += len(ids)
+                logger.info(
+                    "Embedded %s/%s schemes (%.1f%%)",
+                    added,
+                    total,
+                    100.0 * added / total,
+                )
+
+            logger.info(
+                "ChromaDB initialized successfully with %s schemes. Saved to disk at %s",
+                added,
+                CHROMA_PATH,
+            )
+        except Exception as e:
+            logger.error("ChromaDB initialization failed: %s", e)
+            raise
 
     def filter_schemes_by_eligibility(
         self, schemes: List[Dict[str, Any]], user_context: Optional[Dict[str, Any]]
@@ -217,57 +246,101 @@ class RAGService:
         Semantic search for schemes. Returns list of scheme dicts with match_score.
         Applies hard eligibility filter when user_context is provided.
         """
-        if not self.schemes or not self._collection:
+        top_k = top_k or settings.TOP_K_SCHEMES
+        query = (query or "").strip() if query is not None else ""
+        if not query:
+            logger.warning("search_schemes called with empty query")
             return []
 
-        top_k = top_k or settings.TOP_K_SCHEMES
-        enhanced_query = self._enhance_query(query, user_context)
-
         try:
-            n_results = min(top_k * 3, 30, self._collection.count() or 1)
-            if n_results < 1:
+            logger.info("DEBUG RAG 1 - Total schemes loaded: %s", len(self.schemes))
+            logger.info(
+                "DEBUG RAG 2 - Collection count: %s",
+                self._collection.count() if self._collection else "NO COLLECTION",
+            )
+
+            if not self._collection or self._collection.count() == 0:
+                logger.warning("ChromaDB empty or not initialized")
+                return []
+
+            # Build enhanced query string
+            enhanced_query = query.strip()
+            if user_context:
+                parts: List[str] = []
+                if user_context.get("occupation") and str(user_context.get("occupation", "")).lower() not in ("unknown", "any", ""):
+                    parts.append(str(user_context["occupation"]))
+                if user_context.get("state") and str(user_context.get("state", "")).lower() not in ("unknown", "any", "all india", ""):
+                    parts.append(str(user_context["state"]))
+                if user_context.get("caste_category") and str(user_context.get("caste_category", "")).lower() not in ("unknown", "any", ""):
+                    parts.append(str(user_context["caste_category"]))
+                if user_context.get("age"):
+                    parts.append(str(user_context["age"]))
+                if parts:
+                    enhanced_query = f"{enhanced_query} {' '.join(parts)}"
+
+            logger.info("DEBUG RAG 3 - Query: %s", enhanced_query)
+            logger.info("DEBUG RAG 4 - User context: %s", user_context)
+
+            # Embed the query locally
+            query_embedding = self._model.encode(
+                [enhanced_query],
+                convert_to_numpy=True,
+            ).tolist()
+
+            # Search ChromaDB with manual embedding
+            fetch_k = min(top_k * 3, 30, self._collection.count() or 1)
+            if fetch_k < 1:
                 return []
 
             results = self._collection.query(
-                query_texts=[enhanced_query],
-                n_results=n_results,
-                include=["metadatas", "distances"],
+                query_embeddings=query_embedding,
+                n_results=fetch_k,
+                include=["metadatas", "distances", "documents"],
             )
+
+            raw_count = len(results["ids"][0]) if results and results.get("ids") and results["ids"][0] else 0
+            logger.info("DEBUG RAG 5 - Results before threshold filter: %s", raw_count)
+
+            matched_schemes: List[Dict[str, Any]] = []
+            scheme_by_id = {str(s.get("scheme_id", "")): s for s in self.schemes if s.get("scheme_id")}
+            threshold = settings.SIMILARITY_THRESHOLD
+
+            if results and results.get("ids") and len(results["ids"][0]) > 0:
+                for scheme_id, distance in zip(
+                    results["ids"][0],
+                    results["distances"][0],
+                ):
+                    scheme = scheme_by_id.get(str(scheme_id))
+                    if not scheme:
+                        continue
+
+                    # Cosine distance → similarity score (0-1)
+                    match_score = max(0.0, 1.0 - float(distance))
+
+                    if match_score >= threshold:
+                        scheme_copy = dict(scheme)
+                        scheme_copy["match_score"] = round(match_score, 4)
+                        matched_schemes.append(scheme_copy)
+
+            matched_schemes.sort(key=lambda s: s.get("match_score", 0), reverse=True)
+            logger.info("DEBUG RAG 6 - Results after threshold filter: %s", len(matched_schemes))
+
+            # Apply hard eligibility filter
+            if user_context:
+                matched_schemes = self.filter_schemes_by_eligibility(
+                    matched_schemes, user_context
+                )
+            logger.info("DEBUG RAG 7 - Results after eligibility filter: %s", len(matched_schemes))
+
+            return matched_schemes[:top_k]
         except Exception as e:
-            logger.error("ChromaDB search failed: %s", e)
+            logger.error("Search error: %s", e, exc_info=True)
             return []
-
-        ids = results.get("ids", [[]])
-        distances = results.get("distances", [[]])
-        if not ids or not ids[0]:
-            return []
-
-        scheme_by_id = {s.get("scheme_id"): s for s in self.schemes if s.get("scheme_id")}
-        threshold = settings.SIMILARITY_THRESHOLD
-        out: List[Dict[str, Any]] = []
-
-        for sid, dist in zip(ids[0], (distances[0] if distances else [])):
-            scheme = scheme_by_id.get(sid)
-            if not scheme:
-                continue
-            match_score = max(0.0, 1.0 - (float(dist) / 2.0))
-            if match_score < threshold:
-                continue
-            scheme = dict(scheme)
-            scheme["match_score"] = round(match_score, 4)
-            out.append(scheme)
-
-        out.sort(key=lambda s: s.get("match_score", 0), reverse=True)
-
-        if user_context:
-            out = self.filter_schemes_by_eligibility(out, user_context)
-
-        return out[:top_k]
 
     def get_scheme_by_id(self, scheme_id: str) -> Optional[Dict[str, Any]]:
         """Return a single scheme by id or None if not found."""
         for s in self.schemes:
-            if s.get("scheme_id") == scheme_id:
+            if str(s.get("scheme_id", "")) == str(scheme_id):
                 return s
         return None
 
@@ -282,6 +355,8 @@ class RAGService:
     def check_health(self) -> bool:
         """Return True if vector DB is usable."""
         try:
+            if not self._model:
+                return False
             if not self._collection:
                 return False
             self._collection.count()

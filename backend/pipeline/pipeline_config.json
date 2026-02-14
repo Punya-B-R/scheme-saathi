@@ -3,16 +3,26 @@
   "enabled_by_default": false,
   "notes": "This file only defines the pipeline. It does NOT schedule or auto-run anything.",
   "scheduler": {
-    "enabled": false,
+    "enabled": true,
     "interval_hours": 24,
-    "run_on_startup": false,
+    "run_on_startup": true,
     "stop_file": "backend/pipeline/.stop_daemon",
     "heartbeat_file": "backend/pipeline/reports/daemon_status.json"
+  },
+  "url_fetch": {
+    "run": false,
+    "try_requests_first": true,
+    "use_selenium": true,
+    "max_categories": 16,
+    "pages_per_category": 25,
+    "headless": true,
+    "notes": "Fetches new scheme URLs from MyScheme.gov.in. Enable to discover new schemes before scraping."
   },
   "scraping": {
     "run": true,
     "resume": true,
     "test_mode": false,
+    "run_from_fetched_urls": true,
     "category_modules": [
       "scraper.agriculture_rural_environment_scraper",
       "scraper.education_learning_scraper",
@@ -43,4 +53,3 @@
     "rebuild": true
   }
 }
-

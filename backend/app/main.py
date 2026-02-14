@@ -8,7 +8,7 @@ import re
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
@@ -19,6 +19,9 @@ from app.models import (
     HealthResponse,
     SchemeSearchRequest,
     SchemeSearchResponse,
+    SubscribeRequest,
+    SubscribeResponse,
+    UnsubscribeRequest,
 )
 from app.database import get_db, init_db
 from app.chat_history import (
@@ -29,6 +32,15 @@ from app.auth_router import get_current_user_id
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.services.gemini_service import gemini_service
 from app.services.rag_service import rag_service
+from app.utils.subscriber_db import (
+    add_subscriber,
+    get_all_active_subscribers,
+    unsubscribe as unsubscribe_subscriber,
+)
+from app.services.email_service import (
+    send_welcome_email,
+    send_alerts_to_matching_subscribers,
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -80,6 +92,22 @@ STATE_DISPLAY.update({
     "himachal pradesh": "Himachal Pradesh", "arunachal pradesh": "Arunachal Pradesh",
     "west bengal": "West Bengal", "jammu and kashmir": "Jammu and Kashmir",
 })
+
+# City → state mapping for context extraction
+CITY_TO_STATE = {
+    "bangalore": "Karnataka", "bengaluru": "Karnataka",
+    "mumbai": "Maharashtra", "pune": "Maharashtra", "nagpur": "Maharashtra",
+    "chennai": "Tamil Nadu", "coimbatore": "Tamil Nadu",
+    "hyderabad": "Telangana", "secunderabad": "Telangana",
+    "delhi": "Delhi", "new delhi": "Delhi",
+    "kolkata": "West Bengal", "calcutta": "West Bengal",
+    "lucknow": "Uttar Pradesh", "kanpur": "Uttar Pradesh", "varanasi": "Uttar Pradesh",
+    "patna": "Bihar",
+    "jaipur": "Rajasthan", "udaipur": "Rajasthan", "jodhpur": "Rajasthan",
+    "ahmedabad": "Gujarat", "surat": "Gujarat", "vadodara": "Gujarat",
+    "chandigarh": "Chandigarh",
+    "kochi": "Kerala", "thiruvananthapuram": "Kerala", "trivandrum": "Kerala",
+}
 
 OCCUPATIONS = {
     r"\bfarmer\b|\bkisan\b|\bfarming\b|\bagricultur\w*\b|\bcrop\b|\bkhet\b|\bkheti\b": "farmer",
@@ -193,9 +221,9 @@ NEED_PATTERNS = {
 }
 
 # Required context fields before recommending
-# Order = question order. "help_type" = what kind of help they want
-CONTEXT_FIELDS = ["occupation", "state", "help_type", "gender", "age", "caste_category"]
-MIN_CONTEXT_FOR_RECOMMENDATION = 4
+# Minimum: occupation, state, age. Preferred: help_type, caste, gender, income.
+CONTEXT_FIELDS = ["occupation", "state", "age", "help_type", "gender", "caste_category"]
+MIN_CONTEXT_FOR_RECOMMENDATION = 3  # occupation + state + age
 
 
 def extract_context_from_text(text: str) -> Dict[str, str]:
@@ -208,6 +236,11 @@ def extract_context_from_text(text: str) -> Dict[str, str]:
         if state in t:
             ctx["state"] = STATE_DISPLAY.get(state, state.title())
             break
+    if "state" not in ctx:
+        for city, state_name in CITY_TO_STATE.items():
+            if city in t:
+                ctx["state"] = state_name
+                break
 
     # --- Occupation ---
     for pattern, occ in OCCUPATIONS.items():
@@ -232,6 +265,8 @@ def extract_context_from_text(text: str) -> Dict[str, str]:
         r"\b(\d{1,2})\s*(?:years?|yrs?|year)?\s*old\b",
         r"\bage\s*(?:is\s*)?(\d{1,2})\b",
         r"\bi(?:'?m| am)\s*(\d{1,2})\b",
+        r"\b(\d{1,2})\s*sal\s*(?:ka|ki|ke|kaa)?\b",  # Hindi: 35 sal ka
+        r"\b(?:umr|umar)\s*(?:hai\s*)?(\d{1,2})\b",  # Hindi: umr 35
     ]:
         m = re.search(pat, t, re.I)
         if m:
@@ -337,32 +372,39 @@ def _is_valid(val: Optional[str]) -> bool:
     return val.strip().lower() not in ("unknown", "any", "all india", "")
 
 
+def _is_known(val: Optional[str]) -> bool:
+    """Value is present and not a placeholder/unknown."""
+    if not val:
+        return False
+    s = str(val).strip().lower()
+    return s not in ("unknown", "any", "", "none", "not specified", "all india")
+
+
 def has_enough_context(user_context: Optional[Dict[str, str]]) -> bool:
     """
-    Check if we have minimum context needed for scheme search.
-    Need at least occupation AND state to start searching.
+    Minimum to trigger RAG: occupation + state.
+    Age, caste, income are optional — improve results but not required.
     """
     if not user_context:
         return False
-    return _is_valid(user_context.get("occupation")) and _is_valid(user_context.get("state"))
+
+    def is_known(val: Optional[str]) -> bool:
+        if not val:
+            return False
+        s = str(val).strip().lower()
+        return s not in ("unknown", "any", "", "none", "not specified")
+
+    has_occupation = is_known(user_context.get("occupation"))
+    has_state = is_known(user_context.get("state"))
+    return has_occupation and has_state
 
 
 def is_ready_to_recommend(user_context: Optional[Dict[str, str]]) -> bool:
     """
-    Show schemes when we have enough to match: occupation + state + what they want.
-    Optionally use gender/age/caste if present for better filtering.
+    Show schemes when we have minimum: occupation + state.
+    RAG runs when these two are known.
     """
-    if not user_context:
-        return False
-    if not _is_valid(user_context.get("occupation")):
-        return False
-    if not _is_valid(user_context.get("state")):
-        return False
-    # What they want: help_type or specific_need (extraction sets both, but accept either)
-    want = user_context.get("help_type") or user_context.get("specific_need")
-    if not _is_valid(want):
-        return False
-    return True
+    return has_enough_context(user_context)
 
 
 # ============================================================
@@ -736,10 +778,44 @@ def filter_schemes_for_user(
 # ============================================================
 
 
+def _start_pipeline_daemon() -> None:
+    """Start the 24h pipeline daemon in a background thread if scheduler.enabled."""
+    import json
+    import threading
+    from pathlib import Path
+
+    backend_root = Path(__file__).resolve().parent.parent
+    config_path = backend_root / "pipeline" / "pipeline_config.json"
+    if not config_path.exists():
+        return
+    try:
+        with config_path.open(encoding="utf-8") as f:
+            cfg = json.load(f)
+        if not cfg.get("scheduler", {}).get("enabled", False):
+            return
+    except Exception:
+        return
+
+    def run_daemon_thread():
+        try:
+            from pipeline.daemon import run_daemon
+            run_daemon(config_path=config_path, dry_run=False)
+        except Exception as e:
+            logger.warning("Pipeline daemon error: %s", e)
+
+    th = threading.Thread(target=run_daemon_thread, daemon=True)
+    th.start()
+    logger.info("Pipeline daemon started (24h auto-update)")
+
+
 @app.on_event("startup")
 async def startup_event():
     logger.info("Starting Scheme Saathi Backend...")
     logger.info("Gemini model: %s", settings.GEMINI_MODEL)
+
+    # DISABLED: Auto-scraper disabled for now. Pipeline code is intact, just not auto-starting.
+    # To manually trigger: POST /admin/run-pipeline (if available) or run pipeline daemon manually.
+    # _start_pipeline_daemon()
 
     # Initialize database schema (creates tables on first run).
     try:
@@ -783,6 +859,112 @@ async def health():
         raise HTTPException(status_code=500, detail=f"Health check error: {str(e)}")
 
 
+@app.post("/subscribe", response_model=SubscribeResponse)
+async def subscribe(request: SubscribeRequest, background_tasks: BackgroundTasks):
+    """Subscribe to scheme alerts. Welcome email sent in background for new subscribers."""
+    try:
+        if "@" not in request.email or "." not in request.email:
+            raise HTTPException(status_code=400, detail="Invalid email address")
+
+        ctx = request.user_context or {}
+        state = ctx.get("state", "")
+        occupation = ctx.get("occupation", "")
+
+        is_new = add_subscriber(
+            email=request.email,
+            name=request.name or "",
+            state=state,
+            occupation=occupation,
+            language=request.language,
+            user_context=ctx,
+        )
+
+        if is_new:
+            subscriber = {
+                "email": request.email,
+                "name": request.name or "there",
+                "state": state,
+                "occupation": occupation,
+                "language": request.language,
+            }
+            background_tasks.add_task(send_welcome_email, subscriber)
+
+        return SubscribeResponse(
+            success=True,
+            message="Successfully subscribed!" if is_new else "You're already subscribed.",
+            is_new_subscriber=is_new,
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.exception("Subscribe error: %s", e)
+        raise HTTPException(status_code=500, detail="Subscription failed")
+
+
+@app.post("/unsubscribe")
+async def unsubscribe_user(request: UnsubscribeRequest):
+    """Unsubscribe from scheme alerts."""
+    try:
+        unsubscribe_subscriber(request.email)
+        return {"success": True, "message": "Unsubscribed successfully"}
+    except Exception as e:
+        logger.exception("Unsubscribe error: %s", e)
+        raise HTTPException(status_code=500, detail="Unsubscribe failed")
+
+
+@app.post("/admin/send-alerts")
+async def trigger_alerts(background_tasks: BackgroundTasks):
+    """Manually trigger scheme alerts to all subscribers. For demo: call after adding new schemes."""
+    try:
+        from datetime import timedelta
+
+        week_ago = (datetime.now() - timedelta(days=7)).isoformat()
+        new_schemes = [
+            s
+            for s in rag_service.schemes
+            if (s.get("scraped_at") or s.get("last_updated") or "") >= week_ago
+        ]
+        if not new_schemes:
+            import random
+
+            new_schemes = random.sample(
+                rag_service.schemes, min(5, len(rag_service.schemes))
+            )
+
+        background_tasks.add_task(send_alerts_to_matching_subscribers, new_schemes)
+        return {
+            "success": True,
+            "message": f"Sending alerts for {len(new_schemes)} schemes",
+            "schemes_count": len(new_schemes),
+        }
+    except Exception as e:
+        logger.exception("Alert trigger error: %s", e)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/admin/subscribers")
+async def get_subscribers():
+    """List all active subscribers (for demo)."""
+    try:
+        subs = get_all_active_subscribers()
+        return {
+            "total": len(subs),
+            "subscribers": [
+                {
+                    "email": s["email"],
+                    "name": s["name"],
+                    "state": s["state"],
+                    "occupation": s["occupation"],
+                    "subscribed_at": s["subscribed_at"],
+                }
+                for s in subs
+            ],
+        }
+    except Exception as e:
+        logger.exception("Get subscribers error: %s", e)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.post("/chat", response_model=ChatResponse)
 async def chat(
     request: ChatRequest,
@@ -804,67 +986,87 @@ async def chat(
         completeness = context_completeness(user_ctx)
         missing = missing_context_fields(user_ctx)
 
+        # DEBUG: Context extraction
+        logger.info("DEBUG 1 - Raw message: %s", request.message)
+        logger.info("DEBUG 2 - user_ctx: %s", user_ctx)
+        logger.info("DEBUG 3 - is_ready: %s", is_ready_to_recommend(user_ctx))
+        logger.info("DEBUG CTX 1 - conversation_history length: %s", len(request.conversation_history))
+        logger.info("DEBUG CTX 2 - occupation extracted: %s", user_ctx.get("occupation"))
+        logger.info("DEBUG CTX 3 - state extracted: %s", user_ctx.get("state"))
+        logger.info("DEBUG CTX 4 - full context: %s", user_ctx)
+
         logger.info(
             "Context: %s | completeness=%d/%d | missing=%s",
             user_ctx, completeness, len(CONTEXT_FIELDS), missing,
         )
 
-        # 2. ALWAYS run RAG so scheme cards show on every reply
+        # 2. Run RAG only when we have minimum context (occupation + state)
         ready = is_ready_to_recommend(user_ctx)
         candidates: List[Dict[str, Any]] = []
 
-        search_parts = [query]
-        for key in ("occupation", "state", "gender", "caste_category", "education_level"):
-            val = user_ctx.get(key)
-            if val and val.lower() not in ("unknown", "any", ""):
-                search_parts.append(val)
-        if user_ctx.get("specific_need"):
-            search_parts.append(user_ctx["specific_need"])
-        if user_ctx.get("disability") == "yes":
-            search_parts.append("disability divyang PWD")
-        if user_ctx.get("bpl") == "yes":
-            search_parts.append("BPL below poverty economically weaker")
-        if request.conversation_history:
-            for m in request.conversation_history[-4:]:
-                role = getattr(m, "role", None) or (m.get("role") if isinstance(m, dict) else None)
-                content = getattr(m, "content", None) or (m.get("content", "") if isinstance(m, dict) else "")
-                if role == "user" and content:
-                    search_parts.append(content)
-        search_query = " ".join(search_parts)
-
-        raw = rag_service.search_schemes(
-            query=search_query,
-            user_context=user_ctx if ready else None,
-            top_k=50,
-        )
-        logger.info("RAG returned %d candidates (ready=%s)", len(raw), ready)
-
         if ready:
-            candidates = filter_schemes_for_user(raw, user_ctx)
-            logger.info("After main filter: %d candidates", len(candidates))
-        else:
-            candidates = list(raw)
+            try:
+                search_parts = [query]
+                for key in ("occupation", "state", "gender", "caste_category", "education_level"):
+                    val = user_ctx.get(key)
+                    if val and str(val).lower() not in ("unknown", "any", ""):
+                        search_parts.append(str(val))
+                if user_ctx.get("specific_need"):
+                    search_parts.append(str(user_ctx["specific_need"]))
+                if user_ctx.get("disability") == "yes":
+                    search_parts.append("disability divyang PWD")
+                if user_ctx.get("bpl") == "yes":
+                    search_parts.append("BPL below poverty economically weaker")
+                if request.conversation_history:
+                    for m in request.conversation_history[-4:]:
+                        role = getattr(m, "role", None) or (m.get("role") if isinstance(m, dict) else None)
+                        content = getattr(m, "content", None) or (m.get("content", "") if isinstance(m, dict) else "")
+                        if role == "user" and content:
+                            search_parts.append(str(content))
+                search_query = " ".join(search_parts)
+                raw = rag_service.search_schemes(
+                    query=search_query,
+                    user_context=user_ctx,
+                    top_k=50,
+                )
+                logger.info("DEBUG 4 - RAG results count: %s", len(raw))
+                candidates = filter_schemes_for_user(raw or [], user_ctx)
+                candidates = (candidates or [])[:20]
+                logger.info("DEBUG 5 - After filtering: %s", len(candidates))
+                logger.info("RAG returned %d candidates (ready=True)", len(candidates))
+            except Exception as rag_err:
+                logger.exception("RAG or filter failed (returning no schemes): %s", rag_err)
+                candidates = []
 
-        max_schemes_chat = 20
-        if not candidates and raw:
-            candidates = raw[:max_schemes_chat]
-            logger.info("Using top %d from RAG as fallback", len(candidates))
         else:
-            candidates = candidates[:max_schemes_chat]
+            logger.info("Skipping RAG — need occupation + state (ready=False)")
 
+        candidates = candidates or []
         for s in candidates:
             s["source_url"] = s.get("source_url") or ""
             s["official_website"] = s.get("official_website") or ""
+        logger.info("DEBUG 6 - Final schemes count: %s", len(candidates))
+        logger.info("DEBUG 7 - needs_more_info: %s", not ready)
         logger.info("Returning %d schemes", len(candidates))
 
-        reply = gemini_service.chat(
-            user_message=query,
-            conversation_history=request.conversation_history,
-            matched_schemes=candidates if ready else None,
-            user_context=user_ctx,
-            missing_fields=missing,
-            language=request.language,
-        )
+        try:
+            reply = gemini_service.chat(
+                user_message=query,
+                conversation_history=request.conversation_history,
+                matched_schemes=candidates if ready else None,
+                user_context=user_ctx,
+                missing_fields=missing,
+                language=request.language,
+            )
+        except Exception as llm_err:
+            logger.exception("LLM chat failed: %s", llm_err)
+            reply = (
+                "I found some schemes for you below, but I couldn't generate a full response right now. "
+                "Please try again in a moment."
+            )
+        if not reply or not str(reply).strip():
+            reply = "Here are some schemes that might be relevant for you."
+
         persistent_chat_id: int | None = None
 
         # 4. Persist conversation to DB when user is authenticated
@@ -890,10 +1092,22 @@ async def chat(
         else:
             logger.debug("Anonymous request; skipping DB persistence.")
 
+        # Ensure schemes is always a list with at least scheme_id/scheme_name for frontend
+        schemes_out: List[Dict[str, Any]] = []
+        for s in (candidates or []):
+            if not isinstance(s, dict):
+                continue
+            schemes_out.append({
+                **s,
+                "scheme_id": s.get("scheme_id") or s.get("id") or "",
+                "scheme_name": s.get("scheme_name") or s.get("name") or s.get("title") or "Scheme",
+                "source_url": s.get("source_url") or "",
+                "official_website": s.get("official_website") or "",
+            })
         return ChatResponse(
             message=reply,
             chat_id=persistent_chat_id,
-            schemes=candidates,
+            schemes=schemes_out,
             needs_more_info=not ready,
             extracted_context=user_ctx if user_ctx else None,
         )

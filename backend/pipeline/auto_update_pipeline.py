@@ -2,11 +2,12 @@
 Auto-update pipeline for Scheme Saathi data.
 
 Builds a full offline pipeline (NOT auto-enabled):
-1) Scrape category URLs/pages (via existing scraper modules)
-2) Merge new scraped schemes into backend/data_f/all_schemes.json
-3) Re-run enrichment to fix structured fields
-4) Rebuild ChromaDB vectors
-5) Write report to backend/pipeline/reports/
+1) url_fetch: Discover new scheme URLs from MyScheme.gov.in (optional)
+2) Scrape category URLs/pages (via existing scraper modules + fetched URLs)
+3) Merge new scraped schemes into backend/data_f/all_schemes.json
+4) Re-run enrichment to fix structured fields
+5) Rebuild ChromaDB vectors
+6) Write report to backend/pipeline/reports/
 
 Run manually:
     python run_data_update_pipeline.py
@@ -30,6 +31,9 @@ from typing import Any, Dict, List, Tuple
 BACKEND_ROOT = Path(__file__).resolve().parent.parent
 PROJECT_ROOT = BACKEND_ROOT.parent
 CONFIG_PATH = BACKEND_ROOT / "pipeline" / "pipeline_config.json"
+FETCHED_URLS_PATH = PROJECT_ROOT / "data" / "pipeline_urls" / "all_scheme_urls.json"
+FETCHED_SCHEMES_OUTPUT = PROJECT_ROOT / "data" / "from_urls" / "all_schemes" / "all_schemes_schemes.json"
+EX_MACHINA_ROOT = PROJECT_ROOT / "ex-machina"
 REPORT_DIR = BACKEND_ROOT / "pipeline" / "reports"
 LOCK_FILE = BACKEND_ROOT / "pipeline" / ".update.lock"
 
@@ -103,6 +107,75 @@ def _is_newer(new_item: Dict[str, Any], old_item: Dict[str, Any], prefer_newer: 
     new_d = _parse_date(new_item.get("last_updated", ""))
     old_d = _parse_date(old_item.get("last_updated", ""))
     return bool(new_d and old_d and new_d > old_d)
+
+
+def run_url_fetch(
+    config: Dict[str, Any], config_path: Path, dry_run: bool
+) -> Dict[str, Any]:
+    """Stage 1: Fetch new scheme URLs from MyScheme.gov.in."""
+    uf = config.get("url_fetch", {})
+    if not uf.get("run", False):
+        return {"skipped": True, "reason": "url_fetch.run=false"}
+
+    if dry_run:
+        return {"status": "dry_run"}
+
+    try:
+        from backend.pipeline.fetch_scheme_urls import run as fetch_run
+
+        result = fetch_run(
+            config_path,
+            test_mode=config.get("scraping", {}).get("test_mode", False),
+        )
+        return result
+    except Exception as e:
+        logger.exception("url_fetch failed")
+        return {"status": "error", "error": str(e)}
+
+
+def run_scraping_from_fetched_urls(config: Dict[str, Any], dry_run: bool) -> Dict[str, Any]:
+    """Run agriculture_detail_scraper on URLs from url_fetch (data/pipeline_urls/all_scheme_urls.json)."""
+    scraping = config.get("scraping", {})
+    if not scraping.get("run_from_fetched_urls", False):
+        return {"skipped": True, "reason": "run_from_fetched_urls=false"}
+
+    if not FETCHED_URLS_PATH.exists():
+        return {"skipped": True, "reason": "No fetched URLs (url_fetch did not run or produced nothing)"}
+
+    if dry_run:
+        return {"status": "dry_run"}
+
+    detail_scraper = EX_MACHINA_ROOT / "agriculture_detail_scraper.py"
+    if not detail_scraper.exists():
+        return {"skipped": True, "reason": "agriculture_detail_scraper.py not found"}
+
+    FETCHED_SCHEMES_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+
+    try:
+        result = subprocess.run(
+            [
+                sys.executable,
+                str(detail_scraper),
+                "--input", str(FETCHED_URLS_PATH),
+                "--output", str(FETCHED_SCHEMES_OUTPUT),
+                "--category", "Government Schemes",
+                "--headless",
+            ],
+            cwd=str(EX_MACHINA_ROOT),
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=14400,  # 4 hours max
+        )
+        return {
+            "status": "ok" if result.returncode == 0 else "error",
+            "returncode": result.returncode,
+            "output_path": str(FETCHED_SCHEMES_OUTPUT),
+        }
+    except subprocess.TimeoutExpired:
+        return {"status": "error", "error": "Scraper timed out"}
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
 
 
 def run_scraping_modules(config: Dict[str, Any], dry_run: bool) -> Dict[str, Any]:
@@ -266,7 +339,8 @@ def _run_python_script(script_name: str, dry_run: bool) -> Dict[str, Any]:
         return {"status": "error", "error": str(e)}
 
 
-def run_pipeline(config_path: Path, dry_run: bool = False) -> Dict[str, Any]:
+def run_pipeline(config_path: Path | None = None, dry_run: bool = False) -> Dict[str, Any]:
+    config_path = config_path or CONFIG_PATH
     if LOCK_FILE.exists():
         raise RuntimeError(f"Pipeline lock exists: {LOCK_FILE}. Another run may be active.")
 
@@ -282,6 +356,14 @@ def run_pipeline(config_path: Path, dry_run: bool = False) -> Dict[str, Any]:
     }
 
     try:
+        report["stages"]["url_fetch"] = run_url_fetch(
+            config, config_path, dry_run=dry_run
+        )
+
+        report["stages"]["scraping_from_fetched"] = run_scraping_from_fetched_urls(
+            config, dry_run=dry_run
+        )
+
         report["stages"]["scraping"] = run_scraping_modules(config, dry_run=dry_run)
 
         merge_stats, _ = merge_new_data(config, dry_run=dry_run)

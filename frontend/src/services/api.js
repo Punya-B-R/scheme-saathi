@@ -93,4 +93,19 @@ export async function searchSchemes(query, userContext = {}) {
   return data
 }
 
+export async function subscribeToAlerts(email, name = '', userContext = null, language = 'en') {
+  const { data } = await api.post('/subscribe', {
+    email,
+    name,
+    user_context: userContext,
+    language,
+  })
+  return data
+}
+
+export async function unsubscribeFromAlerts(email) {
+  const { data } = await api.post('/unsubscribe', { email })
+  return data
+}
+
 export default api

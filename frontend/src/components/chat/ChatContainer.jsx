@@ -45,6 +45,11 @@ export default function ChatContainer() {
   const [language, setLanguage] = useState(
     () => localStorage.getItem('scheme_saathi_language') || 'en'
   )
+  const [showSubscriptionPrompt, setShowSubscriptionPrompt] = useState(false)
+  const [hasPromptedSubscription, setHasPromptedSubscription] = useState(
+    () => localStorage.getItem('scheme_saathi_subscription_prompted') === 'true'
+  )
+  const [extractedContext, setExtractedContext] = useState({})
   const voiceRef = useRef(null)
   const t = useTranslation(language)
 
@@ -106,7 +111,12 @@ export default function ChatContainer() {
         if (chat) {
           setCurrentChatIdState(urlChatId)
           setCurrentChatId(urlChatId)
-          setMessages(chat.messages || [])
+          setMessages(
+            (chat.messages || []).map((msg) => ({
+              ...msg,
+              schemes: msg.schemes ?? [],
+            }))
+          )
         } else {
           navigate('/chat', { replace: true })
         }
@@ -117,7 +127,12 @@ export default function ChatContainer() {
         const chat = saved ? getChatById(saved) : null
         if (chat) {
           setCurrentChatIdState(chat.id)
-          setMessages(chat.messages || [])
+          setMessages(
+            (chat.messages || []).map((msg) => ({
+              ...msg,
+              schemes: msg.schemes ?? [],
+            }))
+          )
         } else {
           setCurrentChatIdState(null)
           setMessages([])
@@ -226,6 +241,7 @@ export default function ChatContainer() {
       id: `msg_${Date.now()}`,
       role: 'user',
       content: text,
+      schemes: [],
       timestamp: new Date().toISOString(),
     }
     setMessages((prev) => [...prev, userMessage])
@@ -240,6 +256,12 @@ export default function ChatContainer() {
         .map((m) => ({ role: m.role, content: m.content }))
       const response = await sendChatMessage(text, history, null, language, backendChatIdRef.current)
 
+      // DEBUG: API response
+      console.log('DEBUG 1 - Full API response:', response)
+      console.log('DEBUG 2 - response.schemes:', response.schemes)
+      console.log('DEBUG 3 - response.schemes length:', response.schemes?.length)
+      console.log('DEBUG 4 - needs_more_info:', response.needs_more_info)
+
       // Store the backend chat_id for future messages in this conversation
       if (response.chat_id) {
         backendChatIdRef.current = response.chat_id
@@ -249,9 +271,9 @@ export default function ChatContainer() {
         }
       }
 
-      // Main rule: once LLM is done, show scheme cards. Use response.schemes or fallback to API so cards always show.
+      // Use response.schemes only when AI has enough context (needs_more_info=false). No fallback during gathering.
       let schemesList = Array.isArray(response.schemes) ? response.schemes : []
-      if (schemesList.length === 0) {
+      if (schemesList.length === 0 && !response.needs_more_info) {
         try {
           const listRes = await listSchemes({ limit: 12 })
           schemesList = Array.isArray(listRes?.schemes) ? listRes.schemes : []
@@ -267,10 +289,23 @@ export default function ChatContainer() {
         id: `msg_${Date.now()}`,
         role: 'assistant',
         content: response.message || '',
-        schemes: schemesForCards,
+        schemes: schemesForCards || [],
         timestamp: new Date().toISOString(),
       }
+      console.log('DEBUG 5 - aiMessage:', aiMessage)
+      console.log('DEBUG 6 - aiMessage.schemes:', aiMessage.schemes)
       setMessages((prev) => [...prev, aiMessage])
+
+      if (response.extracted_context) {
+        setExtractedContext(response.extracted_context)
+      }
+      if (
+        schemesForCards.length > 0 &&
+        !hasPromptedSubscription &&
+        messages.length >= 2
+      ) {
+        setTimeout(() => setShowSubscriptionPrompt(true), 1000)
+      }
       if (!isAuthenticated && chatId) {
         saveMessageToChat(chatId, aiMessage)
       }
@@ -310,6 +345,17 @@ export default function ChatContainer() {
   const handleSpeakMessage = useCallback((text) => {
     if (!text || !voiceRef.current?.speak) return
     voiceRef.current.speak(text)
+  }, [])
+
+  const handleSubscriptionDismiss = useCallback(() => {
+    setShowSubscriptionPrompt(false)
+    setHasPromptedSubscription(true)
+    localStorage.setItem('scheme_saathi_subscription_prompted', 'true')
+  }, [])
+
+  const handleSubscribed = useCallback(() => {
+    setHasPromptedSubscription(true)
+    localStorage.setItem('scheme_saathi_subscription_prompted', 'true')
   }, [])
 
   const currentChat = currentChatId ? getChatById(currentChatId) : null
@@ -424,6 +470,10 @@ export default function ChatContainer() {
           language={language}
           onSpeakMessage={handleSpeakMessage}
           isSpeaking={isSpeaking}
+          showSubscriptionPrompt={showSubscriptionPrompt}
+          extractedContext={extractedContext}
+          onSubscriptionDismiss={handleSubscriptionDismiss}
+          onSubscribed={handleSubscribed}
         />
 
         <ChatInput

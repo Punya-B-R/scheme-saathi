@@ -32,11 +32,15 @@ export const saveMessageToChat = (chatId, message) => {
   const idx = chats.findIndex((c) => c.id === chatId)
   if (idx === -1) return
 
-  chats[idx].messages.push(message)
+  // Save COMPLETE message object including schemes (don't strip fields)
+  chats[idx].messages.push({
+    ...message,
+    schemes: Array.isArray(message.schemes) ? message.schemes : [],
+  })
   chats[idx].updatedAt = new Date().toISOString()
 
   if (chats[idx].messages.filter((m) => m.role === 'user').length === 1 && message.role === 'user') {
-    chats[idx].title = message.content.length > 45 ? message.content.slice(0, 45) + '...' : message.content
+    chats[idx].title = (message.content || '').length > 45 ? message.content.slice(0, 45) + '...' : (message.content || 'New Conversation')
   }
   saveChats(chats)
 }

@@ -43,6 +43,7 @@ IMPORTANT_FIELDS = [
 
 # Canonical category mapping (folder name -> display category)
 CATEGORY_MAP = {
+    "all_schemes": "Government Schemes",
     "agriculture_rural_environment": "Agriculture",
     "education_learning": "Education",
     "health_wellness": "Healthcare",

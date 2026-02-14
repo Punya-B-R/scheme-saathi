@@ -6,6 +6,31 @@ import { useTranslation } from '../../utils/i18n'
 
 const ASSISTANT_NAME = 'Scheme Saathi'
 
+const doesResponseMentionSchemes = (content) => {
+  if (!content || typeof content !== 'string') return false
+  const schemeIndicators = [
+    'scheme', 'schemes', 'yojana', 'yojnaa',
+    'benefit', 'benefits', 'eligible', 'eligibility',
+    'qualify', 'qualified', 'entitled', 'entitlement',
+    'apply', 'application', 'register', 'enroll',
+    'found for you', 'here are', 'following',
+    'these are', 'i found', "i've found",
+    'matches', 'matching', 'matched',
+    'options for you', 'programs', 'initiatives',
+    'for your profile', 'based on your',
+    'results', 'recommendations',
+    '₹', 'rupees', 'lakh', 'per month',
+    'per year', 'annually', 'monthly',
+    'financial assistance', 'subsidy', 'pension',
+    'scholarship', 'loan', 'grant',
+    'योजना', 'योजनाएं', 'पात्र', 'लाभ',
+    'आवेदन', 'मिलेगा', 'मिलेंगे',
+    'सहायता', 'छात्रवृत्ति',
+  ]
+  const lowerContent = content.toLowerCase()
+  return schemeIndicators.some((ind) => lowerContent.includes(ind.toLowerCase()))
+}
+
 export default function Message({
   message,
   isLatest,
@@ -13,6 +38,11 @@ export default function Message({
   onSpeak,
   isSpeaking = false,
 }) {
+  // DEBUG: Message component
+  console.log('DEBUG MSG 1 - message.role:', message.role)
+  console.log('DEBUG MSG 2 - message.schemes:', message.schemes)
+  console.log('DEBUG MSG 3 - schemes length:', message.schemes?.length)
+
   const isUser = message.role === 'user'
   const t = useTranslation(language)
 
@@ -82,10 +112,13 @@ export default function Message({
           )}
         </div>
 
-        {/* Main rule: once LLM text is done, show scheme cards right after (if any). */}
+        {/* Show scheme cards when schemes exist. Trust backend (only returns schemes when confident). */}
         {!isUser && (() => {
           const schemeList = Array.isArray(message.schemes) ? message.schemes : []
-          if (schemeList.length > 0) {
+          if (
+            schemeList.length > 0 &&
+            (doesResponseMentionSchemes(message.content) || schemeList.length > 0)
+          ) {
             return (
               <div className="mt-3 w-full max-w-2xl space-y-2">
                 <p className="text-xs font-semibold text-gray-500 mb-2 flex items-center gap-1.5">

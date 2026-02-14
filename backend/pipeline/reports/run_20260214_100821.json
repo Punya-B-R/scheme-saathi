@@ -1,0 +1,119 @@
+{
+  "started_at": "2026-02-14T10:08:11.067905",
+  "dry_run": false,
+  "config_path": "E:\\Buildathon pt 3\\deploy\\scheme-saathi\\backend\\pipeline\\pipeline_config.json",
+  "stages": {
+    "url_fetch": {
+      "skipped": true,
+      "reason": "url_fetch.run=false"
+    },
+    "scraping_from_fetched": {
+      "skipped": true,
+      "reason": "No fetched URLs (url_fetch did not run or produced nothing)"
+    },
+    "scraping": {
+      "skipped": false,
+      "results": [
+        {
+          "module": "scraper.agriculture_rural_environment_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        },
+        {
+          "module": "scraper.education_learning_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        },
+        {
+          "module": "scraper.health_wellness_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        },
+        {
+          "module": "scraper.social_welfare_empowerment_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        },
+        {
+          "module": "scraper.women_child_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        },
+        {
+          "module": "scraper.banking_financial_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        },
+        {
+          "module": "scraper.business_entrepreneurship_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        },
+        {
+          "module": "scraper.skills_employment_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        },
+        {
+          "module": "scraper.housing_shelter_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        },
+        {
+          "module": "scraper.science_it_communications_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        },
+        {
+          "module": "scraper.transport_infrastructure_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        },
+        {
+          "module": "scraper.travel_tourism_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        },
+        {
+          "module": "scraper.utility_sanitation_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        },
+        {
+          "module": "scraper.sports_culture_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        },
+        {
+          "module": "scraper.public_safety_scraper",
+          "status": "error",
+          "error": "No module named 'agriculture_detail_scraper'"
+        }
+      ]
+    },
+    "merge": {
+      "existing_count": 3793,
+      "scraped_raw_count": 4889,
+      "scraped_clean_count": 3774,
+      "updated_by_id": 3773,
+      "replaced_by_name": 0,
+      "inserted_new": 0,
+      "untouched_existing": 0,
+      "final_count": 3793
+    },
+    "enrichment": {
+      "status": "ok",
+      "returncode": 0,
+      "stdout_tail": "3  Marriage Assistance\n     55  Protection / Rehabilitation\n     45  Compensation\n     44  In-kind Support\n     39  Housing\n     21  Food/Essentials\n     18  Healthcare\n      9  Travel Concession\n      6  Startup Fund\n      5  Rehabilitation\n      4  Legal Aid\n      3  Direct Cash Transfer\n      1  Health Insurance\n      1  Subsidized Loan\n      1  Savings Scheme\n      1  Subsidized Credit\n      1  Capital Subsidy\n      1  Pension / Investment\n      1  Technical Assistance\n      1  Market Access\n      1  Awareness & Institutional Support\n\n--- NEW OCCUPATION DISTRIBUTION ---\n   1250  any\n    949  student\n    405  farmer\n    336  worker\n    168  researcher\n    104  entrepreneur\n    103  widow\n     93  tribal\n     91  senior citizen\n     75  artisan\n     66  fisherman\n     47  health worker\n     30  ex-serviceman\n     21  sportsperson\n     18  journalist\n     16  teacher\n     11  driver\n      7  lawyer\n      1  small/micro entrepreneur\n      1  Primarily for unorganized sector workers\n      1  aspiring entrepreneur\n\n--- NEW GENDER DISTRIBUTION ---\n   2717  any\n   1063  female\n     13  male\n\n--- NEW CASTE DISTRIBUTION ---\n   2785  any\n    312  SC/ST\n    229  SC\n    217  ST\n     79  OBC\n     67  Minority\n     64  EWS\n     21  SC/ST/OBC\n     16  Brahmin\n      1  any (higher subsidy for SC/ST/OBC/Women/Minority)\n      1  SC/ST/BPL preferred; all in LPS states\n      1  Minority (Muslim, Christian, Sikh, Buddhist, Jain, Parsi)\n\nSaving enriched data to E:\\Buildathon pt 3\\deploy\\scheme-saathi\\backend\\data_f\\all_schemes.json...\nSaved! File size: 25.5 MB\n\n======================================================================\nENRICHMENT COMPLETE!\n======================================================================\n\nBackup saved at: E:\\Buildathon pt 3\\deploy\\scheme-saathi\\backend\\data_f\\all_schemes_backup.json\nIMPORTANT: You need to rebuild ChromaDB after this!\n  1. Delete the chroma_db folder\n  2. Restart the backend server\n  (ChromaDB will auto-rebuild from the enriched data)\n",
+      "stderr_tail": ""
+    },
+    "vectordb": {
+      "status": "error",
+      "returncode": 1,
+      "stdout_tail": "==================================================\n  Scheme Saathi - Vector DB Builder\n==================================================\n\n",
+      "stderr_tail": "2026-02-14 10:08:19,710 [INFO] Reading E:\\Buildathon pt 3\\deploy\\scheme-saathi\\backend\\data_f\\all_schemes.json ...\n2026-02-14 10:08:19,894 [INFO] Found 3793 total schemes in file\n2026-02-14 10:08:19,894 [INFO] Schemes to index: 3793\n2026-02-14 10:08:21,195 [INFO] Using OpenAI embedding model: text-embedding-3-large\n2026-02-14 10:08:21,197 [INFO] Removing old vector DB at E:\\Buildathon pt 3\\deploy\\scheme-saathi\\backend\\chroma_db ...\nTraceback (most recent call last):\n  File \"E:\\Buildathon pt 3\\deploy\\scheme-saathi\\backend\\build_vectordb.py\", line 314, in <module>\n    build_vectordb(schemes, fresh=True)\n  File \"E:\\Buildathon pt 3\\deploy\\scheme-saathi\\backend\\build_vectordb.py\", line 156, in build_vectordb\n    shutil.rmtree(CHROMA_DIR)\n  File \"C:\\Users\\punya\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\shutil.py\", line 787, in rmtree\n    return _rmtree_unsafe(path, onerror)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\punya\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\shutil.py\", line 634, in _rmtree_unsafe\n    onerror(os.unlink, fullname, sys.exc_info())\n  File \"C:\\Users\\punya\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\shutil.py\", line 632, in _rmtree_unsafe\n    os.unlink(fullname)\nPermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'E:\\\\Buildathon pt 3\\\\deploy\\\\scheme-saathi\\\\backend\\\\chroma_db\\\\chroma.sqlite3'\n"
+    }
+  },
+  "status": "ok",
+  "finished_at": "2026-02-14T10:08:21.389486"
+}

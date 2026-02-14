@@ -56,6 +56,12 @@ class Settings(BaseSettings):
     # Legacy JWT secret (HS256); only needed if SUPABASE_URL is not set
     SUPABASE_JWT_SECRET: str = ""
 
+    # Email alerts (Resend)
+    RESEND_API_KEY: str = ""
+    ALERT_FROM_EMAIL: str = "onboarding@resend.dev"
+    ALERT_FROM_NAME: str = "Scheme Saathi"
+    FRONTEND_URL: str = "https://schemesaathi.in"  # For email links
+
     @property
     def allowed_origins_list(self) -> List[str]:
         """Convert comma-separated CORS origins to list"""

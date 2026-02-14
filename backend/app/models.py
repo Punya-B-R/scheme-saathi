@@ -215,3 +215,34 @@ class SchemeSearchResponse(BaseModel):
     query: str
     total_matches: int
     schemes: List[Dict[str, Any]] = Field(default_factory=list)
+
+
+# ============================================================
+# SUBSCRIPTION MODELS
+# ============================================================
+
+
+class SubscribeRequest(BaseModel):
+    """Request to subscribe to scheme alerts"""
+
+    email: str = Field(..., description="User email address")
+    name: str = Field(default="", description="User name (optional)")
+    user_context: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="User context from conversation (state, occupation, etc.)",
+    )
+    language: str = Field(default="en")
+
+
+class SubscribeResponse(BaseModel):
+    """Response from subscribe endpoint"""
+
+    success: bool
+    message: str
+    is_new_subscriber: bool
+
+
+class UnsubscribeRequest(BaseModel):
+    """Request to unsubscribe from scheme alerts"""
+
+    email: str

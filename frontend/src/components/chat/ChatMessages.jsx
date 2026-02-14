@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import Message from './Message'
 import TypingIndicator from './TypingIndicator'
 import WelcomeScreen from './WelcomeScreen'
+import SubscriptionPrompt from './SubscriptionPrompt'
 
 export default function ChatMessages({
   messages = [],
@@ -10,6 +11,10 @@ export default function ChatMessages({
   language = 'en',
   onSpeakMessage,
   isSpeaking = false,
+  showSubscriptionPrompt = false,
+  extractedContext = {},
+  onSubscriptionDismiss,
+  onSubscribed,
 }) {
   const bottomRef = useRef(null)
 
@@ -35,6 +40,14 @@ export default function ChatMessages({
           />
         ))}
         {isLoading && <TypingIndicator language={language} />}
+        {showSubscriptionPrompt && !isLoading && (
+          <SubscriptionPrompt
+            userContext={extractedContext}
+            language={language}
+            onDismiss={onSubscriptionDismiss}
+            onSubscribed={onSubscribed}
+          />
+        )}
         <div ref={bottomRef} />
       </div>
     </div>
