@@ -117,6 +117,15 @@ export default function useVoice({
   }, [onTranscript])
 
   useEffect(() => {
+    if (typeof window === 'undefined' || !window.speechSynthesis) return
+    const loadVoices = () => window.speechSynthesis.getVoices()
+    loadVoices()
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = loadVoices
+    }
+  }, [])
+
+  useEffect(() => {
     onFinalTranscriptRef.current = onFinalTranscript
   }, [onFinalTranscript])
 
@@ -212,20 +221,24 @@ export default function useVoice({
   }, [isSupported, requestMicPermission, resetSilenceTimer])
 
   const speak = useCallback(
-    (text) => {
+    (text, lang = language) => {
       if (!window?.speechSynthesis || !text) return
 
       window.speechSynthesis.cancel()
+      const usedLang = lang || language
       const cleanText = String(text)
         .replace(/\*\*(.*?)\*\*/g, '$1')
         .replace(/\*(.*?)\*/g, '$1')
         .replace(/#{1,6}\s/g, '')
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+        .replace(/`([^`]+)`/g, '$1')
+        .replace(/^\s*[-*+]\s/gm, '')
         .replace(/•\s/g, '')
         .replace(/\d+\.\s/g, '')
-        .replace(/[₹]/g, (RUPEE_REPLACEMENT[language] || 'rupees') + ' ')
+        .replace(/[₹]/g, (RUPEE_REPLACEMENT[usedLang] || 'rupees') + ' ')
         .replace(/https?:\/\/\S+/g, '')
         .replace(/[\u{1F300}-\u{1FAFF}]/gu, '')
-        .replace(/\n/g, '. ')
+        .replace(/\n+/g, ' ')
         .trim()
 
       if (!cleanText) return
@@ -244,58 +257,83 @@ export default function useVoice({
         return chunks.filter(Boolean)
       }
 
-      const voices = window.speechSynthesis.getVoices()
-      const locale = getSpeechLocale(language)
-      const langCode = locale.split('-')[0]
-      const preferredVoice =
-        voices.find(
-          (v) =>
-            v.lang === locale ||
-            v.lang.startsWith(langCode + '-') ||
-            v.lang.startsWith(langCode),
-        ) ||
-        voices.find(
-          (v) =>
-            v.lang === 'en-IN' ||
-            v.name.includes('India') ||
-            v.name.includes('Ravi') ||
-            v.name.includes('Heera'),
+      const targetLang = getSpeechLocale(usedLang)
+      const langCode = (usedLang || 'en').toLowerCase()
+
+      const selectVoice = (voiceList) => {
+        const exactMatch = voiceList.find(
+          (v) => v.lang?.toLowerCase() === targetLang.toLowerCase()
         )
-      const chunks = chunkText(cleanText)
-      if (!chunks.length) return
+        if (exactMatch) return exactMatch
 
-      let idx = 0
-      setIsSpeaking(true)
-      const speakNext = () => {
-        if (idx >= chunks.length) {
-          setIsSpeaking(false)
-          return
-        }
-        const utterance = new SpeechSynthesisUtterance(chunks[idx])
-        utterance.lang = getSpeechLocale(language)
-        utterance.rate = 0.9
-        utterance.pitch = 1.0
-        utterance.volume = 1.0
-        if (preferredVoice) utterance.voice = preferredVoice
+        const langMatch = voiceList.find((v) =>
+          v.lang?.toLowerCase().startsWith(langCode)
+        )
+        if (langMatch) return langMatch
 
-        utterance.onend = () => {
-          idx += 1
-          speakNext()
+        if (usedLang === 'en' || usedLang === 'hi') {
+          const indianFallback = voiceList.find(
+            (v) =>
+              v.lang === 'en-IN' ||
+              v.name?.includes('Ravi') ||
+              v.name?.includes('Heera') ||
+              v.name?.includes('India')
+          )
+          if (indianFallback) return indianFallback
         }
-        utterance.onerror = () => {
-          setIsSpeaking(false)
-        }
-        window.speechSynthesis.speak(utterance)
+
+        return null
       }
 
-      // If voices are not loaded yet, wait once then speak.
-      if (!voices.length && typeof window.speechSynthesis.onvoiceschanged !== 'undefined') {
+      const doSpeak = (voiceList) => {
+        const selectedVoice = selectVoice(voiceList)
+        const chunks = chunkText(cleanText)
+        if (!chunks.length) return
+
+        let idx = 0
+        setIsSpeaking(true)
+        const speakNext = () => {
+          if (idx >= chunks.length) {
+            setIsSpeaking(false)
+            return
+          }
+          const utterance = new SpeechSynthesisUtterance(chunks[idx])
+          utterance.lang = targetLang
+          utterance.rate = 0.9
+          utterance.pitch = 1.0
+          utterance.volume = 1.0
+          if (selectedVoice) {
+            utterance.voice = selectedVoice
+            if (idx === 0) {
+              console.log(`Voice selected: ${selectedVoice.name} (${selectedVoice.lang})`)
+            }
+          } else if (idx === 0) {
+            console.log(`No exact voice for ${targetLang}, using browser default`)
+          }
+
+          utterance.onend = () => {
+            idx += 1
+            speakNext()
+          }
+          utterance.onerror = (e) => {
+            console.error('Speech error:', e)
+            setIsSpeaking(false)
+          }
+          window.speechSynthesis.speak(utterance)
+        }
+        speakNext()
+      }
+
+      const voices = window.speechSynthesis.getVoices()
+      if (voices.length > 0) {
+        doSpeak(voices)
+      } else if (typeof window.speechSynthesis.onvoiceschanged !== 'undefined') {
         window.speechSynthesis.onvoiceschanged = () => {
-          speakNext()
+          doSpeak(window.speechSynthesis.getVoices())
           window.speechSynthesis.onvoiceschanged = null
         }
       } else {
-        speakNext()
+        doSpeak([])
       }
     },
     [language],

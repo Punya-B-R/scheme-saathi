@@ -325,7 +325,7 @@ export default function ChatContainer() {
       // For typed messages, follow the voice toggle.
       if ((fromVoice || voiceEnabled) && voiceRef.current?.speak) {
         setTimeout(() => {
-          voiceRef.current?.speak(response.message || '')
+          voiceRef.current?.speak(response.message || '', language)
         }, 500)
       }
     } catch {
@@ -354,8 +354,8 @@ export default function ChatContainer() {
 
   const handleSpeakMessage = useCallback((text) => {
     if (!text || !voiceRef.current?.speak) return
-    voiceRef.current.speak(text)
-  }, [])
+    voiceRef.current.speak(text, language)
+  }, [language])
 
   const handleSubscriptionDismiss = useCallback(() => {
     setShowSubscriptionPrompt(false)

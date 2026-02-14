@@ -15,9 +15,6 @@ ENV/
 .venv
 venv*/
 
-# ChromaDB (database files)
-chroma_db/
-
 # IDE
 .vscode/
 .idea/

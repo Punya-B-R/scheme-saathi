@@ -1319,7 +1319,11 @@ async def chat(
         full_conversation = list(request.conversation_history or []) + [
             ChatMessage(role="user", content=request.message)
         ]
-        extracted_ctx = gemini_service.extract_user_context(full_conversation)
+        try:
+            extracted_ctx = gemini_service.extract_user_context(full_conversation)
+        except Exception as extract_err:
+            logger.warning("Context extraction (LLM) failed, using regex fallback: %s", extract_err)
+            extracted_ctx = {}
         if not extracted_ctx:
             extracted_ctx = build_cumulative_context(request.conversation_history, query)
 
